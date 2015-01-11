@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
           content="Jenetics is an advanced Genetic Algorithm, respectively an Evolutionary Algorithm, library written in modern day Java.">
-    <meta name="keywords" content="Java, Java8, genetic algorithm, library, evolutionary algorithm">
+    <meta name="keywords" content="java, genetic algorithm, evolutionary algorithm, programming, ga, gp, optimization, evolutionary, streams">
+    <meta NAME="robots" content="noarchive, index, follow">
     <meta name="author" content="Franz Wilhelmstötter">
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -44,13 +45,13 @@
 </head>
 
 <body class="bs-docs-home" onload="prettyPrint()">
-<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+<header class="navbar navbar-static-top bs-docs-nav" role="banner">
     <div class="navbar-header">
         <span class="logo-text"><img src="img/Jenetics.png"/></span>
     </div>
 </header>
 
-<main class="bs-docs-masthead" id="content" role="main">
+<div class="bs-docs-masthead" role="main">
     <div class="container">
         <span class="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline logo-img"><img
                 src="img/logo.png"/></span>
@@ -67,10 +68,14 @@
 
         <p class="version">Currently v3.0.0</p>
     </div>
-</main>
+</div>
 
 <div class="bs-docs-social">
     <ul class="bs-docs-footer-links">
+        <li><a href="javadoc/org.jenetics/index.html">Documentation</a></li>
+        <li>&middot;</li>
+        <li><a href="manual/manual-3.0.0.pdf">User guide</a></li>
+        <li>&middot;</li>
         <li><a href="https://github.com/jenetics/jenetics">GitHub</a></li>
         <li>&middot;</li>
         <li><a href="https://github.com/jenetics/jenetics/issues">Issues</a></li>
@@ -92,8 +97,8 @@
                     fitness <em>Function</em>. Jenetics allows you to minimize
                     and maximize the given fitness function without tweaking it. In contrast
                     to other GA implementations, the library uses the concept of an
-                    evolution stream (<code>EvolutionStream</code>) for executing the evolution steps.
-                    Since the <code>EvolutionStream</code> implements the Java Stream interface,
+                    evolution stream (<a href="javadoc/org.jenetics/org/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a>) for executing the evolution steps.
+                    Since the <a href="javadoc/org.jenetics/org/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a> implements the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a> interface,
                     it works smoothly with the rest of the Java Stream API.</p>
 
                 <h3>Features</h3>
@@ -116,6 +121,18 @@
                             <p>No global state has to be maintained while processing generations!</p>
                         </div>
                     </div>
+                    <div class="item col-md-4 col-sm-6 col-xs-12">
+                        <div class="content">
+                            <h4><i class="fa fa-check-circle"></i> Parallel processing support</h4>
+                            <p>Processing of the evolutionary steps can be executed in parallel!</p>
+                        </div>
+                    </div>
+                    <div class="item col-md-4 col-sm-6 col-xs-12">
+                        <div class="content">
+                            <h4><i class="fa fa-check-circle"></i> Fully documented</h4>
+                            <p>Complete <a href="javadoc/org.jenetics/index.html">Documentation</a> and <a href="manual/manual-3.0.0.pdf">User guide</a> available!</p>
+                        </div>
+                    </div>
                 </div>
 
                 <hr/>
@@ -129,7 +146,7 @@
                 </ul>
                 <h3>Build time</h3>
                 <ul>
-                    <li><b>JDK 8</b>: The `JAVA_HOME` variable must be set to your java installation directory.</li>
+                    <li><b>JDK 8</b>: The <code>JAVA_HOME</code> variable must be set to your Java installation directory.</li>
                     <li><b>Gradle 2.x</b>: <a href="http://www.gradle.org/">Gradle</a> is used for building the library.
                         (Gradle is download automatically, if you are using the Gradle Wrapper script
                         <pre class="prettyprint">$ gradlew</pre>
@@ -178,33 +195,33 @@ $ hg clone https://bitbucket.org/fwilhelm/jenetics &lt;builddir&gt;</pre>
                 </ul>
 
                 <p>For building the library change into the
-                <pre>&lt;builddir&gt;</pre>
+                <code>&lt;builddir&gt;</code>
                 directory (or one of the module directory) and call one of the available tasks:</p>
 
                 <ul>
                     <li><b>compileJava</b>: Compiles the Jenetics sources and copies the class files to the
-                        <pre>&lt;builddir&gt;/&lt;module-dir&gt;/build/classes/main</pre>
+                        <code>&lt;builddir&gt;/&lt;module-dir&gt;/build/classes/main</code>
                         directory.
                     </li>
                     <li><b>test</b>: Compiles and executes the unit tests. The test results are printed onto the console
                         and a test-report, created by TestNG, is written to
-                        <pre>&lt;builddir&gt;/&lt;module-dir&gt</pre>
+                        <code>&lt;builddir&gt;/&lt;module-dir&gt</code>
                         pre directory.
                     </li>
-                    <li><b>javadoc</b>: Generates the API documentation. The Javadoc is stored in the `&lt;builddir&gt;/&lt;module-dir&gt;/build/docs`
+                    <li><b>javadoc</b>: Generates the API documentation. The Javadoc is stored in the <code>&lt;builddir&gt;/&lt;module-dir&gt;/build/docs</code>
                         directory
                     </li>
-                    <li><b>jar</b>: Compiles the sources and creates the JAR files. The artifacts are copied to the `&lt;builddir&gt;/&lt;module-dir&gt;/build/libs`
+                    <li><b>jar</b>: Compiles the sources and creates the JAR files. The artifacts are copied to the <code>&lt;builddir&gt;/&lt;module-dir&gt;/build/libs</code>
                         directory.
                     </li>
                     <li><b>packaging</b>: Compiles the sources of all modules, creates the JAR files and the Javadoc and
                         creates a complete library package--the same which you can download from the home page. The
                         build artifacts are copied into the
-                        <pre>&lt;builddir&gt;/build/package/jenetics-&lt;version&gt;</pre>
+                        <code>&lt;builddir&gt;/build/package/jenetics-&lt;version&gt;</code>
                         directory.
                     </li>
                     <li><b>clean</b>: Deletes the
-                        <pre>&lt;builddir&gt;/build/*</pre>
+                        <code>&lt;builddir&gt;/build/*</code>
                         directories and removes all generated artifacts.
                     </li>
                 </ul>
@@ -228,8 +245,8 @@ $ ./gradlew packaging</pre>
                 <p>
                     The minimum evolution Engine setup needs a genotype factory,
                     <code>Factory&lt;Genotype&lt;?&gt;&gt;</code>, and a fitness <em>Function</em>. The
-                    <em>Genotype</em> implements the
-                    <em>Factory</em> interface and can therefore be used
+                    <code>Genotype</code> implements the
+                    <code>Factory</code> interface and can therefore be used
                     as prototype for creating the initial <em>Population</em> and for creating
                     new random <em>Genotypes</em>.
                 </p>
