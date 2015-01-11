@@ -163,9 +163,7 @@
                         <pre class="prettyprint">
 $ git clone https://github.com/jenetics/jenetics.git &lt;builddir&gt;
 # or
-$ hg clone https://bitbucket.org/fwilhelm/jenetics &lt;builddir&gt;
-# or
-$ hg clone http://hg.code.sf.net/p/jenetics/main &lt;builddir&gt;</pre>
+$ hg clone https://bitbucket.org/fwilhelm/jenetics &lt;builddir&gt;</pre>
 
                 <p>Jenetics uses <a href="http://www.gradle.org/downloads">Gradle</a> as build system and organizes the
                     source into <em>sub</em>-projects (modules). Each sub-project is located in it’s own sub-directory:
@@ -253,7 +251,7 @@ public class HelloWorld {
         // 1.) Define the genotype (factory) suitable
         //     for the problem.
         Factory&lt;Genotype&lt;BitGene&gt;&gt; gtf =
-        Genotype.of(BitChromosome.of(10, 0.5));
+            Genotype.of(BitChromosome.of(10, 0.5));
 
         // 3.) Create the execution environment.
         Engine&lt;BitGene, Integer&gt; engine = Engine
