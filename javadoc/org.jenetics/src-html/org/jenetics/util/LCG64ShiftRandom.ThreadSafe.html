@@ -8,7 +8,7 @@
 <div class="sourceContainer">
 <pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
 <span class="sourceLineNo">002</span> * Java Genetic Algorithm Library (jenetics-3.0.0).<a name="line.2"></a>
-<span class="sourceLineNo">003</span> * Copyright (c) 2007-2015 Franz WilhelmstÃ¶tter<a name="line.3"></a>
+<span class="sourceLineNo">003</span> * Copyright (c) 2007-2014 Franz Wilhelmstötter<a name="line.3"></a>
 <span class="sourceLineNo">004</span> *<a name="line.4"></a>
 <span class="sourceLineNo">005</span> * Licensed under the Apache License, Version 2.0 (the "License");<a name="line.5"></a>
 <span class="sourceLineNo">006</span> * you may not use this file except in compliance with the License.<a name="line.6"></a>
@@ -23,7 +23,7 @@
 <span class="sourceLineNo">015</span> * limitations under the License.<a name="line.15"></a>
 <span class="sourceLineNo">016</span> *<a name="line.16"></a>
 <span class="sourceLineNo">017</span> * Author:<a name="line.17"></a>
-<span class="sourceLineNo">018</span> *    Franz WilhelmstÃ¶tter (franz.wilhelmstoetter@gmx.at)<a name="line.18"></a>
+<span class="sourceLineNo">018</span> *    Franz Wilhelmstötter (franz.wilhelmstoetter@gmx.at)<a name="line.18"></a>
 <span class="sourceLineNo">019</span> */<a name="line.19"></a>
 <span class="sourceLineNo">020</span>package org.jenetics.util;<a name="line.20"></a>
 <span class="sourceLineNo">021</span><a name="line.21"></a>
@@ -81,9 +81,9 @@
 <span class="sourceLineNo">073</span> * @see &lt;a href="http://numbercrunch.de/trng/"&gt;TRNG&lt;/a&gt;<a name="line.73"></a>
 <span class="sourceLineNo">074</span> * @see RandomRegistry<a name="line.74"></a>
 <span class="sourceLineNo">075</span> *<a name="line.75"></a>
-<span class="sourceLineNo">076</span> * @author &lt;a href="mailto:franz.wilhelmstoetter@gmx.at"&gt;Franz WilhelmstÃ¶tter&lt;/a&gt;<a name="line.76"></a>
+<span class="sourceLineNo">076</span> * @author &lt;a href="mailto:franz.wilhelmstoetter@gmx.at"&gt;Franz Wilhelmstötter&lt;/a&gt;<a name="line.76"></a>
 <span class="sourceLineNo">077</span> * @since 1.1<a name="line.77"></a>
-<span class="sourceLineNo">078</span> * @version 2.0 &amp;mdash; &lt;em&gt;$Date$&lt;/em&gt;<a name="line.78"></a>
+<span class="sourceLineNo">078</span> * @version 2.0 &amp;mdash; &lt;em&gt;$Date: 2014-12-28 $&lt;/em&gt;<a name="line.78"></a>
 <span class="sourceLineNo">079</span> */<a name="line.79"></a>
 <span class="sourceLineNo">080</span>public class LCG64ShiftRandom extends Random64 {<a name="line.80"></a>
 <span class="sourceLineNo">081</span><a name="line.81"></a>
@@ -103,7 +103,7 @@
 <span <font color="#7F0055"><b>class</b></font>=<font color="#0000FF">"sourceLineNo"</font>>095</span>         * <font color="#3F7F5F">// Register the PRNG with the {@code LECUYER3} parameters.<a name="line.95"></a></font>
 <span <font color="#7F0055"><b>class</b></font>=<font color="#0000FF">"sourceLineNo"</font>>096</span>         * RandomRegistry.setRandom(<font color="#7F0055"><b>new</b></font> LCG64ShiftRandom.ThreadLocal(<a name=<font color="#0000FF">"line.96"</font>></a>
 <span <font color="#7F0055"><b>class</b></font>=<font color="#0000FF">"sourceLineNo"</font>>097</span>         *     LCG64ShiftRandom.LECUYER3<a name=<font color="#0000FF">"line.97"</font>></a>
-<span <font color="#7F0055"><b>class</b></font>=<font color="#0000FF">"sourceLineNo"</font>>098</span>         * ));<a name=<font color="#0000FF">"line.98"</font>></a></code></div><a name="line.99"></a>
+<span <font color="#7F0055"><b>class</b></font>=<font color="#0000FF">"sourceLineNo"</font>>098</span>         * ));<a name=<font color="#0000FF">"line.98"</font>></a></code></div><a name="line.99"></a>
 <span class="sourceLineNo">100</span>         *<a name="line.100"></a>
 <span class="sourceLineNo">101</span>         * Be aware, that calls of the {@code setSeed(long)} method will throw an<a name="line.101"></a>
 <span class="sourceLineNo">102</span>         * {@code UnsupportedOperationException} for &lt;i&gt;thread local&lt;/i&gt; instances.<a name="line.102"></a>
@@ -111,11 +111,11 @@
 <span <font color="#7F0055"><b>class</b></font>=<font color="#0000FF">"sourceLineNo"</font>>104</span>         * RandomRegistry.setRandom(<font color="#7F0055"><b>new</b></font> LCG64ShiftRandom.ThreadLocal());<a name=<font color="#0000FF">"line.104"</font>></a>
 <span <font color="#7F0055"><b>class</b></font>=<font color="#0000FF">"sourceLineNo"</font>>105</span>         *<a name=<font color="#0000FF">"line.105"</font>></a>
 <span <font color="#7F0055"><b>class</b></font>=<font color="#0000FF">"sourceLineNo"</font>>106</span>         * <font color="#3F7F5F">// Will throw 'UnsupportedOperationException'.<a name="line.106"></a></font>
-<span <font color="#7F0055"><b>class</b></font>=<font color="#0000FF">"sourceLineNo"</font>>107</span>         * RandomRegistry.getRandom().setSeed(1234);<a name=<font color="#0000FF">"line.107"</font>></a></code></div><a name="line.108"></a>
+<span <font color="#7F0055"><b>class</b></font>=<font color="#0000FF">"sourceLineNo"</font>>107</span>         * RandomRegistry.getRandom().setSeed(1234);<a name=<font color="#0000FF">"line.107"</font>></a></code></div><a name="line.108"></a>
 <span class="sourceLineNo">109</span>         *<a name="line.109"></a>
-<span class="sourceLineNo">110</span>         * @author &lt;a href="mailto:franz.wilhelmstoetter@gmx.at"&gt;Franz WilhelmstÃ¶tter&lt;/a&gt;<a name="line.110"></a>
+<span class="sourceLineNo">110</span>         * @author &lt;a href="mailto:franz.wilhelmstoetter@gmx.at"&gt;Franz Wilhelmstötter&lt;/a&gt;<a name="line.110"></a>
 <span class="sourceLineNo">111</span>         * @since 1.1<a name="line.111"></a>
-<span class="sourceLineNo">112</span>         * @version 3.0 &amp;mdash; &lt;em&gt;$Date$&lt;/em&gt;<a name="line.112"></a>
+<span class="sourceLineNo">112</span>         * @version 3.0 &amp;mdash; &lt;em&gt;$Date: 2014-12-28 $&lt;/em&gt;<a name="line.112"></a>
 <span class="sourceLineNo">113</span>         */<a name="line.113"></a>
 <span class="sourceLineNo">114</span>        public static final class ThreadLocal<a name="line.114"></a>
 <span class="sourceLineNo">115</span>                extends java.lang.ThreadLocal&lt;LCG64ShiftRandom&gt;<a name="line.115"></a>
@@ -151,7 +151,7 @@
 <span class="sourceLineNo">145</span>                 * distributed PRN for every thread.<a name="line.145"></a>
 <span class="sourceLineNo">146</span>                 *<a name="line.146"></a>
 <span class="sourceLineNo">147</span>                 * &lt;p&gt;<a name="line.147"></a>
-<span class="sourceLineNo">148</span>                 * &lt;strong&gt;Tinaâ€™s Random Number Generator Library&lt;/strong&gt;<a name="line.148"></a>
+<span class="sourceLineNo">148</span>                 * &lt;strong&gt;Tina’s Random Number Generator Library&lt;/strong&gt;<a name="line.148"></a>
 <span class="sourceLineNo">149</span>                 * &lt;br&gt;<a name="line.149"></a>
 <span class="sourceLineNo">150</span>                 * &lt;em&gt;Chapter 2. Pseudo-random numbers for parallel Monte Carlo<a name="line.150"></a>
 <span class="sourceLineNo">151</span>                 *     simulations, Page 7&lt;/em&gt;<a name="line.151"></a>
@@ -202,9 +202,9 @@
 <span class="sourceLineNo">196</span>         * This is a &lt;i&gt;thread safe&lt;/i&gt; variation of the this PRNG&amp;mdash;by<a name="line.196"></a>
 <span class="sourceLineNo">197</span>         * synchronizing the random number generation.<a name="line.197"></a>
 <span class="sourceLineNo">198</span>         *<a name="line.198"></a>
-<span class="sourceLineNo">199</span>         * @author &lt;a href="mailto:franz.wilhelmstoetter@gmx.at"&gt;Franz WilhelmstÃ¶tter&lt;/a&gt;<a name="line.199"></a>
+<span class="sourceLineNo">199</span>         * @author &lt;a href="mailto:franz.wilhelmstoetter@gmx.at"&gt;Franz Wilhelmstötter&lt;/a&gt;<a name="line.199"></a>
 <span class="sourceLineNo">200</span>         * @since 1.1<a name="line.200"></a>
-<span class="sourceLineNo">201</span>         * @version 3.0 &amp;mdash; &lt;em&gt;$Date$&lt;/em&gt;<a name="line.201"></a>
+<span class="sourceLineNo">201</span>         * @version 3.0 &amp;mdash; &lt;em&gt;$Date: 2014-12-28 $&lt;/em&gt;<a name="line.201"></a>
 <span class="sourceLineNo">202</span>         */<a name="line.202"></a>
 <span class="sourceLineNo">203</span>        public static final class ThreadSafe extends LCG64ShiftRandom {<a name="line.203"></a>
 <span class="sourceLineNo">204</span>                private static final long serialVersionUID = 1L;<a name="line.204"></a>
@@ -279,11 +279,11 @@
 <span class="sourceLineNo">273</span>        /**<a name="line.273"></a>
 <span class="sourceLineNo">274</span>         * Parameter class for the {@code LCG64ShiftRandom} generator, for the<a name="line.274"></a>
 <span class="sourceLineNo">275</span>         * parameters &lt;i&gt;a&lt;/i&gt; and &lt;i&gt;b&lt;/i&gt; of the LC recursion<a name="line.275"></a>
-<span class="sourceLineNo">276</span>         * &lt;i&gt;r&lt;sub&gt;i+1&lt;/sub&gt; = a Â· r&lt;sub&gt;i&lt;/sub&gt; + b&lt;/i&gt; mod &lt;i&gt;2&lt;sup&gt;64&lt;/sup&gt;&lt;/i&gt;.<a name="line.276"></a>
+<span class="sourceLineNo">276</span>         * &lt;i&gt;r&lt;sub&gt;i+1&lt;/sub&gt; = a · r&lt;sub&gt;i&lt;/sub&gt; + b&lt;/i&gt; mod &lt;i&gt;2&lt;sup&gt;64&lt;/sup&gt;&lt;/i&gt;.<a name="line.276"></a>
 <span class="sourceLineNo">277</span>         *<a name="line.277"></a>
-<span class="sourceLineNo">278</span>         * @author &lt;a href="mailto:franz.wilhelmstoetter@gmx.at"&gt;Franz WilhelmstÃ¶tter&lt;/a&gt;<a name="line.278"></a>
+<span class="sourceLineNo">278</span>         * @author &lt;a href="mailto:franz.wilhelmstoetter@gmx.at"&gt;Franz Wilhelmstötter&lt;/a&gt;<a name="line.278"></a>
 <span class="sourceLineNo">279</span>         * @since 1.1<a name="line.279"></a>
-<span class="sourceLineNo">280</span>         * @version 2.0 &amp;mdash; &lt;em&gt;$Date$&lt;/em&gt;<a name="line.280"></a>
+<span class="sourceLineNo">280</span>         * @version 2.0 &amp;mdash; &lt;em&gt;$Date: 2014-12-28 $&lt;/em&gt;<a name="line.280"></a>
 <span class="sourceLineNo">281</span>         */<a name="line.281"></a>
 <span class="sourceLineNo">282</span>        public static final class Param implements Serializable {<a name="line.282"></a>
 <span class="sourceLineNo">283</span><a name="line.283"></a>
