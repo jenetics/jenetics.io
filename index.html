@@ -168,19 +168,15 @@
                 <h2>Build Jenetics</h2>
 
                 <p>For building the Jenetics library from source, download the most recent, stable package version from
-                    <a href="https://sourceforge.net/projects/jenetics/files/latest/download">Sourceforge</a> or <a
-                            href="https://bitbucket.org/fwilhelm/jenetics/downloads">Bitbucket</a> and extract it to
+                    <a href="https://sourceforge.net/projects/jenetics/files/latest/download">Sourceforge</a> and extract it to
                     some build directory.</p>
 
                 <pre class="prettyprint">$ unzip jenetics-&lt;version&gt;.zip -d &lt;builddir&gt;</pre>
                 <p><code>&lt;version&gt;</code> denotes the actual Jenetics version and <code>&lt;builddir&gt;</code>
-                    the actual build directory. Alternatively you can check out the latest-unstable-version from the
-                    Mercurial default branch.</p>
+                    the actual build directory. Alternatively you can clone the current version from Github.</p>
 
                         <pre class="prettyprint">
-$ git clone https://github.com/jenetics/jenetics.git &lt;builddir&gt;
-# or
-$ hg clone https://bitbucket.org/fwilhelm/jenetics &lt;builddir&gt;</pre>
+$ git clone https://github.com/jenetics/jenetics.git &lt;builddir&gt;</pre>
 
                 <p>Jenetics uses <a href="http://www.gradle.org/downloads">Gradle</a> as build system and organizes the
                     source into <em>sub</em>-projects (modules). Each sub-project is located in it’s own sub-directory:
