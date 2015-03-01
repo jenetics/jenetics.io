@@ -224,22 +224,16 @@ $ git clone https://github.com/jenetics/jenetics.git &lt;builddir&gt;</pre>
                         <code>&lt;builddir&gt;/&lt;module-dir&gt;/build/classes/main</code>
                         directory.
                     </li>
+                    <li><b>jar</b>: Compiles the sources and creates the JAR files. The artifacts are copied to the <code>&lt;builddir&gt;/&lt;module-dir&gt;/build/libs</code>
+                        directory.
+                    </li>           
+                    <li><b>javadoc</b>: Generates the API documentation. The Javadoc is stored in the <code>&lt;builddir&gt;/&lt;module-dir&gt;/build/docs</code>
+                        directory
+                    </li>                    
                     <li><b>test</b>: Compiles and executes the unit tests. The test results are printed onto the console
                         and a test-report, created by TestNG, is written to
                         <code>&lt;builddir&gt;/&lt;module-dir&gt</code>
                         pre directory.
-                    </li>
-                    <li><b>javadoc</b>: Generates the API documentation. The Javadoc is stored in the <code>&lt;builddir&gt;/&lt;module-dir&gt;/build/docs</code>
-                        directory
-                    </li>
-                    <li><b>jar</b>: Compiles the sources and creates the JAR files. The artifacts are copied to the <code>&lt;builddir&gt;/&lt;module-dir&gt;/build/libs</code>
-                        directory.
-                    </li>
-                    <li><b>packaging</b>: Compiles the sources of all modules, creates the JAR files and the Javadoc and
-                        creates a complete library package--the same which you can download from the home page. The
-                        build artifacts are copied into the
-                        <code>&lt;builddir&gt;/build/package/jenetics-&lt;version&gt;</code>
-                        directory.
                     </li>
                     <li><b>clean</b>: Deletes the
                         <code>&lt;builddir&gt;/build/*</code>
@@ -247,10 +241,10 @@ $ git clone https://github.com/jenetics/jenetics.git &lt;builddir&gt;</pre>
                     </li>
                 </ul>
 
-                <p>For packaging (building) the source call</p>
+                <p>For building the library jar from the sources call</p>
                         <pre class="prettyprint">
 $ cd &lt;build-dir&gt;
-$ ./gradlew packaging</pre>
+$ ./gradlew jar</pre>
 
                 <h3>IDE Integration</h3>
 
@@ -278,6 +272,7 @@ import org.jenetics.BitGene;
 import org.jenetics.Genotype;
 import org.jenetics.engine.Engine;
 import org.jenetics.engine.EvolutionResult;
+import org.jenetics.util.Factory;
 
 public class HelloWorld {
     // 2.) Definition of the fitness function.
