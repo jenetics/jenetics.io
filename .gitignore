@@ -4,4 +4,5 @@
 *.ipr
 *.iws
 .idea/*
+.idea
 classes/*
