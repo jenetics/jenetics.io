@@ -30,7 +30,7 @@ EvolutionSpliterator.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">01</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">02</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-3.0.1).</font><br />
+<font color="#808080">02</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-3.1.0).</font><br />
 <font color="#808080">03</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2015&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">04</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">05</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
@@ -63,7 +63,7 @@ EvolutionSpliterator.java
 <font color="#808080">32</font>&nbsp;<font color="#3f5fbf">/**</font><br />
 <font color="#808080">33</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">&lt;a&nbsp;href=&#34;mailto:franz.wilhelmstoetter@gmx.at&#34;&gt;Franz&nbsp;Wilhelmst&ouml;tter</font><font color="#7f7f9f">&lt;/a&gt;</font><br />
 <font color="#808080">34</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@since&nbsp;</font><font color="#3f5fbf">3.0</font><br />
-<font color="#808080">35</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@version&nbsp;</font><font color="#3f5fbf">3.0&nbsp;&amp;mdash;&nbsp;</font><font color="#7f7f9f">&lt;em&gt;</font><font color="#3f5fbf">$Date:&nbsp;2014-09-23&nbsp;$</font><font color="#7f7f9f">&lt;/em&gt;</font><br />
+<font color="#808080">35</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@version&nbsp;</font><font color="#3f5fbf">3.0</font><br />
 <font color="#808080">36</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
 <font color="#808080">37</font>&nbsp;<font color="#7f0055"><b>final&nbsp;class&nbsp;</b></font><font color="#000000">EvolutionSpliterator&lt;</font><br />
 <font color="#808080">38</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">G&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">Gene&lt;?,&nbsp;G&gt;,</font><br />
@@ -72,15 +72,15 @@ EvolutionSpliterator.java
 <font color="#808080">41</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>implements&nbsp;</b></font><font color="#000000">Spliterator&lt;EvolutionResult&lt;G,&nbsp;C&gt;&gt;</font><br />
 <font color="#808080">42</font>&nbsp;<font color="#000000">{</font><br />
 <font color="#808080">43</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">44</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">Function&lt;EvolutionStart&lt;G,&nbsp;C&gt;,&nbsp;EvolutionResult&lt;G,&nbsp;C&gt;&gt;&nbsp;_evolution;</font><br />
-<font color="#808080">45</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">Supplier&lt;EvolutionStart&lt;G,&nbsp;C&gt;&gt;&nbsp;_initial;</font><br />
+<font color="#808080">44</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">Supplier&lt;EvolutionStart&lt;G,&nbsp;C&gt;&gt;&nbsp;_initial;</font><br />
+<font color="#808080">45</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">Function&lt;?&nbsp;</font><font color="#7f0055"><b>super&nbsp;</b></font><font color="#000000">EvolutionStart&lt;G,&nbsp;C&gt;,&nbsp;EvolutionResult&lt;G,&nbsp;C&gt;&gt;&nbsp;_evolution;</font><br />
 <font color="#808080">46</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">Predicate&lt;?&nbsp;</font><font color="#7f0055"><b>super&nbsp;</b></font><font color="#000000">EvolutionResult&lt;G,&nbsp;C&gt;&gt;&nbsp;_proceed;</font><br />
 <font color="#808080">47</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">48</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">EvolutionStart&lt;G,&nbsp;C&gt;&nbsp;_start;</font><br />
 <font color="#808080">49</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">50</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">EvolutionSpliterator</font><font color="#000000">(</font><br />
-<font color="#808080">51</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Function&lt;EvolutionStart&lt;G,&nbsp;C&gt;,&nbsp;EvolutionResult&lt;G,&nbsp;C&gt;&gt;&nbsp;evolution,</font><br />
-<font color="#808080">52</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Supplier&lt;EvolutionStart&lt;G,&nbsp;C&gt;&gt;&nbsp;initial,</font><br />
+<font color="#808080">51</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Supplier&lt;EvolutionStart&lt;G,&nbsp;C&gt;&gt;&nbsp;initial,</font><br />
+<font color="#808080">52</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Function&lt;?&nbsp;</font><font color="#7f0055"><b>super&nbsp;</b></font><font color="#000000">EvolutionStart&lt;G,&nbsp;C&gt;,&nbsp;EvolutionResult&lt;G,&nbsp;C&gt;&gt;&nbsp;evolution,</font><br />
 <font color="#808080">53</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Predicate&lt;?&nbsp;</font><font color="#7f0055"><b>super&nbsp;</b></font><font color="#000000">EvolutionResult&lt;G,&nbsp;C&gt;&gt;&nbsp;proceed</font><br />
 <font color="#808080">54</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">)&nbsp;{</font><br />
 <font color="#808080">55</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_evolution&nbsp;=&nbsp;requireNonNull</font><font color="#000000">(</font><font color="#000000">evolution</font><font color="#000000">)</font><font color="#000000">;</font><br />
@@ -115,7 +115,7 @@ EvolutionSpliterator.java
 <font color="#808080">84</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">85</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
 <font color="#808080">86</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">characteristics</font><font color="#000000">()&nbsp;{</font><br />
-<font color="#808080">87</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">Spliterator.NONNULL&nbsp;|&nbsp;Spliterator.IMMUTABLE;</font><br />
+<font color="#808080">87</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">NONNULL&nbsp;|&nbsp;IMMUTABLE;</font><br />
 <font color="#808080">88</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
 <font color="#808080">89</font>&nbsp;<font color="#000000">}</font></code>
     
