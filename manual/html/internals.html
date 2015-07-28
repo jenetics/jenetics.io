@@ -98,7 +98,6 @@ hr {
 
 p {
     color: black;
-    /*font-size: 110%;*/
     text-align: justify;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -120,6 +119,7 @@ ul > li > * {
     font-family: "Courier New", Courier, monospace;
     font-size: inherit;
     color: #333;
+    display: inline-block;
     padding: 0;
     margin: 0;
 }
@@ -2580,7 +2580,6 @@ hr {
 
 p {
     color: black;
-    /*font-size: 110%;*/
     text-align: justify;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -2602,6 +2601,7 @@ ul > li > * {
     font-family: "Courier New", Courier, monospace;
     font-size: inherit;
     color: #333;
+    display: inline-block;
     padding: 0;
     margin: 0;
 }
@@ -5187,11 +5187,11 @@ This site contains internal implementation details. They are not essential for u
 <div class="sect1">
 <h2 id="_prng_testing">1. PRNG testing</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Jenetics uses the <code>dieharder</code> <span class="footnote"><br />[<a href="http://www.phy.duke.edu/~rgb/General/dieharder.php">From Robert G. Brown</a>]<br /></span> (command line) tool for testing the randomness
-of the used PRNGs. <code>dieharder</code> is a random number generator (RNG) testing
+<div class="paragraph"><p>Jenetics uses the <em>dieharder</em> <span class="footnote"><br />[<a href="http://www.phy.duke.edu/~rgb/General/dieharder.php">From Robert G. Brown</a>]<br /></span> (command line) tool for testing the randomness
+of the used PRNGs. <em>dieharder</em> is a random number generator (RNG) testing
 suite. It is intended to test generators, not files of possibly random numbers.
-Since <code>dieharder</code> needs a huge amount of random data, for testing the quality
-of a RNG, it is usually advisable to pipe the random numbers to the <code>dieharder</code>
+Since <em>dieharder</em> needs a huge amount of random data, for testing the quality
+of a RNG, it is usually advisable to pipe the random numbers to the <em>dieharder</em>
 process:</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.7
@@ -5200,9 +5200,9 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>$ cat /dev/urandom <span style="color: #990000">|</span> dieharder -g <span style="color: #993399">200</span> -a</tt></pre></div></div>
 <div class="paragraph"><p>The example above demonstrates how to stream a raw binary stream of bits to
-the stdin (raw) interface of <code>dieharder</code>. With the <code>DieHarder</code> class, which is
-part of the <code>org.jenetics.internal.util</code> package, it is easily possible to test
-PRNGs extending the <code>java.util.Random</code> class. The only requirement is, that
+the stdin (raw) interface of <em>dieharder</em>. With the <em>DieHarder</em> class, which is
+part of the <em>org.jenetics.internal.util</em> package, it is easily possible to test
+PRNGs extending the <em>java.util.Random</em> class. The only requirement is, that
 the PRNG must be default-constructable and part of the classpath.</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.7
@@ -5250,8 +5250,8 @@ Preparing to run <span style="font-weight: bold"><span style="color: #0000FF">te
 <span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span>
 <span style="font-style: italic"><span style="color: #9A1900"># Runtime: 1:34:37                                                            #</span></span>
 <span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span></tt></pre></div></div>
-<div class="paragraph"><p>In the listing above, a part of the created <code>dieharder</code> report is shown. For
-testing the <code>LCG64ShiftRandom</code> class, which is part of the <code>org.jenetics.util</code>
+<div class="paragraph"><p>In the listing above, a part of the created <em>dieharder</em> report is shown. For
+testing the <em>LCG64ShiftRandom</em> class, which is part of the <em>org.jenetics.util</em>
 package, the following command can be called:</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.7
@@ -5262,14 +5262,14 @@ http://www.gnu.org/software/src-highlite -->
     org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>internal<span style="color: #990000">.</span>util<span style="color: #990000">.</span>DieHarder <span style="color: #990000">\</span>
     org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>util<span style="color: #990000">.</span>LCG64ShiftRandom -a
 </tt></pre></div></div>
-<div class="paragraph"><p>Table <a href="#LCG64ShiftRandom-quality"><code>LCG64ShiftRandom</code> quality</a> shows the summary of the <code>dieharder</code> tests. The full report is part of
-the source file of the <code>LCG64ShiftRandom</code> class.</p></div>
+<div class="paragraph"><p>Table <a href="#LCG64ShiftRandom-quality"><em>LCG64ShiftRandom</em> quality</a> shows the summary of the <em>dieharder</em> tests. The full report is part of
+the source file of the <em>LCG64ShiftRandom</em> class.</p></div>
 <div class="tableblock" id="LCG64ShiftRandom-quality">
 <table rules="all"
 width="100%"
 frame="border"
 cellspacing="0" cellpadding="4">
-<caption class="title">Table 1. <code>LCG64ShiftRandom</code> quality <span class="footnote"><br />[<a href="https://github.com/jenetics/jenetics/blob/master/org.jenetics/src/main/java/org/jenetics/util/LCG64ShiftRandom.java">Full report</a>]<br /></span></caption>
+<caption class="title">Table 1. <em>LCG64ShiftRandom</em> quality <span class="footnote"><br />[<a href="https://github.com/jenetics/jenetics/blob/master/org.jenetics/src/main/java/org/jenetics/util/LCG64ShiftRandom.java">Full report</a>]<br /></span></caption>
 <col width="33%" />
 <col width="33%" />
 <col width="33%" />
