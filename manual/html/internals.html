@@ -5217,39 +5217,41 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>Calling the command above will create an instance of the given random engine
 and stream the random data (bytes) to the raw interface of dieharder process.</p></div>
 <div class="listingblock">
-<div class="content">
-<pre><code>#=============================================================================#
-# Testing: &lt;random-engine-name&gt; (2015-07-11 23:48)                            #
-#=============================================================================#
-#=============================================================================#
-# Linux 3.19.0-22-generic (amd64)                                             #
-# java version "1.8.0_45"                                                     #
-# Java(TM) SE Runtime Environment (build 1.8.0_45-b14)                        #
-# Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02)                         #
-#=============================================================================#
-#=============================================================================#
-#            dieharder version 3.31.1 Copyright 2003 Robert G. Brown          #
-#=============================================================================#
-   rng_name    |rands/second|   Seed   |
-stdin_input_raw|  1.36e+07  |1583496496|
-#=============================================================================#
-        test_name   |ntup| tsamples |psamples|  p-value |Assessment
-#=============================================================================#
-   diehard_birthdays|   0|       100|     100|0.63372078|  PASSED
-      diehard_operm5|   0|   1000000|     100|0.42965082|  PASSED
-  diehard_rank_32x32|   0|     40000|     100|0.95159380|  PASSED
-    diehard_rank_6x8|   0|    100000|     100|0.70376799|  PASSED
-...
-Preparing to run test 209.  ntuple = 0
-        dab_monobit2|  12|  65000000|       1|0.76563780|  PASSED
-#=============================================================================#
-# Summary: PASSED=112, WEAK=2, FAILED=0                                       #
-#          235,031.492 MB of random data created with 41.394 MB/sec           #
-#=============================================================================#
-#=============================================================================#
-# Runtime: 1:34:37                                                            #
-#=============================================================================#</code></pre>
-</div></div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># Testing: &lt;random-engine-name&gt; (2015-07-11 23:48)                            #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># Linux 3.19.0-22-generic (amd64)                                             #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># java version "1.8.0_45"                                                     #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># Java(TM) SE Runtime Environment (build 1.8.0_45-b14)                        #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02)                         #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#            dieharder version 3.31.1 Copyright 2003 Robert G. Brown          #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span>
+   rng_name    <span style="color: #990000">|</span>rands/second<span style="color: #990000">|</span>   Seed   <span style="color: #990000">|</span>
+stdin_input_raw<span style="color: #990000">|</span>  <span style="color: #993399">1.36e+07</span>  <span style="color: #990000">|</span><span style="color: #993399">1583496496</span><span style="color: #990000">|</span>
+<span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span>
+        test_name   <span style="color: #990000">|</span>ntup<span style="color: #990000">|</span> tsamples <span style="color: #990000">|</span>psamples<span style="color: #990000">|</span>  p-value <span style="color: #990000">|</span>Assessment
+<span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span>
+   diehard_birthdays<span style="color: #990000">|</span>   <span style="color: #993399">0</span><span style="color: #990000">|</span>       <span style="color: #993399">100</span><span style="color: #990000">|</span>     <span style="color: #993399">100</span><span style="color: #990000">|</span><span style="color: #993399">0.63372078</span><span style="color: #990000">|</span>  PASSED
+      diehard_operm5<span style="color: #990000">|</span>   <span style="color: #993399">0</span><span style="color: #990000">|</span>   <span style="color: #993399">1000000</span><span style="color: #990000">|</span>     <span style="color: #993399">100</span><span style="color: #990000">|</span><span style="color: #993399">0.42965082</span><span style="color: #990000">|</span>  PASSED
+  diehard_rank_32x32<span style="color: #990000">|</span>   <span style="color: #993399">0</span><span style="color: #990000">|</span>     <span style="color: #993399">40000</span><span style="color: #990000">|</span>     <span style="color: #993399">100</span><span style="color: #990000">|</span><span style="color: #993399">0.95159380</span><span style="color: #990000">|</span>  PASSED
+    diehard_rank_6x8<span style="color: #990000">|</span>   <span style="color: #993399">0</span><span style="color: #990000">|</span>    <span style="color: #993399">100000</span><span style="color: #990000">|</span>     <span style="color: #993399">100</span><span style="color: #990000">|</span><span style="color: #993399">0.70376799</span><span style="color: #990000">|</span>  PASSED
+<span style="color: #990000">...</span>
+Preparing to run <span style="font-weight: bold"><span style="color: #0000FF">test</span></span> <span style="color: #993399">209</span><span style="color: #990000">.</span>  ntuple <span style="color: #990000">=</span> <span style="color: #993399">0</span>
+        dab_monobit2<span style="color: #990000">|</span>  <span style="color: #993399">12</span><span style="color: #990000">|</span>  <span style="color: #993399">65000000</span><span style="color: #990000">|</span>       <span style="color: #993399">1</span><span style="color: #990000">|</span><span style="color: #993399">0.76563780</span><span style="color: #990000">|</span>  PASSED
+<span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># Summary: PASSED=112, WEAK=2, FAILED=0                                       #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#          235,031.492 MB of random data created with 41.394 MB/sec           #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># Runtime: 1:34:37                                                            #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#=============================================================================#</span></span></tt></pre></div></div>
 <div class="paragraph"><p>In the listing above, a part of the created <code>dieharder</code> report is shown. For
 testing the <code>LCG64ShiftRandom</code> class, which is part of the <code>org.jenetics.util</code>
 package, the following command can be called:</p></div>
@@ -5294,7 +5296,7 @@ cellspacing="0" cellpadding="4">
 <div id="footer">
 <div id="footer-text">
 Last updated
- 2015-07-28 22:55:43 CEST
+ 2015-07-28 23:16:59 CEST
 </div>
 </div>
 </body>
