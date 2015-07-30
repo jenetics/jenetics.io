@@ -5187,7 +5187,7 @@ This site contains internal implementation details. They are not essential for u
 <div class="sect1">
 <h2 id="_prng_testing">1. PRNG testing</h2>
 <div class="sectionbody">
-<div class="paragraph"><p><a href="http://jenetics.io">Jenetics</a> uses the <em>dieharder</em> <span class="footnote"><br />[<a href="http://www.phy.duke.edu/~rgb/General/dieharder.php">From Robert G. Brown</a>]<br /></span> (command line) tool for testing the randomness
+<div class="paragraph"><p><a href="http://jenetics.io">Jenetics</a> uses the <a href="http://www.phy.duke.edu/~rgb/General/dieharder.php"><em>dieharder</em></a> (command line) tool for testing the randomness
 of the used PRNGs. <em>dieharder</em> is a random number generator (RNG) testing
 suite. It is intended to test generators, not files of possibly random numbers.
 Since <em>dieharder</em> needs a huge amount of random data, for testing the quality
@@ -5210,8 +5210,8 @@ by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>$ java -cp org<span style="color: #990000">.</span>jenetics-<span style="color: #993399">3.2</span><span style="color: #990000">.</span><span style="color: #993399">0</span><span style="color: #990000">.</span>jar <span style="color: #990000">\</span>
-    org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>internal<span style="color: #990000">.</span>util<span style="color: #990000">.</span>DieHarder <span style="color: #990000">\</span>
-    <span style="color: #990000">&lt;</span>random-engine-name<span style="color: #990000">&gt;</span> -a</tt></pre></div></div>
+      org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>internal<span style="color: #990000">.</span>util<span style="color: #990000">.</span>DieHarder <span style="color: #990000">\</span>
+      <span style="color: #990000">&lt;</span>random-engine-name<span style="color: #990000">&gt;</span> -a</tt></pre></div></div>
 <div class="paragraph"><p>Calling the command above will create an instance of the given random engine
 and stream the random data (bytes) to the raw interface of dieharder process.</p></div>
 <div class="listingblock">
@@ -5259,11 +5259,10 @@ by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>$ java -cp org<span style="color: #990000">.</span>jenetics-<span style="color: #993399">3.2</span><span style="color: #990000">.</span><span style="color: #993399">0</span><span style="color: #990000">.</span>jar <span style="color: #990000">\</span>
-    org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>internal<span style="color: #990000">.</span>util<span style="color: #990000">.</span>DieHarder <span style="color: #990000">\</span>
-    org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>util<span style="color: #990000">.</span>LCG64ShiftRandom -a
-</tt></pre></div></div>
+      org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>internal<span style="color: #990000">.</span>util<span style="color: #990000">.</span>DieHarder <span style="color: #990000">\</span>
+      org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>util<span style="color: #990000">.</span>LCG64ShiftRandom -a</tt></pre></div></div>
 <div class="paragraph"><p>Table <a href="#LCG64ShiftRandom-quality"><em>LCG64ShiftRandom</em> quality</a> shows the summary of the <em>dieharder</em> tests. The full report is part of
-the source file of the <em>LCG64ShiftRandom</em> <span class="footnote"><br />[<a href="https://github.com/jenetics/jenetics/blob/master/org.jenetics/src/main/java/org/jenetics/util/LCG64ShiftRandom.java">Full report</a>]<br /></span> class.</p></div>
+the source file of the <a href="https://github.com/jenetics/jenetics/blob/master/org.jenetics/src/main/java/org/jenetics/util/LCG64ShiftRandom.java"><em>LCG64ShiftRandom</em></a> class.</p></div>
 <div class="tableblock" id="LCG64ShiftRandom-quality">
 <table rules="all"
 width="100%"
@@ -5287,6 +5286,196 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_random_seeding">2. Random seeding</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The PRNGs, used by the Jenetics library, needs to be initialized with a proper
+seed value before they can be used. The usual way for doing this, is to take the
+current time stamp.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="font-weight: bold"><span style="color: #0000FF">static</span></span> <span style="color: #009900">long</span> <span style="font-weight: bold"><span style="color: #000000">seed</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> System<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">nanoTime</span></span><span style="color: #990000">();</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+<div class="paragraph"><p>Before applying this method throughout the whole library, I decided to perform
+some statistical tests. For this purpose I treated the <em>seed()</em> method itself
+as PRNG and analyzed the created long values with the <em>DieHarder</em> class. The
+<em>seed()</em> method has been wrapped into the <em>NanoTimeRandom</em>
+ class. Assuming that the dieharder tool is in the search path, calling</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>$ java -cp org<span style="color: #990000">.</span>jenetics-<span style="color: #993399">3.2</span><span style="color: #990000">.</span><span style="color: #993399">0</span><span style="color: #990000">.</span>jar <span style="color: #990000">\</span>
+      org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>internal<span style="color: #990000">.</span>util<span style="color: #990000">.</span>DieHarder <span style="color: #990000">\</span>
+      org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>internal<span style="color: #990000">.</span>util<span style="color: #990000">.</span>NanoTimeRandom -a</tt></pre></div></div>
+<div class="paragraph"><p>will perform the statistical tests for the nano time random engine. The statistical
+quality is rather bad: every single test failed. Table
+<a href="#NanoTimeSeeding-quality">Nano time seeding quality</a> shows the summary of
+the dieharder <a href="https://github.com/jenetics/jenetics/blob/master/org.jenetics/src/main/java/org/jenetics/internal/util/NanoTimeRandom.java">report</a>.</p></div>
+<div class="tableblock" id="NanoTimeSeeding-quality">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 2. Nano time seeding quality</caption>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Passed tests</p></td>
+<td align="left" valign="top"><p class="table">Weak tests</p></td>
+<td align="left" valign="top"><p class="table">Failed tests</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">0</p></td>
+<td align="left" valign="top"><p class="table">0</p></td>
+<td align="left" valign="top"><p class="table">114</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>An alternative source of entropy, for generating seed values, would be the
+<em>/dev/random</em> or <em>/dev/urandom</em> file. But this approach is not portable, which
+was a prerequisite for the Jenetics library.</p></div>
+<div class="paragraph"><p>The next attempt tries to fetch the seeds from the JVM, via the <em>Object.hashCode()</em>
+method. Since the hash code of an Object is available for every operating system
+and most likely "randomly" distributed.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="font-weight: bold"><span style="color: #0000FF">static</span></span> <span style="color: #009900">long</span> <span style="font-weight: bold"><span style="color: #000000">seed</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #990000">((</span><span style="color: #009900">long</span><span style="color: #990000">)</span><span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Object</span></span><span style="color: #990000">().</span><span style="font-weight: bold"><span style="color: #000000">hashCode</span></span><span style="color: #990000">()</span> <span style="color: #990000">&lt;&lt;</span> <span style="color: #993399">32</span><span style="color: #990000">)</span> <span style="color: #990000">|</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Object</span></span><span style="color: #990000">().</span><span style="font-weight: bold"><span style="color: #000000">hashCode</span></span><span style="color: #990000">();</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+<div class="paragraph"><p>This seed method has been wrapped into the ObjectHashRandom class and tested as
+well with</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>$ java -cp org<span style="color: #990000">.</span>jenetics-<span style="color: #993399">3.2</span><span style="color: #990000">.</span><span style="color: #993399">0</span><span style="color: #990000">.</span>jar <span style="color: #990000">\</span>
+      org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>internal<span style="color: #990000">.</span>util<span style="color: #990000">.</span>DieHarder <span style="color: #990000">\</span>
+      org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>internal<span style="color: #990000">.</span>util<span style="color: #990000">.</span>ObjectHashRandom -a</tt></pre></div></div>
+<div class="paragraph"><p>Table <a href="#ObjectHashSeeding-quality">Object hash seeding quality</a> shows the
+summary of the dieharder
+<a href="https://github.com/jenetics/jenetics/blob/master/org.jenetics/src/main/java/org/jenetics/internal/util/ObjectHashRandom.java">report</a>,
+which looks better than the nano time seeding, but 86 failing tests was still
+not very satisfying.</p></div>
+<div class="tableblock" id="ObjectHashSeeding-quality">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 3. Object hash seeding quality</caption>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Passed tests</p></td>
+<td align="left" valign="top"><p class="table">Weak tests</p></td>
+<td align="left" valign="top"><p class="table">Failed tests</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">28</p></td>
+<td align="left" valign="top"><p class="table">0</p></td>
+<td align="left" valign="top"><p class="table">86</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>After additional experimentation, a combination of the nano time seed and the
+object hash seeding seems to be the "right" solution. The rational behind this
+was, that the PRNG seed shouldn&#8217;t rely on a single source of entropy.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="font-weight: bold"><span style="color: #0000FF">static</span></span> <span style="color: #009900">long</span> <span style="font-weight: bold"><span style="color: #000000">seed</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #000000">mix</span></span><span style="color: #990000">(</span>System<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">nanoType</span></span><span style="color: #990000">(),</span> <span style="font-weight: bold"><span style="color: #000000">objectHashSeed</span></span><span style="color: #990000">());</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">private</span></span> <span style="font-weight: bold"><span style="color: #0000FF">static</span></span> <span style="color: #009900">long</span> <span style="font-weight: bold"><span style="color: #000000">mix</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">final</span></span> <span style="color: #009900">long</span> a<span style="color: #990000">,</span> <span style="font-weight: bold"><span style="color: #0000FF">final</span></span> <span style="color: #009900">long</span> b<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="color: #009900">long</span> c <span style="color: #990000">=</span> a<span style="color: #990000">^</span>b<span style="color: #990000">;</span>
+    c <span style="color: #990000">^=</span> c <span style="color: #990000">&lt;&lt;</span> <span style="color: #993399">17</span><span style="color: #990000">;</span>
+    c <span style="color: #990000">^=</span> c <span style="color: #990000">&gt;&gt;&gt;</span> <span style="color: #993399">31</span><span style="color: #990000">;</span>
+    c <span style="color: #990000">^=</span> c <span style="color: #990000">&lt;&lt;</span> <span style="color: #993399">8</span><span style="color: #990000">;</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> c<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">private</span></span> <span style="font-weight: bold"><span style="color: #0000FF">static</span></span> <span style="color: #009900">long</span> <span style="font-weight: bold"><span style="color: #000000">objectHashSeed</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #990000">((</span><span style="color: #009900">long</span><span style="color: #990000">)</span><span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Object</span></span><span style="color: #990000">().</span><span style="font-weight: bold"><span style="color: #000000">hashCode</span></span><span style="color: #990000">()</span> <span style="color: #990000">&lt;&lt;</span> <span style="color: #993399">32</span><span style="color: #990000">)</span> <span style="color: #990000">|</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Object</span></span><span style="color: #990000">().</span><span style="font-weight: bold"><span style="color: #000000">hashCode</span></span><span style="color: #990000">();</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+<div class="paragraph"><p>The code above shows how the nano time seed is mixed  with the object seed.
+The mix method was inspired by the mixing step of the
+<a href="https://github.com/rabauke/trng4/blob/master/src/lcg64_shift.hpp">lcg64_shift</a>
+random engine, which is part of the <a href="http://numbercrunch.de/trng/">TRNG</a> library
+and has been reimplemented in the <a href="https://github.com/jenetics/jenetics/blob/master/org.jenetics/src/main/java/org/jenetics/util/LCG64ShiftRandom.java"><em>LCG64ShiftRandom</em></a>
+ class. Running the tests with</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>$ java -cp org<span style="color: #990000">.</span>jenetics-<span style="color: #993399">3.2</span><span style="color: #990000">.</span><span style="color: #993399">0</span><span style="color: #990000">.</span>jar <span style="color: #990000">\</span>
+      org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>internal<span style="color: #990000">.</span>util<span style="color: #990000">.</span>DieHarder <span style="color: #990000">\</span>
+      org<span style="color: #990000">.</span>jenetics<span style="color: #990000">.</span>internal<span style="color: #990000">.</span>util<span style="color: #990000">.</span>SeedRandom -a</tt></pre></div></div>
+<div class="paragraph"><p>leads to the statistics summary (the full report can be found
+<a href="https://github.com/jenetics/jenetics/blob/master/org.jenetics/src/main/java/org/jenetics/internal/util/SeedRandom.java">here</a>),
+which is shown in following <a href="#CombinedSeeding-quality">table</a>.</p></div>
+<div class="tableblock" id="CombinedSeeding-quality">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 4. Combined random seeding quality</caption>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Passed tests</p></td>
+<td align="left" valign="top"><p class="table">Weak tests</p></td>
+<td align="left" valign="top"><p class="table">Failed tests</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">112</p></td>
+<td align="left" valign="top"><p class="table">2</p></td>
+<td align="left" valign="top"><p class="table">0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>The statistical performance of this seeding is better, according to the
+<em>dieharder</em> test suite, than some of the real random engines, including the
+default Java <em>Random</em> engine. Using the proposed <em>seed()</em> method is in any
+case preferable to the simple <em>System.nanoTime()</em> call.</p></div>
+<div class="paragraph"><p><strong>Open questions</strong></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+How does this method perform on operating systems other than Linux?
+</p>
+</li>
+<li>
+<p>
+How does this method perform on other JVM implementations?
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 </div>
