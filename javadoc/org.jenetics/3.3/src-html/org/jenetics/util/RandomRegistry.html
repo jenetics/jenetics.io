@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<title></title>
+  <style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+  </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head><body>
+
+
+<!-- ======================================================== -->
+<!-- = Java Sourcecode to HTML automatically converted code = -->
+<!-- =   Java2Html Converter 5.0 [2006-02-26] by Markus Gebhard  markus@jave.de   = -->
+<!-- =     Further information: http://www.java2html.de     = -->
+<div align="left" class="java">
+<table border="2" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+  <!-- start headline -->
+   <tr>
+    <td colspan="2">
+     <center><font size="+2">
+      <code><b>
+RandomRegistry.java
+      </b></code>
+     </font></center>
+    </td>
+   </tr>
+  <!-- end headline -->
+   <tr>
+  <!-- start source code -->
+   <td nowrap="nowrap" valign="top" align="left">
+    <code>
+<font color="#808080">001</font>&nbsp;<font color="#3f7f5f">/*</font><br />
+<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-3.3.0).</font><br />
+<font color="#808080">003</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2015&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
+<font color="#808080">004</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+<font color="#808080">005</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
+<font color="#808080">006</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance&nbsp;with&nbsp;the&nbsp;License.</font><br />
+<font color="#808080">007</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;You&nbsp;may&nbsp;obtain&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;License&nbsp;at</font><br />
+<font color="#808080">008</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+<font color="#808080">009</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.apache.org/licenses/LICENSE-2.0</font><br />
+<font color="#808080">010</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+<font color="#808080">011</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Unless&nbsp;required&nbsp;by&nbsp;applicable&nbsp;law&nbsp;or&nbsp;agreed&nbsp;to&nbsp;in&nbsp;writing,&nbsp;software</font><br />
+<font color="#808080">012</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;distributed&nbsp;under&nbsp;the&nbsp;License&nbsp;is&nbsp;distributed&nbsp;on&nbsp;an&nbsp;&#34;AS&nbsp;IS&#34;&nbsp;BASIS,</font><br />
+<font color="#808080">013</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;WITHOUT&nbsp;WARRANTIES&nbsp;OR&nbsp;CONDITIONS&nbsp;OF&nbsp;ANY&nbsp;KIND,&nbsp;either&nbsp;express&nbsp;or&nbsp;implied.</font><br />
+<font color="#808080">014</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;See&nbsp;the&nbsp;License&nbsp;for&nbsp;the&nbsp;specific&nbsp;language&nbsp;governing&nbsp;permissions&nbsp;and</font><br />
+<font color="#808080">015</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;limitations&nbsp;under&nbsp;the&nbsp;License.</font><br />
+<font color="#808080">016</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+<font color="#808080">017</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Author:</font><br />
+<font color="#808080">018</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;&nbsp;&nbsp;&nbsp;Franz&nbsp;Wilhelmst&ouml;tter&nbsp;(franz.wilhelmstoetter@gmx.at)</font><br />
+<font color="#808080">019</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*/</font><br />
+<font color="#808080">020</font>&nbsp;<font color="#7f0055"><b>package&nbsp;</b></font><font color="#000000">org.jenetics.util;</font><br />
+<font color="#808080">021</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">022</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.util.Objects.requireNonNull;</font><br />
+<font color="#808080">023</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">024</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Random;</font><br />
+<font color="#808080">025</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.concurrent.ThreadLocalRandom;</font><br />
+<font color="#808080">026</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.function.Consumer;</font><br />
+<font color="#808080">027</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.function.Function;</font><br />
+<font color="#808080">028</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.function.Supplier;</font><br />
+<font color="#808080">029</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">030</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">org.jenetics.internal.util.require;</font><br />
+<font color="#808080">031</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">032</font>&nbsp;<font color="#3f5fbf">/**</font><br />
+<font color="#808080">033</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;This&nbsp;class&nbsp;holds&nbsp;the&nbsp;</font><font color="#3f3fbf">{@link&nbsp;Random}&nbsp;</font><font color="#3f5fbf">engine&nbsp;used&nbsp;for&nbsp;the&nbsp;GA.&nbsp;The</font><br />
+<font color="#808080">034</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;{@code&nbsp;RandomRegistry}&nbsp;is&nbsp;thread&nbsp;safe.&nbsp;The&nbsp;registry&nbsp;is&nbsp;initialized&nbsp;with&nbsp;the</font><br />
+<font color="#808080">035</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#3f3fbf">{@link&nbsp;ThreadLocalRandom}&nbsp;</font><font color="#3f5fbf">PRNG,&nbsp;which&nbsp;has&nbsp;a&nbsp;much&nbsp;better&nbsp;performance&nbsp;behavior</font><br />
+<font color="#808080">036</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;than&nbsp;an&nbsp;instance&nbsp;of&nbsp;the&nbsp;{@code&nbsp;Random}&nbsp;class.&nbsp;Alternatively,&nbsp;you&nbsp;can</font><br />
+<font color="#808080">037</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;initialize&nbsp;the&nbsp;registry&nbsp;with&nbsp;one&nbsp;of&nbsp;the&nbsp;PRNG,&nbsp;which&nbsp;are&nbsp;being&nbsp;part&nbsp;of&nbsp;the</font><br />
+<font color="#808080">038</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;library.</font><br />
+<font color="#808080">039</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;p&gt;</font><br />
+<font color="#808080">040</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">041</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;b&gt;</font><font color="#3f5fbf">Setup&nbsp;of&nbsp;a&nbsp;</font><font color="#7f7f9f">&lt;i&gt;</font><font color="#3f5fbf">global</font><font color="#7f7f9f">&lt;/i&gt;&nbsp;</font><font color="#3f5fbf">PRNG</font><font color="#7f7f9f">&lt;/b&gt;</font><br />
+<font color="#808080">042</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">043</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;pre&gt;</font><font color="#3f5fbf">{@code</font><br />
+<font color="#808080">044</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;public&nbsp;class&nbsp;GA&nbsp;{</font><br />
+<font color="#808080">045</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;main(final&nbsp;String[]&nbsp;args)&nbsp;{</font><br />
+<font color="#808080">046</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Initialize&nbsp;the&nbsp;registry&nbsp;with&nbsp;a&nbsp;ThreadLocal&nbsp;instance&nbsp;of&nbsp;the&nbsp;PRGN.</font><br />
+<font color="#808080">047</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;This&nbsp;is&nbsp;the&nbsp;preferred&nbsp;way&nbsp;setting&nbsp;a&nbsp;new&nbsp;PRGN.</font><br />
+<font color="#808080">048</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RandomRegistry.setRandom(new&nbsp;LCG64ShiftRandom.ThreadLocal());</font><br />
+<font color="#808080">049</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">050</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Using&nbsp;a&nbsp;thread&nbsp;safe&nbsp;variant&nbsp;of&nbsp;the&nbsp;PRGN.&nbsp;Leads&nbsp;to&nbsp;slower&nbsp;PRN</font><br />
+<font color="#808080">051</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;generation,&nbsp;but&nbsp;gives&nbsp;you&nbsp;the&nbsp;possibility&nbsp;to&nbsp;set&nbsp;a&nbsp;PRNG&nbsp;seed.</font><br />
+<font color="#808080">052</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RandomRegistry.setRandom(new&nbsp;LCG64ShiftRandom.ThreadSafe(1234));</font><br />
+<font color="#808080">053</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">054</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</font><br />
+<font color="#808080">055</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final&nbsp;EvolutionResult</font><font color="#7f7f9f">&lt;DoubleGene,&nbsp;Double&gt;&nbsp;</font><font color="#3f5fbf">result&nbsp;=&nbsp;stream</font><br />
+<font color="#808080">056</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.limit(100)</font><br />
+<font color="#808080">057</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collect(toBestEvolutionResult());</font><br />
+<font color="#808080">058</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</font><br />
+<font color="#808080">059</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><br />
+<font color="#808080">060</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><font color="#7f7f9f">&lt;/pre&gt;</font><br />
+<font color="#808080">061</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;p&gt;</font><br />
+<font color="#808080">062</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">063</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;b&gt;</font><font color="#3f5fbf">Setup&nbsp;of&nbsp;a&nbsp;</font><font color="#7f7f9f">&lt;i&gt;</font><font color="#3f5fbf">local</font><font color="#7f7f9f">&lt;/i&gt;&nbsp;</font><font color="#3f5fbf">PRNG</font><font color="#7f7f9f">&lt;/b&gt;&lt;br&gt;</font><br />
+<font color="#808080">064</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">065</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;You&nbsp;can&nbsp;temporarily&nbsp;(and&nbsp;locally)&nbsp;change&nbsp;the&nbsp;implementation&nbsp;of&nbsp;the&nbsp;PRNG.&nbsp;E.g.</font><br />
+<font color="#808080">066</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;for&nbsp;initialize&nbsp;the&nbsp;engine&nbsp;stream&nbsp;with&nbsp;the&nbsp;same&nbsp;initial&nbsp;population.</font><br />
+<font color="#808080">067</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">068</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;pre&gt;</font><font color="#3f5fbf">{@code</font><br />
+<font color="#808080">069</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;public&nbsp;class&nbsp;GA&nbsp;{</font><br />
+<font color="#808080">070</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;main(final&nbsp;String[]&nbsp;args)&nbsp;{</font><br />
+<font color="#808080">071</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Create&nbsp;a&nbsp;reproducible&nbsp;list&nbsp;of&nbsp;genotypes.</font><br />
+<font color="#808080">072</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final&nbsp;List</font><font color="#7f7f9f">&lt;Genotype&lt;DoubleGene&gt;</font><font color="#3f5fbf">&gt;&nbsp;genotypes&nbsp;=</font><br />
+<font color="#808080">073</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with(new&nbsp;LCG64ShiftRandom(123),&nbsp;r&nbsp;-&gt;</font><br />
+<font color="#808080">074</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Genotype.of(DoubleChromosome.of(0,&nbsp;10)).instances()</font><br />
+<font color="#808080">075</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.limit(50)</font><br />
+<font color="#808080">076</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collect(toList())</font><br />
+<font color="#808080">077</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</font><br />
+<font color="#808080">078</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">079</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final&nbsp;Engine</font><font color="#7f7f9f">&lt;DoubleGene,&nbsp;Double&gt;&nbsp;</font><font color="#3f5fbf">engine&nbsp;=&nbsp;...;</font><br />
+<font color="#808080">080</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final&nbsp;EvolutionResult</font><font color="#7f7f9f">&lt;DoubleGene,&nbsp;Double&gt;&nbsp;</font><font color="#3f5fbf">result&nbsp;=&nbsp;engine</font><br />
+<font color="#808080">081</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Initialize&nbsp;the&nbsp;evolution&nbsp;stream&nbsp;with&nbsp;the&nbsp;given&nbsp;genotypes.</font><br />
+<font color="#808080">082</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.stream(genotypes)</font><br />
+<font color="#808080">083</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.limit(100)</font><br />
+<font color="#808080">084</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collect(toBestEvolutionResult());</font><br />
+<font color="#808080">085</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</font><br />
+<font color="#808080">086</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><br />
+<font color="#808080">087</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><font color="#7f7f9f">&lt;/pre&gt;</font><br />
+<font color="#808080">088</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;p&gt;</font><br />
+<font color="#808080">089</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">090</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@see&nbsp;</font><font color="#3f5fbf">Random</font><br />
+<font color="#808080">091</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@see&nbsp;</font><font color="#3f5fbf">ThreadLocalRandom</font><br />
+<font color="#808080">092</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@see&nbsp;</font><font color="#3f5fbf">LCG64ShiftRandom</font><br />
+<font color="#808080">093</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">094</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">&lt;a&nbsp;href=&#34;mailto:franz.wilhelmstoetter@gmx.at&#34;&gt;Franz&nbsp;Wilhelmst&ouml;tter</font><font color="#7f7f9f">&lt;/a&gt;</font><br />
+<font color="#808080">095</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@since&nbsp;</font><font color="#3f5fbf">1.0</font><br />
+<font color="#808080">096</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@version&nbsp;</font><font color="#3f5fbf">3.0</font><br />
+<font color="#808080">097</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">098</font>&nbsp;<font color="#7f0055"><b>public&nbsp;final&nbsp;class&nbsp;</b></font><font color="#000000">RandomRegistry&nbsp;</font><font color="#000000">{</font><br />
+<font color="#808080">099</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#000000">RandomRegistry</font><font color="#000000">()&nbsp;{</font><font color="#000000">require.noInstance</font><font color="#000000">()</font><font color="#000000">;</font><font color="#000000">}</font><br />
+<font color="#808080">100</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">101</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;static&nbsp;final&nbsp;</b></font><font color="#000000">Context&lt;Supplier&lt;Random&gt;&gt;&nbsp;CONTEXT&nbsp;=</font><br />
+<font color="#808080">102</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">Context&lt;&gt;</font><font color="#000000">(</font><font color="#000000">ThreadLocalRandom::current</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">103</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">104</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">105</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Return&nbsp;the&nbsp;global&nbsp;</font><font color="#3f3fbf">{@link&nbsp;Random}&nbsp;</font><font color="#3f5fbf">object.</font><br />
+<font color="#808080">106</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">107</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">the&nbsp;global&nbsp;</font><font color="#3f3fbf">{@link&nbsp;Random}&nbsp;</font><font color="#3f5fbf">object.</font><br />
+<font color="#808080">108</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">109</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#000000">Random&nbsp;getRandom</font><font color="#000000">()&nbsp;{</font><br />
+<font color="#808080">110</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">CONTEXT.get</font><font color="#000000">()</font><font color="#000000">.get</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">111</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">112</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">113</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>static&nbsp;</b></font><font color="#000000">Random&nbsp;random</font><font color="#000000">()&nbsp;{</font><br />
+<font color="#808080">114</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">CONTEXT.get</font><font color="#000000">()</font><font color="#000000">.get</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">115</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">116</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">117</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">118</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Set&nbsp;the&nbsp;new&nbsp;global&nbsp;</font><font color="#3f3fbf">{@link&nbsp;Random}&nbsp;</font><font color="#3f5fbf">object&nbsp;for&nbsp;the&nbsp;GA.&nbsp;The&nbsp;given</font><br />
+<font color="#808080">119</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#3f3fbf">{@link&nbsp;Random}&nbsp;</font><font color="#7f7f9f">&lt;b&gt;</font><font color="#3f5fbf">must</font><font color="#7f7f9f">&lt;/b&gt;&nbsp;</font><font color="#3f5fbf">be&nbsp;thread&nbsp;safe,&nbsp;which&nbsp;is&nbsp;the&nbsp;case&nbsp;for&nbsp;the</font><br />
+<font color="#808080">120</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;default&nbsp;Java&nbsp;{@code&nbsp;Random}&nbsp;implementation.</font><br />
+<font color="#808080">121</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;p&gt;</font><br />
+<font color="#808080">122</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Setting&nbsp;a&nbsp;</font><font color="#7f7f9f">&lt;i&gt;</font><font color="#3f5fbf">thread-local</font><font color="#7f7f9f">&lt;/i&gt;&nbsp;</font><font color="#3f5fbf">random&nbsp;object&nbsp;leads,&nbsp;in&nbsp;general,&nbsp;to&nbsp;a&nbsp;faster</font><br />
+<font color="#808080">123</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;PRN&nbsp;generation,&nbsp;because&nbsp;the&nbsp;given&nbsp;{@code&nbsp;Random}&nbsp;engine&nbsp;don't&nbsp;have&nbsp;to&nbsp;be</font><br />
+<font color="#808080">124</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;thread-safe.</font><br />
+<font color="#808080">125</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">126</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@see&nbsp;</font><font color="#3f5fbf">#setRandom(ThreadLocal)</font><br />
+<font color="#808080">127</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">128</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">random&nbsp;the&nbsp;new&nbsp;global&nbsp;</font><font color="#3f3fbf">{@link&nbsp;Random}&nbsp;</font><font color="#3f5fbf">object&nbsp;for&nbsp;the&nbsp;GA.</font><br />
+<font color="#808080">129</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@throws&nbsp;</font><font color="#3f5fbf">NullPointerException&nbsp;if&nbsp;the&nbsp;{@code&nbsp;random}&nbsp;object&nbsp;is&nbsp;{@code&nbsp;null}.</font><br />
+<font color="#808080">130</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">131</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">setRandom</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Random&nbsp;random</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">132</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">requireNonNull</font><font color="#000000">(</font><font color="#000000">random,&nbsp;</font><font color="#2a00ff">&#34;Random&nbsp;must&nbsp;not&nbsp;be&nbsp;null.&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">133</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">CONTEXT.set</font><font color="#000000">(()&nbsp;</font><font color="#000000">-&gt;&nbsp;random</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">134</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">135</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">136</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">137</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Set&nbsp;the&nbsp;new&nbsp;global&nbsp;</font><font color="#3f3fbf">{@link&nbsp;Random}&nbsp;</font><font color="#3f5fbf">object&nbsp;for&nbsp;the&nbsp;GA.&nbsp;The&nbsp;given</font><br />
+<font color="#808080">138</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#3f3fbf">{@link&nbsp;Random}&nbsp;</font><font color="#3f5fbf">don't&nbsp;have&nbsp;be&nbsp;thread&nbsp;safe,&nbsp;because&nbsp;the&nbsp;given</font><br />
+<font color="#808080">139</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#3f3fbf">{@link&nbsp;ThreadLocal}&nbsp;</font><font color="#3f5fbf">wrapper&nbsp;guarantees&nbsp;thread&nbsp;safety.&nbsp;Setting&nbsp;a</font><br />
+<font color="#808080">140</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;i&gt;</font><font color="#3f5fbf">thread-local</font><font color="#7f7f9f">&lt;/i&gt;&nbsp;</font><font color="#3f5fbf">random&nbsp;object&nbsp;leads,&nbsp;in&nbsp;general,&nbsp;to&nbsp;a&nbsp;faster</font><br />
+<font color="#808080">141</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;PRN&nbsp;generation,&nbsp;when&nbsp;using&nbsp;a&nbsp;non-blocking&nbsp;PRNG.&nbsp;This&nbsp;is&nbsp;the&nbsp;preferred</font><br />
+<font color="#808080">142</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;way&nbsp;for&nbsp;changing&nbsp;the&nbsp;PRNG.</font><br />
+<font color="#808080">143</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">144</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">random&nbsp;the&nbsp;thread-local&nbsp;random&nbsp;engine&nbsp;to&nbsp;use.</font><br />
+<font color="#808080">145</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@throws&nbsp;</font><font color="#3f5fbf">NullPointerException&nbsp;if&nbsp;the&nbsp;{@code&nbsp;random}&nbsp;object&nbsp;is&nbsp;{@code&nbsp;null}.</font><br />
+<font color="#808080">146</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">147</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@SuppressWarnings</font><font color="#000000">(</font><font color="#2a00ff">&#34;unchecked&#34;</font><font color="#000000">)</font><br />
+<font color="#808080">148</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">setRandom</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">ThreadLocal&lt;?&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">Random&gt;&nbsp;random</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">149</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">requireNonNull</font><font color="#000000">(</font><font color="#000000">random,&nbsp;</font><font color="#2a00ff">&#34;Random&nbsp;must&nbsp;not&nbsp;be&nbsp;null.&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">150</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">CONTEXT.set</font><font color="#000000">(</font><font color="#000000">random::get</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">151</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">152</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">153</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">154</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Set&nbsp;the&nbsp;random&nbsp;object&nbsp;to&nbsp;it's&nbsp;default&nbsp;value.&nbsp;The&nbsp;</font><font color="#7f7f9f">&lt;i&gt;</font><font color="#3f5fbf">default</font><font color="#7f7f9f">&lt;/i&gt;&nbsp;</font><font color="#3f5fbf">used&nbsp;PRNG</font><br />
+<font color="#808080">155</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;is&nbsp;the&nbsp;</font><font color="#3f3fbf">{@link&nbsp;ThreadLocalRandom}&nbsp;</font><font color="#3f5fbf">PRNG.</font><br />
+<font color="#808080">156</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">157</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">reset</font><font color="#000000">()&nbsp;{</font><br />
+<font color="#808080">158</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">CONTEXT.reset</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">159</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">160</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">161</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">162</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Executes&nbsp;the&nbsp;consumer&nbsp;code&nbsp;using&nbsp;the&nbsp;given&nbsp;{@code&nbsp;random}&nbsp;engine.</font><br />
+<font color="#808080">163</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">164</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;pre&gt;</font><font color="#3f5fbf">{@code</font><br />
+<font color="#808080">165</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;final&nbsp;MSeq</font><font color="#7f7f9f">&lt;Integer&gt;&nbsp;</font><font color="#3f5fbf">seq&nbsp;=&nbsp;...</font><br />
+<font color="#808080">166</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;using(new&nbsp;Random(123),&nbsp;r&nbsp;-&gt;&nbsp;{</font><br />
+<font color="#808080">167</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seq.shuffle();</font><br />
+<font color="#808080">168</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;});</font><br />
+<font color="#808080">169</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><font color="#7f7f9f">&lt;/pre&gt;</font><br />
+<font color="#808080">170</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">171</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;The&nbsp;example&nbsp;above&nbsp;shuffles&nbsp;the&nbsp;given&nbsp;integer&nbsp;{@code&nbsp;seq}&nbsp;</font><font color="#7f7f9f">&lt;i&gt;</font><font color="#3f5fbf">using</font><font color="#7f7f9f">&lt;/i&gt;&nbsp;</font><font color="#3f5fbf">the</font><br />
+<font color="#808080">172</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;given&nbsp;{@code&nbsp;Random(123)}&nbsp;engine.</font><br />
+<font color="#808080">173</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">174</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@since&nbsp;</font><font color="#3f5fbf">3.0</font><br />
+<font color="#808080">175</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">176</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">random&nbsp;the&nbsp;PRNG&nbsp;used&nbsp;within&nbsp;the&nbsp;consumer</font><br />
+<font color="#808080">177</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">consumer&nbsp;the&nbsp;consumer&nbsp;which&nbsp;is&nbsp;executed&nbsp;with&nbsp;the&nbsp;</font><font color="#7f7f9f">&lt;i&gt;</font><font color="#3f5fbf">scope</font><font color="#7f7f9f">&lt;/i&gt;&nbsp;</font><font color="#3f5fbf">of</font><br />
+<font color="#808080">178</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;given&nbsp;{@code&nbsp;random}&nbsp;engine.</font><br />
+<font color="#808080">179</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#7f7f9f">&lt;R&gt;&nbsp;</font><font color="#3f5fbf">the&nbsp;type&nbsp;of&nbsp;the&nbsp;random&nbsp;engine</font><br />
+<font color="#808080">180</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@throws&nbsp;</font><font color="#3f5fbf">NullPointerException&nbsp;if&nbsp;one&nbsp;of&nbsp;the&nbsp;arguments&nbsp;is&nbsp;{@code&nbsp;null}</font><br />
+<font color="#808080">181</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">182</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#000000">&lt;R&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">Random&gt;&nbsp;</font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">using</font><font color="#000000">(</font><br />
+<font color="#808080">183</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">R&nbsp;random,</font><br />
+<font color="#808080">184</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Consumer&lt;?&nbsp;</font><font color="#7f0055"><b>super&nbsp;</b></font><font color="#000000">R&gt;&nbsp;consumer</font><br />
+<font color="#808080">185</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">186</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">CONTEXT.with</font><font color="#000000">(()&nbsp;</font><font color="#000000">-&gt;&nbsp;random,&nbsp;r&nbsp;-&gt;&nbsp;</font><font color="#000000">{</font><br />
+<font color="#808080">187</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">consumer.accept</font><font color="#000000">(</font><font color="#000000">random</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">188</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;null</b></font><font color="#000000">;</font><br />
+<font color="#808080">189</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">})</font><font color="#000000">;</font><br />
+<font color="#808080">190</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">191</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">192</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">193</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Executes&nbsp;the&nbsp;consumer&nbsp;code&nbsp;using&nbsp;the&nbsp;given&nbsp;{@code&nbsp;random}&nbsp;engine.</font><br />
+<font color="#808080">194</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">195</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;pre&gt;</font><font color="#3f5fbf">{@code</font><br />
+<font color="#808080">196</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;final&nbsp;MSeq</font><font color="#7f7f9f">&lt;Integer&gt;&nbsp;</font><font color="#3f5fbf">seq&nbsp;=&nbsp;...</font><br />
+<font color="#808080">197</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;using(new&nbsp;LCG64ShiftRandom.ThreadLocal(),&nbsp;r&nbsp;-&gt;&nbsp;{</font><br />
+<font color="#808080">198</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seq.shuffle();</font><br />
+<font color="#808080">199</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;});</font><br />
+<font color="#808080">200</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><font color="#7f7f9f">&lt;/pre&gt;</font><br />
+<font color="#808080">201</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">202</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;The&nbsp;example&nbsp;above&nbsp;shuffles&nbsp;the&nbsp;given&nbsp;integer&nbsp;{@code&nbsp;seq}&nbsp;</font><font color="#7f7f9f">&lt;i&gt;</font><font color="#3f5fbf">using</font><font color="#7f7f9f">&lt;/i&gt;&nbsp;</font><font color="#3f5fbf">the</font><br />
+<font color="#808080">203</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;given&nbsp;{@code&nbsp;LCG64ShiftRandom.ThreadLocal()}&nbsp;engine.</font><br />
+<font color="#808080">204</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">205</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@since&nbsp;</font><font color="#3f5fbf">3.0</font><br />
+<font color="#808080">206</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">207</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">random&nbsp;the&nbsp;PRNG&nbsp;used&nbsp;within&nbsp;the&nbsp;consumer</font><br />
+<font color="#808080">208</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">consumer&nbsp;the&nbsp;consumer&nbsp;which&nbsp;is&nbsp;executed&nbsp;with&nbsp;the&nbsp;</font><font color="#7f7f9f">&lt;i&gt;</font><font color="#3f5fbf">scope</font><font color="#7f7f9f">&lt;/i&gt;&nbsp;</font><font color="#3f5fbf">of</font><br />
+<font color="#808080">209</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;given&nbsp;{@code&nbsp;random}&nbsp;engine.</font><br />
+<font color="#808080">210</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#7f7f9f">&lt;R&gt;&nbsp;</font><font color="#3f5fbf">the&nbsp;type&nbsp;of&nbsp;the&nbsp;random&nbsp;engine</font><br />
+<font color="#808080">211</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@throws&nbsp;</font><font color="#3f5fbf">NullPointerException&nbsp;if&nbsp;one&nbsp;of&nbsp;the&nbsp;arguments&nbsp;is&nbsp;{@code&nbsp;null}</font><br />
+<font color="#808080">212</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">213</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#000000">&lt;R&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">Random&gt;&nbsp;</font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">using</font><font color="#000000">(</font><br />
+<font color="#808080">214</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">ThreadLocal&lt;R&gt;&nbsp;random,</font><br />
+<font color="#808080">215</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Consumer&lt;?&nbsp;</font><font color="#7f0055"><b>super&nbsp;</b></font><font color="#000000">R&gt;&nbsp;consumer</font><br />
+<font color="#808080">216</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">217</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">CONTEXT.with</font><font color="#000000">(</font><font color="#000000">random::get,&nbsp;r&nbsp;-&gt;&nbsp;</font><font color="#000000">{</font><br />
+<font color="#808080">218</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">consumer.accept</font><font color="#000000">(</font><font color="#000000">random.get</font><font color="#000000">())</font><font color="#000000">;</font><br />
+<font color="#808080">219</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;null</b></font><font color="#000000">;</font><br />
+<font color="#808080">220</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">})</font><font color="#000000">;</font><br />
+<font color="#808080">221</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">222</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">223</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">224</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Opens&nbsp;a&nbsp;new&nbsp;{@code&nbsp;Scope}&nbsp;with&nbsp;the&nbsp;given&nbsp;random&nbsp;engine&nbsp;and&nbsp;executes&nbsp;the</font><br />
+<font color="#808080">225</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;given&nbsp;function&nbsp;within&nbsp;it.&nbsp;The&nbsp;following&nbsp;example&nbsp;shows&nbsp;how&nbsp;to&nbsp;create&nbsp;a</font><br />
+<font color="#808080">226</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;reproducible&nbsp;list&nbsp;of&nbsp;genotypes:</font><br />
+<font color="#808080">227</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;pre&gt;</font><font color="#3f5fbf">{@code</font><br />
+<font color="#808080">228</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;final&nbsp;List</font><font color="#7f7f9f">&lt;Genotype&lt;DoubleGene&gt;</font><font color="#3f5fbf">&gt;&nbsp;genotypes&nbsp;=</font><br />
+<font color="#808080">229</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with(new&nbsp;LCG64ShiftRandom(123),&nbsp;r&nbsp;-&gt;</font><br />
+<font color="#808080">230</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Genotype.of(DoubleChromosome.of(0,&nbsp;10)).instances()</font><br />
+<font color="#808080">231</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.limit(50)</font><br />
+<font color="#808080">232</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collect(toList())</font><br />
+<font color="#808080">233</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</font><br />
+<font color="#808080">234</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><font color="#7f7f9f">&lt;/pre&gt;</font><br />
+<font color="#808080">235</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">236</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@since&nbsp;</font><font color="#3f5fbf">3.0</font><br />
+<font color="#808080">237</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">238</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#7f7f9f">&lt;R&gt;&nbsp;</font><font color="#3f5fbf">the&nbsp;type&nbsp;of&nbsp;the&nbsp;random&nbsp;engine</font><br />
+<font color="#808080">239</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#7f7f9f">&lt;T&gt;&nbsp;</font><font color="#3f5fbf">the&nbsp;function&nbsp;return&nbsp;type</font><br />
+<font color="#808080">240</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">random&nbsp;the&nbsp;PRNG&nbsp;used&nbsp;for&nbsp;the&nbsp;opened&nbsp;scope</font><br />
+<font color="#808080">241</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">function&nbsp;the&nbsp;function&nbsp;to&nbsp;apply&nbsp;within&nbsp;the&nbsp;random&nbsp;scope</font><br />
+<font color="#808080">242</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">the&nbsp;object&nbsp;returned&nbsp;by&nbsp;the&nbsp;given&nbsp;function</font><br />
+<font color="#808080">243</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@throws&nbsp;</font><font color="#3f5fbf">NullPointerException&nbsp;if&nbsp;one&nbsp;of&nbsp;the&nbsp;arguments&nbsp;is&nbsp;{@code&nbsp;null}</font><br />
+<font color="#808080">244</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">245</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#000000">&lt;R&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">Random,&nbsp;T&gt;&nbsp;T&nbsp;with</font><font color="#000000">(</font><br />
+<font color="#808080">246</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">R&nbsp;random,</font><br />
+<font color="#808080">247</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Function&lt;?&nbsp;</font><font color="#7f0055"><b>super&nbsp;</b></font><font color="#000000">R,&nbsp;?&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">T&gt;&nbsp;function</font><br />
+<font color="#808080">248</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">249</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">CONTEXT.with</font><font color="#000000">(()&nbsp;</font><font color="#000000">-&gt;&nbsp;random,&nbsp;s&nbsp;-&gt;&nbsp;function.apply</font><font color="#000000">(</font><font color="#000000">random</font><font color="#000000">))</font><font color="#000000">;</font><br />
+<font color="#808080">250</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">251</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">252</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">253</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Opens&nbsp;a&nbsp;new&nbsp;{@code&nbsp;Scope}&nbsp;with&nbsp;the&nbsp;given&nbsp;random&nbsp;engine&nbsp;and&nbsp;executes&nbsp;the</font><br />
+<font color="#808080">254</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;given&nbsp;function&nbsp;within&nbsp;it.&nbsp;The&nbsp;following&nbsp;example&nbsp;shows&nbsp;how&nbsp;to&nbsp;create&nbsp;a</font><br />
+<font color="#808080">255</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;reproducible&nbsp;list&nbsp;of&nbsp;genotypes:</font><br />
+<font color="#808080">256</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;pre&gt;</font><font color="#3f5fbf">{@code</font><br />
+<font color="#808080">257</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;final&nbsp;List</font><font color="#7f7f9f">&lt;Genotype&lt;DoubleGene&gt;</font><font color="#3f5fbf">&gt;&nbsp;genotypes&nbsp;=</font><br />
+<font color="#808080">258</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with(new&nbsp;LCG64ShiftRandom.ThreadLocal(),&nbsp;random&nbsp;-&gt;</font><br />
+<font color="#808080">259</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Genotype.of(DoubleChromosome.of(0,&nbsp;10)).instances()</font><br />
+<font color="#808080">260</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.limit(50)</font><br />
+<font color="#808080">261</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collect(toList())</font><br />
+<font color="#808080">262</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</font><br />
+<font color="#808080">263</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><font color="#7f7f9f">&lt;/pre&gt;</font><br />
+<font color="#808080">264</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">265</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@since&nbsp;</font><font color="#3f5fbf">3.0</font><br />
+<font color="#808080">266</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">267</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#7f7f9f">&lt;R&gt;&nbsp;</font><font color="#3f5fbf">the&nbsp;type&nbsp;of&nbsp;the&nbsp;random&nbsp;engine</font><br />
+<font color="#808080">268</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#7f7f9f">&lt;T&gt;&nbsp;</font><font color="#3f5fbf">the&nbsp;function&nbsp;return&nbsp;type</font><br />
+<font color="#808080">269</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">random&nbsp;the&nbsp;PRNG&nbsp;used&nbsp;for&nbsp;the&nbsp;opened&nbsp;scope</font><br />
+<font color="#808080">270</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">function&nbsp;the&nbsp;function&nbsp;to&nbsp;apply&nbsp;within&nbsp;the&nbsp;random&nbsp;scope</font><br />
+<font color="#808080">271</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">the&nbsp;object&nbsp;returned&nbsp;by&nbsp;the&nbsp;given&nbsp;function</font><br />
+<font color="#808080">272</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@throws&nbsp;</font><font color="#3f5fbf">NullPointerException&nbsp;if&nbsp;one&nbsp;of&nbsp;the&nbsp;arguments&nbsp;is&nbsp;{@code&nbsp;null}.</font><br />
+<font color="#808080">273</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">274</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#000000">&lt;R&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">Random,&nbsp;T&gt;&nbsp;T&nbsp;with</font><font color="#000000">(</font><br />
+<font color="#808080">275</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">ThreadLocal&lt;R&gt;&nbsp;random,</font><br />
+<font color="#808080">276</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Function&lt;?&nbsp;</font><font color="#7f0055"><b>super&nbsp;</b></font><font color="#000000">R,&nbsp;?&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">T&gt;&nbsp;function</font><br />
+<font color="#808080">277</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">278</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">CONTEXT.with</font><font color="#000000">(</font><font color="#000000">random::get,&nbsp;s&nbsp;-&gt;&nbsp;function.apply</font><font color="#000000">(</font><font color="#000000">random.get</font><font color="#000000">()))</font><font color="#000000">;</font><br />
+<font color="#808080">279</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">280</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">281</font>&nbsp;<font color="#000000">}</font></code>
+    
+   </td>
+  <!-- end source code -->
+   </tr>
+</table>
+</div>
+<!-- =       END of automatically generated HTML code       = -->
+<!-- ======================================================== -->
+
+
+</body></html>
