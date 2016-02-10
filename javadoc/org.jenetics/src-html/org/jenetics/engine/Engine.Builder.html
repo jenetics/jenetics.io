@@ -7,8 +7,8 @@
 <body>
 <div class="sourceContainer">
 <pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
-<span class="sourceLineNo">002</span> * Java Genetic Algorithm Library (jenetics-3.3.0).<a name="line.2"></a>
-<span class="sourceLineNo">003</span> * Copyright (c) 2007-2015 Franz Wilhelmstötter<a name="line.3"></a>
+<span class="sourceLineNo">002</span> * Java Genetic Algorithm Library (jenetics-3.4.0).<a name="line.2"></a>
+<span class="sourceLineNo">003</span> * Copyright (c) 2007-2016 Franz Wilhelmstötter<a name="line.3"></a>
 <span class="sourceLineNo">004</span> *<a name="line.4"></a>
 <span class="sourceLineNo">005</span> * Licensed under the Apache License, Version 2.0 (the "License");<a name="line.5"></a>
 <span class="sourceLineNo">006</span> * you may not use this file except in compliance with the License.<a name="line.6"></a>
@@ -760,594 +760,633 @@
 <span class="sourceLineNo">752</span>        }<a name="line.752"></a>
 <span class="sourceLineNo">753</span><a name="line.753"></a>
 <span class="sourceLineNo">754</span>        /**<a name="line.754"></a>
-<span class="sourceLineNo">755</span>         * Create a new evolution {@code Engine.Builder} with the given fitness<a name="line.755"></a>
-<span class="sourceLineNo">756</span>         * function and genotype factory.<a name="line.756"></a>
+<span class="sourceLineNo">755</span>         * Create a new evolution {@code Engine.Builder} for the given<a name="line.755"></a>
+<span class="sourceLineNo">756</span>         * {@link Problem}.<a name="line.756"></a>
 <span class="sourceLineNo">757</span>         *<a name="line.757"></a>
-<span class="sourceLineNo">758</span>         * @param ff the fitness function<a name="line.758"></a>
-<span class="sourceLineNo">759</span>         * @param genotypeFactory the genotype factory<a name="line.759"></a>
-<span class="sourceLineNo">760</span>         * @param &lt;G&gt; the gene type<a name="line.760"></a>
-<span class="sourceLineNo">761</span>         * @param &lt;C&gt; the fitness function result type<a name="line.761"></a>
-<span class="sourceLineNo">762</span>         * @return a new engine builder<a name="line.762"></a>
-<span class="sourceLineNo">763</span>         * @throws java.lang.NullPointerException if one of the arguments is<a name="line.763"></a>
-<span class="sourceLineNo">764</span>         *         {@code null}.<a name="line.764"></a>
+<span class="sourceLineNo">758</span>         * @since 3.4<a name="line.758"></a>
+<span class="sourceLineNo">759</span>         *<a name="line.759"></a>
+<span class="sourceLineNo">760</span>         * @param problem the problem to be solved by the evolution {@code Engine}<a name="line.760"></a>
+<span class="sourceLineNo">761</span>         * @param &lt;T&gt; the (&lt;i&gt;native&lt;/i&gt;) argument type of the problem fitness function<a name="line.761"></a>
+<span class="sourceLineNo">762</span>         * @param &lt;G&gt; the gene type the evolution engine is working with<a name="line.762"></a>
+<span class="sourceLineNo">763</span>         * @param &lt;C&gt; the result type of the fitness function<a name="line.763"></a>
+<span class="sourceLineNo">764</span>         * @return Create a new evolution {@code Engine.Builder}<a name="line.764"></a>
 <span class="sourceLineNo">765</span>         */<a name="line.765"></a>
-<span class="sourceLineNo">766</span>        public static &lt;G extends Gene&lt;?, G&gt;, C extends Comparable&lt;? super C&gt;&gt;<a name="line.766"></a>
-<span class="sourceLineNo">767</span>        Builder&lt;G, C&gt; builder(<a name="line.767"></a>
-<span class="sourceLineNo">768</span>                final Function&lt;? super Genotype&lt;G&gt;, ? extends C&gt; ff,<a name="line.768"></a>
-<span class="sourceLineNo">769</span>                final Factory&lt;Genotype&lt;G&gt;&gt; genotypeFactory<a name="line.769"></a>
-<span class="sourceLineNo">770</span>        ) {<a name="line.770"></a>
-<span class="sourceLineNo">771</span>                return new Builder&lt;&gt;(genotypeFactory, ff);<a name="line.771"></a>
-<span class="sourceLineNo">772</span>        }<a name="line.772"></a>
-<span class="sourceLineNo">773</span><a name="line.773"></a>
-<span class="sourceLineNo">774</span>        /**<a name="line.774"></a>
-<span class="sourceLineNo">775</span>         * Create a new evolution {@code Engine.Builder} with the given fitness<a name="line.775"></a>
-<span class="sourceLineNo">776</span>         * function and chromosome templates.<a name="line.776"></a>
-<span class="sourceLineNo">777</span>         *<a name="line.777"></a>
-<span class="sourceLineNo">778</span>         * @param ff the fitness function<a name="line.778"></a>
-<span class="sourceLineNo">779</span>         * @param chromosome the first chromosome<a name="line.779"></a>
-<span class="sourceLineNo">780</span>         * @param chromosomes the chromosome templates<a name="line.780"></a>
-<span class="sourceLineNo">781</span>         * @param &lt;G&gt; the gene type<a name="line.781"></a>
-<span class="sourceLineNo">782</span>         * @param &lt;C&gt; the fitness function result type<a name="line.782"></a>
-<span class="sourceLineNo">783</span>         * @return a new engine builder<a name="line.783"></a>
-<span class="sourceLineNo">784</span>         * @throws java.lang.NullPointerException if one of the arguments is<a name="line.784"></a>
-<span class="sourceLineNo">785</span>         *         {@code null}.<a name="line.785"></a>
-<span class="sourceLineNo">786</span>         */<a name="line.786"></a>
-<span class="sourceLineNo">787</span>        @SafeVarargs<a name="line.787"></a>
-<span class="sourceLineNo">788</span>        public static &lt;G extends Gene&lt;?, G&gt;, C extends Comparable&lt;? super C&gt;&gt;<a name="line.788"></a>
-<span class="sourceLineNo">789</span>        Builder&lt;G, C&gt; builder(<a name="line.789"></a>
-<span class="sourceLineNo">790</span>                final Function&lt;? super Genotype&lt;G&gt;, ? extends C&gt; ff,<a name="line.790"></a>
-<span class="sourceLineNo">791</span>                final Chromosome&lt;G&gt; chromosome,<a name="line.791"></a>
-<span class="sourceLineNo">792</span>                final Chromosome&lt;G&gt;... chromosomes<a name="line.792"></a>
-<span class="sourceLineNo">793</span>        ) {<a name="line.793"></a>
-<span class="sourceLineNo">794</span>                return new Builder&lt;&gt;(Genotype.of(chromosome, chromosomes), ff);<a name="line.794"></a>
-<span class="sourceLineNo">795</span>        }<a name="line.795"></a>
-<span class="sourceLineNo">796</span><a name="line.796"></a>
-<span class="sourceLineNo">797</span>        /**<a name="line.797"></a>
-<span class="sourceLineNo">798</span>         * Create a new evolution {@code Engine.Builder} with the given fitness<a name="line.798"></a>
-<span class="sourceLineNo">799</span>         * function and problem {@code codec}.<a name="line.799"></a>
-<span class="sourceLineNo">800</span>         *<a name="line.800"></a>
-<span class="sourceLineNo">801</span>         * @since 3.2<a name="line.801"></a>
-<span class="sourceLineNo">802</span>         *<a name="line.802"></a>
-<span class="sourceLineNo">803</span>         * @param ff the fitness function<a name="line.803"></a>
-<span class="sourceLineNo">804</span>         * @param codec the problem codec<a name="line.804"></a>
-<span class="sourceLineNo">805</span>         * @param &lt;T&gt; the fitness function input type<a name="line.805"></a>
-<span class="sourceLineNo">806</span>         * @param &lt;C&gt; the fitness function result type<a name="line.806"></a>
-<span class="sourceLineNo">807</span>         * @param &lt;G&gt; the gene type<a name="line.807"></a>
-<span class="sourceLineNo">808</span>         * @return a new engine builder<a name="line.808"></a>
-<span class="sourceLineNo">809</span>         * @throws java.lang.NullPointerException if one of the arguments is<a name="line.809"></a>
-<span class="sourceLineNo">810</span>         *         {@code null}.<a name="line.810"></a>
-<span class="sourceLineNo">811</span>         */<a name="line.811"></a>
-<span class="sourceLineNo">812</span>        public static &lt;T, C extends Comparable&lt;? super C&gt;, G extends Gene&lt;?, G&gt;&gt;<a name="line.812"></a>
-<span class="sourceLineNo">813</span>        Builder&lt;G, C&gt; builder(<a name="line.813"></a>
-<span class="sourceLineNo">814</span>                final Function&lt;? super T, ? extends C&gt; ff,<a name="line.814"></a>
-<span class="sourceLineNo">815</span>                final Codec&lt;T, G&gt; codec<a name="line.815"></a>
-<span class="sourceLineNo">816</span>        ) {<a name="line.816"></a>
-<span class="sourceLineNo">817</span>                return builder(ff.compose(codec.decoder()), codec.encoding());<a name="line.817"></a>
-<span class="sourceLineNo">818</span>        }<a name="line.818"></a>
-<span class="sourceLineNo">819</span><a name="line.819"></a>
-<span class="sourceLineNo">820</span><a name="line.820"></a>
-<span class="sourceLineNo">821</span>        /* *************************************************************************<a name="line.821"></a>
-<span class="sourceLineNo">822</span>         * Inner classes<a name="line.822"></a>
-<span class="sourceLineNo">823</span>         **************************************************************************/<a name="line.823"></a>
-<span class="sourceLineNo">824</span><a name="line.824"></a>
-<span class="sourceLineNo">825</span>        /**<a name="line.825"></a>
-<span class="sourceLineNo">826</span>         * Builder class for building GA {@code Engine} instances.<a name="line.826"></a>
-<span class="sourceLineNo">827</span>         *<a name="line.827"></a>
-<span class="sourceLineNo">828</span>         * @see Engine<a name="line.828"></a>
-<span class="sourceLineNo">829</span>         *<a name="line.829"></a>
-<span class="sourceLineNo">830</span>         * @author &lt;a href="mailto:franz.wilhelmstoetter@gmx.at"&gt;Franz Wilhelmstötter&lt;/a&gt;<a name="line.830"></a>
-<span class="sourceLineNo">831</span>         * @since 3.0<a name="line.831"></a>
-<span class="sourceLineNo">832</span>         * @version 3.0<a name="line.832"></a>
-<span class="sourceLineNo">833</span>         */<a name="line.833"></a>
-<span class="sourceLineNo">834</span>        public static final class Builder&lt;<a name="line.834"></a>
-<span class="sourceLineNo">835</span>                G extends Gene&lt;?, G&gt;,<a name="line.835"></a>
-<span class="sourceLineNo">836</span>                C extends Comparable&lt;? super C&gt;<a name="line.836"></a>
-<span class="sourceLineNo">837</span>        &gt;<a name="line.837"></a>
-<span class="sourceLineNo">838</span>                implements Copyable&lt;Builder&lt;G, C&gt;&gt;<a name="line.838"></a>
-<span class="sourceLineNo">839</span>        {<a name="line.839"></a>
-<span class="sourceLineNo">840</span><a name="line.840"></a>
-<span class="sourceLineNo">841</span>                // No default values for this properties.<a name="line.841"></a>
-<span class="sourceLineNo">842</span>                private Function&lt;? super Genotype&lt;G&gt;, ? extends C&gt; _fitnessFunction;<a name="line.842"></a>
-<span class="sourceLineNo">843</span>                private Factory&lt;Genotype&lt;G&gt;&gt; _genotypeFactory;<a name="line.843"></a>
-<span class="sourceLineNo">844</span><a name="line.844"></a>
-<span class="sourceLineNo">845</span>                // This are the properties which default values.<a name="line.845"></a>
-<span class="sourceLineNo">846</span>                private Function&lt;? super C, ? extends C&gt; _fitnessScaler = a -&gt; a;<a name="line.846"></a>
-<span class="sourceLineNo">847</span>                private Selector&lt;G, C&gt; _survivorsSelector = new TournamentSelector&lt;&gt;(3);<a name="line.847"></a>
-<span class="sourceLineNo">848</span>                private Selector&lt;G, C&gt; _offspringSelector = new TournamentSelector&lt;&gt;(3);<a name="line.848"></a>
-<span class="sourceLineNo">849</span>                private Alterer&lt;G, C&gt; _alterer = Alterer.of(<a name="line.849"></a>
-<span class="sourceLineNo">850</span>                        new SinglePointCrossover&lt;G, C&gt;(0.2),<a name="line.850"></a>
-<span class="sourceLineNo">851</span>                        new Mutator&lt;&gt;(0.15)<a name="line.851"></a>
-<span class="sourceLineNo">852</span>                );<a name="line.852"></a>
-<span class="sourceLineNo">853</span>                private Predicate&lt;? super Phenotype&lt;G, C&gt;&gt; _validator = Phenotype::isValid;<a name="line.853"></a>
-<span class="sourceLineNo">854</span>                private Optimize _optimize = Optimize.MAXIMUM;<a name="line.854"></a>
-<span class="sourceLineNo">855</span>                private double _offspringFraction = 0.6;<a name="line.855"></a>
-<span class="sourceLineNo">856</span>                private int _populationSize = 50;<a name="line.856"></a>
-<span class="sourceLineNo">857</span>                private long _maximalPhenotypeAge = 70;<a name="line.857"></a>
-<span class="sourceLineNo">858</span><a name="line.858"></a>
-<span class="sourceLineNo">859</span>                private Executor _executor = ForkJoinPool.commonPool();<a name="line.859"></a>
-<span class="sourceLineNo">860</span>                private Clock _clock = NanoClock.systemUTC();<a name="line.860"></a>
+<span class="sourceLineNo">766</span>        public static &lt;T, G extends Gene&lt;?, G&gt;, C extends Comparable&lt;? super C&gt;&gt;<a name="line.766"></a>
+<span class="sourceLineNo">767</span>        Builder&lt;G, C&gt; builder(final Problem&lt;T, G, C&gt; problem) {<a name="line.767"></a>
+<span class="sourceLineNo">768</span>                return builder(problem.fitness(), problem.codec());<a name="line.768"></a>
+<span class="sourceLineNo">769</span>        }<a name="line.769"></a>
+<span class="sourceLineNo">770</span><a name="line.770"></a>
+<span class="sourceLineNo">771</span>        /**<a name="line.771"></a>
+<span class="sourceLineNo">772</span>         * Create a new evolution {@code Engine.Builder} with the given fitness<a name="line.772"></a>
+<span class="sourceLineNo">773</span>         * function and genotype factory.<a name="line.773"></a>
+<span class="sourceLineNo">774</span>         *<a name="line.774"></a>
+<span class="sourceLineNo">775</span>         * @param ff the fitness function<a name="line.775"></a>
+<span class="sourceLineNo">776</span>         * @param genotypeFactory the genotype factory<a name="line.776"></a>
+<span class="sourceLineNo">777</span>         * @param &lt;G&gt; the gene type<a name="line.777"></a>
+<span class="sourceLineNo">778</span>         * @param &lt;C&gt; the fitness function result type<a name="line.778"></a>
+<span class="sourceLineNo">779</span>         * @return a new engine builder<a name="line.779"></a>
+<span class="sourceLineNo">780</span>         * @throws java.lang.NullPointerException if one of the arguments is<a name="line.780"></a>
+<span class="sourceLineNo">781</span>         *         {@code null}.<a name="line.781"></a>
+<span class="sourceLineNo">782</span>         */<a name="line.782"></a>
+<span class="sourceLineNo">783</span>        public static &lt;G extends Gene&lt;?, G&gt;, C extends Comparable&lt;? super C&gt;&gt;<a name="line.783"></a>
+<span class="sourceLineNo">784</span>        Builder&lt;G, C&gt; builder(<a name="line.784"></a>
+<span class="sourceLineNo">785</span>                final Function&lt;? super Genotype&lt;G&gt;, ? extends C&gt; ff,<a name="line.785"></a>
+<span class="sourceLineNo">786</span>                final Factory&lt;Genotype&lt;G&gt;&gt; genotypeFactory<a name="line.786"></a>
+<span class="sourceLineNo">787</span>        ) {<a name="line.787"></a>
+<span class="sourceLineNo">788</span>                return new Builder&lt;&gt;(genotypeFactory, ff);<a name="line.788"></a>
+<span class="sourceLineNo">789</span>        }<a name="line.789"></a>
+<span class="sourceLineNo">790</span><a name="line.790"></a>
+<span class="sourceLineNo">791</span>        /**<a name="line.791"></a>
+<span class="sourceLineNo">792</span>         * Create a new evolution {@code Engine.Builder} with the given fitness<a name="line.792"></a>
+<span class="sourceLineNo">793</span>         * function and chromosome templates.<a name="line.793"></a>
+<span class="sourceLineNo">794</span>         *<a name="line.794"></a>
+<span class="sourceLineNo">795</span>         * @param ff the fitness function<a name="line.795"></a>
+<span class="sourceLineNo">796</span>         * @param chromosome the first chromosome<a name="line.796"></a>
+<span class="sourceLineNo">797</span>         * @param chromosomes the chromosome templates<a name="line.797"></a>
+<span class="sourceLineNo">798</span>         * @param &lt;G&gt; the gene type<a name="line.798"></a>
+<span class="sourceLineNo">799</span>         * @param &lt;C&gt; the fitness function result type<a name="line.799"></a>
+<span class="sourceLineNo">800</span>         * @return a new engine builder<a name="line.800"></a>
+<span class="sourceLineNo">801</span>         * @throws java.lang.NullPointerException if one of the arguments is<a name="line.801"></a>
+<span class="sourceLineNo">802</span>         *         {@code null}.<a name="line.802"></a>
+<span class="sourceLineNo">803</span>         */<a name="line.803"></a>
+<span class="sourceLineNo">804</span>        @SafeVarargs<a name="line.804"></a>
+<span class="sourceLineNo">805</span>        public static &lt;G extends Gene&lt;?, G&gt;, C extends Comparable&lt;? super C&gt;&gt;<a name="line.805"></a>
+<span class="sourceLineNo">806</span>        Builder&lt;G, C&gt; builder(<a name="line.806"></a>
+<span class="sourceLineNo">807</span>                final Function&lt;? super Genotype&lt;G&gt;, ? extends C&gt; ff,<a name="line.807"></a>
+<span class="sourceLineNo">808</span>                final Chromosome&lt;G&gt; chromosome,<a name="line.808"></a>
+<span class="sourceLineNo">809</span>                final Chromosome&lt;G&gt;... chromosomes<a name="line.809"></a>
+<span class="sourceLineNo">810</span>        ) {<a name="line.810"></a>
+<span class="sourceLineNo">811</span>                return new Builder&lt;&gt;(Genotype.of(chromosome, chromosomes), ff);<a name="line.811"></a>
+<span class="sourceLineNo">812</span>        }<a name="line.812"></a>
+<span class="sourceLineNo">813</span><a name="line.813"></a>
+<span class="sourceLineNo">814</span>        /**<a name="line.814"></a>
+<span class="sourceLineNo">815</span>         * Create a new evolution {@code Engine.Builder} with the given fitness<a name="line.815"></a>
+<span class="sourceLineNo">816</span>         * function and problem {@code codec}.<a name="line.816"></a>
+<span class="sourceLineNo">817</span>         *<a name="line.817"></a>
+<span class="sourceLineNo">818</span>         * @since 3.2<a name="line.818"></a>
+<span class="sourceLineNo">819</span>         *<a name="line.819"></a>
+<span class="sourceLineNo">820</span>         * @param ff the fitness function<a name="line.820"></a>
+<span class="sourceLineNo">821</span>         * @param codec the problem codec<a name="line.821"></a>
+<span class="sourceLineNo">822</span>         * @param &lt;T&gt; the fitness function input type<a name="line.822"></a>
+<span class="sourceLineNo">823</span>         * @param &lt;C&gt; the fitness function result type<a name="line.823"></a>
+<span class="sourceLineNo">824</span>         * @param &lt;G&gt; the gene type<a name="line.824"></a>
+<span class="sourceLineNo">825</span>         * @return a new engine builder<a name="line.825"></a>
+<span class="sourceLineNo">826</span>         * @throws java.lang.NullPointerException if one of the arguments is<a name="line.826"></a>
+<span class="sourceLineNo">827</span>         *         {@code null}.<a name="line.827"></a>
+<span class="sourceLineNo">828</span>         */<a name="line.828"></a>
+<span class="sourceLineNo">829</span>        public static &lt;T, G extends Gene&lt;?, G&gt;, C extends Comparable&lt;? super C&gt;&gt;<a name="line.829"></a>
+<span class="sourceLineNo">830</span>        Builder&lt;G, C&gt; builder(<a name="line.830"></a>
+<span class="sourceLineNo">831</span>                final Function&lt;? super T, ? extends C&gt; ff,<a name="line.831"></a>
+<span class="sourceLineNo">832</span>                final Codec&lt;T, G&gt; codec<a name="line.832"></a>
+<span class="sourceLineNo">833</span>        ) {<a name="line.833"></a>
+<span class="sourceLineNo">834</span>                return builder(ff.compose(codec.decoder()), codec.encoding());<a name="line.834"></a>
+<span class="sourceLineNo">835</span>        }<a name="line.835"></a>
+<span class="sourceLineNo">836</span><a name="line.836"></a>
+<span class="sourceLineNo">837</span><a name="line.837"></a>
+<span class="sourceLineNo">838</span>        /* *************************************************************************<a name="line.838"></a>
+<span class="sourceLineNo">839</span>         * Inner classes<a name="line.839"></a>
+<span class="sourceLineNo">840</span>         **************************************************************************/<a name="line.840"></a>
+<span class="sourceLineNo">841</span><a name="line.841"></a>
+<span class="sourceLineNo">842</span>        /**<a name="line.842"></a>
+<span class="sourceLineNo">843</span>         * Builder class for building GA {@code Engine} instances.<a name="line.843"></a>
+<span class="sourceLineNo">844</span>         *<a name="line.844"></a>
+<span class="sourceLineNo">845</span>         * @see Engine<a name="line.845"></a>
+<span class="sourceLineNo">846</span>         *<a name="line.846"></a>
+<span class="sourceLineNo">847</span>         * @author &lt;a href="mailto:franz.wilhelmstoetter@gmx.at"&gt;Franz Wilhelmstötter&lt;/a&gt;<a name="line.847"></a>
+<span class="sourceLineNo">848</span>         * @since 3.0<a name="line.848"></a>
+<span class="sourceLineNo">849</span>         * @version 3.0<a name="line.849"></a>
+<span class="sourceLineNo">850</span>         */<a name="line.850"></a>
+<span class="sourceLineNo">851</span>        public static final class Builder&lt;<a name="line.851"></a>
+<span class="sourceLineNo">852</span>                G extends Gene&lt;?, G&gt;,<a name="line.852"></a>
+<span class="sourceLineNo">853</span>                C extends Comparable&lt;? super C&gt;<a name="line.853"></a>
+<span class="sourceLineNo">854</span>        &gt;<a name="line.854"></a>
+<span class="sourceLineNo">855</span>                implements Copyable&lt;Builder&lt;G, C&gt;&gt;<a name="line.855"></a>
+<span class="sourceLineNo">856</span>        {<a name="line.856"></a>
+<span class="sourceLineNo">857</span><a name="line.857"></a>
+<span class="sourceLineNo">858</span>                // No default values for this properties.<a name="line.858"></a>
+<span class="sourceLineNo">859</span>                private Function&lt;? super Genotype&lt;G&gt;, ? extends C&gt; _fitnessFunction;<a name="line.859"></a>
+<span class="sourceLineNo">860</span>                private Factory&lt;Genotype&lt;G&gt;&gt; _genotypeFactory;<a name="line.860"></a>
 <span class="sourceLineNo">861</span><a name="line.861"></a>
-<span class="sourceLineNo">862</span>                private int _individualCreationRetries = 10;<a name="line.862"></a>
-<span class="sourceLineNo">863</span><a name="line.863"></a>
-<span class="sourceLineNo">864</span>                private Builder(<a name="line.864"></a>
-<span class="sourceLineNo">865</span>                        final Factory&lt;Genotype&lt;G&gt;&gt; genotypeFactory,<a name="line.865"></a>
-<span class="sourceLineNo">866</span>                        final Function&lt;? super Genotype&lt;G&gt;, ? extends C&gt; fitnessFunction<a name="line.866"></a>
-<span class="sourceLineNo">867</span>                ) {<a name="line.867"></a>
-<span class="sourceLineNo">868</span>                        _genotypeFactory = requireNonNull(genotypeFactory);<a name="line.868"></a>
-<span class="sourceLineNo">869</span>                        _fitnessFunction = requireNonNull(fitnessFunction);<a name="line.869"></a>
-<span class="sourceLineNo">870</span>                }<a name="line.870"></a>
-<span class="sourceLineNo">871</span><a name="line.871"></a>
-<span class="sourceLineNo">872</span>                /**<a name="line.872"></a>
-<span class="sourceLineNo">873</span>                 * Set the fitness function of the evolution {@code Engine}.<a name="line.873"></a>
-<span class="sourceLineNo">874</span>                 *<a name="line.874"></a>
-<span class="sourceLineNo">875</span>                 * @param function the fitness function to use in the GA {@code Engine}<a name="line.875"></a>
-<span class="sourceLineNo">876</span>                 * @return {@code this} builder, for command chaining<a name="line.876"></a>
-<span class="sourceLineNo">877</span>                 */<a name="line.877"></a>
-<span class="sourceLineNo">878</span>                public Builder&lt;G, C&gt; fitnessFunction(<a name="line.878"></a>
-<span class="sourceLineNo">879</span>                        Function&lt;? super Genotype&lt;G&gt;, ? extends C&gt; function<a name="line.879"></a>
-<span class="sourceLineNo">880</span>                ) {<a name="line.880"></a>
-<span class="sourceLineNo">881</span>                        _fitnessFunction = requireNonNull(function);<a name="line.881"></a>
-<span class="sourceLineNo">882</span>                        return this;<a name="line.882"></a>
-<span class="sourceLineNo">883</span>                }<a name="line.883"></a>
-<span class="sourceLineNo">884</span><a name="line.884"></a>
-<span class="sourceLineNo">885</span>                /**<a name="line.885"></a>
-<span class="sourceLineNo">886</span>                 * Set the fitness scaler of the evolution {@code Engine}. &lt;i&gt;Default<a name="line.886"></a>
-<span class="sourceLineNo">887</span>                 * value is set to the identity function.&lt;/i&gt;<a name="line.887"></a>
-<span class="sourceLineNo">888</span>                 *<a name="line.888"></a>
-<span class="sourceLineNo">889</span>                 * @param scaler the fitness scale to use in the GA {@code Engine}<a name="line.889"></a>
-<span class="sourceLineNo">890</span>                 * @return {@code this} builder, for command chaining<a name="line.890"></a>
-<span class="sourceLineNo">891</span>                 */<a name="line.891"></a>
-<span class="sourceLineNo">892</span>                public Builder&lt;G, C&gt; fitnessScaler(<a name="line.892"></a>
-<span class="sourceLineNo">893</span>                        final Function&lt;? super C, ? extends C&gt; scaler<a name="line.893"></a>
-<span class="sourceLineNo">894</span>                ) {<a name="line.894"></a>
-<span class="sourceLineNo">895</span>                        _fitnessScaler = requireNonNull(scaler);<a name="line.895"></a>
-<span class="sourceLineNo">896</span>                        return this;<a name="line.896"></a>
-<span class="sourceLineNo">897</span>                }<a name="line.897"></a>
-<span class="sourceLineNo">898</span><a name="line.898"></a>
-<span class="sourceLineNo">899</span>                /**<a name="line.899"></a>
-<span class="sourceLineNo">900</span>                 * The genotype factory used for creating new individuals.<a name="line.900"></a>
-<span class="sourceLineNo">901</span>                 *<a name="line.901"></a>
-<span class="sourceLineNo">902</span>                 * @param genotypeFactory the genotype factory for creating new<a name="line.902"></a>
-<span class="sourceLineNo">903</span>                 *        individuals.<a name="line.903"></a>
-<span class="sourceLineNo">904</span>                 * @return {@code this} builder, for command chaining<a name="line.904"></a>
-<span class="sourceLineNo">905</span>                 */<a name="line.905"></a>
-<span class="sourceLineNo">906</span>                public Builder&lt;G, C&gt; genotypeFactory(<a name="line.906"></a>
-<span class="sourceLineNo">907</span>                        final Factory&lt;Genotype&lt;G&gt;&gt; genotypeFactory<a name="line.907"></a>
-<span class="sourceLineNo">908</span>                ) {<a name="line.908"></a>
-<span class="sourceLineNo">909</span>                        _genotypeFactory = requireNonNull(genotypeFactory);<a name="line.909"></a>
-<span class="sourceLineNo">910</span>                        return this;<a name="line.910"></a>
-<span class="sourceLineNo">911</span>                }<a name="line.911"></a>
-<span class="sourceLineNo">912</span><a name="line.912"></a>
-<span class="sourceLineNo">913</span>                /**<a name="line.913"></a>
-<span class="sourceLineNo">914</span>                 * The selector used for selecting the offspring population. &lt;i&gt;Default<a name="line.914"></a>
-<span class="sourceLineNo">915</span>                 * values is set to {@code TournamentSelector&lt;&gt;(3)}.&lt;/i&gt;<a name="line.915"></a>
-<span class="sourceLineNo">916</span>                 *<a name="line.916"></a>
-<span class="sourceLineNo">917</span>                 * @param selector used for selecting the offspring population<a name="line.917"></a>
-<span class="sourceLineNo">918</span>                 * @return {@code this} builder, for command chaining<a name="line.918"></a>
-<span class="sourceLineNo">919</span>                 */<a name="line.919"></a>
-<span class="sourceLineNo">920</span>                public Builder&lt;G, C&gt; offspringSelector(<a name="line.920"></a>
-<span class="sourceLineNo">921</span>                        final Selector&lt;G, C&gt; selector<a name="line.921"></a>
-<span class="sourceLineNo">922</span>                ) {<a name="line.922"></a>
-<span class="sourceLineNo">923</span>                        _offspringSelector = requireNonNull(selector);<a name="line.923"></a>
-<span class="sourceLineNo">924</span>                        return this;<a name="line.924"></a>
-<span class="sourceLineNo">925</span>                }<a name="line.925"></a>
-<span class="sourceLineNo">926</span><a name="line.926"></a>
-<span class="sourceLineNo">927</span>                /**<a name="line.927"></a>
-<span class="sourceLineNo">928</span>                 * The selector used for selecting the survivors population. &lt;i&gt;Default<a name="line.928"></a>
-<span class="sourceLineNo">929</span>                 * values is set to {@code TournamentSelector&lt;&gt;(3)}.&lt;/i&gt;<a name="line.929"></a>
-<span class="sourceLineNo">930</span>                 *<a name="line.930"></a>
-<span class="sourceLineNo">931</span>                 * @param selector used for selecting survivors population<a name="line.931"></a>
-<span class="sourceLineNo">932</span>                 * @return {@code this} builder, for command chaining<a name="line.932"></a>
-<span class="sourceLineNo">933</span>                 */<a name="line.933"></a>
-<span class="sourceLineNo">934</span>                public Builder&lt;G, C&gt; survivorsSelector(<a name="line.934"></a>
-<span class="sourceLineNo">935</span>                        final Selector&lt;G, C&gt; selector<a name="line.935"></a>
-<span class="sourceLineNo">936</span>                ) {<a name="line.936"></a>
-<span class="sourceLineNo">937</span>                        _survivorsSelector = requireNonNull(selector);<a name="line.937"></a>
-<span class="sourceLineNo">938</span>                        return this;<a name="line.938"></a>
-<span class="sourceLineNo">939</span>                }<a name="line.939"></a>
-<span class="sourceLineNo">940</span><a name="line.940"></a>
-<span class="sourceLineNo">941</span>                /**<a name="line.941"></a>
-<span class="sourceLineNo">942</span>                 * The selector used for selecting the survivors and offspring<a name="line.942"></a>
-<span class="sourceLineNo">943</span>                 * population. &lt;i&gt;Default values is set to<a name="line.943"></a>
-<span class="sourceLineNo">944</span>                 * {@code TournamentSelector&lt;&gt;(3)}.&lt;/i&gt;<a name="line.944"></a>
-<span class="sourceLineNo">945</span>                 *<a name="line.945"></a>
-<span class="sourceLineNo">946</span>                 * @param selector used for selecting survivors and offspring population<a name="line.946"></a>
-<span class="sourceLineNo">947</span>                 * @return {@code this} builder, for command chaining<a name="line.947"></a>
-<span class="sourceLineNo">948</span>                 */<a name="line.948"></a>
-<span class="sourceLineNo">949</span>                public Builder&lt;G, C&gt; selector(final Selector&lt;G, C&gt; selector) {<a name="line.949"></a>
-<span class="sourceLineNo">950</span>                        _offspringSelector = requireNonNull(selector);<a name="line.950"></a>
-<span class="sourceLineNo">951</span>                        _survivorsSelector = requireNonNull(selector);<a name="line.951"></a>
-<span class="sourceLineNo">952</span>                        return this;<a name="line.952"></a>
-<span class="sourceLineNo">953</span>                }<a name="line.953"></a>
-<span class="sourceLineNo">954</span><a name="line.954"></a>
-<span class="sourceLineNo">955</span>                /**<a name="line.955"></a>
-<span class="sourceLineNo">956</span>                 * The alterers used for alter the offspring population. &lt;i&gt;Default<a name="line.956"></a>
-<span class="sourceLineNo">957</span>                 * values is set to {@code new SinglePointCrossover&lt;&gt;(0.2)} followed by<a name="line.957"></a>
-<span class="sourceLineNo">958</span>                 * {@code new Mutator&lt;&gt;(0.15)}.&lt;/i&gt;<a name="line.958"></a>
-<span class="sourceLineNo">959</span>                 *<a name="line.959"></a>
-<span class="sourceLineNo">960</span>                 * @param first the first alterer used for alter the offspring<a name="line.960"></a>
-<span class="sourceLineNo">961</span>                 *        population<a name="line.961"></a>
-<span class="sourceLineNo">962</span>                 * @param rest the rest of the alterers used for alter the offspring<a name="line.962"></a>
-<span class="sourceLineNo">963</span>                 *        population<a name="line.963"></a>
+<span class="sourceLineNo">862</span>                // This are the properties which default values.<a name="line.862"></a>
+<span class="sourceLineNo">863</span>                private Function&lt;? super C, ? extends C&gt; _fitnessScaler = a -&gt; a;<a name="line.863"></a>
+<span class="sourceLineNo">864</span>                private Selector&lt;G, C&gt; _survivorsSelector = new TournamentSelector&lt;&gt;(3);<a name="line.864"></a>
+<span class="sourceLineNo">865</span>                private Selector&lt;G, C&gt; _offspringSelector = new TournamentSelector&lt;&gt;(3);<a name="line.865"></a>
+<span class="sourceLineNo">866</span>                private Alterer&lt;G, C&gt; _alterer = Alterer.of(<a name="line.866"></a>
+<span class="sourceLineNo">867</span>                        new SinglePointCrossover&lt;G, C&gt;(0.2),<a name="line.867"></a>
+<span class="sourceLineNo">868</span>                        new Mutator&lt;&gt;(0.15)<a name="line.868"></a>
+<span class="sourceLineNo">869</span>                );<a name="line.869"></a>
+<span class="sourceLineNo">870</span>                private Predicate&lt;? super Phenotype&lt;G, C&gt;&gt; _validator = Phenotype::isValid;<a name="line.870"></a>
+<span class="sourceLineNo">871</span>                private Optimize _optimize = Optimize.MAXIMUM;<a name="line.871"></a>
+<span class="sourceLineNo">872</span>                private double _offspringFraction = 0.6;<a name="line.872"></a>
+<span class="sourceLineNo">873</span>                private int _populationSize = 50;<a name="line.873"></a>
+<span class="sourceLineNo">874</span>                private long _maximalPhenotypeAge = 70;<a name="line.874"></a>
+<span class="sourceLineNo">875</span><a name="line.875"></a>
+<span class="sourceLineNo">876</span>                private Executor _executor = ForkJoinPool.commonPool();<a name="line.876"></a>
+<span class="sourceLineNo">877</span>                private Clock _clock = NanoClock.systemUTC();<a name="line.877"></a>
+<span class="sourceLineNo">878</span><a name="line.878"></a>
+<span class="sourceLineNo">879</span>                private int _individualCreationRetries = 10;<a name="line.879"></a>
+<span class="sourceLineNo">880</span><a name="line.880"></a>
+<span class="sourceLineNo">881</span>                private Builder(<a name="line.881"></a>
+<span class="sourceLineNo">882</span>                        final Factory&lt;Genotype&lt;G&gt;&gt; genotypeFactory,<a name="line.882"></a>
+<span class="sourceLineNo">883</span>                        final Function&lt;? super Genotype&lt;G&gt;, ? extends C&gt; fitnessFunction<a name="line.883"></a>
+<span class="sourceLineNo">884</span>                ) {<a name="line.884"></a>
+<span class="sourceLineNo">885</span>                        _genotypeFactory = requireNonNull(genotypeFactory);<a name="line.885"></a>
+<span class="sourceLineNo">886</span>                        _fitnessFunction = requireNonNull(fitnessFunction);<a name="line.886"></a>
+<span class="sourceLineNo">887</span>                }<a name="line.887"></a>
+<span class="sourceLineNo">888</span><a name="line.888"></a>
+<span class="sourceLineNo">889</span>                /**<a name="line.889"></a>
+<span class="sourceLineNo">890</span>                 * Set the fitness function of the evolution {@code Engine}.<a name="line.890"></a>
+<span class="sourceLineNo">891</span>                 *<a name="line.891"></a>
+<span class="sourceLineNo">892</span>                 * @param function the fitness function to use in the GA {@code Engine}<a name="line.892"></a>
+<span class="sourceLineNo">893</span>                 * @return {@code this} builder, for command chaining<a name="line.893"></a>
+<span class="sourceLineNo">894</span>                 */<a name="line.894"></a>
+<span class="sourceLineNo">895</span>                public Builder&lt;G, C&gt; fitnessFunction(<a name="line.895"></a>
+<span class="sourceLineNo">896</span>                        Function&lt;? super Genotype&lt;G&gt;, ? extends C&gt; function<a name="line.896"></a>
+<span class="sourceLineNo">897</span>                ) {<a name="line.897"></a>
+<span class="sourceLineNo">898</span>                        _fitnessFunction = requireNonNull(function);<a name="line.898"></a>
+<span class="sourceLineNo">899</span>                        return this;<a name="line.899"></a>
+<span class="sourceLineNo">900</span>                }<a name="line.900"></a>
+<span class="sourceLineNo">901</span><a name="line.901"></a>
+<span class="sourceLineNo">902</span>                /**<a name="line.902"></a>
+<span class="sourceLineNo">903</span>                 * Set the fitness scaler of the evolution {@code Engine}. &lt;i&gt;Default<a name="line.903"></a>
+<span class="sourceLineNo">904</span>                 * value is set to the identity function.&lt;/i&gt;<a name="line.904"></a>
+<span class="sourceLineNo">905</span>                 *<a name="line.905"></a>
+<span class="sourceLineNo">906</span>                 * @param scaler the fitness scale to use in the GA {@code Engine}<a name="line.906"></a>
+<span class="sourceLineNo">907</span>                 * @return {@code this} builder, for command chaining<a name="line.907"></a>
+<span class="sourceLineNo">908</span>                 */<a name="line.908"></a>
+<span class="sourceLineNo">909</span>                public Builder&lt;G, C&gt; fitnessScaler(<a name="line.909"></a>
+<span class="sourceLineNo">910</span>                        final Function&lt;? super C, ? extends C&gt; scaler<a name="line.910"></a>
+<span class="sourceLineNo">911</span>                ) {<a name="line.911"></a>
+<span class="sourceLineNo">912</span>                        _fitnessScaler = requireNonNull(scaler);<a name="line.912"></a>
+<span class="sourceLineNo">913</span>                        return this;<a name="line.913"></a>
+<span class="sourceLineNo">914</span>                }<a name="line.914"></a>
+<span class="sourceLineNo">915</span><a name="line.915"></a>
+<span class="sourceLineNo">916</span>                /**<a name="line.916"></a>
+<span class="sourceLineNo">917</span>                 * The genotype factory used for creating new individuals.<a name="line.917"></a>
+<span class="sourceLineNo">918</span>                 *<a name="line.918"></a>
+<span class="sourceLineNo">919</span>                 * @param genotypeFactory the genotype factory for creating new<a name="line.919"></a>
+<span class="sourceLineNo">920</span>                 *        individuals.<a name="line.920"></a>
+<span class="sourceLineNo">921</span>                 * @return {@code this} builder, for command chaining<a name="line.921"></a>
+<span class="sourceLineNo">922</span>                 */<a name="line.922"></a>
+<span class="sourceLineNo">923</span>                public Builder&lt;G, C&gt; genotypeFactory(<a name="line.923"></a>
+<span class="sourceLineNo">924</span>                        final Factory&lt;Genotype&lt;G&gt;&gt; genotypeFactory<a name="line.924"></a>
+<span class="sourceLineNo">925</span>                ) {<a name="line.925"></a>
+<span class="sourceLineNo">926</span>                        _genotypeFactory = requireNonNull(genotypeFactory);<a name="line.926"></a>
+<span class="sourceLineNo">927</span>                        return this;<a name="line.927"></a>
+<span class="sourceLineNo">928</span>                }<a name="line.928"></a>
+<span class="sourceLineNo">929</span><a name="line.929"></a>
+<span class="sourceLineNo">930</span>                /**<a name="line.930"></a>
+<span class="sourceLineNo">931</span>                 * The selector used for selecting the offspring population. &lt;i&gt;Default<a name="line.931"></a>
+<span class="sourceLineNo">932</span>                 * values is set to {@code TournamentSelector&lt;&gt;(3)}.&lt;/i&gt;<a name="line.932"></a>
+<span class="sourceLineNo">933</span>                 *<a name="line.933"></a>
+<span class="sourceLineNo">934</span>                 * @param selector used for selecting the offspring population<a name="line.934"></a>
+<span class="sourceLineNo">935</span>                 * @return {@code this} builder, for command chaining<a name="line.935"></a>
+<span class="sourceLineNo">936</span>                 */<a name="line.936"></a>
+<span class="sourceLineNo">937</span>                public Builder&lt;G, C&gt; offspringSelector(<a name="line.937"></a>
+<span class="sourceLineNo">938</span>                        final Selector&lt;G, C&gt; selector<a name="line.938"></a>
+<span class="sourceLineNo">939</span>                ) {<a name="line.939"></a>
+<span class="sourceLineNo">940</span>                        _offspringSelector = requireNonNull(selector);<a name="line.940"></a>
+<span class="sourceLineNo">941</span>                        return this;<a name="line.941"></a>
+<span class="sourceLineNo">942</span>                }<a name="line.942"></a>
+<span class="sourceLineNo">943</span><a name="line.943"></a>
+<span class="sourceLineNo">944</span>                /**<a name="line.944"></a>
+<span class="sourceLineNo">945</span>                 * The selector used for selecting the survivors population. &lt;i&gt;Default<a name="line.945"></a>
+<span class="sourceLineNo">946</span>                 * values is set to {@code TournamentSelector&lt;&gt;(3)}.&lt;/i&gt;<a name="line.946"></a>
+<span class="sourceLineNo">947</span>                 *<a name="line.947"></a>
+<span class="sourceLineNo">948</span>                 * @param selector used for selecting survivors population<a name="line.948"></a>
+<span class="sourceLineNo">949</span>                 * @return {@code this} builder, for command chaining<a name="line.949"></a>
+<span class="sourceLineNo">950</span>                 */<a name="line.950"></a>
+<span class="sourceLineNo">951</span>                public Builder&lt;G, C&gt; survivorsSelector(<a name="line.951"></a>
+<span class="sourceLineNo">952</span>                        final Selector&lt;G, C&gt; selector<a name="line.952"></a>
+<span class="sourceLineNo">953</span>                ) {<a name="line.953"></a>
+<span class="sourceLineNo">954</span>                        _survivorsSelector = requireNonNull(selector);<a name="line.954"></a>
+<span class="sourceLineNo">955</span>                        return this;<a name="line.955"></a>
+<span class="sourceLineNo">956</span>                }<a name="line.956"></a>
+<span class="sourceLineNo">957</span><a name="line.957"></a>
+<span class="sourceLineNo">958</span>                /**<a name="line.958"></a>
+<span class="sourceLineNo">959</span>                 * The selector used for selecting the survivors and offspring<a name="line.959"></a>
+<span class="sourceLineNo">960</span>                 * population. &lt;i&gt;Default values is set to<a name="line.960"></a>
+<span class="sourceLineNo">961</span>                 * {@code TournamentSelector&lt;&gt;(3)}.&lt;/i&gt;<a name="line.961"></a>
+<span class="sourceLineNo">962</span>                 *<a name="line.962"></a>
+<span class="sourceLineNo">963</span>                 * @param selector used for selecting survivors and offspring population<a name="line.963"></a>
 <span class="sourceLineNo">964</span>                 * @return {@code this} builder, for command chaining<a name="line.964"></a>
-<span class="sourceLineNo">965</span>                 * @throws java.lang.NullPointerException if one of the alterers is<a name="line.965"></a>
-<span class="sourceLineNo">966</span>                 *         {@code null}.<a name="line.966"></a>
-<span class="sourceLineNo">967</span>                 */<a name="line.967"></a>
-<span class="sourceLineNo">968</span>                @SafeVarargs<a name="line.968"></a>
-<span class="sourceLineNo">969</span>                public final Builder&lt;G, C&gt; alterers(<a name="line.969"></a>
-<span class="sourceLineNo">970</span>                        final Alterer&lt;G, C&gt; first,<a name="line.970"></a>
-<span class="sourceLineNo">971</span>                        final Alterer&lt;G, C&gt;... rest<a name="line.971"></a>
-<span class="sourceLineNo">972</span>                ) {<a name="line.972"></a>
-<span class="sourceLineNo">973</span>                        requireNonNull(first);<a name="line.973"></a>
-<span class="sourceLineNo">974</span>                        Stream.of(rest).forEach(Objects::requireNonNull);<a name="line.974"></a>
-<span class="sourceLineNo">975</span><a name="line.975"></a>
-<span class="sourceLineNo">976</span>                        _alterer = rest.length == 0 ?<a name="line.976"></a>
-<span class="sourceLineNo">977</span>                                first :<a name="line.977"></a>
-<span class="sourceLineNo">978</span>                                Alterer.of(rest).compose(first);<a name="line.978"></a>
-<span class="sourceLineNo">979</span><a name="line.979"></a>
-<span class="sourceLineNo">980</span>                        return this;<a name="line.980"></a>
-<span class="sourceLineNo">981</span>                }<a name="line.981"></a>
-<span class="sourceLineNo">982</span><a name="line.982"></a>
-<span class="sourceLineNo">983</span>                /**<a name="line.983"></a>
-<span class="sourceLineNo">984</span>                 * The phenotype validator used for detecting invalid individuals.<a name="line.984"></a>
-<span class="sourceLineNo">985</span>                 * Alternatively it is also possible to set the genotype validator with<a name="line.985"></a>
-<span class="sourceLineNo">986</span>                 * {@link #genotypeFactory(Factory)}, which will replace any<a name="line.986"></a>
-<span class="sourceLineNo">987</span>                 * previously set phenotype validators.<a name="line.987"></a>
-<span class="sourceLineNo">988</span>                 *<a name="line.988"></a>
-<span class="sourceLineNo">989</span>                 * &lt;p&gt;&lt;i&gt;Default value is set to {@code Phenotype::isValid}.&lt;/i&gt;&lt;/p&gt;<a name="line.989"></a>
-<span class="sourceLineNo">990</span>                 *<a name="line.990"></a>
-<span class="sourceLineNo">991</span>                 * @since 3.1<a name="line.991"></a>
-<span class="sourceLineNo">992</span>                 *<a name="line.992"></a>
-<span class="sourceLineNo">993</span>                 * @see #genotypeValidator(Predicate)<a name="line.993"></a>
-<span class="sourceLineNo">994</span>                 *<a name="line.994"></a>
-<span class="sourceLineNo">995</span>                 * @param validator the {@code validator} used for validating the<a name="line.995"></a>
-<span class="sourceLineNo">996</span>                 *        individuals (phenotypes).<a name="line.996"></a>
-<span class="sourceLineNo">997</span>                 * @return {@code this} builder, for command chaining<a name="line.997"></a>
-<span class="sourceLineNo">998</span>                 * @throws java.lang.NullPointerException if the {@code validator} is<a name="line.998"></a>
-<span class="sourceLineNo">999</span>                 *         {@code null}.<a name="line.999"></a>
-<span class="sourceLineNo">1000</span>                 */<a name="line.1000"></a>
-<span class="sourceLineNo">1001</span>                public Builder&lt;G, C&gt; phenotypeValidator(<a name="line.1001"></a>
-<span class="sourceLineNo">1002</span>                        final Predicate&lt;? super Phenotype&lt;G, C&gt;&gt; validator<a name="line.1002"></a>
-<span class="sourceLineNo">1003</span>                ) {<a name="line.1003"></a>
-<span class="sourceLineNo">1004</span>                        _validator = requireNonNull(validator);<a name="line.1004"></a>
-<span class="sourceLineNo">1005</span>                        return this;<a name="line.1005"></a>
-<span class="sourceLineNo">1006</span>                }<a name="line.1006"></a>
-<span class="sourceLineNo">1007</span><a name="line.1007"></a>
-<span class="sourceLineNo">1008</span>                /**<a name="line.1008"></a>
-<span class="sourceLineNo">1009</span>                 * The genotype validator used for detecting invalid individuals.<a name="line.1009"></a>
-<span class="sourceLineNo">1010</span>                 * Alternatively it is also possible to set the phenotype validator with<a name="line.1010"></a>
-<span class="sourceLineNo">1011</span>                 * {@link #phenotypeValidator(Predicate)}, which will replace any<a name="line.1011"></a>
-<span class="sourceLineNo">1012</span>                 * previously set genotype validators.<a name="line.1012"></a>
-<span class="sourceLineNo">1013</span>                 *<a name="line.1013"></a>
-<span class="sourceLineNo">1014</span>                 * &lt;p&gt;&lt;i&gt;Default value is set to {@code Genotype::isValid}.&lt;/i&gt;&lt;/p&gt;<a name="line.1014"></a>
-<span class="sourceLineNo">1015</span>                 *<a name="line.1015"></a>
-<span class="sourceLineNo">1016</span>                 * @since 3.1<a name="line.1016"></a>
-<span class="sourceLineNo">1017</span>                 *<a name="line.1017"></a>
-<span class="sourceLineNo">1018</span>                 * @see #phenotypeValidator(Predicate)<a name="line.1018"></a>
-<span class="sourceLineNo">1019</span>                 *<a name="line.1019"></a>
-<span class="sourceLineNo">1020</span>                 * @param validator the {@code validator} used for validating the<a name="line.1020"></a>
-<span class="sourceLineNo">1021</span>                 *        individuals (genotypes).<a name="line.1021"></a>
-<span class="sourceLineNo">1022</span>                 * @return {@code this} builder, for command chaining<a name="line.1022"></a>
-<span class="sourceLineNo">1023</span>                 * @throws java.lang.NullPointerException if the {@code validator} is<a name="line.1023"></a>
-<span class="sourceLineNo">1024</span>                 *         {@code null}.<a name="line.1024"></a>
-<span class="sourceLineNo">1025</span>                 */<a name="line.1025"></a>
-<span class="sourceLineNo">1026</span>                public Builder&lt;G, C&gt; genotypeValidator(<a name="line.1026"></a>
-<span class="sourceLineNo">1027</span>                        final Predicate&lt;? super Genotype&lt;G&gt;&gt; validator<a name="line.1027"></a>
-<span class="sourceLineNo">1028</span>                ) {<a name="line.1028"></a>
-<span class="sourceLineNo">1029</span>                        requireNonNull(validator);<a name="line.1029"></a>
-<span class="sourceLineNo">1030</span><a name="line.1030"></a>
-<span class="sourceLineNo">1031</span>                        _validator = pt -&gt; validator.test(pt.getGenotype());<a name="line.1031"></a>
-<span class="sourceLineNo">1032</span>                        return this;<a name="line.1032"></a>
-<span class="sourceLineNo">1033</span>                }<a name="line.1033"></a>
-<span class="sourceLineNo">1034</span><a name="line.1034"></a>
-<span class="sourceLineNo">1035</span>                /**<a name="line.1035"></a>
-<span class="sourceLineNo">1036</span>                 * The optimization strategy used by the engine. &lt;i&gt;Default values is<a name="line.1036"></a>
-<span class="sourceLineNo">1037</span>                 * set to {@code Optimize.MAXIMUM}.&lt;/i&gt;<a name="line.1037"></a>
-<span class="sourceLineNo">1038</span>                 *<a name="line.1038"></a>
-<span class="sourceLineNo">1039</span>                 * @param optimize the optimization strategy used by the engine<a name="line.1039"></a>
-<span class="sourceLineNo">1040</span>                 * @return {@code this} builder, for command chaining<a name="line.1040"></a>
-<span class="sourceLineNo">1041</span>                 */<a name="line.1041"></a>
-<span class="sourceLineNo">1042</span>                public Builder&lt;G, C&gt; optimize(final Optimize optimize) {<a name="line.1042"></a>
-<span class="sourceLineNo">1043</span>                        _optimize = requireNonNull(optimize);<a name="line.1043"></a>
-<span class="sourceLineNo">1044</span>                        return this;<a name="line.1044"></a>
-<span class="sourceLineNo">1045</span>                }<a name="line.1045"></a>
-<span class="sourceLineNo">1046</span><a name="line.1046"></a>
-<span class="sourceLineNo">1047</span>                /**<a name="line.1047"></a>
-<span class="sourceLineNo">1048</span>                 * The offspring fraction. &lt;i&gt;Default values is set to {@code 0.6}.&lt;/i&gt;<a name="line.1048"></a>
-<span class="sourceLineNo">1049</span>                 *<a name="line.1049"></a>
-<span class="sourceLineNo">1050</span>                 * @param fraction the offspring fraction<a name="line.1050"></a>
-<span class="sourceLineNo">1051</span>                 * @return {@code this} builder, for command chaining<a name="line.1051"></a>
-<span class="sourceLineNo">1052</span>                 * @throws java.lang.IllegalArgumentException if the fraction is not<a name="line.1052"></a>
-<span class="sourceLineNo">1053</span>                 *         within the range [0, 1].<a name="line.1053"></a>
-<span class="sourceLineNo">1054</span>                 */<a name="line.1054"></a>
-<span class="sourceLineNo">1055</span>                public Builder&lt;G, C&gt; offspringFraction(final double fraction) {<a name="line.1055"></a>
-<span class="sourceLineNo">1056</span>                        _offspringFraction = probability(fraction);<a name="line.1056"></a>
-<span class="sourceLineNo">1057</span>                        return this;<a name="line.1057"></a>
-<span class="sourceLineNo">1058</span>                }<a name="line.1058"></a>
-<span class="sourceLineNo">1059</span><a name="line.1059"></a>
-<span class="sourceLineNo">1060</span>                /**<a name="line.1060"></a>
-<span class="sourceLineNo">1061</span>                 * The number of individuals which form the population. &lt;i&gt;Default<a name="line.1061"></a>
-<span class="sourceLineNo">1062</span>                 * values is set to {@code 50}.&lt;/i&gt;<a name="line.1062"></a>
-<span class="sourceLineNo">1063</span>                 *<a name="line.1063"></a>
-<span class="sourceLineNo">1064</span>                 * @param size the number of individuals of a population<a name="line.1064"></a>
-<span class="sourceLineNo">1065</span>                 * @return {@code this} builder, for command chaining<a name="line.1065"></a>
-<span class="sourceLineNo">1066</span>                 * @throws java.lang.IllegalArgumentException if {@code size &lt; 1}<a name="line.1066"></a>
-<span class="sourceLineNo">1067</span>                 */<a name="line.1067"></a>
-<span class="sourceLineNo">1068</span>                public Builder&lt;G, C&gt; populationSize(final int size) {<a name="line.1068"></a>
-<span class="sourceLineNo">1069</span>                        if (size &lt; 1) {<a name="line.1069"></a>
-<span class="sourceLineNo">1070</span>                                throw new IllegalArgumentException(format(<a name="line.1070"></a>
-<span class="sourceLineNo">1071</span>                                        "Population size must be greater than zero, but was %s.", size<a name="line.1071"></a>
-<span class="sourceLineNo">1072</span>                                ));<a name="line.1072"></a>
-<span class="sourceLineNo">1073</span>                        }<a name="line.1073"></a>
-<span class="sourceLineNo">1074</span>                        _populationSize = size;<a name="line.1074"></a>
-<span class="sourceLineNo">1075</span>                        return this;<a name="line.1075"></a>
-<span class="sourceLineNo">1076</span>                }<a name="line.1076"></a>
-<span class="sourceLineNo">1077</span><a name="line.1077"></a>
-<span class="sourceLineNo">1078</span>                /**<a name="line.1078"></a>
-<span class="sourceLineNo">1079</span>                 * The maximal allowed age of a phenotype. &lt;i&gt;Default values is set to<a name="line.1079"></a>
-<span class="sourceLineNo">1080</span>                 * {@code 70}.&lt;/i&gt;<a name="line.1080"></a>
-<span class="sourceLineNo">1081</span>                 *<a name="line.1081"></a>
-<span class="sourceLineNo">1082</span>                 * @param age the maximal phenotype age<a name="line.1082"></a>
-<span class="sourceLineNo">1083</span>                 * @return {@code this} builder, for command chaining<a name="line.1083"></a>
-<span class="sourceLineNo">1084</span>                 * @throws java.lang.IllegalArgumentException if {@code age &lt; 1}<a name="line.1084"></a>
-<span class="sourceLineNo">1085</span>                 */<a name="line.1085"></a>
-<span class="sourceLineNo">1086</span>                public Builder&lt;G, C&gt; maximalPhenotypeAge(final long age) {<a name="line.1086"></a>
-<span class="sourceLineNo">1087</span>                        if (age &lt; 1) {<a name="line.1087"></a>
-<span class="sourceLineNo">1088</span>                                throw new IllegalArgumentException(format(<a name="line.1088"></a>
-<span class="sourceLineNo">1089</span>                                        "Phenotype age must be greater than one, but was %s.", age<a name="line.1089"></a>
-<span class="sourceLineNo">1090</span>                                ));<a name="line.1090"></a>
-<span class="sourceLineNo">1091</span>                        }<a name="line.1091"></a>
-<span class="sourceLineNo">1092</span>                        _maximalPhenotypeAge = age;<a name="line.1092"></a>
-<span class="sourceLineNo">1093</span>                        return this;<a name="line.1093"></a>
-<span class="sourceLineNo">1094</span>                }<a name="line.1094"></a>
-<span class="sourceLineNo">1095</span><a name="line.1095"></a>
-<span class="sourceLineNo">1096</span>                /**<a name="line.1096"></a>
-<span class="sourceLineNo">1097</span>                 * The executor used by the engine.<a name="line.1097"></a>
-<span class="sourceLineNo">1098</span>                 *<a name="line.1098"></a>
-<span class="sourceLineNo">1099</span>                 * @param executor the executor used by the engine<a name="line.1099"></a>
-<span class="sourceLineNo">1100</span>                 * @return {@code this} builder, for command chaining<a name="line.1100"></a>
-<span class="sourceLineNo">1101</span>                 */<a name="line.1101"></a>
-<span class="sourceLineNo">1102</span>                public Builder&lt;G, C&gt; executor(final Executor executor) {<a name="line.1102"></a>
-<span class="sourceLineNo">1103</span>                        _executor = requireNonNull(executor);<a name="line.1103"></a>
-<span class="sourceLineNo">1104</span>                        return this;<a name="line.1104"></a>
-<span class="sourceLineNo">1105</span>                }<a name="line.1105"></a>
-<span class="sourceLineNo">1106</span><a name="line.1106"></a>
-<span class="sourceLineNo">1107</span>                /**<a name="line.1107"></a>
-<span class="sourceLineNo">1108</span>                 * The clock used for calculating the execution durations.<a name="line.1108"></a>
-<span class="sourceLineNo">1109</span>                 *<a name="line.1109"></a>
-<span class="sourceLineNo">1110</span>                 * @param clock the clock used for calculating the execution durations<a name="line.1110"></a>
-<span class="sourceLineNo">1111</span>                 * @return {@code this} builder, for command chaining<a name="line.1111"></a>
-<span class="sourceLineNo">1112</span>                 */<a name="line.1112"></a>
-<span class="sourceLineNo">1113</span>                public Builder&lt;G, C&gt; clock(final Clock clock) {<a name="line.1113"></a>
-<span class="sourceLineNo">1114</span>                        _clock = requireNonNull(clock);<a name="line.1114"></a>
-<span class="sourceLineNo">1115</span>                        return this;<a name="line.1115"></a>
-<span class="sourceLineNo">1116</span>                }<a name="line.1116"></a>
-<span class="sourceLineNo">1117</span><a name="line.1117"></a>
-<span class="sourceLineNo">1118</span>                /**<a name="line.1118"></a>
-<span class="sourceLineNo">1119</span>                 * The maximal number of attempt before the {@code Engine} gives up<a name="line.1119"></a>
-<span class="sourceLineNo">1120</span>                 * creating a valid individual ({@code Phenotype}). &lt;i&gt;Default values is<a name="line.1120"></a>
-<span class="sourceLineNo">1121</span>                 * set to {@code 10}.&lt;/i&gt;<a name="line.1121"></a>
-<span class="sourceLineNo">1122</span>                 *<a name="line.1122"></a>
-<span class="sourceLineNo">1123</span>                 * @since 3.1<a name="line.1123"></a>
-<span class="sourceLineNo">1124</span>                 *<a name="line.1124"></a>
-<span class="sourceLineNo">1125</span>                 * @param retries the maximal retry count<a name="line.1125"></a>
-<span class="sourceLineNo">1126</span>                 * @throws IllegalArgumentException if the given retry {@code count} is<a name="line.1126"></a>
-<span class="sourceLineNo">1127</span>                 *         smaller than zero.<a name="line.1127"></a>
-<span class="sourceLineNo">1128</span>                 * @return {@code this} builder, for command chaining<a name="line.1128"></a>
-<span class="sourceLineNo">1129</span>                 */<a name="line.1129"></a>
-<span class="sourceLineNo">1130</span>                public Builder&lt;G, C&gt; individualCreationRetries(final int retries) {<a name="line.1130"></a>
-<span class="sourceLineNo">1131</span>                        if (retries &lt; 0) {<a name="line.1131"></a>
-<span class="sourceLineNo">1132</span>                                throw new IllegalArgumentException(format(<a name="line.1132"></a>
-<span class="sourceLineNo">1133</span>                                        "Retry count must not be negative: %d",<a name="line.1133"></a>
-<span class="sourceLineNo">1134</span>                                        retries<a name="line.1134"></a>
-<span class="sourceLineNo">1135</span>                                ));<a name="line.1135"></a>
-<span class="sourceLineNo">1136</span>                        }<a name="line.1136"></a>
-<span class="sourceLineNo">1137</span>                        _individualCreationRetries = retries;<a name="line.1137"></a>
-<span class="sourceLineNo">1138</span>                        return this;<a name="line.1138"></a>
-<span class="sourceLineNo">1139</span>                }<a name="line.1139"></a>
-<span class="sourceLineNo">1140</span><a name="line.1140"></a>
-<span class="sourceLineNo">1141</span>                /**<a name="line.1141"></a>
-<span class="sourceLineNo">1142</span>                 * Builds an new {@code Engine} instance from the set properties.<a name="line.1142"></a>
-<span class="sourceLineNo">1143</span>                 *<a name="line.1143"></a>
-<span class="sourceLineNo">1144</span>                 * @return an new {@code Engine} instance from the set properties<a name="line.1144"></a>
-<span class="sourceLineNo">1145</span>                 */<a name="line.1145"></a>
-<span class="sourceLineNo">1146</span>                public Engine&lt;G, C&gt; build() {<a name="line.1146"></a>
-<span class="sourceLineNo">1147</span>                        return new Engine&lt;&gt;(<a name="line.1147"></a>
-<span class="sourceLineNo">1148</span>                                _fitnessFunction,<a name="line.1148"></a>
-<span class="sourceLineNo">1149</span>                                _fitnessScaler,<a name="line.1149"></a>
-<span class="sourceLineNo">1150</span>                                _genotypeFactory,<a name="line.1150"></a>
-<span class="sourceLineNo">1151</span>                                _survivorsSelector,<a name="line.1151"></a>
-<span class="sourceLineNo">1152</span>                                _offspringSelector,<a name="line.1152"></a>
-<span class="sourceLineNo">1153</span>                                _alterer,<a name="line.1153"></a>
-<span class="sourceLineNo">1154</span>                                _validator,<a name="line.1154"></a>
-<span class="sourceLineNo">1155</span>                                _optimize,<a name="line.1155"></a>
-<span class="sourceLineNo">1156</span>                                getOffspringCount(),<a name="line.1156"></a>
-<span class="sourceLineNo">1157</span>                                getSurvivorsCount(),<a name="line.1157"></a>
-<span class="sourceLineNo">1158</span>                                _maximalPhenotypeAge,<a name="line.1158"></a>
-<span class="sourceLineNo">1159</span>                                _executor,<a name="line.1159"></a>
-<span class="sourceLineNo">1160</span>                                _clock,<a name="line.1160"></a>
-<span class="sourceLineNo">1161</span>                                _individualCreationRetries<a name="line.1161"></a>
-<span class="sourceLineNo">1162</span>                        );<a name="line.1162"></a>
-<span class="sourceLineNo">1163</span>                }<a name="line.1163"></a>
-<span class="sourceLineNo">1164</span><a name="line.1164"></a>
-<span class="sourceLineNo">1165</span>                private int getSurvivorsCount() {<a name="line.1165"></a>
-<span class="sourceLineNo">1166</span>                        return _populationSize - getOffspringCount();<a name="line.1166"></a>
-<span class="sourceLineNo">1167</span>                }<a name="line.1167"></a>
-<span class="sourceLineNo">1168</span><a name="line.1168"></a>
-<span class="sourceLineNo">1169</span>                private int getOffspringCount() {<a name="line.1169"></a>
-<span class="sourceLineNo">1170</span>                        return (int)round(_offspringFraction*_populationSize);<a name="line.1170"></a>
-<span class="sourceLineNo">1171</span>                }<a name="line.1171"></a>
-<span class="sourceLineNo">1172</span><a name="line.1172"></a>
-<span class="sourceLineNo">1173</span>                /**<a name="line.1173"></a>
-<span class="sourceLineNo">1174</span>                 * Return the used {@link Alterer} of the GA.<a name="line.1174"></a>
-<span class="sourceLineNo">1175</span>                 *<a name="line.1175"></a>
-<span class="sourceLineNo">1176</span>                 * @return the used {@link Alterer} of the GA.<a name="line.1176"></a>
-<span class="sourceLineNo">1177</span>                 */<a name="line.1177"></a>
-<span class="sourceLineNo">1178</span>                public Alterer&lt;G, C&gt; getAlterers() {<a name="line.1178"></a>
-<span class="sourceLineNo">1179</span>                        return _alterer;<a name="line.1179"></a>
-<span class="sourceLineNo">1180</span>                }<a name="line.1180"></a>
-<span class="sourceLineNo">1181</span><a name="line.1181"></a>
-<span class="sourceLineNo">1182</span>                /**<a name="line.1182"></a>
-<span class="sourceLineNo">1183</span>                 * Return the {@link Clock} the engine is using for measuring the execution<a name="line.1183"></a>
-<span class="sourceLineNo">1184</span>                 * time.<a name="line.1184"></a>
-<span class="sourceLineNo">1185</span>                 *<a name="line.1185"></a>
-<span class="sourceLineNo">1186</span>                 * @since 3.1<a name="line.1186"></a>
-<span class="sourceLineNo">1187</span>                 *<a name="line.1187"></a>
-<span class="sourceLineNo">1188</span>                 * @return the clock used for measuring the execution time<a name="line.1188"></a>
-<span class="sourceLineNo">1189</span>                 */<a name="line.1189"></a>
-<span class="sourceLineNo">1190</span>                public Clock getClock() {<a name="line.1190"></a>
-<span class="sourceLineNo">1191</span>                        return _clock;<a name="line.1191"></a>
-<span class="sourceLineNo">1192</span>                }<a name="line.1192"></a>
-<span class="sourceLineNo">1193</span><a name="line.1193"></a>
-<span class="sourceLineNo">1194</span>                /**<a name="line.1194"></a>
-<span class="sourceLineNo">1195</span>                 * Return the {@link Executor} the engine is using for executing the<a name="line.1195"></a>
-<span class="sourceLineNo">1196</span>                 * evolution steps.<a name="line.1196"></a>
-<span class="sourceLineNo">1197</span>                 *<a name="line.1197"></a>
-<span class="sourceLineNo">1198</span>                 * @since 3.1<a name="line.1198"></a>
-<span class="sourceLineNo">1199</span>                 *<a name="line.1199"></a>
-<span class="sourceLineNo">1200</span>                 * @return the executor used for performing the evolution steps<a name="line.1200"></a>
-<span class="sourceLineNo">1201</span>                 */<a name="line.1201"></a>
-<span class="sourceLineNo">1202</span>                public Executor getExecutor() {<a name="line.1202"></a>
-<span class="sourceLineNo">1203</span>                        return _executor;<a name="line.1203"></a>
-<span class="sourceLineNo">1204</span>                }<a name="line.1204"></a>
-<span class="sourceLineNo">1205</span><a name="line.1205"></a>
-<span class="sourceLineNo">1206</span>                /**<a name="line.1206"></a>
-<span class="sourceLineNo">1207</span>                 * Return the fitness function of the GA engine.<a name="line.1207"></a>
-<span class="sourceLineNo">1208</span>                 *<a name="line.1208"></a>
-<span class="sourceLineNo">1209</span>                 * @since 3.1<a name="line.1209"></a>
-<span class="sourceLineNo">1210</span>                 *<a name="line.1210"></a>
-<span class="sourceLineNo">1211</span>                 * @return the fitness function<a name="line.1211"></a>
-<span class="sourceLineNo">1212</span>                 */<a name="line.1212"></a>
-<span class="sourceLineNo">1213</span>                public Function&lt;? super Genotype&lt;G&gt;, ? extends C&gt; getFitnessFunction() {<a name="line.1213"></a>
-<span class="sourceLineNo">1214</span>                        return _fitnessFunction;<a name="line.1214"></a>
-<span class="sourceLineNo">1215</span>                }<a name="line.1215"></a>
-<span class="sourceLineNo">1216</span><a name="line.1216"></a>
-<span class="sourceLineNo">1217</span>                /**<a name="line.1217"></a>
-<span class="sourceLineNo">1218</span>                 * Return the fitness scaler of the GA engine.<a name="line.1218"></a>
-<span class="sourceLineNo">1219</span>                 *<a name="line.1219"></a>
-<span class="sourceLineNo">1220</span>                 * @since 3.1<a name="line.1220"></a>
-<span class="sourceLineNo">1221</span>                 *<a name="line.1221"></a>
-<span class="sourceLineNo">1222</span>                 * @return the fitness scaler<a name="line.1222"></a>
-<span class="sourceLineNo">1223</span>                 */<a name="line.1223"></a>
-<span class="sourceLineNo">1224</span>                public Function&lt;? super C, ? extends C&gt; getFitnessScaler() {<a name="line.1224"></a>
-<span class="sourceLineNo">1225</span>                        return _fitnessScaler;<a name="line.1225"></a>
-<span class="sourceLineNo">1226</span>                }<a name="line.1226"></a>
-<span class="sourceLineNo">1227</span><a name="line.1227"></a>
-<span class="sourceLineNo">1228</span>                /**<a name="line.1228"></a>
-<span class="sourceLineNo">1229</span>                 * Return the used genotype {@link Factory} of the GA. The genotype factory<a name="line.1229"></a>
-<span class="sourceLineNo">1230</span>                 * is used for creating the initial population and new, random individuals<a name="line.1230"></a>
-<span class="sourceLineNo">1231</span>                 * when needed (as replacement for invalid and/or died genotypes).<a name="line.1231"></a>
-<span class="sourceLineNo">1232</span>                 *<a name="line.1232"></a>
-<span class="sourceLineNo">1233</span>                 * @since 3.1<a name="line.1233"></a>
-<span class="sourceLineNo">1234</span>                 *<a name="line.1234"></a>
-<span class="sourceLineNo">1235</span>                 * @return the used genotype {@link Factory} of the GA.<a name="line.1235"></a>
-<span class="sourceLineNo">1236</span>                 */<a name="line.1236"></a>
-<span class="sourceLineNo">1237</span>                public Factory&lt;Genotype&lt;G&gt;&gt; getGenotypeFactory() {<a name="line.1237"></a>
-<span class="sourceLineNo">1238</span>                        return _genotypeFactory;<a name="line.1238"></a>
-<span class="sourceLineNo">1239</span>                }<a name="line.1239"></a>
-<span class="sourceLineNo">1240</span><a name="line.1240"></a>
-<span class="sourceLineNo">1241</span>                /**<a name="line.1241"></a>
-<span class="sourceLineNo">1242</span>                 * Return the maximal allowed phenotype age.<a name="line.1242"></a>
-<span class="sourceLineNo">1243</span>                 *<a name="line.1243"></a>
-<span class="sourceLineNo">1244</span>                 * @since 3.1<a name="line.1244"></a>
-<span class="sourceLineNo">1245</span>                 *<a name="line.1245"></a>
-<span class="sourceLineNo">1246</span>                 * @return the maximal allowed phenotype age<a name="line.1246"></a>
-<span class="sourceLineNo">1247</span>                 */<a name="line.1247"></a>
-<span class="sourceLineNo">1248</span>                public long getMaximalPhenotypeAge() {<a name="line.1248"></a>
-<span class="sourceLineNo">1249</span>                        return _maximalPhenotypeAge;<a name="line.1249"></a>
-<span class="sourceLineNo">1250</span>                }<a name="line.1250"></a>
-<span class="sourceLineNo">1251</span><a name="line.1251"></a>
-<span class="sourceLineNo">1252</span>                /**<a name="line.1252"></a>
-<span class="sourceLineNo">1253</span>                 * Return the offspring fraction.<a name="line.1253"></a>
-<span class="sourceLineNo">1254</span>                 *<a name="line.1254"></a>
-<span class="sourceLineNo">1255</span>                 * @return the offspring fraction.<a name="line.1255"></a>
-<span class="sourceLineNo">1256</span>                 */<a name="line.1256"></a>
-<span class="sourceLineNo">1257</span>                public double getOffspringFraction() {<a name="line.1257"></a>
-<span class="sourceLineNo">1258</span>                        return _offspringFraction;<a name="line.1258"></a>
-<span class="sourceLineNo">1259</span>                }<a name="line.1259"></a>
-<span class="sourceLineNo">1260</span><a name="line.1260"></a>
-<span class="sourceLineNo">1261</span>                /**<a name="line.1261"></a>
-<span class="sourceLineNo">1262</span>                 * Return the used offspring {@link Selector} of the GA.<a name="line.1262"></a>
-<span class="sourceLineNo">1263</span>                 *<a name="line.1263"></a>
-<span class="sourceLineNo">1264</span>                 * @since 3.1<a name="line.1264"></a>
-<span class="sourceLineNo">1265</span>                 *<a name="line.1265"></a>
-<span class="sourceLineNo">1266</span>                 * @return the used offspring {@link Selector} of the GA.<a name="line.1266"></a>
-<span class="sourceLineNo">1267</span>                 */<a name="line.1267"></a>
-<span class="sourceLineNo">1268</span>                public Selector&lt;G, C&gt; getOffspringSelector() {<a name="line.1268"></a>
-<span class="sourceLineNo">1269</span>                        return _offspringSelector;<a name="line.1269"></a>
-<span class="sourceLineNo">1270</span>                }<a name="line.1270"></a>
-<span class="sourceLineNo">1271</span><a name="line.1271"></a>
-<span class="sourceLineNo">1272</span>                /**<a name="line.1272"></a>
-<span class="sourceLineNo">1273</span>                 * Return the used survivor {@link Selector} of the GA.<a name="line.1273"></a>
-<span class="sourceLineNo">1274</span>                 *<a name="line.1274"></a>
-<span class="sourceLineNo">1275</span>                 * @since 3.1<a name="line.1275"></a>
-<span class="sourceLineNo">1276</span>                 *<a name="line.1276"></a>
-<span class="sourceLineNo">1277</span>                 * @return the used survivor {@link Selector} of the GA.<a name="line.1277"></a>
-<span class="sourceLineNo">1278</span>                 */<a name="line.1278"></a>
-<span class="sourceLineNo">1279</span>                public Selector&lt;G, C&gt; getSurvivorsSelector() {<a name="line.1279"></a>
-<span class="sourceLineNo">1280</span>                        return _survivorsSelector;<a name="line.1280"></a>
-<span class="sourceLineNo">1281</span>                }<a name="line.1281"></a>
-<span class="sourceLineNo">1282</span><a name="line.1282"></a>
-<span class="sourceLineNo">1283</span>                /**<a name="line.1283"></a>
-<span class="sourceLineNo">1284</span>                 * Return the optimization strategy.<a name="line.1284"></a>
-<span class="sourceLineNo">1285</span>                 *<a name="line.1285"></a>
-<span class="sourceLineNo">1286</span>                 * @since 3.1<a name="line.1286"></a>
-<span class="sourceLineNo">1287</span>                 *<a name="line.1287"></a>
-<span class="sourceLineNo">1288</span>                 * @return the optimization strategy<a name="line.1288"></a>
-<span class="sourceLineNo">1289</span>                 */<a name="line.1289"></a>
-<span class="sourceLineNo">1290</span>                public Optimize getOptimize() {<a name="line.1290"></a>
-<span class="sourceLineNo">1291</span>                        return _optimize;<a name="line.1291"></a>
-<span class="sourceLineNo">1292</span>                }<a name="line.1292"></a>
-<span class="sourceLineNo">1293</span><a name="line.1293"></a>
-<span class="sourceLineNo">1294</span>                /**<a name="line.1294"></a>
-<span class="sourceLineNo">1295</span>                 * Return the number of individuals of a population.<a name="line.1295"></a>
-<span class="sourceLineNo">1296</span>                 *<a name="line.1296"></a>
-<span class="sourceLineNo">1297</span>                 * @since 3.1<a name="line.1297"></a>
-<span class="sourceLineNo">1298</span>                 *<a name="line.1298"></a>
-<span class="sourceLineNo">1299</span>                 * @return the number of individuals of a population<a name="line.1299"></a>
-<span class="sourceLineNo">1300</span>                 */<a name="line.1300"></a>
-<span class="sourceLineNo">1301</span>                public int getPopulationSize() {<a name="line.1301"></a>
-<span class="sourceLineNo">1302</span>                        return _populationSize;<a name="line.1302"></a>
-<span class="sourceLineNo">1303</span>                }<a name="line.1303"></a>
-<span class="sourceLineNo">1304</span><a name="line.1304"></a>
-<span class="sourceLineNo">1305</span>                /**<a name="line.1305"></a>
-<span class="sourceLineNo">1306</span>                 * Return the maximal number of attempt before the {@code Engine} gives<a name="line.1306"></a>
-<span class="sourceLineNo">1307</span>                 * up creating a valid individual ({@code Phenotype}).<a name="line.1307"></a>
-<span class="sourceLineNo">1308</span>                 *<a name="line.1308"></a>
-<span class="sourceLineNo">1309</span>                 * @since 3.1<a name="line.1309"></a>
-<span class="sourceLineNo">1310</span>                 *<a name="line.1310"></a>
-<span class="sourceLineNo">1311</span>                 * @return the maximal number of {@code Phenotype} creation attempts<a name="line.1311"></a>
-<span class="sourceLineNo">1312</span>                 */<a name="line.1312"></a>
-<span class="sourceLineNo">1313</span>                public int getIndividualCreationRetries() {<a name="line.1313"></a>
-<span class="sourceLineNo">1314</span>                        return _individualCreationRetries;<a name="line.1314"></a>
-<span class="sourceLineNo">1315</span>                }<a name="line.1315"></a>
-<span class="sourceLineNo">1316</span><a name="line.1316"></a>
-<span class="sourceLineNo">1317</span>                /**<a name="line.1317"></a>
-<span class="sourceLineNo">1318</span>                 * Create a new builder, with the current configuration.<a name="line.1318"></a>
-<span class="sourceLineNo">1319</span>                 *<a name="line.1319"></a>
-<span class="sourceLineNo">1320</span>                 * @since 3.1<a name="line.1320"></a>
-<span class="sourceLineNo">1321</span>                 *<a name="line.1321"></a>
-<span class="sourceLineNo">1322</span>                 * @return a new builder, with the current configuration<a name="line.1322"></a>
-<span class="sourceLineNo">1323</span>                 */<a name="line.1323"></a>
-<span class="sourceLineNo">1324</span>                @Override<a name="line.1324"></a>
-<span class="sourceLineNo">1325</span>                public Builder&lt;G, C&gt; copy() {<a name="line.1325"></a>
-<span class="sourceLineNo">1326</span>                        return new Builder&lt;&gt;(_genotypeFactory, _fitnessFunction)<a name="line.1326"></a>
-<span class="sourceLineNo">1327</span>                                .alterers(_alterer)<a name="line.1327"></a>
-<span class="sourceLineNo">1328</span>                                .clock(_clock)<a name="line.1328"></a>
-<span class="sourceLineNo">1329</span>                                .executor(_executor)<a name="line.1329"></a>
-<span class="sourceLineNo">1330</span>                                .fitnessScaler(_fitnessScaler)<a name="line.1330"></a>
-<span class="sourceLineNo">1331</span>                                .maximalPhenotypeAge(_maximalPhenotypeAge)<a name="line.1331"></a>
-<span class="sourceLineNo">1332</span>                                .offspringFraction(_offspringFraction)<a name="line.1332"></a>
-<span class="sourceLineNo">1333</span>                                .offspringSelector(_offspringSelector)<a name="line.1333"></a>
-<span class="sourceLineNo">1334</span>                                .phenotypeValidator(_validator)<a name="line.1334"></a>
-<span class="sourceLineNo">1335</span>                                .optimize(_optimize)<a name="line.1335"></a>
-<span class="sourceLineNo">1336</span>                                .populationSize(_populationSize)<a name="line.1336"></a>
-<span class="sourceLineNo">1337</span>                                .survivorsSelector(_survivorsSelector)<a name="line.1337"></a>
-<span class="sourceLineNo">1338</span>                                .individualCreationRetries(_individualCreationRetries);<a name="line.1338"></a>
-<span class="sourceLineNo">1339</span>                }<a name="line.1339"></a>
-<span class="sourceLineNo">1340</span><a name="line.1340"></a>
-<span class="sourceLineNo">1341</span>        }<a name="line.1341"></a>
-<span class="sourceLineNo">1342</span>}<a name="line.1342"></a>
+<span class="sourceLineNo">965</span>                 */<a name="line.965"></a>
+<span class="sourceLineNo">966</span>                public Builder&lt;G, C&gt; selector(final Selector&lt;G, C&gt; selector) {<a name="line.966"></a>
+<span class="sourceLineNo">967</span>                        _offspringSelector = requireNonNull(selector);<a name="line.967"></a>
+<span class="sourceLineNo">968</span>                        _survivorsSelector = requireNonNull(selector);<a name="line.968"></a>
+<span class="sourceLineNo">969</span>                        return this;<a name="line.969"></a>
+<span class="sourceLineNo">970</span>                }<a name="line.970"></a>
+<span class="sourceLineNo">971</span><a name="line.971"></a>
+<span class="sourceLineNo">972</span>                /**<a name="line.972"></a>
+<span class="sourceLineNo">973</span>                 * The alterers used for alter the offspring population. &lt;i&gt;Default<a name="line.973"></a>
+<span class="sourceLineNo">974</span>                 * values is set to {@code new SinglePointCrossover&lt;&gt;(0.2)} followed by<a name="line.974"></a>
+<span class="sourceLineNo">975</span>                 * {@code new Mutator&lt;&gt;(0.15)}.&lt;/i&gt;<a name="line.975"></a>
+<span class="sourceLineNo">976</span>                 *<a name="line.976"></a>
+<span class="sourceLineNo">977</span>                 * @param first the first alterer used for alter the offspring<a name="line.977"></a>
+<span class="sourceLineNo">978</span>                 *        population<a name="line.978"></a>
+<span class="sourceLineNo">979</span>                 * @param rest the rest of the alterers used for alter the offspring<a name="line.979"></a>
+<span class="sourceLineNo">980</span>                 *        population<a name="line.980"></a>
+<span class="sourceLineNo">981</span>                 * @return {@code this} builder, for command chaining<a name="line.981"></a>
+<span class="sourceLineNo">982</span>                 * @throws java.lang.NullPointerException if one of the alterers is<a name="line.982"></a>
+<span class="sourceLineNo">983</span>                 *         {@code null}.<a name="line.983"></a>
+<span class="sourceLineNo">984</span>                 */<a name="line.984"></a>
+<span class="sourceLineNo">985</span>                @SafeVarargs<a name="line.985"></a>
+<span class="sourceLineNo">986</span>                public final Builder&lt;G, C&gt; alterers(<a name="line.986"></a>
+<span class="sourceLineNo">987</span>                        final Alterer&lt;G, C&gt; first,<a name="line.987"></a>
+<span class="sourceLineNo">988</span>                        final Alterer&lt;G, C&gt;... rest<a name="line.988"></a>
+<span class="sourceLineNo">989</span>                ) {<a name="line.989"></a>
+<span class="sourceLineNo">990</span>                        requireNonNull(first);<a name="line.990"></a>
+<span class="sourceLineNo">991</span>                        Stream.of(rest).forEach(Objects::requireNonNull);<a name="line.991"></a>
+<span class="sourceLineNo">992</span><a name="line.992"></a>
+<span class="sourceLineNo">993</span>                        _alterer = rest.length == 0 ?<a name="line.993"></a>
+<span class="sourceLineNo">994</span>                                first :<a name="line.994"></a>
+<span class="sourceLineNo">995</span>                                Alterer.of(rest).compose(first);<a name="line.995"></a>
+<span class="sourceLineNo">996</span><a name="line.996"></a>
+<span class="sourceLineNo">997</span>                        return this;<a name="line.997"></a>
+<span class="sourceLineNo">998</span>                }<a name="line.998"></a>
+<span class="sourceLineNo">999</span><a name="line.999"></a>
+<span class="sourceLineNo">1000</span>                /**<a name="line.1000"></a>
+<span class="sourceLineNo">1001</span>                 * The phenotype validator used for detecting invalid individuals.<a name="line.1001"></a>
+<span class="sourceLineNo">1002</span>                 * Alternatively it is also possible to set the genotype validator with<a name="line.1002"></a>
+<span class="sourceLineNo">1003</span>                 * {@link #genotypeFactory(Factory)}, which will replace any<a name="line.1003"></a>
+<span class="sourceLineNo">1004</span>                 * previously set phenotype validators.<a name="line.1004"></a>
+<span class="sourceLineNo">1005</span>                 *<a name="line.1005"></a>
+<span class="sourceLineNo">1006</span>                 * &lt;p&gt;&lt;i&gt;Default value is set to {@code Phenotype::isValid}.&lt;/i&gt;&lt;/p&gt;<a name="line.1006"></a>
+<span class="sourceLineNo">1007</span>                 *<a name="line.1007"></a>
+<span class="sourceLineNo">1008</span>                 * @since 3.1<a name="line.1008"></a>
+<span class="sourceLineNo">1009</span>                 *<a name="line.1009"></a>
+<span class="sourceLineNo">1010</span>                 * @see #genotypeValidator(Predicate)<a name="line.1010"></a>
+<span class="sourceLineNo">1011</span>                 *<a name="line.1011"></a>
+<span class="sourceLineNo">1012</span>                 * @param validator the {@code validator} used for validating the<a name="line.1012"></a>
+<span class="sourceLineNo">1013</span>                 *        individuals (phenotypes).<a name="line.1013"></a>
+<span class="sourceLineNo">1014</span>                 * @return {@code this} builder, for command chaining<a name="line.1014"></a>
+<span class="sourceLineNo">1015</span>                 * @throws java.lang.NullPointerException if the {@code validator} is<a name="line.1015"></a>
+<span class="sourceLineNo">1016</span>                 *         {@code null}.<a name="line.1016"></a>
+<span class="sourceLineNo">1017</span>                 */<a name="line.1017"></a>
+<span class="sourceLineNo">1018</span>                public Builder&lt;G, C&gt; phenotypeValidator(<a name="line.1018"></a>
+<span class="sourceLineNo">1019</span>                        final Predicate&lt;? super Phenotype&lt;G, C&gt;&gt; validator<a name="line.1019"></a>
+<span class="sourceLineNo">1020</span>                ) {<a name="line.1020"></a>
+<span class="sourceLineNo">1021</span>                        _validator = requireNonNull(validator);<a name="line.1021"></a>
+<span class="sourceLineNo">1022</span>                        return this;<a name="line.1022"></a>
+<span class="sourceLineNo">1023</span>                }<a name="line.1023"></a>
+<span class="sourceLineNo">1024</span><a name="line.1024"></a>
+<span class="sourceLineNo">1025</span>                /**<a name="line.1025"></a>
+<span class="sourceLineNo">1026</span>                 * The genotype validator used for detecting invalid individuals.<a name="line.1026"></a>
+<span class="sourceLineNo">1027</span>                 * Alternatively it is also possible to set the phenotype validator with<a name="line.1027"></a>
+<span class="sourceLineNo">1028</span>                 * {@link #phenotypeValidator(Predicate)}, which will replace any<a name="line.1028"></a>
+<span class="sourceLineNo">1029</span>                 * previously set genotype validators.<a name="line.1029"></a>
+<span class="sourceLineNo">1030</span>                 *<a name="line.1030"></a>
+<span class="sourceLineNo">1031</span>                 * &lt;p&gt;&lt;i&gt;Default value is set to {@code Genotype::isValid}.&lt;/i&gt;&lt;/p&gt;<a name="line.1031"></a>
+<span class="sourceLineNo">1032</span>                 *<a name="line.1032"></a>
+<span class="sourceLineNo">1033</span>                 * @since 3.1<a name="line.1033"></a>
+<span class="sourceLineNo">1034</span>                 *<a name="line.1034"></a>
+<span class="sourceLineNo">1035</span>                 * @see #phenotypeValidator(Predicate)<a name="line.1035"></a>
+<span class="sourceLineNo">1036</span>                 *<a name="line.1036"></a>
+<span class="sourceLineNo">1037</span>                 * @param validator the {@code validator} used for validating the<a name="line.1037"></a>
+<span class="sourceLineNo">1038</span>                 *        individuals (genotypes).<a name="line.1038"></a>
+<span class="sourceLineNo">1039</span>                 * @return {@code this} builder, for command chaining<a name="line.1039"></a>
+<span class="sourceLineNo">1040</span>                 * @throws java.lang.NullPointerException if the {@code validator} is<a name="line.1040"></a>
+<span class="sourceLineNo">1041</span>                 *         {@code null}.<a name="line.1041"></a>
+<span class="sourceLineNo">1042</span>                 */<a name="line.1042"></a>
+<span class="sourceLineNo">1043</span>                public Builder&lt;G, C&gt; genotypeValidator(<a name="line.1043"></a>
+<span class="sourceLineNo">1044</span>                        final Predicate&lt;? super Genotype&lt;G&gt;&gt; validator<a name="line.1044"></a>
+<span class="sourceLineNo">1045</span>                ) {<a name="line.1045"></a>
+<span class="sourceLineNo">1046</span>                        requireNonNull(validator);<a name="line.1046"></a>
+<span class="sourceLineNo">1047</span><a name="line.1047"></a>
+<span class="sourceLineNo">1048</span>                        _validator = pt -&gt; validator.test(pt.getGenotype());<a name="line.1048"></a>
+<span class="sourceLineNo">1049</span>                        return this;<a name="line.1049"></a>
+<span class="sourceLineNo">1050</span>                }<a name="line.1050"></a>
+<span class="sourceLineNo">1051</span><a name="line.1051"></a>
+<span class="sourceLineNo">1052</span>                /**<a name="line.1052"></a>
+<span class="sourceLineNo">1053</span>                 * The optimization strategy used by the engine. &lt;i&gt;Default values is<a name="line.1053"></a>
+<span class="sourceLineNo">1054</span>                 * set to {@code Optimize.MAXIMUM}.&lt;/i&gt;<a name="line.1054"></a>
+<span class="sourceLineNo">1055</span>                 *<a name="line.1055"></a>
+<span class="sourceLineNo">1056</span>                 * @param optimize the optimization strategy used by the engine<a name="line.1056"></a>
+<span class="sourceLineNo">1057</span>                 * @return {@code this} builder, for command chaining<a name="line.1057"></a>
+<span class="sourceLineNo">1058</span>                 */<a name="line.1058"></a>
+<span class="sourceLineNo">1059</span>                public Builder&lt;G, C&gt; optimize(final Optimize optimize) {<a name="line.1059"></a>
+<span class="sourceLineNo">1060</span>                        _optimize = requireNonNull(optimize);<a name="line.1060"></a>
+<span class="sourceLineNo">1061</span>                        return this;<a name="line.1061"></a>
+<span class="sourceLineNo">1062</span>                }<a name="line.1062"></a>
+<span class="sourceLineNo">1063</span><a name="line.1063"></a>
+<span class="sourceLineNo">1064</span>                /**<a name="line.1064"></a>
+<span class="sourceLineNo">1065</span>                 * Set to a fitness maximizing strategy.<a name="line.1065"></a>
+<span class="sourceLineNo">1066</span>                 *<a name="line.1066"></a>
+<span class="sourceLineNo">1067</span>                 * @since 3.4<a name="line.1067"></a>
+<span class="sourceLineNo">1068</span>                 *<a name="line.1068"></a>
+<span class="sourceLineNo">1069</span>                 * @return {@code this} builder, for command chaining<a name="line.1069"></a>
+<span class="sourceLineNo">1070</span>                 */<a name="line.1070"></a>
+<span class="sourceLineNo">1071</span>                public Builder&lt;G, C&gt; maximizing() {<a name="line.1071"></a>
+<span class="sourceLineNo">1072</span>                        return optimize(Optimize.MAXIMUM);<a name="line.1072"></a>
+<span class="sourceLineNo">1073</span>                }<a name="line.1073"></a>
+<span class="sourceLineNo">1074</span><a name="line.1074"></a>
+<span class="sourceLineNo">1075</span>                /**<a name="line.1075"></a>
+<span class="sourceLineNo">1076</span>                 * Set to a fitness minimizing strategy.<a name="line.1076"></a>
+<span class="sourceLineNo">1077</span>                 *<a name="line.1077"></a>
+<span class="sourceLineNo">1078</span>                 * @since 3.4<a name="line.1078"></a>
+<span class="sourceLineNo">1079</span>                 *<a name="line.1079"></a>
+<span class="sourceLineNo">1080</span>                 * @return {@code this} builder, for command chaining<a name="line.1080"></a>
+<span class="sourceLineNo">1081</span>                 */<a name="line.1081"></a>
+<span class="sourceLineNo">1082</span>                public Builder&lt;G, C&gt; minimizing() {<a name="line.1082"></a>
+<span class="sourceLineNo">1083</span>                        return optimize(Optimize.MINIMUM);<a name="line.1083"></a>
+<span class="sourceLineNo">1084</span>                }<a name="line.1084"></a>
+<span class="sourceLineNo">1085</span><a name="line.1085"></a>
+<span class="sourceLineNo">1086</span>                /**<a name="line.1086"></a>
+<span class="sourceLineNo">1087</span>                 * The offspring fraction. &lt;i&gt;Default values is set to {@code 0.6}.&lt;/i&gt;<a name="line.1087"></a>
+<span class="sourceLineNo">1088</span>                 *<a name="line.1088"></a>
+<span class="sourceLineNo">1089</span>                 * @param fraction the offspring fraction<a name="line.1089"></a>
+<span class="sourceLineNo">1090</span>                 * @return {@code this} builder, for command chaining<a name="line.1090"></a>
+<span class="sourceLineNo">1091</span>                 * @throws java.lang.IllegalArgumentException if the fraction is not<a name="line.1091"></a>
+<span class="sourceLineNo">1092</span>                 *         within the range [0, 1].<a name="line.1092"></a>
+<span class="sourceLineNo">1093</span>                 */<a name="line.1093"></a>
+<span class="sourceLineNo">1094</span>                public Builder&lt;G, C&gt; offspringFraction(final double fraction) {<a name="line.1094"></a>
+<span class="sourceLineNo">1095</span>                        _offspringFraction = probability(fraction);<a name="line.1095"></a>
+<span class="sourceLineNo">1096</span>                        return this;<a name="line.1096"></a>
+<span class="sourceLineNo">1097</span>                }<a name="line.1097"></a>
+<span class="sourceLineNo">1098</span><a name="line.1098"></a>
+<span class="sourceLineNo">1099</span>                /**<a name="line.1099"></a>
+<span class="sourceLineNo">1100</span>                 * The number of individuals which form the population. &lt;i&gt;Default<a name="line.1100"></a>
+<span class="sourceLineNo">1101</span>                 * values is set to {@code 50}.&lt;/i&gt;<a name="line.1101"></a>
+<span class="sourceLineNo">1102</span>                 *<a name="line.1102"></a>
+<span class="sourceLineNo">1103</span>                 * @param size the number of individuals of a population<a name="line.1103"></a>
+<span class="sourceLineNo">1104</span>                 * @return {@code this} builder, for command chaining<a name="line.1104"></a>
+<span class="sourceLineNo">1105</span>                 * @throws java.lang.IllegalArgumentException if {@code size &lt; 1}<a name="line.1105"></a>
+<span class="sourceLineNo">1106</span>                 */<a name="line.1106"></a>
+<span class="sourceLineNo">1107</span>                public Builder&lt;G, C&gt; populationSize(final int size) {<a name="line.1107"></a>
+<span class="sourceLineNo">1108</span>                        if (size &lt; 1) {<a name="line.1108"></a>
+<span class="sourceLineNo">1109</span>                                throw new IllegalArgumentException(format(<a name="line.1109"></a>
+<span class="sourceLineNo">1110</span>                                        "Population size must be greater than zero, but was %s.", size<a name="line.1110"></a>
+<span class="sourceLineNo">1111</span>                                ));<a name="line.1111"></a>
+<span class="sourceLineNo">1112</span>                        }<a name="line.1112"></a>
+<span class="sourceLineNo">1113</span>                        _populationSize = size;<a name="line.1113"></a>
+<span class="sourceLineNo">1114</span>                        return this;<a name="line.1114"></a>
+<span class="sourceLineNo">1115</span>                }<a name="line.1115"></a>
+<span class="sourceLineNo">1116</span><a name="line.1116"></a>
+<span class="sourceLineNo">1117</span>                /**<a name="line.1117"></a>
+<span class="sourceLineNo">1118</span>                 * The maximal allowed age of a phenotype. &lt;i&gt;Default values is set to<a name="line.1118"></a>
+<span class="sourceLineNo">1119</span>                 * {@code 70}.&lt;/i&gt;<a name="line.1119"></a>
+<span class="sourceLineNo">1120</span>                 *<a name="line.1120"></a>
+<span class="sourceLineNo">1121</span>                 * @param age the maximal phenotype age<a name="line.1121"></a>
+<span class="sourceLineNo">1122</span>                 * @return {@code this} builder, for command chaining<a name="line.1122"></a>
+<span class="sourceLineNo">1123</span>                 * @throws java.lang.IllegalArgumentException if {@code age &lt; 1}<a name="line.1123"></a>
+<span class="sourceLineNo">1124</span>                 */<a name="line.1124"></a>
+<span class="sourceLineNo">1125</span>                public Builder&lt;G, C&gt; maximalPhenotypeAge(final long age) {<a name="line.1125"></a>
+<span class="sourceLineNo">1126</span>                        if (age &lt; 1) {<a name="line.1126"></a>
+<span class="sourceLineNo">1127</span>                                throw new IllegalArgumentException(format(<a name="line.1127"></a>
+<span class="sourceLineNo">1128</span>                                        "Phenotype age must be greater than one, but was %s.", age<a name="line.1128"></a>
+<span class="sourceLineNo">1129</span>                                ));<a name="line.1129"></a>
+<span class="sourceLineNo">1130</span>                        }<a name="line.1130"></a>
+<span class="sourceLineNo">1131</span>                        _maximalPhenotypeAge = age;<a name="line.1131"></a>
+<span class="sourceLineNo">1132</span>                        return this;<a name="line.1132"></a>
+<span class="sourceLineNo">1133</span>                }<a name="line.1133"></a>
+<span class="sourceLineNo">1134</span><a name="line.1134"></a>
+<span class="sourceLineNo">1135</span>                /**<a name="line.1135"></a>
+<span class="sourceLineNo">1136</span>                 * The executor used by the engine.<a name="line.1136"></a>
+<span class="sourceLineNo">1137</span>                 *<a name="line.1137"></a>
+<span class="sourceLineNo">1138</span>                 * @param executor the executor used by the engine<a name="line.1138"></a>
+<span class="sourceLineNo">1139</span>                 * @return {@code this} builder, for command chaining<a name="line.1139"></a>
+<span class="sourceLineNo">1140</span>                 */<a name="line.1140"></a>
+<span class="sourceLineNo">1141</span>                public Builder&lt;G, C&gt; executor(final Executor executor) {<a name="line.1141"></a>
+<span class="sourceLineNo">1142</span>                        _executor = requireNonNull(executor);<a name="line.1142"></a>
+<span class="sourceLineNo">1143</span>                        return this;<a name="line.1143"></a>
+<span class="sourceLineNo">1144</span>                }<a name="line.1144"></a>
+<span class="sourceLineNo">1145</span><a name="line.1145"></a>
+<span class="sourceLineNo">1146</span>                /**<a name="line.1146"></a>
+<span class="sourceLineNo">1147</span>                 * The clock used for calculating the execution durations.<a name="line.1147"></a>
+<span class="sourceLineNo">1148</span>                 *<a name="line.1148"></a>
+<span class="sourceLineNo">1149</span>                 * @param clock the clock used for calculating the execution durations<a name="line.1149"></a>
+<span class="sourceLineNo">1150</span>                 * @return {@code this} builder, for command chaining<a name="line.1150"></a>
+<span class="sourceLineNo">1151</span>                 */<a name="line.1151"></a>
+<span class="sourceLineNo">1152</span>                public Builder&lt;G, C&gt; clock(final Clock clock) {<a name="line.1152"></a>
+<span class="sourceLineNo">1153</span>                        _clock = requireNonNull(clock);<a name="line.1153"></a>
+<span class="sourceLineNo">1154</span>                        return this;<a name="line.1154"></a>
+<span class="sourceLineNo">1155</span>                }<a name="line.1155"></a>
+<span class="sourceLineNo">1156</span><a name="line.1156"></a>
+<span class="sourceLineNo">1157</span>                /**<a name="line.1157"></a>
+<span class="sourceLineNo">1158</span>                 * The maximal number of attempt before the {@code Engine} gives up<a name="line.1158"></a>
+<span class="sourceLineNo">1159</span>                 * creating a valid individual ({@code Phenotype}). &lt;i&gt;Default values is<a name="line.1159"></a>
+<span class="sourceLineNo">1160</span>                 * set to {@code 10}.&lt;/i&gt;<a name="line.1160"></a>
+<span class="sourceLineNo">1161</span>                 *<a name="line.1161"></a>
+<span class="sourceLineNo">1162</span>                 * @since 3.1<a name="line.1162"></a>
+<span class="sourceLineNo">1163</span>                 *<a name="line.1163"></a>
+<span class="sourceLineNo">1164</span>                 * @param retries the maximal retry count<a name="line.1164"></a>
+<span class="sourceLineNo">1165</span>                 * @throws IllegalArgumentException if the given retry {@code count} is<a name="line.1165"></a>
+<span class="sourceLineNo">1166</span>                 *         smaller than zero.<a name="line.1166"></a>
+<span class="sourceLineNo">1167</span>                 * @return {@code this} builder, for command chaining<a name="line.1167"></a>
+<span class="sourceLineNo">1168</span>                 */<a name="line.1168"></a>
+<span class="sourceLineNo">1169</span>                public Builder&lt;G, C&gt; individualCreationRetries(final int retries) {<a name="line.1169"></a>
+<span class="sourceLineNo">1170</span>                        if (retries &lt; 0) {<a name="line.1170"></a>
+<span class="sourceLineNo">1171</span>                                throw new IllegalArgumentException(format(<a name="line.1171"></a>
+<span class="sourceLineNo">1172</span>                                        "Retry count must not be negative: %d",<a name="line.1172"></a>
+<span class="sourceLineNo">1173</span>                                        retries<a name="line.1173"></a>
+<span class="sourceLineNo">1174</span>                                ));<a name="line.1174"></a>
+<span class="sourceLineNo">1175</span>                        }<a name="line.1175"></a>
+<span class="sourceLineNo">1176</span>                        _individualCreationRetries = retries;<a name="line.1176"></a>
+<span class="sourceLineNo">1177</span>                        return this;<a name="line.1177"></a>
+<span class="sourceLineNo">1178</span>                }<a name="line.1178"></a>
+<span class="sourceLineNo">1179</span><a name="line.1179"></a>
+<span class="sourceLineNo">1180</span>                /**<a name="line.1180"></a>
+<span class="sourceLineNo">1181</span>                 * Builds an new {@code Engine} instance from the set properties.<a name="line.1181"></a>
+<span class="sourceLineNo">1182</span>                 *<a name="line.1182"></a>
+<span class="sourceLineNo">1183</span>                 * @return an new {@code Engine} instance from the set properties<a name="line.1183"></a>
+<span class="sourceLineNo">1184</span>                 */<a name="line.1184"></a>
+<span class="sourceLineNo">1185</span>                public Engine&lt;G, C&gt; build() {<a name="line.1185"></a>
+<span class="sourceLineNo">1186</span>                        return new Engine&lt;&gt;(<a name="line.1186"></a>
+<span class="sourceLineNo">1187</span>                                _fitnessFunction,<a name="line.1187"></a>
+<span class="sourceLineNo">1188</span>                                _fitnessScaler,<a name="line.1188"></a>
+<span class="sourceLineNo">1189</span>                                _genotypeFactory,<a name="line.1189"></a>
+<span class="sourceLineNo">1190</span>                                _survivorsSelector,<a name="line.1190"></a>
+<span class="sourceLineNo">1191</span>                                _offspringSelector,<a name="line.1191"></a>
+<span class="sourceLineNo">1192</span>                                _alterer,<a name="line.1192"></a>
+<span class="sourceLineNo">1193</span>                                _validator,<a name="line.1193"></a>
+<span class="sourceLineNo">1194</span>                                _optimize,<a name="line.1194"></a>
+<span class="sourceLineNo">1195</span>                                getOffspringCount(),<a name="line.1195"></a>
+<span class="sourceLineNo">1196</span>                                getSurvivorsCount(),<a name="line.1196"></a>
+<span class="sourceLineNo">1197</span>                                _maximalPhenotypeAge,<a name="line.1197"></a>
+<span class="sourceLineNo">1198</span>                                _executor,<a name="line.1198"></a>
+<span class="sourceLineNo">1199</span>                                _clock,<a name="line.1199"></a>
+<span class="sourceLineNo">1200</span>                                _individualCreationRetries<a name="line.1200"></a>
+<span class="sourceLineNo">1201</span>                        );<a name="line.1201"></a>
+<span class="sourceLineNo">1202</span>                }<a name="line.1202"></a>
+<span class="sourceLineNo">1203</span><a name="line.1203"></a>
+<span class="sourceLineNo">1204</span>                private int getSurvivorsCount() {<a name="line.1204"></a>
+<span class="sourceLineNo">1205</span>                        return _populationSize - getOffspringCount();<a name="line.1205"></a>
+<span class="sourceLineNo">1206</span>                }<a name="line.1206"></a>
+<span class="sourceLineNo">1207</span><a name="line.1207"></a>
+<span class="sourceLineNo">1208</span>                private int getOffspringCount() {<a name="line.1208"></a>
+<span class="sourceLineNo">1209</span>                        return (int)round(_offspringFraction*_populationSize);<a name="line.1209"></a>
+<span class="sourceLineNo">1210</span>                }<a name="line.1210"></a>
+<span class="sourceLineNo">1211</span><a name="line.1211"></a>
+<span class="sourceLineNo">1212</span>                /**<a name="line.1212"></a>
+<span class="sourceLineNo">1213</span>                 * Return the used {@link Alterer} of the GA.<a name="line.1213"></a>
+<span class="sourceLineNo">1214</span>                 *<a name="line.1214"></a>
+<span class="sourceLineNo">1215</span>                 * @return the used {@link Alterer} of the GA.<a name="line.1215"></a>
+<span class="sourceLineNo">1216</span>                 */<a name="line.1216"></a>
+<span class="sourceLineNo">1217</span>                public Alterer&lt;G, C&gt; getAlterers() {<a name="line.1217"></a>
+<span class="sourceLineNo">1218</span>                        return _alterer;<a name="line.1218"></a>
+<span class="sourceLineNo">1219</span>                }<a name="line.1219"></a>
+<span class="sourceLineNo">1220</span><a name="line.1220"></a>
+<span class="sourceLineNo">1221</span>                /**<a name="line.1221"></a>
+<span class="sourceLineNo">1222</span>                 * Return the {@link Clock} the engine is using for measuring the execution<a name="line.1222"></a>
+<span class="sourceLineNo">1223</span>                 * time.<a name="line.1223"></a>
+<span class="sourceLineNo">1224</span>                 *<a name="line.1224"></a>
+<span class="sourceLineNo">1225</span>                 * @since 3.1<a name="line.1225"></a>
+<span class="sourceLineNo">1226</span>                 *<a name="line.1226"></a>
+<span class="sourceLineNo">1227</span>                 * @return the clock used for measuring the execution time<a name="line.1227"></a>
+<span class="sourceLineNo">1228</span>                 */<a name="line.1228"></a>
+<span class="sourceLineNo">1229</span>                public Clock getClock() {<a name="line.1229"></a>
+<span class="sourceLineNo">1230</span>                        return _clock;<a name="line.1230"></a>
+<span class="sourceLineNo">1231</span>                }<a name="line.1231"></a>
+<span class="sourceLineNo">1232</span><a name="line.1232"></a>
+<span class="sourceLineNo">1233</span>                /**<a name="line.1233"></a>
+<span class="sourceLineNo">1234</span>                 * Return the {@link Executor} the engine is using for executing the<a name="line.1234"></a>
+<span class="sourceLineNo">1235</span>                 * evolution steps.<a name="line.1235"></a>
+<span class="sourceLineNo">1236</span>                 *<a name="line.1236"></a>
+<span class="sourceLineNo">1237</span>                 * @since 3.1<a name="line.1237"></a>
+<span class="sourceLineNo">1238</span>                 *<a name="line.1238"></a>
+<span class="sourceLineNo">1239</span>                 * @return the executor used for performing the evolution steps<a name="line.1239"></a>
+<span class="sourceLineNo">1240</span>                 */<a name="line.1240"></a>
+<span class="sourceLineNo">1241</span>                public Executor getExecutor() {<a name="line.1241"></a>
+<span class="sourceLineNo">1242</span>                        return _executor;<a name="line.1242"></a>
+<span class="sourceLineNo">1243</span>                }<a name="line.1243"></a>
+<span class="sourceLineNo">1244</span><a name="line.1244"></a>
+<span class="sourceLineNo">1245</span>                /**<a name="line.1245"></a>
+<span class="sourceLineNo">1246</span>                 * Return the fitness function of the GA engine.<a name="line.1246"></a>
+<span class="sourceLineNo">1247</span>                 *<a name="line.1247"></a>
+<span class="sourceLineNo">1248</span>                 * @since 3.1<a name="line.1248"></a>
+<span class="sourceLineNo">1249</span>                 *<a name="line.1249"></a>
+<span class="sourceLineNo">1250</span>                 * @return the fitness function<a name="line.1250"></a>
+<span class="sourceLineNo">1251</span>                 */<a name="line.1251"></a>
+<span class="sourceLineNo">1252</span>                public Function&lt;? super Genotype&lt;G&gt;, ? extends C&gt; getFitnessFunction() {<a name="line.1252"></a>
+<span class="sourceLineNo">1253</span>                        return _fitnessFunction;<a name="line.1253"></a>
+<span class="sourceLineNo">1254</span>                }<a name="line.1254"></a>
+<span class="sourceLineNo">1255</span><a name="line.1255"></a>
+<span class="sourceLineNo">1256</span>                /**<a name="line.1256"></a>
+<span class="sourceLineNo">1257</span>                 * Return the fitness scaler of the GA engine.<a name="line.1257"></a>
+<span class="sourceLineNo">1258</span>                 *<a name="line.1258"></a>
+<span class="sourceLineNo">1259</span>                 * @since 3.1<a name="line.1259"></a>
+<span class="sourceLineNo">1260</span>                 *<a name="line.1260"></a>
+<span class="sourceLineNo">1261</span>                 * @return the fitness scaler<a name="line.1261"></a>
+<span class="sourceLineNo">1262</span>                 */<a name="line.1262"></a>
+<span class="sourceLineNo">1263</span>                public Function&lt;? super C, ? extends C&gt; getFitnessScaler() {<a name="line.1263"></a>
+<span class="sourceLineNo">1264</span>                        return _fitnessScaler;<a name="line.1264"></a>
+<span class="sourceLineNo">1265</span>                }<a name="line.1265"></a>
+<span class="sourceLineNo">1266</span><a name="line.1266"></a>
+<span class="sourceLineNo">1267</span>                /**<a name="line.1267"></a>
+<span class="sourceLineNo">1268</span>                 * Return the used genotype {@link Factory} of the GA. The genotype factory<a name="line.1268"></a>
+<span class="sourceLineNo">1269</span>                 * is used for creating the initial population and new, random individuals<a name="line.1269"></a>
+<span class="sourceLineNo">1270</span>                 * when needed (as replacement for invalid and/or died genotypes).<a name="line.1270"></a>
+<span class="sourceLineNo">1271</span>                 *<a name="line.1271"></a>
+<span class="sourceLineNo">1272</span>                 * @since 3.1<a name="line.1272"></a>
+<span class="sourceLineNo">1273</span>                 *<a name="line.1273"></a>
+<span class="sourceLineNo">1274</span>                 * @return the used genotype {@link Factory} of the GA.<a name="line.1274"></a>
+<span class="sourceLineNo">1275</span>                 */<a name="line.1275"></a>
+<span class="sourceLineNo">1276</span>                public Factory&lt;Genotype&lt;G&gt;&gt; getGenotypeFactory() {<a name="line.1276"></a>
+<span class="sourceLineNo">1277</span>                        return _genotypeFactory;<a name="line.1277"></a>
+<span class="sourceLineNo">1278</span>                }<a name="line.1278"></a>
+<span class="sourceLineNo">1279</span><a name="line.1279"></a>
+<span class="sourceLineNo">1280</span>                /**<a name="line.1280"></a>
+<span class="sourceLineNo">1281</span>                 * Return the maximal allowed phenotype age.<a name="line.1281"></a>
+<span class="sourceLineNo">1282</span>                 *<a name="line.1282"></a>
+<span class="sourceLineNo">1283</span>                 * @since 3.1<a name="line.1283"></a>
+<span class="sourceLineNo">1284</span>                 *<a name="line.1284"></a>
+<span class="sourceLineNo">1285</span>                 * @return the maximal allowed phenotype age<a name="line.1285"></a>
+<span class="sourceLineNo">1286</span>                 */<a name="line.1286"></a>
+<span class="sourceLineNo">1287</span>                public long getMaximalPhenotypeAge() {<a name="line.1287"></a>
+<span class="sourceLineNo">1288</span>                        return _maximalPhenotypeAge;<a name="line.1288"></a>
+<span class="sourceLineNo">1289</span>                }<a name="line.1289"></a>
+<span class="sourceLineNo">1290</span><a name="line.1290"></a>
+<span class="sourceLineNo">1291</span>                /**<a name="line.1291"></a>
+<span class="sourceLineNo">1292</span>                 * Return the offspring fraction.<a name="line.1292"></a>
+<span class="sourceLineNo">1293</span>                 *<a name="line.1293"></a>
+<span class="sourceLineNo">1294</span>                 * @return the offspring fraction.<a name="line.1294"></a>
+<span class="sourceLineNo">1295</span>                 */<a name="line.1295"></a>
+<span class="sourceLineNo">1296</span>                public double getOffspringFraction() {<a name="line.1296"></a>
+<span class="sourceLineNo">1297</span>                        return _offspringFraction;<a name="line.1297"></a>
+<span class="sourceLineNo">1298</span>                }<a name="line.1298"></a>
+<span class="sourceLineNo">1299</span><a name="line.1299"></a>
+<span class="sourceLineNo">1300</span>                /**<a name="line.1300"></a>
+<span class="sourceLineNo">1301</span>                 * Return the used offspring {@link Selector} of the GA.<a name="line.1301"></a>
+<span class="sourceLineNo">1302</span>                 *<a name="line.1302"></a>
+<span class="sourceLineNo">1303</span>                 * @since 3.1<a name="line.1303"></a>
+<span class="sourceLineNo">1304</span>                 *<a name="line.1304"></a>
+<span class="sourceLineNo">1305</span>                 * @return the used offspring {@link Selector} of the GA.<a name="line.1305"></a>
+<span class="sourceLineNo">1306</span>                 */<a name="line.1306"></a>
+<span class="sourceLineNo">1307</span>                public Selector&lt;G, C&gt; getOffspringSelector() {<a name="line.1307"></a>
+<span class="sourceLineNo">1308</span>                        return _offspringSelector;<a name="line.1308"></a>
+<span class="sourceLineNo">1309</span>                }<a name="line.1309"></a>
+<span class="sourceLineNo">1310</span><a name="line.1310"></a>
+<span class="sourceLineNo">1311</span>                /**<a name="line.1311"></a>
+<span class="sourceLineNo">1312</span>                 * Return the used survivor {@link Selector} of the GA.<a name="line.1312"></a>
+<span class="sourceLineNo">1313</span>                 *<a name="line.1313"></a>
+<span class="sourceLineNo">1314</span>                 * @since 3.1<a name="line.1314"></a>
+<span class="sourceLineNo">1315</span>                 *<a name="line.1315"></a>
+<span class="sourceLineNo">1316</span>                 * @return the used survivor {@link Selector} of the GA.<a name="line.1316"></a>
+<span class="sourceLineNo">1317</span>                 */<a name="line.1317"></a>
+<span class="sourceLineNo">1318</span>                public Selector&lt;G, C&gt; getSurvivorsSelector() {<a name="line.1318"></a>
+<span class="sourceLineNo">1319</span>                        return _survivorsSelector;<a name="line.1319"></a>
+<span class="sourceLineNo">1320</span>                }<a name="line.1320"></a>
+<span class="sourceLineNo">1321</span><a name="line.1321"></a>
+<span class="sourceLineNo">1322</span>                /**<a name="line.1322"></a>
+<span class="sourceLineNo">1323</span>                 * Return the optimization strategy.<a name="line.1323"></a>
+<span class="sourceLineNo">1324</span>                 *<a name="line.1324"></a>
+<span class="sourceLineNo">1325</span>                 * @since 3.1<a name="line.1325"></a>
+<span class="sourceLineNo">1326</span>                 *<a name="line.1326"></a>
+<span class="sourceLineNo">1327</span>                 * @return the optimization strategy<a name="line.1327"></a>
+<span class="sourceLineNo">1328</span>                 */<a name="line.1328"></a>
+<span class="sourceLineNo">1329</span>                public Optimize getOptimize() {<a name="line.1329"></a>
+<span class="sourceLineNo">1330</span>                        return _optimize;<a name="line.1330"></a>
+<span class="sourceLineNo">1331</span>                }<a name="line.1331"></a>
+<span class="sourceLineNo">1332</span><a name="line.1332"></a>
+<span class="sourceLineNo">1333</span>                /**<a name="line.1333"></a>
+<span class="sourceLineNo">1334</span>                 * Return the number of individuals of a population.<a name="line.1334"></a>
+<span class="sourceLineNo">1335</span>                 *<a name="line.1335"></a>
+<span class="sourceLineNo">1336</span>                 * @since 3.1<a name="line.1336"></a>
+<span class="sourceLineNo">1337</span>                 *<a name="line.1337"></a>
+<span class="sourceLineNo">1338</span>                 * @return the number of individuals of a population<a name="line.1338"></a>
+<span class="sourceLineNo">1339</span>                 */<a name="line.1339"></a>
+<span class="sourceLineNo">1340</span>                public int getPopulationSize() {<a name="line.1340"></a>
+<span class="sourceLineNo">1341</span>                        return _populationSize;<a name="line.1341"></a>
+<span class="sourceLineNo">1342</span>                }<a name="line.1342"></a>
+<span class="sourceLineNo">1343</span><a name="line.1343"></a>
+<span class="sourceLineNo">1344</span>                /**<a name="line.1344"></a>
+<span class="sourceLineNo">1345</span>                 * Return the maximal number of attempt before the {@code Engine} gives<a name="line.1345"></a>
+<span class="sourceLineNo">1346</span>                 * up creating a valid individual ({@code Phenotype}).<a name="line.1346"></a>
+<span class="sourceLineNo">1347</span>                 *<a name="line.1347"></a>
+<span class="sourceLineNo">1348</span>                 * @since 3.1<a name="line.1348"></a>
+<span class="sourceLineNo">1349</span>                 *<a name="line.1349"></a>
+<span class="sourceLineNo">1350</span>                 * @return the maximal number of {@code Phenotype} creation attempts<a name="line.1350"></a>
+<span class="sourceLineNo">1351</span>                 */<a name="line.1351"></a>
+<span class="sourceLineNo">1352</span>                public int getIndividualCreationRetries() {<a name="line.1352"></a>
+<span class="sourceLineNo">1353</span>                        return _individualCreationRetries;<a name="line.1353"></a>
+<span class="sourceLineNo">1354</span>                }<a name="line.1354"></a>
+<span class="sourceLineNo">1355</span><a name="line.1355"></a>
+<span class="sourceLineNo">1356</span>                /**<a name="line.1356"></a>
+<span class="sourceLineNo">1357</span>                 * Create a new builder, with the current configuration.<a name="line.1357"></a>
+<span class="sourceLineNo">1358</span>                 *<a name="line.1358"></a>
+<span class="sourceLineNo">1359</span>                 * @since 3.1<a name="line.1359"></a>
+<span class="sourceLineNo">1360</span>                 *<a name="line.1360"></a>
+<span class="sourceLineNo">1361</span>                 * @return a new builder, with the current configuration<a name="line.1361"></a>
+<span class="sourceLineNo">1362</span>                 */<a name="line.1362"></a>
+<span class="sourceLineNo">1363</span>                @Override<a name="line.1363"></a>
+<span class="sourceLineNo">1364</span>                public Builder&lt;G, C&gt; copy() {<a name="line.1364"></a>
+<span class="sourceLineNo">1365</span>                        return new Builder&lt;&gt;(_genotypeFactory, _fitnessFunction)<a name="line.1365"></a>
+<span class="sourceLineNo">1366</span>                                .alterers(_alterer)<a name="line.1366"></a>
+<span class="sourceLineNo">1367</span>                                .clock(_clock)<a name="line.1367"></a>
+<span class="sourceLineNo">1368</span>                                .executor(_executor)<a name="line.1368"></a>
+<span class="sourceLineNo">1369</span>                                .fitnessScaler(_fitnessScaler)<a name="line.1369"></a>
+<span class="sourceLineNo">1370</span>                                .maximalPhenotypeAge(_maximalPhenotypeAge)<a name="line.1370"></a>
+<span class="sourceLineNo">1371</span>                                .offspringFraction(_offspringFraction)<a name="line.1371"></a>
+<span class="sourceLineNo">1372</span>                                .offspringSelector(_offspringSelector)<a name="line.1372"></a>
+<span class="sourceLineNo">1373</span>                                .phenotypeValidator(_validator)<a name="line.1373"></a>
+<span class="sourceLineNo">1374</span>                                .optimize(_optimize)<a name="line.1374"></a>
+<span class="sourceLineNo">1375</span>                                .populationSize(_populationSize)<a name="line.1375"></a>
+<span class="sourceLineNo">1376</span>                                .survivorsSelector(_survivorsSelector)<a name="line.1376"></a>
+<span class="sourceLineNo">1377</span>                                .individualCreationRetries(_individualCreationRetries);<a name="line.1377"></a>
+<span class="sourceLineNo">1378</span>                }<a name="line.1378"></a>
+<span class="sourceLineNo">1379</span><a name="line.1379"></a>
+<span class="sourceLineNo">1380</span>        }<a name="line.1380"></a>
+<span class="sourceLineNo">1381</span>}<a name="line.1381"></a>
 
 
 
