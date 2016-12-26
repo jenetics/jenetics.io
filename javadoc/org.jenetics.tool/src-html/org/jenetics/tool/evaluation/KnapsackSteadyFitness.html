@@ -30,7 +30,7 @@ KnapsackSteadyFitness.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">01</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">02</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-3.6.0).</font><br />
+<font color="#808080">02</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-3.7.0).</font><br />
 <font color="#808080">03</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2016&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">04</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">05</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
@@ -76,7 +76,7 @@ KnapsackSteadyFitness.java
 <font color="#808080">45</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;Generations&#34;</font><font color="#000000">,</font><br />
 <font color="#808080">46</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">IntStream.rangeClosed</font><font color="#000000">(</font><font color="#990000">1</font><font color="#000000">,&nbsp;</font><font color="#990000">50</font><font color="#000000">)</font><br />
 <font color="#808080">47</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.map</font><font color="#000000">(</font><font color="#000000">i&nbsp;-&gt;&nbsp;max</font><font color="#000000">((</font><font color="#7f0055"><b>int</b></font><font color="#000000">)</font><font color="#000000">pow</font><font color="#000000">(</font><font color="#000000">GEN_BASE,&nbsp;i</font><font color="#000000">)</font><font color="#000000">,&nbsp;i</font><font color="#000000">))</font><br />
-<font color="#808080">48</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.mapToObj</font><font color="#000000">(</font><font color="#000000">Integer::</font><font color="#7f0055"><b>new</b></font><font color="#000000">)</font><br />
+<font color="#808080">48</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.mapToObj</font><font color="#000000">(</font><font color="#000000">Integer::valueOf</font><font color="#000000">)</font><br />
 <font color="#808080">49</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.collect</font><font color="#000000">(</font><font color="#000000">ISeq.toISeq</font><font color="#000000">())</font><br />
 <font color="#808080">50</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">)</font><font color="#000000">;</font><br />
 <font color="#808080">51</font>&nbsp;<font color="#ffffff"></font><br />
