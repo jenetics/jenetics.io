@@ -30,7 +30,7 @@ MomentStatistics.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">001</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-3.6.0).</font><br />
+<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-3.7.0).</font><br />
 <font color="#808080">003</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2016&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">004</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">005</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
@@ -218,7 +218,15 @@ MomentStatistics.java
 <font color="#808080">187</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">kurtosis;</font><br />
 <font color="#808080">188</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
 <font color="#808080">189</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">190</font>&nbsp;<font color="#000000">}</font></code>
+<font color="#808080">190</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#7f0055"><b>boolean&nbsp;</b></font><font color="#000000">sameState</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">MomentStatistics&nbsp;statistics</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">191</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">_n&nbsp;==&nbsp;statistics._n&nbsp;&amp;&amp;</font><br />
+<font color="#808080">192</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_m1.sameState</font><font color="#000000">(</font><font color="#000000">statistics._m1</font><font color="#000000">)&nbsp;</font><font color="#000000">&amp;&amp;</font><br />
+<font color="#808080">193</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_m2.sameState</font><font color="#000000">(</font><font color="#000000">statistics._m2</font><font color="#000000">)&nbsp;</font><font color="#000000">&amp;&amp;</font><br />
+<font color="#808080">194</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_m3.sameState</font><font color="#000000">(</font><font color="#000000">statistics._m3</font><font color="#000000">)&nbsp;</font><font color="#000000">&amp;&amp;</font><br />
+<font color="#808080">195</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_m4.sameState</font><font color="#000000">(</font><font color="#000000">statistics._m4</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">196</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">197</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">198</font>&nbsp;<font color="#000000">}</font></code>
     
    </td>
   <!-- end source code -->
