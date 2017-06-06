@@ -155,101 +155,8 @@
                 </div>
 
                 <hr/>
-                <h2>Requirements</h2>
-
-                <h3>Runtime</h3>
-                <ul>
-                    <li><b>JRE 8</b>: Java runtime version 8 is needed for using the library, respectively for running
-                        the examples.
-                    </li>
-                </ul>
-                <h3>Build time</h3>
-                <ul>
-                    <li><b>JDK 8</b>: The <code>JAVA_HOME</code> variable must be set to your Java installation directory.</li>
-                    <li><b>Gradle 2.x</b>: <a href="http://www.gradle.org/">Gradle</a> is used for building the library.
-                        (Gradle is download automatically, if you are using the Gradle Wrapper script,<p/>
-                        <pre class="prettyprint">$ gradlew</pre>located in the base directory, for building the library.)
-                    </li>
-                </ul>
-                <h3>Test compile/execution</h3>
-                <ul>
-                    <li><b>TestNG 6.11</b>: Jenetics uses <a href="http://testng.org/doc/index.html">TestNG</a> framework
-                        for unit tests.
-                    </li>
-                    <li><b>Apache Commons Math 3.6</b>: <a
-                            href="http://commons.apache.org/proper/commons-math/">Library</a> is used for testing
-                        statistical collectors in the <em>org.jenetics.stat</em> package.
-                    </li>
-                </ul>
-
-                <hr/>
-                <h2>Build Jenetics</h2>
-
-                <p>For building the Jenetics library from source, download the most recent, stable package version from
-                    <a href="https://sourceforge.net/projects/jenetics/files/latest/download">Sourceforge</a> and extract it to
-                    some build directory.</p>
-
-                <pre class="prettyprint">$ unzip jenetics-&lt;version&gt;.zip -d &lt;builddir&gt;</pre>
-                <p><code>&lt;version&gt;</code> denotes the actual Jenetics version and <code>&lt;builddir&gt;</code>
-                    the actual build directory. Alternatively you can clone the current version from Github.</p>
-
-                        <pre class="prettyprint">
-$ git clone https://github.com/jenetics/jenetics.git &lt;builddir&gt;</pre>
-
-                <p>Jenetics uses <a href="http://www.gradle.org/downloads">Gradle</a> as build system and organizes the
-                    source into <em>sub</em>-projects (modules). Each sub-project is located in it’s own sub-directory:
-                </p>
-                <ul>
-                    <li><b>org.jenetics</b>: This project contains the source code and tests for the Jenetics
-                        <em>core</em>-module.
-                    </li>
-                    <li><b>org.jenetics.example</b>: This project contains example code for the <em>core</em>-module.
-                    </li>
-                    <li><b>org.jenetics.doc</b>: Contains the code of the web-site and the manual.</li>
-                </ul>
-
-                <p>For building the library change into the
-                <code>&lt;builddir&gt;</code>
-                directory (or one of the module directory) and call one of the available tasks:</p>
-
-                <ul>
-                    <li><b>compileJava</b>: Compiles the Jenetics sources and copies the class files to the
-                        <code>&lt;builddir&gt;/&lt;module-dir&gt;/build/classes/main</code>
-                        directory.
-                    </li>
-                    <li><b>jar</b>: Compiles the sources and creates the JAR files. The artifacts are copied to the <code>&lt;builddir&gt;/&lt;module-dir&gt;/build/libs</code>
-                        directory.
-                    </li>
-                    <li><b>javadoc</b>: Generates the API documentation. The Javadoc is stored in the <code>&lt;builddir&gt;/&lt;module-dir&gt;/build/docs</code>
-                        directory
-                    </li>
-                    <li><b>test</b>: Compiles and executes the unit tests. The test results are printed onto the console
-                        and a test-report, created by TestNG, is written to
-                        <code>&lt;builddir&gt;/&lt;module-dir&gt</code>
-                        pre directory.
-                    </li>
-                    <li><b>clean</b>: Deletes the
-                        <code>&lt;builddir&gt;/build/*</code>
-                        directories and removes all generated artifacts.
-                    </li>
-                </ul>
-
-                <p>For building the library jar from the sources call</p>
-                        <pre class="prettyprint">
-$ cd &lt;build-dir&gt;
-$ ./gradlew jar</pre>
-
-                <h3>IDE Integration</h3>
-
-                <p>Gradle has tasks which creates the project file for <em>Eclipse</em> and <em>IntelliJ IDEA</em>. Call
-                </p>
-
-                <pre class="prettyprint">$ ./gradlew [eclipse|idea]</pre>
-
-                <p>for creating the project files for Eclipse or IntelliJ, respectively.</p>
-                <hr/>
-                <h2>Example</h2>
-
+                <h2>Examples</h2>
+                <h3>Hello World (Ones counting)</h3>
                 <p>
                     The minimum evolution Engine setup needs a genotype factory,
                     <code>Factory&lt;Genotype&lt;?&gt;&gt;</code>, and a fitness <em>Function</em>. The
@@ -296,6 +203,21 @@ public class HelloWorld {
     }
 }</pre>
 
+                In contrast to other GA implementations, the library uses the concept of an evolution stream (`EvolutionStream`) for executing the evolution steps. Since the `EvolutionStream` implements the Java Stream interface, it works smoothly with the rest of the Java streaming API. Now let's have a closer look at listing above and discuss this simple program step by step:
+
+                <ol>
+                    <li>The probably most challenging part, when setting up a new evolution <code>Engine</code>, is to transform the problem domain into a appropriate <code>Genotype</code> (factory) representation. In our example we want to count the number of ones of a <code>BitChromosome</code>. Since we are counting only the ones of one chromosome, we are adding only one <code>BitChromosome</code> to our <code>Genotype</code>. In general, the <code>Genotype</code> can be created with 1 to n chromosomes.</li>
+                <li> Once this is done, the fitness function which should be maximized, can be defined. Utilizing the new language features introduced in Java 8, we simply write a private static method, which takes the genotype we defined and calculate it's fitness value. If we want to use the optimized bit-counting method, <code>bitCount()</code>, we have to cast the <code>Chromosome&lt;BitGene&gt;</code> class to the actual used <code>BitChromosome</code> class. Since we know for sure that we created the Genotype with a <code>BitChromosome</code>, this can be done safely. A reference to the eval method is then used as fitness function and passed to the <code>Engine.build</code> method.</li>
+                <li> In the third step we are creating the evolution <code>Engine</code>, which is responsible for changing, respectively evolving, a given population. The <code>Engine</code> is highly configurable and takes parameters for controlling the evolutionary and the computational environment. For changing the evolutionary behavior, you can set different alterers and selectors. By changing the used <code>Executor</code> service, you control the number of threads, the Engine is allowed to use. An new <code>Engine</code> instance can only be created via its builder, which is created by calling the <code>Engine.builder</code> method.</li>
+                    <li>In the last step, we can create a new <code>EvolutionStream</code> from our <code>Engine</code>. The <code>EvolutionStream</code> is the model or view of the evolutionary process. It serves as a »process handle« and also allows you, among other things, to control the termination of the evolution. In our example, we simply truncate the stream after 100 generations. If you don't limit the stream, the <code>EvolutionStream</code> will not terminate and run forever. Since the <code>EvolutionStream</code> extends the <code>java.util.stream.Stream</code> interface, it integrates smoothly with the rest of the Java Stream API. The final result, the best <code>Genotype</code> in our example, is then collected with one of the predefined collectors of the <code>EvolutionResult</code> class.</li>
+                </ol>
+
+                <h3>Evolving images</h3>
+<p>This example tries to approximate a given image by semitransparent polygons.  It comes with an Swing UI, where you can immediately start your own experiments.</p>
+                <img src="https://raw.githubusercontent.com/jenetics/jenetics/master/org.jenetics.doc/src/main/resources/graphic/EvolvingImagesExampleScreenShot.png">
+
+                <p>For a detailed description on how to execute this example, have a look at the <a href="https://github.com/jenetics/jenetics">README</a> file of the project.</p>
+
                 <h2>Additional <em>io.jenetics</em> libraries</h2>
                 <ul>
                     <li><a href="https://github.com/jenetics/prngine"><b>PRNGine</b></a>: A pseudo-random number generator library for sequential and parallel <a href="https://de.wikipedia.org/wiki/Monte-Carlo-Simulation">Monte Carlo simulations</a>. It has been designed to work smoothly with the <em>Jenetics</em> library, but it has no dependency to it. All PRNG implementations of this library extends the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Random.html">Random</a> class, which makes it easily usable in other projects.</li>
@@ -317,15 +239,15 @@ public class HelloWorld {
                 <ul>
                     <li><a href="http://www.baeldung.com/jenetics">Introduction to Jenetics Library</a>, by <em>baeldung</em>, April 11. 2017</li>
                     <li><a href="http://blog.takipi.com/how-to-solve-tough-problems-using-genetic-algorithms/">How to Solve Tough Problems Using Genetic Algorithms</a>, by <em>Tzofia Shiftan</em>, April 6. 2017</li>
-                    <li><a href="http://fxapps.blogspot.co.at/2017/01/genetic-algorithms-with-java.html">Genetic algorithms with Java</a>, by <em>William Antônio</em>, January 10. 2017</li>                      
-                    <li><a href="http://jdm.kr/blog/135">Jenetics 설치 및 예제</a>, by <em>JDM</em>, May 8. 2015</li>    
-                    <li><a href="http://jdm.kr/blog/104">유전 알고리즘 (Genetic Algorithms)</a>, by <em>JDM</em>, April 2. 2015</li>                      
-                </ul>       
-                
+                    <li><a href="http://fxapps.blogspot.co.at/2017/01/genetic-algorithms-with-java.html">Genetic algorithms with Java</a>, by <em>William Antônio</em>, January 10. 2017</li>
+                    <li><a href="http://jdm.kr/blog/135">Jenetics 설치 및 예제</a>, by <em>JDM</em>, May 8. 2015</li>
+                    <li><a href="http://jdm.kr/blog/104">유전 알고리즘 (Genetic Algorithms)</a>, by <em>JDM</em>, April 2. 2015</li>
+                </ul>
+
                 <h2>Citations</h2>
                 <ul>
 					<li>Abraão G. Nazário, Fábio R. A. Silva, Raimundo Teive, Leonardo Villa, Antônio Flávio, João Zico, Eire Fragoso, Ederson F. Souza. <a href="http://siaiap32.univali.br/seer/index.php/acotb/article/view/10579/5933">Automação Domótica Simulada Utilizando Algoritmo Genético Especializado na Redução do Consumo de Energia. </a> <em>Computer on the Beach 2017</em> pp. 180-189, March 2017.
-                    </li>                
+                    </li>
                     <li>Bandaru, S. and Deb, K. <a href="http://dx.doi.org/10.1201/9781315183176-12">Metaheuristic Techniques.</a> <em>Decision Sciences.</em> CRC Press, pp. 693-750, Nov. 2016.
                     </li>
                     <li>Lyazid Toumi, Abdelouahab Moussaoui, and Ahmet Ugur. <a href="http://dx.doi.org/10.1145/2816839.2816876">EMeD-Part: An Efficient Methodology for Horizontal Partitioning in Data Warehouses.</a> <em>Proceedings of the International Conference on Intelligent Information Processing, Security and Advanced Communication.</em> Djallel Eddine Boubiche, Faouzi Hidoussi, and Homero Toral Cruz (Eds.). ACM, New York, NY, USA, Article 43, 7 pages, 2015.
@@ -376,11 +298,11 @@ public class HelloWorld {
                            data-related="mdo:Creator of Jenetics">Tweet</a>
                     </li>
 				    <li class="tweet-btn">
-                        <g:plusone size="medium"></g:plusone>                
-                    </li>                       
+                        <g:plusone size="medium"></g:plusone>
+                    </li>
 					<li class="tweet-btn">
-                        <div class="g-plus" data-action="share"></div>            
-                    </li>  
+                        <div class="g-plus" data-action="share"></div>
+                    </li>
                 </ul>
             </div>
             <p>The library is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache
