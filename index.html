@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
           content="Jenetics is an advanced Genetic Algorithm, respectively an Evolutionary Algorithm, library written in modern day Java.">
-    <meta name="keywords" content="java, genetic algorithm, evolutionary algorithm, evolution strategy, programming, ga, gp, parallel ga, optimization, evolutionary, streams, artificial intelligence">
+    <meta name="keywords" content="java, genetic algorithm, evolutionary algorithm, evolution strategy, genetic programming, programming, ga, gp, parallel ga, optimization, evolutionary, streams, artificial intelligence">
     <meta NAME="robots" content="noarchive, index, follow">
     <meta name="author" content="Franz Wilhelmstötter">
 
@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="css/sons-of-obsidian.css">
 
     <link href="css/docs.min.css" rel="stylesheet">
-	<link rel="canonical" href="http://jenetics.io" />
+    <link rel="canonical" href="http://jenetics.io" />
 
     <style>
         .logo-text img {
@@ -62,33 +62,33 @@
         <span class="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline logo-img"><img
                 src="img/logo.png"/></span>
 
-        <p class="lead">Jenetics is an advanced Genetic Algorithm, respectively an Evolutionary
-            Algorithm, library written in modern day Java.</p>
+        <p class="lead">Jenetics is an advanced Genetic Algorithm, Evolutionary Algorithm and Genetic
+            Programming library, respectively, written in modern day Java.</p>
 
         <p class="lead">
-            <a href="https://github.com/jenetics/jenetics/archive/v3.8.0.zip" class="btn btn-outline-inverse btn-lg">
+            <a href="https://github.com/jenetics/jenetics/archive/v3.9.0.zip" class="btn btn-outline-inverse btn-lg">
                 <i class="fa fa-file-archive-o"></i> zip
             </a>
 
-            <a href="https://github.com/jenetics/jenetics/archive/v3.8.0.tar.gz" class="btn btn-outline-inverse btn-lg">
+            <a href="https://github.com/jenetics/jenetics/archive/v3.9.0.tar.gz" class="btn btn-outline-inverse btn-lg">
                 <i class="fa fa-file-archive-o"></i> tar.gz</a>
 
-            <a href="http://search.maven.org/#artifactdetails|io.jenetics|jenetics|3.8.0|jar" class="btn btn-outline-inverse btn-lg">
+            <a href="http://search.maven.org/#artifactdetails|io.jenetics|jenetics|3.9.0|jar" class="btn btn-outline-inverse btn-lg">
                 <i class="fa fa-external-link"></i> Maven</a>
         </p>
 
-        <p class="version">Currently v3.8.0</p>
+        <p class="version">Currently v3.9.0</p>
     </div>
 </div>
 
 <div class="bs-docs-social">
     <ul class="bs-docs-footer-links">
-        <li class="fa fa-external-link"></li><a href="javadoc/org.jenetics/3.8/index.html"> Documentation</a>
+        <li class="fa fa-external-link"></li><a href="javadoc/jenetics/3.9/index.html"> Documentation</a>
         <li>&middot;</li>
-        <li class="fa fa-file-pdf-o"></li><a href="manual/manual-3.8.0.pdf"> User guide</a>
+        <li class="fa fa-file-pdf-o"></li><a href="manual/manual-3.9.0.pdf"> User guide</a>
         <li>&middot;</li>
         <li class="fa fa-medium"></li><a href="https://medium.com/@jeneticsga/"> Blog</a>
-        <li>&middot;</li>        
+        <li>&middot;</li>
         <li class="fa fa-github"></li><a href="https://github.com/jenetics/jenetics"> GitHub</a>
         <li>&middot;</li>
         <li class="fa fa-github"></li><a href="https://github.com/jenetics/jenetics/issues"> Issues</a>
@@ -110,8 +110,8 @@
                     fitness <em>Function</em>. Jenetics allows you to minimize
                     and maximize the given fitness function without tweaking it. In contrast
                     to other GA implementations, the library uses the concept of an
-                    evolution stream (<a href="javadoc/org.jenetics/3.8/org/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a>) for executing the evolution steps.
-                    Since the <a href="javadoc/org.jenetics/3.8/org/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a> implements the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a> interface,
+                    evolution stream (<a href="javadoc/jenetics/3.9/org/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a>) for executing the evolution steps.
+                    Since the <a href="javadoc/jenetics/3.9/org/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a> implements the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a> interface,
                     it works smoothly with the rest of the Java Stream API.</p>
 
                 <h3>Features</h3>
@@ -119,13 +119,13 @@
                    <div class="item col-md-4 col-sm-6 col-xs-12">
                         <div class="content">
                             <h4><i class="fa fa-check-circle"></i> Frictionless minimization</h4>
-                            <p>No need to tweak the fitness function for minimization problems. Just change the configuration of the evolution <a href="javadoc/org.jenetics/3.8/org/jenetics/engine/Engine.html"><code>Engine</code></a>.</p>
+                            <p>No need to tweak the fitness function for minimization problems. Just change the configuration of the evolution <a href="javadoc/org.jenetics/3.9/org/jenetics/engine/Engine.html"><code>Engine</code></a>.</p>
                         </div>
                     </div>
                    <div class="item col-md-4 col-sm-6 col-xs-12">
                         <div class="content">
                             <h4><i class="fa fa-check-circle"></i> Plugable PRNG</h4>
-                            <p>Easy changeable PRNG (<a href="javadoc/org.jenetics/3.8/org/jenetics/util/RandomRegistry.html"><code>RandomRegistry</code></a>). No <i>special</i> PRNG interface; the standard Java <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Random.html"><code>Random</code></a> engine allows the use of existing random generators.</p>
+                            <p>Easy changeable PRNG (<a href="javadoc/jenetics/3.9/org/jenetics/util/RandomRegistry.html"><code>RandomRegistry</code></a>). No <i>special</i> PRNG interface; the standard Java <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Random.html"><code>Random</code></a> engine allows the use of existing random generators.</p>
                         </div>
                     </div>
                     <div class="item col-md-4 col-sm-6 col-xs-12">
@@ -151,7 +151,7 @@
                     <div class="item col-md-4 col-sm-6 col-xs-12">
                         <div class="content">
                             <h4><i class="fa fa-check-circle"></i> Fully documented</h4>
-                            <p>Complete <a href="javadoc/org.jenetics/3.8/index.html">Documentation</a> and <a href="manual/manual-3.8.0.pdf">User guide</a> available, including <a href="manual/html/internals.html">documentation</a> of selected implementation details.</p>
+                            <p>Complete <a href="javadoc/jenetics/3.9/index.html">Documentation</a> and <a href="manual/manual-3.9.0.pdf">User guide</a> available, including <a href="manual/html/internals.html">documentation</a> of selected implementation details.</p>
                         </div>
                     </div>
                 </div>
@@ -226,24 +226,119 @@ public class HelloWorld {
 
                 <p>For a detailed description on how to execute this example, have a look at the <a href="https://github.com/jenetics/jenetics#evolving-images">Github</a> project page.</p>
 
-                <h2>Additional <em>io.jenetics</em> libraries</h2>
+
+                <h3>Symbolic regression (GP)</h3>
+
+                <p>Symbolic regression is a classical example in genetic programming and tries to find a mathematical expression for a given set of values. The following example shows how to solve the GP problem with Jenetics. We are trying to find the polynomial, 4x<sup>3</sup> - 3x<sup>2</sup> + x, which fits a given data set. The sample data where created with the polynomial we are searching for. This makes it easy to check the quality of the approximation found by the GP.</p>
+                <pre class="prettyprint linenums">
+import static java.lang.Math.pow;
+
+import java.util.Arrays;
+
+import org.jenetics.Genotype;
+import org.jenetics.Mutator;
+import org.jenetics.engine.Codec;
+import org.jenetics.engine.Engine;
+import org.jenetics.engine.EvolutionResult;
+import org.jenetics.ext.SingleNodeCrossover;
+import org.jenetics.ext.util.Tree;
+import org.jenetics.prog.ProgramChromosome;
+import org.jenetics.prog.ProgramGene;
+import org.jenetics.prog.op.EphemeralConst;
+import org.jenetics.prog.op.MathOp;
+import org.jenetics.prog.op.Op;
+import org.jenetics.prog.op.Var;
+import org.jenetics.util.ISeq;
+import org.jenetics.util.RandomRegistry;
+
+public class SymbolicRegression {
+
+    // Sample data created with 4*x^3 - 3*x^2 + x
+    static final double[][] SAMPLES = new double[][] {
+        {-1.0, -8.0000},
+        // ...
+        {0.9, 1.3860},
+        {1.0, 2.0000}
+    };
+
+    // Definition of the operations.
+    static final ISeq<Op<Double>> OPERATIONS = ISeq.of(
+        MathOp.ADD,
+        MathOp.SUB,
+        MathOp.MUL
+    );
+
+    // Definition of the terminals.
+    static final ISeq<Op<Double>> TERMINALS = ISeq.of(
+        Var.of("x", 0),
+        EphemeralConst.of(() -> (double)RandomRegistry
+            .getRandom().nextInt(10))
+    );
+
+    static double error(final ProgramGene<Double> program) {
+        return Arrays.stream(SAMPLES)
+            .mapToDouble(sample ->
+                pow(sample[1] - program.eval(sample[0]), 2) +
+                    program.size()*0.00001)
+            .sum();
+    }
+
+    static final Codec<ProgramGene<Double>, ProgramGene<Double>>
+    CODEC = Codec.of(
+        Genotype.of(ProgramChromosome.of(
+            5,
+            ch -> ch.getRoot().size() <= 50,
+            OPERATIONS,
+            TERMINALS
+        )),
+        Genotype::getGene
+    );
+
+    public static void main(final String[] args) {
+        final Engine<ProgramGene<Double>, Double> engine = Engine
+            .builder(SymbolicRegression::error, CODEC)
+            .minimizing()
+            .alterers(
+                new SingleNodeCrossover<>(),
+                new Mutator<>())
+            .build();
+
+        final ProgramGene<Double> program = engine.stream()
+            .limit(100)
+            .collect(EvolutionResult.toBestGenotype())
+            .getGene();
+
+        System.out.println(Tree.toDottyString(program));
+    }
+
+}
+</pre>
+
+
+
+                <h2>Extension modules</h2>
+                <ul>
+                    <li><a href="javadoc/jenetics.ext/3.9/index.html"><b>jenetics.ext</b>:</a> Additional, non-standard, genetic operators and chromosomes. Containing classes for the <a href="https://en.wikipedia.org/wiki/Weasel_program">Weasel program</a> and tree data structures.</li>
+                    <li><a href="javadoc/jenetics.prog/3.9/index.html"><b>jenetics.prog</b>:</a>The modules contains classes which allows to do genetic programming (GP). It seamlessly works with the existing <code>EvolutionStream</code> and evolution <code>Engine</code>.</li>
+                    <li><a href="javadoc/jenetics.xml/3.9/index.html"><b>jenetics.xml</b>:</a> XML marshalling module for the Jenetics base data structures.</li>
+                </ul>
+
+
+                <h2>Additional libraries</h2>
+                <p>This libraries doesn't have any dependency to Jenetics and can be used as they are.</p>
                 <ul>
                     <li><a href="https://github.com/jenetics/prngine"><b>PRNGine</b></a>: A pseudo-random number generator library for sequential and parallel <a href="https://de.wikipedia.org/wiki/Monte-Carlo-Simulation">Monte Carlo simulations</a>. It has been designed to work smoothly with the <em>Jenetics</em> library, but it has no dependency to it. All PRNG implementations of this library extends the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Random.html">Random</a> class, which makes it easily usable in other projects.</li>
                     <li><a href="https://github.com/jenetics/jpx"><b>JPX</b>:</a> A Java library for creating, reading and writing <a href="https://en.wikipedia.org/wiki/Global_Positioning_System">GPS</a> data in <a href="https://en.wikipedia.org/wiki/GPS_Exchange_Format">GPX</a> format. It is a <b>full</b> implementation of version <a href="http://www.topografix.com/GPX/1/1/">1.1</a> of the GPX format. The data classes are completely immutable and allows a functional programming style. They  are working also nicely with the Java 8 <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream</a> API. <em>Since it is also possible to calculate the distance between way-points, it is a good fit for the TSP.</em></li>
                 </ul>
 
-                <h2>Incubation modules</h2>
-                <ul>
-                    <li><a href="javadoc/org.jenetics.tool/3.8/index.html"><b>org.jenetics.tool</b>:</a> Helper classes for evolution performance measures.</li>
-                    <li><a href="javadoc/org.jenetix/3.8/index.html"><b>org.jenetix</b>:</a> Additional, non-standard, genetic operators and chromosomes. Containing classes for the <a href="https://en.wikipedia.org/wiki/Weasel_program">Weasel program</a>.</li>
-                </ul>
+
 
                 <h2>Projects using Jenetics</h2>
                 <ul>
                     <li><a href="http://www.eclipse.org/app4mc/"><b>APP4MC</b>:</a> Eclipse APP4MC is a platform for engineering embedded multi- and many-core software systems.</li>
                 </ul>
 
-				<h2>Blogs</h2>
+                <h2>Blogs</h2>
                 <ul>
                     <li><a href="http://www.baeldung.com/jenetics">Introduction to Jenetics Library</a>, by <em>baeldung</em>, April 11. 2017</li>
                     <li><a href="http://blog.takipi.com/how-to-solve-tough-problems-using-genetic-algorithms/">How to Solve Tough Problems Using Genetic Algorithms</a>, by <em>Tzofia Shiftan</em>, April 6. 2017</li>
@@ -254,7 +349,7 @@ public class HelloWorld {
 
                 <h2>Citations</h2>
                 <ul>
-					<li>Abraão G. Nazário, Fábio R. A. Silva, Raimundo Teive, Leonardo Villa, Antônio Flávio, João Zico, Eire Fragoso, Ederson F. Souza. <a href="http://siaiap32.univali.br/seer/index.php/acotb/article/view/10579/5933">Automação Domótica Simulada Utilizando Algoritmo Genético Especializado na Redução do Consumo de Energia. </a> <em>Computer on the Beach 2017</em> pp. 180-189, March 2017.
+                    <li>Abraão G. Nazário, Fábio R. A. Silva, Raimundo Teive, Leonardo Villa, Antônio Flávio, João Zico, Eire Fragoso, Ederson F. Souza. <a href="http://siaiap32.univali.br/seer/index.php/acotb/article/view/10579/5933">Automação Domótica Simulada Utilizando Algoritmo Genético Especializado na Redução do Consumo de Energia. </a> <em>Computer on the Beach 2017</em> pp. 180-189, March 2017.
                     </li>
                     <li>Bandaru, S. and Deb, K. <a href="http://dx.doi.org/10.1201/9781315183176-12">Metaheuristic Techniques.</a> <em>Decision Sciences.</em> CRC Press, pp. 693-750, Nov. 2016.
                     </li>
@@ -305,10 +400,10 @@ public class HelloWorld {
                            data-url="http://jenetics.io/" data-count="horizontal" data-via="jeneticsga"
                            data-related="mdo:Creator of Jenetics">Tweet</a>
                     </li>
-				    <li class="tweet-btn">
+                    <li class="tweet-btn">
                         <g:plusone size="medium"></g:plusone>
                     </li>
-					<li class="tweet-btn">
+                    <li class="tweet-btn">
                         <div class="g-plus" data-action="share"></div>
                     </li>
                 </ul>
