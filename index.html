@@ -262,32 +262,32 @@ public class SymbolicRegression {
     };
 
     // Definition of the operations.
-    static final ISeq<Op<Double>> OPERATIONS = ISeq.of(
+    static final ISeq&lt;Op&lt;Double&gt;&gt; OPERATIONS = ISeq.of(
         MathOp.ADD,
         MathOp.SUB,
         MathOp.MUL
     );
 
     // Definition of the terminals.
-    static final ISeq<Op<Double>> TERMINALS = ISeq.of(
+    static final ISeq&lt;Op&lt;Double&gt;&gt; TERMINALS = ISeq.of(
         Var.of("x", 0),
-        EphemeralConst.of(() -> (double)RandomRegistry
+        EphemeralConst.of(() -&gt; (double)RandomRegistry
             .getRandom().nextInt(10))
     );
 
-    static double error(final ProgramGene<Double> program) {
+    static double error(final ProgramGene&lt;Double&gt; program) {
         return Arrays.stream(SAMPLES)
-            .mapToDouble(sample ->
+            .mapToDouble(sample -&gt;
                 pow(sample[1] - program.eval(sample[0]), 2) +
                     program.size()*0.00001)
             .sum();
     }
 
-    static final Codec<ProgramGene<Double>, ProgramGene<Double>>
+    static final Codec&lt;ProgramGene&lt;Double&gt;, ProgramGene&lt;Double&gt;&gt;
     CODEC = Codec.of(
         Genotype.of(ProgramChromosome.of(
             5,
-            ch -> ch.getRoot().size() <= 50,
+            ch -&gt; ch.getRoot().size() &lt;= 50,
             OPERATIONS,
             TERMINALS
         )),
@@ -295,15 +295,15 @@ public class SymbolicRegression {
     );
 
     public static void main(final String[] args) {
-        final Engine<ProgramGene<Double>, Double> engine = Engine
+        final Engine&lt;ProgramGene&lt;Double&gt;, Double&gt; engine = Engine
             .builder(SymbolicRegression::error, CODEC)
             .minimizing()
             .alterers(
-                new SingleNodeCrossover<>(),
-                new Mutator<>())
+                new SingleNodeCrossover&lt;&gt;(),
+                new Mutator&lt;&gt;())
             .build();
 
-        final ProgramGene<Double> program = engine.stream()
+        final ProgramGene&lt;Double&gt; program = engine.stream()
             .limit(100)
             .collect(EvolutionResult.toBestGenotype())
             .getGene();
