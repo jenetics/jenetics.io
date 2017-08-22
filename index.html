@@ -110,8 +110,8 @@
                     fitness <em>Function</em>. Jenetics allows you to minimize
                     and maximize the given fitness function without tweaking it. In contrast
                     to other GA implementations, the library uses the concept of an
-                    evolution stream (<a href="javadoc/jenetics/3.9jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a>) for executing the evolution steps.
-                    Since the <a href="javadoc/jenetics/3.9/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a> implements the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a> interface,
+                    evolution stream (<a href="javadoc/jenetics/3.9/org/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a>) for executing the evolution steps.
+                    Since the <a href="javadoc/jenetics/3.9/org/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a> implements the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a> interface,
                     it works smoothly with the rest of the Java Stream API.</p>
 
                 <h3>Features</h3>
@@ -119,13 +119,13 @@
                    <div class="item col-md-4 col-sm-6 col-xs-12">
                         <div class="content">
                             <h4><i class="fa fa-check-circle"></i> Frictionless minimization</h4>
-                            <p>No need to tweak the fitness function for minimization problems. Just change the configuration of the evolution <a href="javadoc/org.jenetics/3.9/jenetics/engine/Engine.html"><code>Engine</code></a>.</p>
+                            <p>No need to tweak the fitness function for minimization problems. Just change the configuration of the evolution <a href="javadoc/jenetics/3.9/org/jenetics/engine/Engine.html"><code>Engine</code></a>.</p>
                         </div>
                     </div>
                    <div class="item col-md-4 col-sm-6 col-xs-12">
                         <div class="content">
                             <h4><i class="fa fa-check-circle"></i> Plugable PRNG</h4>
-                            <p>Easy changeable PRNG (<a href="javadoc/jenetics/3.9/jenetics/util/RandomRegistry.html"><code>RandomRegistry</code></a>). No <i>special</i> PRNG interface; the standard Java <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Random.html"><code>Random</code></a> engine allows the use of existing random generators.</p>
+                            <p>Easy changeable PRNG (<a href="javadoc/jenetics/3.9/org/jenetics/util/RandomRegistry.html"><code>RandomRegistry</code></a>). No <i>special</i> PRNG interface; the standard Java <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Random.html"><code>Random</code></a> engine allows the use of existing random generators.</p>
                         </div>
                     </div>
                     <div class="item col-md-4 col-sm-6 col-xs-12">
@@ -235,9 +235,9 @@ public class HelloWorld {
 
                 <h2>Extension modules</h2>
                 <ul>
-                    <li><a href="javadoc/jenetics.ext/3.9/index.html"><b>jenetics.ext</b>:</a> Additional, non-standard, genetic operators and chromosomes. Containing classes for the <a href="https://en.wikipedia.org/wiki/Weasel_program">Weasel program</a> and tree data structures.</li>
-                    <li><a href="javadoc/jenetics.prog/3.9/index.html"><b>jenetics.prog</b>:</a>The modules contains classes which allows to do genetic programming (GP). It seamlessly works with the existing <code>EvolutionStream</code> and evolution <code>Engine</code>.</li>
-                    <li><a href="javadoc/jenetics.xml/3.9/index.html"><b>jenetics.xml</b>:</a> XML marshalling module for the Jenetics base data structures.</li>
+                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.ext"><b>jenetics.ext</b> (<a href="javadoc/jenetics.ext/3.9/index.html">javadoc</a>):</a> Additional, non-standard, genetic operators and chromosomes. Containing classes for the <a href="https://en.wikipedia.org/wiki/Weasel_program">Weasel program</a> and tree data structures.</li>
+                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.prog"><b>jenetics.prog</b> (<a href="javadoc/jenetics.prog/3.9/index.html">javadoc</a>):</a>The modules contains classes which allows to do genetic programming (GP). It seamlessly works with the existing <code>EvolutionStream</code> and evolution <code>Engine</code>.</li>
+                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.xml"><b>jenetics.xml</b> (<a href="javadoc/jenetics.xml/3.9/index.html">javadoc</a>):</a> XML marshalling module for the Jenetics base data structures.</li>
                 </ul>
 
 
@@ -253,7 +253,7 @@ public class HelloWorld {
                 <h2>Projects using Jenetics</h2>
                 <ul>
                     <li><a href="http://chronetic.io/"><b>Chronetic</b>:</a> Chronetic is an open-source time pattern analysis library built to describe time-series data.</li>
-                    <li><a href="http://www.eclipse.org/app4mc/"><b>APP4MC</b>:</a> Eclipse APP4MC is a platform for engineering embedded multi- and many-core software systems.</li>                    
+                    <li><a href="http://www.eclipse.org/app4mc/"><b>APP4MC</b>:</a> Eclipse APP4MC is a platform for engineering embedded multi- and many-core software systems.</li>
                 </ul>
 
                 <h2>Blogs</h2>
