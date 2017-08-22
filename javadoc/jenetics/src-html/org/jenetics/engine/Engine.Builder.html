@@ -7,8 +7,8 @@
 <body>
 <div class="sourceContainer">
 <pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
-<span class="sourceLineNo">002</span> * Java Genetic Algorithm Library (@__identifier__@).<a name="line.2"></a>
-<span class="sourceLineNo">003</span> * Copyright (c) @__year__@ Franz Wilhelmstötter<a name="line.3"></a>
+<span class="sourceLineNo">002</span> * Java Genetic Algorithm Library (jenetics-3.9.0).<a name="line.2"></a>
+<span class="sourceLineNo">003</span> * Copyright (c) 2007-2017 Franz Wilhelmstötter<a name="line.3"></a>
 <span class="sourceLineNo">004</span> *<a name="line.4"></a>
 <span class="sourceLineNo">005</span> * Licensed under the Apache License, Version 2.0 (the "License");<a name="line.5"></a>
 <span class="sourceLineNo">006</span> * you may not use this file except in compliance with the License.<a name="line.6"></a>
@@ -258,7 +258,7 @@
 <span class="sourceLineNo">250</span>         *         {@code start} is {@code null}<a name="line.250"></a>
 <span class="sourceLineNo">251</span>         */<a name="line.251"></a>
 <span class="sourceLineNo">252</span>        public EvolutionResult&lt;G, C&gt; evolve(final EvolutionStart&lt;G, C&gt; start) {<a name="line.252"></a>
-<span class="sourceLineNo">253</span>                final Timer timer = Timer.of().start();<a name="line.253"></a>
+<span class="sourceLineNo">253</span>                final Timer timer = Timer.of(_clock).start();<a name="line.253"></a>
 <span class="sourceLineNo">254</span><a name="line.254"></a>
 <span class="sourceLineNo">255</span>                final Population&lt;G, C&gt; startPopulation = start.getPopulation();<a name="line.255"></a>
 <span class="sourceLineNo">256</span><a name="line.256"></a>
