@@ -83,17 +83,17 @@
 
 <div class="bs-docs-social">
     <ul class="bs-docs-footer-links">
-        <li class="fa fa-external-link"></li><a href="javadoc/jenetics/3.9/index.html"> Documentation</a>
+        <li class="fa fa-external-link"><a href="javadoc/jenetics/3.9/index.html"> Documentation</a></li>
         <li>&middot;</li>
-        <li class="fa fa-file-pdf-o"></li><a href="manual/manual-3.9.0.pdf"> User guide</a>
+        <li class="fa fa-file-pdf-o"><a href="manual/manual-3.9.0.pdf"> User guide</a></li>
         <li>&middot;</li>
-        <li class="fa fa-medium"></li><a href="https://medium.com/@jeneticsga/"> Blog</a>
+        <li class="fa fa-medium"><a href="https://medium.com/@jeneticsga/"> Blog</a></li>
         <li>&middot;</li>
-        <li class="fa fa-github"></li><a href="https://github.com/jenetics/jenetics"> GitHub</a>
+        <li class="fa fa-github"><a href="https://github.com/jenetics/jenetics"> GitHub</a></li>
         <li>&middot;</li>
-        <li class="fa fa-github"></li><a href="https://github.com/jenetics/jenetics/issues"> Issues</a>
+        <li class="fa fa-github"><a href="https://github.com/jenetics/jenetics/issues"> Issues</a></li>
         <li>&middot;</li>
-        <li class="fa fa-github"></li><a href="https://github.com/jenetics/jenetics/releases"> Releases</a>
+        <li class="fa fa-github"><a href="https://github.com/jenetics/jenetics/releases"> Releases</a></li>
     </ul>
 </div>
 
@@ -112,7 +112,8 @@
                     to other GA implementations, the library uses the concept of an
                     evolution stream (<a href="javadoc/jenetics/3.9/org/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a>) for executing the evolution steps.
                     Since the <a href="javadoc/jenetics/3.9/org/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a> implements the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a> interface,
-                    it works smoothly with the rest of the Java Stream API. <em>An experimental .Net port of the base library has been implemented by <a href="https://github.com/rmeindl">Rupert Meindl</a> and can be found <a href="https://github.com/rmeindl/jenetics.net">here</a>.</em></p>
+                    it works smoothly with the rest of the Java Stream API.
+                </p>
 
                 <h3>Features</h3>
                 <div class="row">
@@ -254,7 +255,10 @@ public class HelloWorld {
                     <li><a href="https://github.com/jenetics/jpx"><b>JPX</b>:</a> A Java library for creating, reading and writing <a href="https://en.wikipedia.org/wiki/Global_Positioning_System">GPS</a> data in <a href="https://en.wikipedia.org/wiki/GPS_Exchange_Format">GPX</a> format. It is a <b>full</b> implementation of version <a href="http://www.topografix.com/GPX/1/1/">1.1</a> of the GPX format. The data classes are completely immutable and allows a functional programming style. They  are working also nicely with the Java 8 <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream</a> API. <em>Since it is also possible to calculate the distance between way-points, it is a good fit for the TSP.</em></li>
                 </ul>
 
-
+                <h2>Other languages</h2>
+                <ul>
+                    <li><a href="https://github.com/rmeindl/jenetics.net"><b>Jenetics.NET</b>:</a> Experimental .NET Core port in C# of the base library.</li>
+                </ul>
 
                 <h2>Projects using Jenetics</h2>
                 <ul>
@@ -290,11 +294,13 @@ public class HelloWorld {
                 </ul>
 
                 <h2>Used software</h2>
-                <ul>
-                    <li><a href="https://www.jetbrains.com/idea/" alt="IntelliJ">
-                        <img src="img/icon_IntelliJIDEA.png" alt="IntelliJ" style="width:50px"/>
-                    </a></li>
-                </ul>
+                <div align="left" class="jetbrains-logo">
+                    <h4>
+                        <a href="https://www.jetbrains.com/idea/">
+                            <img src="img/icon_IntelliJIDEA.png" alt="IntelliJ" style="width:50px"/> IntelliJ IDEA
+                        </a>
+                    </h4>
+                </div>
             </div>
         </div>
     </div>
@@ -325,10 +331,15 @@ public class HelloWorld {
                            data-related="mdo:Creator of Jenetics">Tweet</a>
                     </li>
                     <li class="tweet-btn">
-                        <g:plusone size="medium"></g:plusone>
+                        <div class="g-plusone" data-size="medium"></div>
+                    </li>
+                    <li class="follow-btn">
+                        <div class="g-plus" data-action="share"></div>
                     </li>
                     <li class="tweet-btn">
-                        <div class="g-plus" data-action="share"></div>
+                        <div class="li-share">
+                            <script type="IN/Share" data-url="http://jenetics.io/"></script>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -383,6 +394,7 @@ public class HelloWorld {
 
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
+<script src="//platform.linkedin.com/in.js" type="text/javascript" async defer></script>
 
 </body>
 </html>
