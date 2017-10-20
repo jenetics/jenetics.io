@@ -151,8 +151,8 @@
                     </div>
                     <div class="item col-md-4 col-sm-6 col-xs-12">
                         <div class="content">
-                            <h4><i class="fa fa-check-circle"></i> Java 8 ready</h4>
-                            <p>Fully support of Java 8 Streams and Lambdas!</p>
+                            <h4><i class="fa fa-check-circle"></i> Java 8/9 ready</h4>
+                            <p>Fully support of Java 8 Streams and Lambdas! Stable (automatic) module names: <code>io.jenetics.[base|ext|prog|xml]</code></p>
                         </div>
                     </div>
                     <div class="item col-md-4 col-sm-6 col-xs-12">
@@ -242,17 +242,17 @@ public class HelloWorld {
 
                 <h2>Extension modules</h2>
                 <ul>
-                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.ext"><b>jenetics.ext</b> (<a href="javadoc/jenetics.ext/4.0/index.html">javadoc</a>):</a> Additional, non-standard, genetic operators and chromosomes. Containing classes for the <a href="https://en.wikipedia.org/wiki/Weasel_program">Weasel program</a> and tree data structures.</li>
-                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.prog"><b>jenetics.prog</b> (<a href="javadoc/jenetics.prog/4.0/index.html">javadoc</a>):</a>The modules contains classes which allows to do genetic programming (GP). It seamlessly works with the existing <code>EvolutionStream</code> and evolution <code>Engine</code>.</li>
-                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.xml"><b>jenetics.xml</b> (<a href="javadoc/jenetics.xml/4.0/index.html">javadoc</a>):</a> XML marshalling module for the Jenetics base data structures.</li>
+                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.ext"><b>io.jenetics.ext</b> (<a href="javadoc/jenetics.ext/4.0/index.html">javadoc</a>):</a> Additional, non-standard, genetic operators and chromosomes. Containing classes for the <a href="https://en.wikipedia.org/wiki/Weasel_program">Weasel program</a> and tree data structures.</li>
+                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.prog"><b>io.jenetics.prog</b> (<a href="javadoc/jenetics.prog/4.0/index.html">javadoc</a>):</a>The modules contains classes which allows to do genetic programming (GP). It seamlessly works with the existing <code>EvolutionStream</code> and evolution <code>Engine</code>.</li>
+                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.xml"><b>io.jenetics.xml</b> (<a href="javadoc/jenetics.xml/4.0/index.html">javadoc</a>):</a> XML marshalling module for the Jenetics base data structures.</li>
                 </ul>
 
 
-                <h2>Additional libraries</h2>
+                <h2>Additional modules</h2>
                 <p>This libraries doesn't have any dependency to Jenetics and can be used as they are.</p>
                 <ul>
-                    <li><a href="https://github.com/jenetics/prngine"><b>PRNGine</b></a>: A pseudo-random number generator library for sequential and parallel <a href="https://de.wikipedia.org/wiki/Monte-Carlo-Simulation">Monte Carlo simulations</a>. It has been designed to work smoothly with the <em>Jenetics</em> library, but it has no dependency to it. All PRNG implementations of this library extends the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Random.html">Random</a> class, which makes it easily usable in other projects.</li>
-                    <li><a href="https://github.com/jenetics/jpx"><b>JPX</b>:</a> A Java library for creating, reading and writing <a href="https://en.wikipedia.org/wiki/Global_Positioning_System">GPS</a> data in <a href="https://en.wikipedia.org/wiki/GPS_Exchange_Format">GPX</a> format. It is a <b>full</b> implementation of version <a href="http://www.topografix.com/GPX/1/1/">1.1</a> of the GPX format. The data classes are completely immutable and allows a functional programming style. They  are working also nicely with the Java 8 <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream</a> API. <em>Since it is also possible to calculate the distance between way-points, it is a good fit for the TSP.</em></li>
+                    <li><a href="https://github.com/jenetics/prngine"><b>io.jenetics.prngine</b></a>: A pseudo-random number generator library for sequential and parallel <a href="https://de.wikipedia.org/wiki/Monte-Carlo-Simulation">Monte Carlo simulations</a>. It has been designed to work smoothly with the <em>Jenetics</em> library, but it has no dependency to it. All PRNG implementations of this library extends the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Random.html">Random</a> class, which makes it easily usable in other projects.</li>
+                    <li><a href="https://github.com/jenetics/jpx"><b>io.jenetics.jpx</b>:</a> A Java library for creating, reading and writing <a href="https://en.wikipedia.org/wiki/Global_Positioning_System">GPS</a> data in <a href="https://en.wikipedia.org/wiki/GPS_Exchange_Format">GPX</a> format. It is a <b>full</b> implementation of version <a href="http://www.topografix.com/GPX/1/1/">1.1</a> of the GPX format. The data classes are completely immutable and allows a functional programming style. They  are working also nicely with the Java 8 <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream</a> API. <em>Since it is also possible to calculate the distance between way-points, it is a good fit for the TSP.</em></li>
                 </ul>
 
                 <h2>Other languages</h2>
