@@ -11,41 +11,43 @@ The minimum evolution Engine setup needs a genotype factory, `Factory<Genotype<?
 
 
 {{< highlight java >}}
-import io.jenetics.BitChromosome;
-import io.jenetics.BitGene;
-import io.jenetics.Genotype;
-import io.jenetics.engine.Engine;
-import io.jenetics.engine.EvolutionResult;
-import io.jenetics.util.Factory;
 
-public class HelloWorld {
-    // 2.) Definition of the fitness function.
-    private static Integer eval(Genotype<BitGene> gt) {
-        return gt.getChromosome()
-            .as(BitChromosome.class)
-            .bitCount();
-    }
+	import io.jenetics.BitChromosome;
+	import io.jenetics.BitGene;
+	import io.jenetics.Genotype;
+	import io.jenetics.engine.Engine;
+	import io.jenetics.engine.EvolutionResult;
+	import io.jenetics.util.Factory;
+	
+	public class HelloWorld {
+		// 2.) Definition of the fitness function.
+		private static Integer eval(Genotype<BitGene> gt) {
+			return gt.getChromosome()
+				.as(BitChromosome.class)
+				.bitCount();
+		}
+	
+		public static void main(String[] args) {
+			// 1.) Define the genotype (factory) suitable
+			//     for the problem.
+			Factory<Genotype<BitGene>> gtf =
+				Genotype.of(BitChromosome.of(10, 0.5));
+	
+			// 3.) Create the execution environment.
+			Engine<BitGene, Integer> engine = Engine
+				.builder(HelloWorld::eval, gtf)
+				.build();
+	
+			// 4.) Start the execution (evolution) and
+			//     collect the result.
+			Genotype<BitGene> result = engine.stream()
+				.limit(100)
+				.collect(EvolutionResult.toBestGenotype());
+	
+			System.out.println("Hello World:\n" + result);
+		}
+	}
 
-    public static void main(String[] args) {
-        // 1.) Define the genotype (factory) suitable
-        //     for the problem.
-        Factory<Genotype<BitGene>> gtf =
-            Genotype.of(BitChromosome.of(10, 0.5));
-
-        // 3.) Create the execution environment.
-        Engine<BitGene, Integer> engine = Engine
-            .builder(HelloWorld::eval, gtf)
-            .build();
-
-        // 4.) Start the execution (evolution) and
-        //     collect the result.
-        Genotype<BitGene> result = engine.stream()
-            .limit(100)
-            .collect(EvolutionResult.toBestGenotype());
-
-        System.out.println("Hello World:\n" + result);
-    }
-}
 {{< /highlight >}}
 
 In contrast to other GA implementations, the library uses the concept of an evolution stream (`EvolutionStream`) for executing the evolution steps. Since the `EvolutionStream` implements the Java Stream interface, it works smoothly with the rest of the Java streaming API. Now let's have a closer look at listing above and discuss this simple program step by step:
