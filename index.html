@@ -28,64 +28,38 @@
 
     <link href="css/docs.min.css" rel="stylesheet">
     <link rel="canonical" href="http://jenetics.io" />
-
-    <style>
-        .logo-text img {
-            padding: 10px;
-            width: 30%;
-        }
-
-        .logo-img img {
-            padding: 0 10px 10px;
-            width: 90%;
-            height: 90%;
-            position: relative;
-        }
-
-        .bs-docs-booticon-outline {
-            background: white;
-        }
-    </style>
-
     <title>Jenetics: Java Genetic Algorithm Library</title>
 </head>
 
-<body class="bs-docs-home" onload="prettyPrint()">
-<header class="navbar navbar-static-top bs-docs-nav" role="banner">
-    <div class="navbar-header">
-        <span class="logo-text"><img src="img/Jenetics.png"/></span>
-    </div>
-</header>
-
-<div class="bs-docs-masthead" role="main">
-    <div class="container">
-        <span class="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline logo-img"><img
-                src="img/logo.png"/></span>
+<body class="bs-docs-home" onload="prettyPrint()" style="background: #ECECEA">
+<div class="bs-docs-masthead" role="main" style="background-image: url('img/bg.jpg'); background-size: cover;">
+    <div class="container" >
+        <h1>Jenetics</h1>
 
         <p class="lead">Jenetics is an advanced Genetic Algorithm, Evolutionary Algorithm and Genetic
             Programming library, respectively, written in modern day Java.</p>
 
         <p class="lead">
-            <a href="https://github.com/jenetics/jenetics/archive/v3.9.0.zip" class="btn btn-outline-inverse btn-lg">
+            <a href="https://github.com/jenetics/jenetics/archive/v4.0.0.zip" class="btn btn-outline-inverse btn-lg">
                 <i class="fa fa-file-archive-o"></i> zip
             </a>
 
-            <a href="https://github.com/jenetics/jenetics/archive/v3.9.0.tar.gz" class="btn btn-outline-inverse btn-lg">
+            <a href="https://github.com/jenetics/jenetics/archive/v4.0.0.tar.gz" class="btn btn-outline-inverse btn-lg">
                 <i class="fa fa-file-archive-o"></i> tar.gz</a>
 
-            <a href="http://search.maven.org/#artifactdetails|io.jenetics|jenetics|3.9.0|jar" class="btn btn-outline-inverse btn-lg">
+            <a href="https://mvnrepository.com/artifact/io.jenetics/jenetics" class="btn btn-outline-inverse btn-lg">
                 <i class="fa fa-external-link"></i> Maven</a>
         </p>
 
-        <p class="version">Currently v3.9.0</p>
+        <p>Currently v4.0.0</p>
     </div>
 </div>
 
 <div class="bs-docs-social">
     <ul class="bs-docs-footer-links">
-        <li class="fa fa-external-link"><a href="javadoc/jenetics/3.9/index.html"> Documentation</a></li>
+        <li class="fa fa-external-link"><a href="javadoc/jenetics/4.0/index.html"> Documentation</a></li>
         <li>&middot;</li>
-        <li class="fa fa-file-pdf-o"><a href="manual/manual-3.9.0.pdf"> User guide</a></li>
+        <li class="fa fa-file-pdf-o"><a href="manual/manual-4.0.0.pdf"> User guide</a></li>
         <li>&middot;</li>
         <li class="fa fa-medium"><a href="https://medium.com/@jeneticsga/"> Blog</a></li>
         <li>&middot;</li>
@@ -97,21 +71,21 @@
     </ul>
 </div>
 
-<div class="container bs-docs-container">
+<div class="container bs-docs-container" >
     <div class="row">
         <div class="col-md-12" role="main">
             <div class="bs-docs-section">
                 <h2 class="page-header">Overview</h2>
 
-                <p class="lead"><strong>Jenetics</strong> is designed with a
+                <p><strong>Jenetics</strong> is designed with a
                     clear separation of the several concepts of the algorithm,
                     e.g. <em>Gene</em>, <em>Chromosome</em>, <em>Genotype</em>, <em>Phenotype</em>, <em>Population</em>
                     and
                     fitness <em>Function</em>. Jenetics allows you to minimize
                     and maximize the given fitness function without tweaking it. In contrast
                     to other GA implementations, the library uses the concept of an
-                    evolution stream (<a href="javadoc/jenetics/3.9/org/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a>) for executing the evolution steps.
-                    Since the <a href="javadoc/jenetics/3.9/org/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a> implements the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a> interface,
+                    evolution stream (<a href="javadoc/jenetics/4.0/io/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a>) for executing the evolution steps.
+                    Since the <a href="javadoc/jenetics/4.0/io/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a> implements the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a> interface,
                     it works smoothly with the rest of the Java Stream API.
                 </p>
 
@@ -119,20 +93,20 @@
                 <div class="row">
                     <div class="item col-md-4 col-sm-6 col-xs-12">
                         <div class="content">
-                            <h4><i class="fa fa-check-circle"></i> Genetic programming (new)</h4>
+                            <h4><i class="fa fa-check-circle"></i> Genetic programming <span class="badge badge-secondary">New</span></h4>
                             <p>Since version <a href="https://github.com/jenetics/jenetics/releases/tag/v3.9.0"><i>3.9.0</i></a> the <a href="https://github.com/jenetics/jenetics/tree/master/jenetics.prog"><i>jenetics.prog</i></a> module allows to do <a href="https://en.wikipedia.org/wiki/Genetic_programming"><i>Genetic programming</i></a> with the Jenetics library.</p>
                         </div>
                     </div>
                    <div class="item col-md-4 col-sm-6 col-xs-12">
                         <div class="content">
                             <h4><i class="fa fa-check-circle"></i> Frictionless minimization</h4>
-                            <p>No need to tweak the fitness function for minimization problems. Just change the configuration of the evolution <a href="javadoc/jenetics/3.9/org/jenetics/engine/Engine.html"><code>Engine</code></a>.</p>
+                            <p>No need to tweak the fitness function for minimization problems. Just change the configuration of the evolution <a href="javadoc/jenetics/4.0/io/jenetics/engine/Engine.html"><code>Engine</code></a>.</p>
                         </div>
                     </div>
                    <div class="item col-md-4 col-sm-6 col-xs-12">
                         <div class="content">
                             <h4><i class="fa fa-check-circle"></i> Plugable PRNG</h4>
-                            <p>Easy changeable PRNG (<a href="javadoc/jenetics/3.9/org/jenetics/util/RandomRegistry.html"><code>RandomRegistry</code></a>). No <i>special</i> PRNG interface; the standard Java <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Random.html"><code>Random</code></a> engine allows the use of existing random generators.</p>
+                            <p>Easy changeable PRNG (<a href="javadoc/jenetics/4.0/io/jenetics/util/RandomRegistry.html"><code>RandomRegistry</code></a>). No <i>special</i> PRNG interface; the standard Java <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Random.html"><code>Random</code></a> engine allows the use of existing random generators.</p>
                         </div>
                     </div>
                     <div class="item col-md-4 col-sm-6 col-xs-12">
@@ -151,14 +125,14 @@
                     </div>
                     <div class="item col-md-4 col-sm-6 col-xs-12">
                         <div class="content">
-                            <h4><i class="fa fa-check-circle"></i> Java 8 ready</h4>
-                            <p>Fully support of Java 8 Streams and Lambdas!</p>
+                            <h4><i class="fa fa-check-circle"></i> Java 8/9 ready</h4>
+                            <p>Fully support of Java 8 Streams and Lambdas! Stable (automatic) module names: <code>io.jenetics.[base|ext|prog|xml]</code></p>
                         </div>
                     </div>
                     <div class="item col-md-4 col-sm-6 col-xs-12">
                         <div class="content">
                             <h4><i class="fa fa-check-circle"></i> Fully documented</h4>
-                            <p>Complete <a href="javadoc/jenetics/3.9/index.html">Documentation</a> and <a href="manual/manual-3.9.0.pdf">User guide</a> available, including <a href="manual/html/internals.html">documentation</a> of selected implementation details.</p>
+                            <p>Complete <a href="javadoc/jenetics/4.0/index.html">Documentation</a> and <a href="manual/manual-4.0.0.pdf">User guide</a> available.</p>
                         </div>
                     </div>
                 </div>
@@ -180,12 +154,12 @@
                 </p>
 
                     <pre class="prettyprint linenums">
-import org.jenetics.BitChromosome;
-import org.jenetics.BitGene;
-import org.jenetics.Genotype;
-import org.jenetics.engine.Engine;
-import org.jenetics.engine.EvolutionResult;
-import org.jenetics.util.Factory;
+import io.jenetics.BitChromosome;
+import io.jenetics.BitGene;
+import io.jenetics.Genotype;
+import io.jenetics.engine.Engine;
+import io.jenetics.engine.EvolutionResult;
+import io.jenetics.util.Factory;
 
 public class HelloWorld {
     // 2.) Definition of the fitness function.
@@ -242,17 +216,17 @@ public class HelloWorld {
 
                 <h2>Extension modules</h2>
                 <ul>
-                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.ext"><b>jenetics.ext</b> (<a href="javadoc/jenetics.ext/3.9/index.html">javadoc</a>):</a> Additional, non-standard, genetic operators and chromosomes. Containing classes for the <a href="https://en.wikipedia.org/wiki/Weasel_program">Weasel program</a> and tree data structures.</li>
-                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.prog"><b>jenetics.prog</b> (<a href="javadoc/jenetics.prog/3.9/index.html">javadoc</a>):</a>The modules contains classes which allows to do genetic programming (GP). It seamlessly works with the existing <code>EvolutionStream</code> and evolution <code>Engine</code>.</li>
-                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.xml"><b>jenetics.xml</b> (<a href="javadoc/jenetics.xml/3.9/index.html">javadoc</a>):</a> XML marshalling module for the Jenetics base data structures.</li>
+                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.ext"><b>io.jenetics.ext</b> (<a href="javadoc/jenetics.ext/4.0/index.html">javadoc</a>):</a> Additional, non-standard, genetic operators and chromosomes. Containing classes for the <a href="https://en.wikipedia.org/wiki/Weasel_program">Weasel program</a> and tree data structures.</li>
+                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.prog"><b>io.jenetics.prog</b> (<a href="javadoc/jenetics.prog/4.0/index.html">javadoc</a>):</a>The modules contains classes which allows to do genetic programming (GP). It seamlessly works with the existing <code>EvolutionStream</code> and evolution <code>Engine</code>.</li>
+                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.xml"><b>io.jenetics.xml</b> (<a href="javadoc/jenetics.xml/4.0/index.html">javadoc</a>):</a> XML marshalling module for the Jenetics base data structures.</li>
                 </ul>
 
 
-                <h2>Additional libraries</h2>
+                <h2>Additional modules</h2>
                 <p>This libraries doesn't have any dependency to Jenetics and can be used as they are.</p>
                 <ul>
-                    <li><a href="https://github.com/jenetics/prngine"><b>PRNGine</b></a>: A pseudo-random number generator library for sequential and parallel <a href="https://de.wikipedia.org/wiki/Monte-Carlo-Simulation">Monte Carlo simulations</a>. It has been designed to work smoothly with the <em>Jenetics</em> library, but it has no dependency to it. All PRNG implementations of this library extends the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Random.html">Random</a> class, which makes it easily usable in other projects.</li>
-                    <li><a href="https://github.com/jenetics/jpx"><b>JPX</b>:</a> A Java library for creating, reading and writing <a href="https://en.wikipedia.org/wiki/Global_Positioning_System">GPS</a> data in <a href="https://en.wikipedia.org/wiki/GPS_Exchange_Format">GPX</a> format. It is a <b>full</b> implementation of version <a href="http://www.topografix.com/GPX/1/1/">1.1</a> of the GPX format. The data classes are completely immutable and allows a functional programming style. They  are working also nicely with the Java 8 <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream</a> API. <em>Since it is also possible to calculate the distance between way-points, it is a good fit for the TSP.</em></li>
+                    <li><a href="https://github.com/jenetics/prngine"><b>io.jenetics.prngine</b></a>: A pseudo-random number generator library for sequential and parallel <a href="https://de.wikipedia.org/wiki/Monte-Carlo-Simulation">Monte Carlo simulations</a>. It has been designed to work smoothly with the <em>Jenetics</em> library, but it has no dependency to it. All PRNG implementations of this library extends the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Random.html">Random</a> class, which makes it easily usable in other projects.</li>
+                    <li><a href="https://github.com/jenetics/jpx"><b>io.jenetics.jpx</b>:</a> A Java library for creating, reading and writing <a href="https://en.wikipedia.org/wiki/Global_Positioning_System">GPS</a> data in <a href="https://en.wikipedia.org/wiki/GPS_Exchange_Format">GPX</a> format. It is a <b>full</b> implementation of version <a href="http://www.topografix.com/GPX/1/1/">1.1</a> of the GPX format. The data classes are completely immutable and allows a functional programming style. They  are working also nicely with the Java 8 <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream</a> API. <em>Since it is also possible to calculate the distance between way-points, it is a good fit for the TSP.</em></li>
                 </ul>
 
                 <h2>Other languages</h2>
