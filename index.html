@@ -26,9 +26,17 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/sons-of-obsidian.css">
 
+    <link rel="stylesheet" type="text/css" href="css/jquery.floating-social-share.min.css" />
+
     <link href="css/docs.min.css" rel="stylesheet">
     <link rel="canonical" href="http://jenetics.io" />
     <title>Jenetics: Java Genetic Algorithm Library</title>
+
+    <style>
+        .bs-docs-footer-links_font {
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
 </head>
 
 <body class="bs-docs-home" onload="prettyPrint()" style="background: #ECECEA">
@@ -56,18 +64,17 @@
 </div>
 
 <div class="bs-docs-social">
-    <ul class="bs-docs-footer-links">
-        <li class="fa fa-external-link"><a href="javadoc/jenetics/4.0/index.html"> Documentation</a></li>
+    <ul class="bs-docs-footer-links bs-docs-footer-links_font">
+        <li class="fa fa-file-pdf-o"><a class="bs-docs-footer-links_font" href="manual/manual-4.0.0.pdf"> User guide</a></li>
+        <!-- style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif" -->
         <li>&middot;</li>
-        <li class="fa fa-file-pdf-o"><a href="manual/manual-4.0.0.pdf"> User guide</a></li>
+        <li class="fa fa-medium "><a class="bs-docs-footer-links_font" href="https://medium.com/@jeneticsga/"> Blog</a></li>
         <li>&middot;</li>
-        <li class="fa fa-medium"><a href="https://medium.com/@jeneticsga/"> Blog</a></li>
+        <li class="fa fa-github"><a class="bs-docs-footer-links_font" href="https://github.com/jenetics/jenetics"> GitHub</a></li>
         <li>&middot;</li>
-        <li class="fa fa-github"><a href="https://github.com/jenetics/jenetics"> GitHub</a></li>
+        <li class="fa fa-github"><a class="bs-docs-footer-links_font" href="https://github.com/jenetics/jenetics/issues"> Issues</a></li>
         <li>&middot;</li>
-        <li class="fa fa-github"><a href="https://github.com/jenetics/jenetics/issues"> Issues</a></li>
-        <li>&middot;</li>
-        <li class="fa fa-github"><a href="https://github.com/jenetics/jenetics/releases"> Releases</a></li>
+        <li class="fa fa-github"><a class="bs-docs-footer-links_font" href="https://github.com/jenetics/jenetics/releases"> Releases</a></li>
     </ul>
 </div>
 
@@ -288,46 +295,24 @@ public class HelloWorld {
 
 <footer class="bs-docs-footer" role="contentinfo">
     <div class="container">
-        <div class="container">
-            <div class="bs-docs-social">
-                <ul class="bs-docs-social-buttons">
-                    <li>
-                        <iframe class="github-btn"
-                                src="http://ghbtns.com/github-btn.html?user=jenetics&amp;repo=jenetics&amp;type=watch&amp;count=true"
-                                width="100" height="20" title="Star on GitHub"></iframe>
-                    </li>
-                    <li>
-                        <iframe class="github-btn"
-                                src="http://ghbtns.com/github-btn.html?user=jenetics&amp;repo=jenetics&amp;type=fork&amp;count=true"
-                                width="102" height="20" title="Fork on GitHub"></iframe>
-                    </li>
-                    <li class="follow-btn">
-                        <a href="https://twitter.com/jeneticsga" class="twitter-follow-button"
-                           data-link-color="#0069D6" data-show-count="true">Follow @jeneticsga</a>
-                    </li>
-                    <li class="tweet-btn">
-                        <a href="https://twitter.com/share" class="twitter-share-button"
-                           data-url="http://jenetics.io/" data-count="horizontal" data-via="jeneticsga"
-                           data-related="mdo:Creator of Jenetics">Tweet</a>
-                    </li>
-                    <li class="tweet-btn">
-                        <div class="g-plusone" data-size="medium"></div>
-                    </li>
-                    <li class="follow-btn">
-                        <div class="g-plus" data-action="share"></div>
-                    </li>
-                    <li class="tweet-btn">
-                        <div class="li-share">
-                            <script type="IN/Share" data-url="http://jenetics.io/"></script>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <p>The library is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache
-                License, Version 2.0</a></p>
-
-            <p>Copyright 2007-2017 Franz Wilhelmstötter</p>
+        <div class="bs-docs-social">
+            <ul class="bs-docs-social-buttons">
+                <li>
+                    <a class="github-button" href="https://github.com/jenetics/jenetics" data-icon="octicon-star" data-show-count="true" aria-label="Star on GitHub">Star</a>
+                </li>
+                <li>
+                    <a class="github-button" href="https://github.com/ntkme/github-buttons/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork on GitHub">Fork</a>
+                </li>
+                <li class="follow-btn">
+                    <a href="https://twitter.com/jeneticsga" class="twitter-follow-button"
+                       data-link-color="#0069D6" data-show-count="true">Follow @jeneticsga</a>
+                </li>
+            </ul>
         </div>
+        <p>The library is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache
+            License, Version 2.0</a></p>
+
+        <p>Copyright 2007-2017 Franz Wilhelmstötter</p>
     </div>
 </footer>
 
@@ -343,6 +328,17 @@ public class HelloWorld {
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<script type="text/javascript" src="js/jquery.floating-social-share.min.js"></script>
+
+<script>
+    $("body").floatingSocialShare({
+        buttons: ["facebook", "twitter", "google-plus", "linkedin"],
+        text: "share with:"
+    });
+</script>
 
 <script>
     window.twttr = (function (d, s, id) {
@@ -373,8 +369,6 @@ public class HelloWorld {
 </script>
 
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-<script src="//platform.linkedin.com/in.js" type="text/javascript" async defer></script>
 
 </body>
 </html>
