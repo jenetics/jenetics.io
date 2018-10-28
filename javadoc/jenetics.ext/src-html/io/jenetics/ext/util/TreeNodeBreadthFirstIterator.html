@@ -30,7 +30,7 @@ TreeNodeBreadthFirstIterator.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">01</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">02</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-4.2.0).</font><br />
+<font color="#808080">02</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-4.3.0).</font><br />
 <font color="#808080">03</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2018&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">04</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">05</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
@@ -53,8 +53,8 @@ TreeNodeBreadthFirstIterator.java
 <font color="#808080">22</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.util.Collections.singletonList;</font><br />
 <font color="#808080">23</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.util.Objects.requireNonNull;</font><br />
 <font color="#808080">24</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">25</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Iterator;</font><br />
-<font color="#808080">26</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.LinkedList;</font><br />
+<font color="#808080">25</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.ArrayDeque;</font><br />
+<font color="#808080">26</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Iterator;</font><br />
 <font color="#808080">27</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.NoSuchElementException;</font><br />
 <font color="#808080">28</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Queue;</font><br />
 <font color="#808080">29</font>&nbsp;<font color="#ffffff"></font><br />
@@ -70,7 +70,7 @@ TreeNodeBreadthFirstIterator.java
 <font color="#808080">39</font>&nbsp;<font color="#7f0055"><b>final&nbsp;class&nbsp;</b></font><font color="#000000">TreeNodeBreadthFirstIterator&lt;V,&nbsp;T&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">Tree&lt;V,&nbsp;T&gt;&gt;</font><br />
 <font color="#808080">40</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>implements&nbsp;</b></font><font color="#000000">Iterator&lt;T&gt;</font><br />
 <font color="#808080">41</font>&nbsp;<font color="#000000">{</font><br />
-<font color="#808080">42</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">Queue&lt;Iterator&lt;T&gt;&gt;&nbsp;_queue&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">LinkedList&lt;&gt;</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">42</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">Queue&lt;Iterator&lt;T&gt;&gt;&nbsp;_queue&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">ArrayDeque&lt;&gt;</font><font color="#000000">()</font><font color="#000000">;</font><br />
 <font color="#808080">43</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">44</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
 <font color="#808080">45</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Create&nbsp;a&nbsp;new&nbsp;breath-first&nbsp;iterator&nbsp;from&nbsp;the&nbsp;given&nbsp;{@code&nbsp;root}&nbsp;element.</font><br />
