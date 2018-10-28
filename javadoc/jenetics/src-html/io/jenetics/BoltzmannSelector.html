@@ -30,7 +30,7 @@ BoltzmannSelector.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">001</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-4.2.0).</font><br />
+<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-4.3.0).</font><br />
 <font color="#808080">003</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2018&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">004</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">005</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
@@ -53,10 +53,10 @@ BoltzmannSelector.java
 <font color="#808080">022</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.exp;</font><br />
 <font color="#808080">023</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.String.format;</font><br />
 <font color="#808080">024</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">io.jenetics.internal.math.base.normalize;</font><br />
-<font color="#808080">025</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">026</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Arrays;</font><br />
-<font color="#808080">027</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">028</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.internal.util.Hash;</font><br />
+<font color="#808080">025</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">io.jenetics.internal.util.Hashes.hash;</font><br />
+<font color="#808080">026</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">027</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Arrays;</font><br />
+<font color="#808080">028</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">029</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.util.Seq;</font><br />
 <font color="#808080">030</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">031</font>&nbsp;<font color="#3f5fbf">/**</font><br />
@@ -159,7 +159,7 @@ BoltzmannSelector.java
 <font color="#808080">128</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">129</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
 <font color="#808080">130</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">hashCode</font><font color="#000000">()&nbsp;{</font><br />
-<font color="#808080">131</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">Hash.of</font><font color="#000000">(</font><font color="#000000">getClass</font><font color="#000000">())</font><font color="#000000">.and</font><font color="#000000">(</font><font color="#000000">_b</font><font color="#000000">)</font><font color="#000000">.value</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">131</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">hash</font><font color="#000000">(</font><font color="#000000">_b</font><font color="#000000">)</font><font color="#000000">;</font><br />
 <font color="#808080">132</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
 <font color="#808080">133</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">134</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />

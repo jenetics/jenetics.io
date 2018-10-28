@@ -30,7 +30,7 @@ FitnessThresholdLimit.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">01</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">02</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-4.2.0).</font><br />
+<font color="#808080">02</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-4.3.0).</font><br />
 <font color="#808080">03</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2018&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">04</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">05</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
@@ -65,18 +65,26 @@ FitnessThresholdLimit.java
 <font color="#808080">34</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">35</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">C&nbsp;_threshold;</font><br />
 <font color="#808080">36</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">37</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">FitnessThresholdLimit</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">C&nbsp;threshold</font><font color="#000000">)&nbsp;{</font><br />
-<font color="#808080">38</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_threshold&nbsp;=&nbsp;requireNonNull</font><font color="#000000">(</font><font color="#000000">threshold</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">39</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">40</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">41</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
-<font color="#808080">42</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>boolean&nbsp;</b></font><font color="#000000">test</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">EvolutionResult&lt;?,&nbsp;C&gt;&nbsp;result</font><font color="#000000">)&nbsp;{</font><br />
-<font color="#808080">43</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">result.getTotalGenerations</font><font color="#000000">()&nbsp;</font><font color="#000000">&lt;=&nbsp;</font><font color="#990000">1&nbsp;</font><font color="#000000">||</font><br />
-<font color="#808080">44</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">result.getOptimize</font><font color="#000000">()</font><br />
-<font color="#808080">45</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.compare</font><font color="#000000">(</font><font color="#000000">_threshold,&nbsp;result.getBestFitness</font><font color="#000000">())&nbsp;</font><font color="#000000">&gt;=&nbsp;</font><font color="#990000">0</font><font color="#000000">;</font><br />
-<font color="#808080">46</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">47</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">48</font>&nbsp;<font color="#000000">}</font></code>
+<font color="#808080">37</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#7f0055"><b>boolean&nbsp;</b></font><font color="#000000">_proceed&nbsp;=&nbsp;</font><font color="#7f0055"><b>true</b></font><font color="#000000">;</font><br />
+<font color="#808080">38</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">39</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">FitnessThresholdLimit</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">C&nbsp;threshold</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">40</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_threshold&nbsp;=&nbsp;requireNonNull</font><font color="#000000">(</font><font color="#000000">threshold</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">41</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">42</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">43</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
+<font color="#808080">44</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>boolean&nbsp;</b></font><font color="#000000">test</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">EvolutionResult&lt;?,&nbsp;C&gt;&nbsp;result</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">45</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#7f0055"><b>boolean&nbsp;</b></font><font color="#000000">proceed&nbsp;=</font><br />
+<font color="#808080">46</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_proceed&nbsp;&amp;&amp;</font><br />
+<font color="#808080">47</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">result.getOptimize</font><font color="#000000">()</font><font color="#000000">.compare</font><font color="#000000">(</font><font color="#000000">_threshold,&nbsp;result.getBestFitness</font><font color="#000000">())&nbsp;</font><font color="#000000">&gt;=&nbsp;</font><font color="#990000">0</font><font color="#000000">;</font><br />
+<font color="#808080">48</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">49</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>try&nbsp;</b></font><font color="#000000">{</font><br />
+<font color="#808080">50</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">_proceed;</font><br />
+<font color="#808080">51</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>finally&nbsp;</b></font><font color="#000000">{</font><br />
+<font color="#808080">52</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_proceed&nbsp;=&nbsp;proceed;</font><br />
+<font color="#808080">53</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">54</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">55</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">56</font>&nbsp;<font color="#000000">}</font></code>
     
    </td>
   <!-- end source code -->

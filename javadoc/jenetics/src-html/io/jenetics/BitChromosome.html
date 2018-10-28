@@ -30,7 +30,7 @@ BitChromosome.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">001</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-4.2.0).</font><br />
+<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-4.3.0).</font><br />
 <font color="#808080">003</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2018&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">004</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">005</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
@@ -54,19 +54,19 @@ BitChromosome.java
 <font color="#808080">023</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.String.format;</font><br />
 <font color="#808080">024</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.util.Objects.requireNonNull;</font><br />
 <font color="#808080">025</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.util.stream.Collectors.joining;</font><br />
-<font color="#808080">026</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">027</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.io.IOException;</font><br />
-<font color="#808080">028</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.io.ObjectInputStream;</font><br />
-<font color="#808080">029</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.io.ObjectOutputStream;</font><br />
-<font color="#808080">030</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.io.Serializable;</font><br />
-<font color="#808080">031</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.math.BigInteger;</font><br />
-<font color="#808080">032</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.BitSet;</font><br />
-<font color="#808080">033</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Iterator;</font><br />
-<font color="#808080">034</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.ListIterator;</font><br />
-<font color="#808080">035</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.stream.IntStream;</font><br />
-<font color="#808080">036</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">037</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.internal.util.Equality;</font><br />
-<font color="#808080">038</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.internal.util.Hash;</font><br />
+<font color="#808080">026</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">io.jenetics.internal.util.Hashes.hash;</font><br />
+<font color="#808080">027</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">028</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.io.IOException;</font><br />
+<font color="#808080">029</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.io.ObjectInputStream;</font><br />
+<font color="#808080">030</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.io.ObjectOutputStream;</font><br />
+<font color="#808080">031</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.io.Serializable;</font><br />
+<font color="#808080">032</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.math.BigInteger;</font><br />
+<font color="#808080">033</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Arrays;</font><br />
+<font color="#808080">034</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.BitSet;</font><br />
+<font color="#808080">035</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Iterator;</font><br />
+<font color="#808080">036</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.ListIterator;</font><br />
+<font color="#808080">037</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.stream.IntStream;</font><br />
+<font color="#808080">038</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">039</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.internal.util.bit;</font><br />
 <font color="#808080">040</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.internal.util.require;</font><br />
 <font color="#808080">041</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.util.ISeq;</font><br />
@@ -463,7 +463,7 @@ BitChromosome.java
 <font color="#808080">432</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BitChromosome.</font><br />
 <font color="#808080">433</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
 <font color="#808080">434</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">String&nbsp;toCanonicalString</font><font color="#000000">()&nbsp;{</font><br />
-<font color="#808080">435</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">toSeq</font><font color="#000000">()</font><font color="#000000">.stream</font><font color="#000000">()</font><br />
+<font color="#808080">435</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">stream</font><font color="#000000">()</font><br />
 <font color="#808080">436</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.map</font><font color="#000000">(</font><font color="#000000">g&nbsp;-&gt;&nbsp;g.booleanValue</font><font color="#000000">()&nbsp;</font><font color="#000000">?&nbsp;</font><font color="#2a00ff">&#34;1&#34;&nbsp;</font><font color="#000000">:&nbsp;</font><font color="#2a00ff">&#34;0&#34;</font><font color="#000000">)</font><br />
 <font color="#808080">437</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.collect</font><font color="#000000">(</font><font color="#000000">joining</font><font color="#000000">())</font><font color="#000000">;</font><br />
 <font color="#808080">438</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
@@ -659,56 +659,54 @@ BitChromosome.java
 <font color="#808080">628</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">629</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
 <font color="#808080">630</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">hashCode</font><font color="#000000">()&nbsp;{</font><br />
-<font color="#808080">631</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">Hash.of</font><font color="#000000">(</font><font color="#000000">getClass</font><font color="#000000">())</font><font color="#000000">.and</font><font color="#000000">(</font><font color="#000000">_genes</font><font color="#000000">)</font><font color="#000000">.value</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">631</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">hash</font><font color="#000000">(</font><font color="#000000">_genes,&nbsp;hash</font><font color="#000000">(</font><font color="#000000">getClass</font><font color="#000000">()))</font><font color="#000000">;</font><br />
 <font color="#808080">632</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
 <font color="#808080">633</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">634</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
 <font color="#808080">635</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>boolean&nbsp;</b></font><font color="#000000">equals</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Object&nbsp;obj</font><font color="#000000">)&nbsp;{</font><br />
-<font color="#808080">636</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">Equality.of</font><font color="#000000">(</font><font color="#000000">this,&nbsp;obj</font><font color="#000000">)</font><font color="#000000">.test</font><font color="#000000">(</font><font color="#000000">c&nbsp;-&gt;&nbsp;</font><font color="#000000">{</font><br />
-<font color="#808080">637</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>boolean&nbsp;</b></font><font color="#000000">equals&nbsp;=&nbsp;length</font><font color="#000000">()&nbsp;</font><font color="#000000">==&nbsp;c.length</font><font color="#000000">()</font><font color="#000000">;</font><br />
-<font color="#808080">638</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>for&nbsp;</b></font><font color="#000000">(</font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">i&nbsp;=&nbsp;</font><font color="#990000">0</font><font color="#000000">,&nbsp;n&nbsp;=&nbsp;length</font><font color="#000000">()</font><font color="#000000">;&nbsp;equals&nbsp;&amp;&amp;&nbsp;i&nbsp;&lt;&nbsp;n;&nbsp;++i</font><font color="#000000">)&nbsp;{</font><br />
-<font color="#808080">639</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">equals&nbsp;=&nbsp;getGene</font><font color="#000000">(</font><font color="#000000">i</font><font color="#000000">)&nbsp;</font><font color="#000000">==&nbsp;c.getGene</font><font color="#000000">(</font><font color="#000000">i</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">640</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">641</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">equals;</font><br />
-<font color="#808080">642</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">})</font><font color="#000000">;</font><br />
-<font color="#808080">643</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">644</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">645</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
-<font color="#808080">646</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">String&nbsp;toString</font><font color="#000000">()&nbsp;{</font><br />
-<font color="#808080">647</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">bit.toByteString</font><font color="#000000">(</font><font color="#000000">_genes</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">648</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">649</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">650</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">/*&nbsp;*************************************************************************</font><br />
-<font color="#808080">651</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">*&nbsp;&nbsp;Java&nbsp;object&nbsp;serialization</font><br />
-<font color="#808080">652</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">*&nbsp;************************************************************************/</font><br />
-<font color="#808080">653</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">654</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">writeObject</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">ObjectOutputStream&nbsp;out</font><font color="#000000">)</font><br />
-<font color="#808080">655</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>throws&nbsp;</b></font><font color="#000000">IOException</font><br />
-<font color="#808080">656</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br />
-<font color="#808080">657</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.defaultWriteObject</font><font color="#000000">()</font><font color="#000000">;</font><br />
-<font color="#808080">658</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">659</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.writeInt</font><font color="#000000">(</font><font color="#000000">_length</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">660</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.writeDouble</font><font color="#000000">(</font><font color="#000000">_p</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">661</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.writeInt</font><font color="#000000">(</font><font color="#000000">_genes.length</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">662</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.write</font><font color="#000000">(</font><font color="#000000">_genes</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">663</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">664</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">665</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">readObject</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">ObjectInputStream&nbsp;in</font><font color="#000000">)</font><br />
-<font color="#808080">666</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>throws&nbsp;</b></font><font color="#000000">IOException,&nbsp;ClassNotFoundException</font><br />
-<font color="#808080">667</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br />
-<font color="#808080">668</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">in.defaultReadObject</font><font color="#000000">()</font><font color="#000000">;</font><br />
-<font color="#808080">669</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">670</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_length&nbsp;=&nbsp;in.readInt</font><font color="#000000">()</font><font color="#000000">;</font><br />
-<font color="#808080">671</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_p&nbsp;=&nbsp;in.readDouble</font><font color="#000000">()</font><font color="#000000">;</font><br />
-<font color="#808080">672</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">673</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">bytes&nbsp;=&nbsp;in.readInt</font><font color="#000000">()</font><font color="#000000">;</font><br />
-<font color="#808080">674</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_genes&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#7f0055"><b>byte</b></font><font color="#000000">[</font><font color="#000000">bytes</font><font color="#000000">]</font><font color="#000000">;</font><br />
-<font color="#808080">675</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">in.readFully</font><font color="#000000">(</font><font color="#000000">_genes</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">676</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">677</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_seq&nbsp;=&nbsp;BitGeneISeq.of</font><font color="#000000">(</font><font color="#000000">_genes,&nbsp;_length</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">678</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">679</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">680</font>&nbsp;<font color="#000000">}</font></code>
+<font color="#808080">636</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">obj&nbsp;==&nbsp;</font><font color="#7f0055"><b>this&nbsp;</b></font><font color="#000000">||</font><br />
+<font color="#808080">637</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">obj&nbsp;!=&nbsp;</font><font color="#7f0055"><b>null&nbsp;</b></font><font color="#000000">&amp;&amp;</font><br />
+<font color="#808080">638</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">getClass</font><font color="#000000">()&nbsp;</font><font color="#000000">==&nbsp;obj.getClass</font><font color="#000000">()&nbsp;</font><font color="#000000">&amp;&amp;</font><br />
+<font color="#808080">639</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">length</font><font color="#000000">()&nbsp;</font><font color="#000000">==&nbsp;</font><font color="#000000">((</font><font color="#000000">BitChromosome</font><font color="#000000">)</font><font color="#000000">obj</font><font color="#000000">)</font><font color="#000000">.length</font><font color="#000000">()&nbsp;</font><font color="#000000">&amp;&amp;</font><br />
+<font color="#808080">640</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Arrays.equals</font><font color="#000000">(</font><font color="#000000">_genes,&nbsp;</font><font color="#000000">((</font><font color="#000000">BitChromosome</font><font color="#000000">)</font><font color="#000000">obj</font><font color="#000000">)</font><font color="#000000">._genes</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">641</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">642</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">643</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
+<font color="#808080">644</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">String&nbsp;toString</font><font color="#000000">()&nbsp;{</font><br />
+<font color="#808080">645</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">bit.toByteString</font><font color="#000000">(</font><font color="#000000">_genes</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">646</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">647</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">648</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">/*&nbsp;*************************************************************************</font><br />
+<font color="#808080">649</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">*&nbsp;&nbsp;Java&nbsp;object&nbsp;serialization</font><br />
+<font color="#808080">650</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">*&nbsp;************************************************************************/</font><br />
+<font color="#808080">651</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">652</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">writeObject</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">ObjectOutputStream&nbsp;out</font><font color="#000000">)</font><br />
+<font color="#808080">653</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>throws&nbsp;</b></font><font color="#000000">IOException</font><br />
+<font color="#808080">654</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br />
+<font color="#808080">655</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.defaultWriteObject</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">656</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">657</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.writeInt</font><font color="#000000">(</font><font color="#000000">_length</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">658</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.writeDouble</font><font color="#000000">(</font><font color="#000000">_p</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">659</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.writeInt</font><font color="#000000">(</font><font color="#000000">_genes.length</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">660</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.write</font><font color="#000000">(</font><font color="#000000">_genes</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">661</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">662</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">663</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">readObject</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">ObjectInputStream&nbsp;in</font><font color="#000000">)</font><br />
+<font color="#808080">664</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>throws&nbsp;</b></font><font color="#000000">IOException,&nbsp;ClassNotFoundException</font><br />
+<font color="#808080">665</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">{</font><br />
+<font color="#808080">666</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">in.defaultReadObject</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">667</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">668</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_length&nbsp;=&nbsp;in.readInt</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">669</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_p&nbsp;=&nbsp;in.readDouble</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">670</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">671</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">bytes&nbsp;=&nbsp;in.readInt</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">672</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_genes&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#7f0055"><b>byte</b></font><font color="#000000">[</font><font color="#000000">bytes</font><font color="#000000">]</font><font color="#000000">;</font><br />
+<font color="#808080">673</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">in.readFully</font><font color="#000000">(</font><font color="#000000">_genes</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">674</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">675</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_seq&nbsp;=&nbsp;BitGeneISeq.of</font><font color="#000000">(</font><font color="#000000">_genes,&nbsp;_length</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">676</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">677</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">678</font>&nbsp;<font color="#000000">}</font></code>
     
    </td>
   <!-- end source code -->
