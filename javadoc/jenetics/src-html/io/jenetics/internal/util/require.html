@@ -30,7 +30,7 @@ require.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">001</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-4.4.0).</font><br />
+<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-5.0.0).</font><br />
 <font color="#808080">003</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2019&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">004</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">005</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
@@ -131,23 +131,32 @@ require.java
 <font color="#808080">100</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">value;</font><br />
 <font color="#808080">101</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
 <font color="#808080">102</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">103</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
-<font color="#808080">104</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Check&nbsp;if&nbsp;the&nbsp;given&nbsp;double&nbsp;value&nbsp;is&nbsp;within&nbsp;the&nbsp;closed&nbsp;range&nbsp;{@code&nbsp;[0,&nbsp;1]}.</font><br />
-<font color="#808080">105</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
-<font color="#808080">106</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">p&nbsp;the&nbsp;probability&nbsp;to&nbsp;check.</font><br />
-<font color="#808080">107</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">p&nbsp;if&nbsp;it&nbsp;is&nbsp;a&nbsp;valid&nbsp;probability.</font><br />
-<font color="#808080">108</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@throws&nbsp;</font><font color="#3f5fbf">IllegalArgumentException&nbsp;if&nbsp;{@code&nbsp;p}&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;probability.</font><br />
-<font color="#808080">109</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
-<font color="#808080">110</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">probability</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">p</font><font color="#000000">)&nbsp;{</font><br />
-<font color="#808080">111</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">p&nbsp;&lt;&nbsp;</font><font color="#990000">0.0&nbsp;</font><font color="#000000">||&nbsp;p&nbsp;&gt;&nbsp;</font><font color="#990000">1.0</font><font color="#000000">)&nbsp;{</font><br />
-<font color="#808080">112</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>throw&nbsp;new&nbsp;</b></font><font color="#000000">IllegalArgumentException</font><font color="#000000">(</font><font color="#000000">format</font><font color="#000000">(</font><br />
-<font color="#808080">113</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;The&nbsp;given&nbsp;probability&nbsp;is&nbsp;not&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,&nbsp;1]:&nbsp;%f&#34;</font><font color="#000000">,&nbsp;p</font><br />
-<font color="#808080">114</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">))</font><font color="#000000">;</font><br />
-<font color="#808080">115</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">116</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">p;</font><br />
-<font color="#808080">117</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">118</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">119</font>&nbsp;<font color="#000000">}</font></code>
+<font color="#808080">103</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">positive</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">value</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">104</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">Double.compare</font><font color="#000000">(</font><font color="#000000">value,&nbsp;</font><font color="#990000">0</font><font color="#000000">)&nbsp;</font><font color="#000000">&lt;=&nbsp;</font><font color="#990000">0</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">105</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>throw&nbsp;new&nbsp;</b></font><font color="#000000">IllegalArgumentException</font><font color="#000000">(</font><font color="#000000">format</font><font color="#000000">(</font><br />
+<font color="#808080">106</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;Value&nbsp;is&nbsp;not&nbsp;positive:&nbsp;%f&#34;</font><font color="#000000">,&nbsp;value</font><br />
+<font color="#808080">107</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">))</font><font color="#000000">;</font><br />
+<font color="#808080">108</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">109</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">value;</font><br />
+<font color="#808080">110</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">111</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">112</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">113</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Check&nbsp;if&nbsp;the&nbsp;given&nbsp;double&nbsp;value&nbsp;is&nbsp;within&nbsp;the&nbsp;closed&nbsp;range&nbsp;{@code&nbsp;[0,&nbsp;1]}.</font><br />
+<font color="#808080">114</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">115</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">p&nbsp;the&nbsp;probability&nbsp;to&nbsp;check.</font><br />
+<font color="#808080">116</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">p&nbsp;if&nbsp;it&nbsp;is&nbsp;a&nbsp;valid&nbsp;probability.</font><br />
+<font color="#808080">117</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@throws&nbsp;</font><font color="#3f5fbf">IllegalArgumentException&nbsp;if&nbsp;{@code&nbsp;p}&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;probability.</font><br />
+<font color="#808080">118</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">119</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">probability</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">p</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">120</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">p&nbsp;&lt;&nbsp;</font><font color="#990000">0.0&nbsp;</font><font color="#000000">||&nbsp;p&nbsp;&gt;&nbsp;</font><font color="#990000">1.0</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">121</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>throw&nbsp;new&nbsp;</b></font><font color="#000000">IllegalArgumentException</font><font color="#000000">(</font><font color="#000000">format</font><font color="#000000">(</font><br />
+<font color="#808080">122</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;The&nbsp;given&nbsp;probability&nbsp;is&nbsp;not&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,&nbsp;1]:&nbsp;%f&#34;</font><font color="#000000">,&nbsp;p</font><br />
+<font color="#808080">123</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">))</font><font color="#000000">;</font><br />
+<font color="#808080">124</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">125</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">p;</font><br />
+<font color="#808080">126</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">127</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">128</font>&nbsp;<font color="#000000">}</font></code>
     
    </td>
   <!-- end source code -->
