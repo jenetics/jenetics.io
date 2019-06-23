@@ -30,7 +30,7 @@ TreeChromosome.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">01</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">02</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-4.4.0).</font><br />
+<font color="#808080">02</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-5.0.0).</font><br />
 <font color="#808080">03</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2019&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">04</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">05</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
@@ -64,15 +64,24 @@ TreeChromosome.java
 <font color="#808080">33</font>&nbsp;<font color="#000000">{</font><br />
 <font color="#808080">34</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">35</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
-<font color="#808080">36</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Return&nbsp;the&nbsp;root&nbsp;gene&nbsp;of&nbsp;this&nbsp;chromosome.</font><br />
-<font color="#808080">37</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
-<font color="#808080">38</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">the&nbsp;root&nbsp;tree&nbsp;gene&nbsp;of&nbsp;this&nbsp;chromosome</font><br />
-<font color="#808080">39</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
-<font color="#808080">40</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;default&nbsp;</b></font><font color="#000000">G&nbsp;getRoot</font><font color="#000000">()&nbsp;{</font><br />
-<font color="#808080">41</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">getGene</font><font color="#000000">()</font><font color="#000000">;</font><br />
-<font color="#808080">42</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">43</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">44</font>&nbsp;<font color="#000000">}</font></code>
+<font color="#808080">36</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Return&nbsp;the&nbsp;root&nbsp;gene&nbsp;of&nbsp;this&nbsp;chromosome.&nbsp;Since&nbsp;the&nbsp;gene&nbsp;type&nbsp;is&nbsp;also&nbsp;a</font><br />
+<font color="#808080">37</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#3f3fbf">{@link&nbsp;io.jenetics.ext.util.Tree}</font><font color="#3f5fbf">,&nbsp;you&nbsp;are&nbsp;able&nbsp;to&nbsp;assign&nbsp;it&nbsp;to&nbsp;one.</font><br />
+<font color="#808080">38</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;pre&gt;</font><font color="#3f5fbf">{@code</font><br />
+<font color="#808080">39</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;final&nbsp;Tree</font><font color="#7f7f9f">&lt;A,&nbsp;?&gt;&nbsp;</font><font color="#3f5fbf">t1&nbsp;=&nbsp;getRoot();</font><br />
+<font color="#808080">40</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;final&nbsp;Tree</font><font color="#7f7f9f">&lt;?,&nbsp;?&gt;&nbsp;</font><font color="#3f5fbf">t2&nbsp;=&nbsp;getRoot();</font><br />
+<font color="#808080">41</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><font color="#7f7f9f">&lt;/pre&gt;</font><br />
+<font color="#808080">42</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;This&nbsp;method&nbsp;is&nbsp;also&nbsp;an&nbsp;alias&nbsp;for&nbsp;</font><font color="#3f3fbf">{@link&nbsp;#getGene()}</font><font color="#3f5fbf">,&nbsp;which&nbsp;returns&nbsp;the</font><br />
+<font color="#808080">43</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;first&nbsp;gene&nbsp;of&nbsp;the&nbsp;chromosome.</font><br />
+<font color="#808080">44</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">45</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@see&nbsp;</font><font color="#3f5fbf">#getGene()</font><br />
+<font color="#808080">46</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">47</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">the&nbsp;root&nbsp;tree&nbsp;gene&nbsp;of&nbsp;this&nbsp;chromosome</font><br />
+<font color="#808080">48</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">49</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;default&nbsp;</b></font><font color="#000000">G&nbsp;getRoot</font><font color="#000000">()&nbsp;{</font><br />
+<font color="#808080">50</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">getGene</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">51</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">52</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">53</font>&nbsp;<font color="#000000">}</font></code>
     
    </td>
   <!-- end source code -->
