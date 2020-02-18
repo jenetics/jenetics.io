@@ -7,8 +7,8 @@
 <body>
 <div class="sourceContainer">
 <pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
-<span class="sourceLineNo">002</span> * Java Genetic Algorithm Library (jenetics-5.1.0).<a name="line.2"></a>
-<span class="sourceLineNo">003</span> * Copyright (c) 2007-2019 Franz Wilhelmstötter<a name="line.3"></a>
+<span class="sourceLineNo">002</span> * Java Genetic Algorithm Library (jenetics-5.2.0).<a name="line.2"></a>
+<span class="sourceLineNo">003</span> * Copyright (c) 2007-2020 Franz Wilhelmstötter<a name="line.3"></a>
 <span class="sourceLineNo">004</span> *<a name="line.4"></a>
 <span class="sourceLineNo">005</span> * Licensed under the Apache License, Version 2.0 (the "License");<a name="line.5"></a>
 <span class="sourceLineNo">006</span> * you may not use this file except in compliance with the License.<a name="line.6"></a>
@@ -145,15 +145,15 @@
 <span class="sourceLineNo">137</span>        extractVars(final TreeNode&lt;Decl&lt;V&gt;&gt; pattern) {<a name="line.137"></a>
 <span class="sourceLineNo">138</span>                final SortedSet&lt;Var&lt;V&gt;&gt; variables = new TreeSet&lt;&gt;();<a name="line.138"></a>
 <span class="sourceLineNo">139</span>                for (Tree&lt;Decl&lt;V&gt;, ?&gt; n : pattern) {<a name="line.139"></a>
-<span class="sourceLineNo">140</span>                        if (n.getValue() instanceof Var) {<a name="line.140"></a>
+<span class="sourceLineNo">140</span>                        if (n.value() instanceof Var) {<a name="line.140"></a>
 <span class="sourceLineNo">141</span>                                if (!n.isLeaf()) {<a name="line.141"></a>
 <span class="sourceLineNo">142</span>                                        throw new IllegalArgumentException(format(<a name="line.142"></a>
 <span class="sourceLineNo">143</span>                                                "Variable node '%s' is not a leaf: %s",<a name="line.143"></a>
-<span class="sourceLineNo">144</span>                                                n.getValue(), n.toParenthesesString()<a name="line.144"></a>
+<span class="sourceLineNo">144</span>                                                n.value(), n.toParenthesesString()<a name="line.144"></a>
 <span class="sourceLineNo">145</span>                                        ));<a name="line.145"></a>
 <span class="sourceLineNo">146</span>                                }<a name="line.146"></a>
 <span class="sourceLineNo">147</span><a name="line.147"></a>
-<span class="sourceLineNo">148</span>                                variables.add((Var&lt;V&gt;)n.getValue());<a name="line.148"></a>
+<span class="sourceLineNo">148</span>                                variables.add((Var&lt;V&gt;)n.value());<a name="line.148"></a>
 <span class="sourceLineNo">149</span>                        }<a name="line.149"></a>
 <span class="sourceLineNo">150</span>                }<a name="line.150"></a>
 <span class="sourceLineNo">151</span><a name="line.151"></a>
@@ -231,7 +231,7 @@
 <span class="sourceLineNo">223</span>                final Tree&lt;Decl&lt;V&gt;, ?&gt; pattern,<a name="line.223"></a>
 <span class="sourceLineNo">224</span>                final Map&lt;Var&lt;V&gt;, Tree&lt;V, ?&gt;&gt; vars<a name="line.224"></a>
 <span class="sourceLineNo">225</span>        ) {<a name="line.225"></a>
-<span class="sourceLineNo">226</span>                final Decl&lt;V&gt; decl = pattern.getValue();<a name="line.226"></a>
+<span class="sourceLineNo">226</span>                final Decl&lt;V&gt; decl = pattern.value();<a name="line.226"></a>
 <span class="sourceLineNo">227</span><a name="line.227"></a>
 <span class="sourceLineNo">228</span>                if (decl instanceof Var) {<a name="line.228"></a>
 <span class="sourceLineNo">229</span>                        final Tree&lt;? extends V, ?&gt; tree = vars.get(decl);<a name="line.229"></a>
@@ -242,8 +242,8 @@
 <span class="sourceLineNo">234</span><a name="line.234"></a>
 <span class="sourceLineNo">235</span>                        return tree.equals(node);<a name="line.235"></a>
 <span class="sourceLineNo">236</span>                } else {<a name="line.236"></a>
-<span class="sourceLineNo">237</span>                        final Val&lt;V&gt; p = (Val&lt;V&gt;)pattern.getValue();<a name="line.237"></a>
-<span class="sourceLineNo">238</span>                        final V v = node.getValue();<a name="line.238"></a>
+<span class="sourceLineNo">237</span>                        final Val&lt;V&gt; p = (Val&lt;V&gt;)pattern.value();<a name="line.237"></a>
+<span class="sourceLineNo">238</span>                        final V v = node.value();<a name="line.238"></a>
 <span class="sourceLineNo">239</span><a name="line.239"></a>
 <span class="sourceLineNo">240</span>                        if (Objects.equals(v, p.value())) {<a name="line.240"></a>
 <span class="sourceLineNo">241</span>                                if (node.childCount() == pattern.childCount()) {<a name="line.241"></a>
@@ -284,335 +284,345 @@
 <span class="sourceLineNo">276</span>                final Map&lt;Var&lt;V&gt;, Tree&lt;V, ?&gt;&gt; vars<a name="line.276"></a>
 <span class="sourceLineNo">277</span>        ) {<a name="line.277"></a>
 <span class="sourceLineNo">278</span>                final Map&lt;Path, Var&lt;V&gt;&gt; paths = template.stream()<a name="line.278"></a>
-<span class="sourceLineNo">279</span>                        .filter((Tree&lt;Decl&lt;V&gt;, ?&gt; n) -&gt; n.getValue() instanceof Var)<a name="line.279"></a>
-<span class="sourceLineNo">280</span>                        .collect(toMap(t -&gt; t.childPath(), t -&gt; (Var&lt;V&gt;)t.getValue()));<a name="line.280"></a>
+<span class="sourceLineNo">279</span>                        .filter((Tree&lt;Decl&lt;V&gt;, ?&gt; n) -&gt; n.value() instanceof Var)<a name="line.279"></a>
+<span class="sourceLineNo">280</span>                        .collect(toMap(t -&gt; t.childPath(), t -&gt; (Var&lt;V&gt;)t.value()));<a name="line.280"></a>
 <span class="sourceLineNo">281</span><a name="line.281"></a>
 <span class="sourceLineNo">282</span>                final TreeNode&lt;V&gt; tree = TreeNode.ofTree(<a name="line.282"></a>
 <span class="sourceLineNo">283</span>                        template,<a name="line.283"></a>
 <span class="sourceLineNo">284</span>                        n -&gt; n instanceof Val ? ((Val&lt;V&gt;)n).value() : null<a name="line.284"></a>
 <span class="sourceLineNo">285</span>                );<a name="line.285"></a>
 <span class="sourceLineNo">286</span><a name="line.286"></a>
-<span class="sourceLineNo">287</span>                for (Map.Entry&lt;Path, Var&lt;V&gt;&gt; var : paths.entrySet()) {<a name="line.287"></a>
-<span class="sourceLineNo">288</span>                        final Path path = var.getKey();<a name="line.288"></a>
-<span class="sourceLineNo">289</span>                        final Var&lt;V&gt; decl = var.getValue();<a name="line.289"></a>
-<span class="sourceLineNo">290</span><a name="line.290"></a>
-<span class="sourceLineNo">291</span>                        final Tree&lt;? extends V, ?&gt; replacement = vars.get(decl);<a name="line.291"></a>
-<span class="sourceLineNo">292</span>                        if (replacement != null) {<a name="line.292"></a>
-<span class="sourceLineNo">293</span>                                tree.replaceAtPath(path, TreeNode.ofTree(replacement));<a name="line.293"></a>
-<span class="sourceLineNo">294</span>                        } else {<a name="line.294"></a>
-<span class="sourceLineNo">295</span>                                tree.removeAtPath(path);<a name="line.295"></a>
-<span class="sourceLineNo">296</span>                        }<a name="line.296"></a>
-<span class="sourceLineNo">297</span>                }<a name="line.297"></a>
+<span class="sourceLineNo">287</span>                paths.forEach((path, decl) -&gt; {<a name="line.287"></a>
+<span class="sourceLineNo">288</span>                        final Tree&lt;? extends V, ?&gt; replacement = vars.get(decl);<a name="line.288"></a>
+<span class="sourceLineNo">289</span>                        if (replacement != null) {<a name="line.289"></a>
+<span class="sourceLineNo">290</span>                                tree.replaceAtPath(path, TreeNode.ofTree(replacement));<a name="line.290"></a>
+<span class="sourceLineNo">291</span>                        } else {<a name="line.291"></a>
+<span class="sourceLineNo">292</span>                                tree.removeAtPath(path);<a name="line.292"></a>
+<span class="sourceLineNo">293</span>                        }<a name="line.293"></a>
+<span class="sourceLineNo">294</span>                });<a name="line.294"></a>
+<span class="sourceLineNo">295</span><a name="line.295"></a>
+<span class="sourceLineNo">296</span>                return tree;<a name="line.296"></a>
+<span class="sourceLineNo">297</span>        }<a name="line.297"></a>
 <span class="sourceLineNo">298</span><a name="line.298"></a>
-<span class="sourceLineNo">299</span>                return tree;<a name="line.299"></a>
-<span class="sourceLineNo">300</span>        }<a name="line.300"></a>
-<span class="sourceLineNo">301</span><a name="line.301"></a>
-<span class="sourceLineNo">302</span>        @Override<a name="line.302"></a>
-<span class="sourceLineNo">303</span>        public int hashCode() {<a name="line.303"></a>
-<span class="sourceLineNo">304</span>                return _pattern.hashCode();<a name="line.304"></a>
-<span class="sourceLineNo">305</span>        }<a name="line.305"></a>
-<span class="sourceLineNo">306</span><a name="line.306"></a>
-<span class="sourceLineNo">307</span>        @Override<a name="line.307"></a>
-<span class="sourceLineNo">308</span>        public boolean equals(final Object obj) {<a name="line.308"></a>
-<span class="sourceLineNo">309</span>                return obj == this ||<a name="line.309"></a>
-<span class="sourceLineNo">310</span>                        obj instanceof TreePattern &amp;&amp;<a name="line.310"></a>
-<span class="sourceLineNo">311</span>                        _pattern.equals(((TreePattern)obj)._pattern);<a name="line.311"></a>
-<span class="sourceLineNo">312</span>        }<a name="line.312"></a>
-<span class="sourceLineNo">313</span><a name="line.313"></a>
-<span class="sourceLineNo">314</span>        @Override<a name="line.314"></a>
-<span class="sourceLineNo">315</span>        public String toString() {<a name="line.315"></a>
-<span class="sourceLineNo">316</span>                return _pattern.toParenthesesString();<a name="line.316"></a>
-<span class="sourceLineNo">317</span>        }<a name="line.317"></a>
-<span class="sourceLineNo">318</span><a name="line.318"></a>
-<span class="sourceLineNo">319</span>        /* *************************************************************************<a name="line.319"></a>
-<span class="sourceLineNo">320</span>         * Static factory methods.<a name="line.320"></a>
-<span class="sourceLineNo">321</span>         * ************************************************************************/<a name="line.321"></a>
-<span class="sourceLineNo">322</span><a name="line.322"></a>
-<span class="sourceLineNo">323</span>        /**<a name="line.323"></a>
-<span class="sourceLineNo">324</span>         * Compiles the given tree pattern string.<a name="line.324"></a>
-<span class="sourceLineNo">325</span>         *<a name="line.325"></a>
-<span class="sourceLineNo">326</span>         * @param pattern the tree pattern string<a name="line.326"></a>
-<span class="sourceLineNo">327</span>         * @return the compiled pattern<a name="line.327"></a>
-<span class="sourceLineNo">328</span>         * @throws NullPointerException if the given pattern is {@code null}<a name="line.328"></a>
-<span class="sourceLineNo">329</span>         * @throws IllegalArgumentException if the given parentheses tree string<a name="line.329"></a>
-<span class="sourceLineNo">330</span>         *         doesn't represent a valid pattern tree or one of the variable<a name="line.330"></a>
-<span class="sourceLineNo">331</span>         *         name is not a valid (Java) identifier<a name="line.331"></a>
-<span class="sourceLineNo">332</span>         */<a name="line.332"></a>
-<span class="sourceLineNo">333</span>        public static TreePattern&lt;String&gt; compile(final String pattern) {<a name="line.333"></a>
-<span class="sourceLineNo">334</span>                return compile(pattern, Function.identity());<a name="line.334"></a>
-<span class="sourceLineNo">335</span>        }<a name="line.335"></a>
-<span class="sourceLineNo">336</span><a name="line.336"></a>
-<span class="sourceLineNo">337</span>        public static &lt;V&gt; TreePattern&lt;V&gt; compile(<a name="line.337"></a>
-<span class="sourceLineNo">338</span>                final String pattern,<a name="line.338"></a>
-<span class="sourceLineNo">339</span>                final Function&lt;? super String, ? extends V&gt; mapper<a name="line.339"></a>
-<span class="sourceLineNo">340</span>        ) {<a name="line.340"></a>
-<span class="sourceLineNo">341</span>                return new TreePattern&lt;&gt;(<a name="line.341"></a>
-<span class="sourceLineNo">342</span>                        TreeNode.parse(pattern, v -&gt; Decl.of(v.trim(), mapper))<a name="line.342"></a>
-<span class="sourceLineNo">343</span>                );<a name="line.343"></a>
-<span class="sourceLineNo">344</span>        }<a name="line.344"></a>
-<span class="sourceLineNo">345</span><a name="line.345"></a>
-<span class="sourceLineNo">346</span>        /* *************************************************************************<a name="line.346"></a>
-<span class="sourceLineNo">347</span>         *  Java object serialization<a name="line.347"></a>
-<span class="sourceLineNo">348</span>         * ************************************************************************/<a name="line.348"></a>
-<span class="sourceLineNo">349</span><a name="line.349"></a>
-<span class="sourceLineNo">350</span>        private Object writeReplace() {<a name="line.350"></a>
-<span class="sourceLineNo">351</span>                return new Serial(Serial.TREE_PATTERN, this);<a name="line.351"></a>
-<span class="sourceLineNo">352</span>        }<a name="line.352"></a>
-<span class="sourceLineNo">353</span><a name="line.353"></a>
-<span class="sourceLineNo">354</span>        private void readObject(final ObjectOutputStream stream)<a name="line.354"></a>
-<span class="sourceLineNo">355</span>                throws InvalidObjectException<a name="line.355"></a>
-<span class="sourceLineNo">356</span>        {<a name="line.356"></a>
-<span class="sourceLineNo">357</span>                throw new InvalidObjectException("Serialization proxy required.");<a name="line.357"></a>
-<span class="sourceLineNo">358</span>        }<a name="line.358"></a>
+<span class="sourceLineNo">299</span>        @Override<a name="line.299"></a>
+<span class="sourceLineNo">300</span>        public int hashCode() {<a name="line.300"></a>
+<span class="sourceLineNo">301</span>                return _pattern.hashCode();<a name="line.301"></a>
+<span class="sourceLineNo">302</span>        }<a name="line.302"></a>
+<span class="sourceLineNo">303</span><a name="line.303"></a>
+<span class="sourceLineNo">304</span>        @Override<a name="line.304"></a>
+<span class="sourceLineNo">305</span>        public boolean equals(final Object obj) {<a name="line.305"></a>
+<span class="sourceLineNo">306</span>                return obj == this ||<a name="line.306"></a>
+<span class="sourceLineNo">307</span>                        obj instanceof TreePattern &amp;&amp;<a name="line.307"></a>
+<span class="sourceLineNo">308</span>                        _pattern.equals(((TreePattern)obj)._pattern);<a name="line.308"></a>
+<span class="sourceLineNo">309</span>        }<a name="line.309"></a>
+<span class="sourceLineNo">310</span><a name="line.310"></a>
+<span class="sourceLineNo">311</span>        @Override<a name="line.311"></a>
+<span class="sourceLineNo">312</span>        public String toString() {<a name="line.312"></a>
+<span class="sourceLineNo">313</span>                return _pattern.toParenthesesString();<a name="line.313"></a>
+<span class="sourceLineNo">314</span>        }<a name="line.314"></a>
+<span class="sourceLineNo">315</span><a name="line.315"></a>
+<span class="sourceLineNo">316</span>        /* *************************************************************************<a name="line.316"></a>
+<span class="sourceLineNo">317</span>         * Static factory methods.<a name="line.317"></a>
+<span class="sourceLineNo">318</span>         * ************************************************************************/<a name="line.318"></a>
+<span class="sourceLineNo">319</span><a name="line.319"></a>
+<span class="sourceLineNo">320</span>        /**<a name="line.320"></a>
+<span class="sourceLineNo">321</span>         * Compiles the given tree pattern string.<a name="line.321"></a>
+<span class="sourceLineNo">322</span>         *<a name="line.322"></a>
+<span class="sourceLineNo">323</span>         * @param pattern the tree pattern string<a name="line.323"></a>
+<span class="sourceLineNo">324</span>         * @return the compiled pattern<a name="line.324"></a>
+<span class="sourceLineNo">325</span>         * @throws NullPointerException if the given pattern is {@code null}<a name="line.325"></a>
+<span class="sourceLineNo">326</span>         * @throws IllegalArgumentException if the given parentheses tree string<a name="line.326"></a>
+<span class="sourceLineNo">327</span>         *         doesn't represent a valid pattern tree or one of the variable<a name="line.327"></a>
+<span class="sourceLineNo">328</span>         *         name is not a valid (Java) identifier<a name="line.328"></a>
+<span class="sourceLineNo">329</span>         */<a name="line.329"></a>
+<span class="sourceLineNo">330</span>        public static TreePattern&lt;String&gt; compile(final String pattern) {<a name="line.330"></a>
+<span class="sourceLineNo">331</span>                return compile(pattern, Function.identity());<a name="line.331"></a>
+<span class="sourceLineNo">332</span>        }<a name="line.332"></a>
+<span class="sourceLineNo">333</span><a name="line.333"></a>
+<span class="sourceLineNo">334</span>        /**<a name="line.334"></a>
+<span class="sourceLineNo">335</span>         * Compiles the given tree pattern string.<a name="line.335"></a>
+<span class="sourceLineNo">336</span>         *<a name="line.336"></a>
+<span class="sourceLineNo">337</span>         * @param pattern the tree pattern string<a name="line.337"></a>
+<span class="sourceLineNo">338</span>         * @param mapper the mapper which converts the serialized string value to<a name="line.338"></a>
+<span class="sourceLineNo">339</span>         *        the desired type<a name="line.339"></a>
+<span class="sourceLineNo">340</span>         * @param &lt;V&gt; the value type of the tree than can be matched by the pattern<a name="line.340"></a>
+<span class="sourceLineNo">341</span>         * @return the compiled pattern<a name="line.341"></a>
+<span class="sourceLineNo">342</span>         * @throws NullPointerException if the given pattern is {@code null}<a name="line.342"></a>
+<span class="sourceLineNo">343</span>         * @throws IllegalArgumentException if the given parentheses tree string<a name="line.343"></a>
+<span class="sourceLineNo">344</span>         *         doesn't represent a valid pattern tree or one of the variable<a name="line.344"></a>
+<span class="sourceLineNo">345</span>         *         name is not a valid (Java) identifier<a name="line.345"></a>
+<span class="sourceLineNo">346</span>         */<a name="line.346"></a>
+<span class="sourceLineNo">347</span>        public static &lt;V&gt; TreePattern&lt;V&gt; compile(<a name="line.347"></a>
+<span class="sourceLineNo">348</span>                final String pattern,<a name="line.348"></a>
+<span class="sourceLineNo">349</span>                final Function&lt;? super String, ? extends V&gt; mapper<a name="line.349"></a>
+<span class="sourceLineNo">350</span>        ) {<a name="line.350"></a>
+<span class="sourceLineNo">351</span>                return new TreePattern&lt;&gt;(<a name="line.351"></a>
+<span class="sourceLineNo">352</span>                        TreeNode.parse(pattern, v -&gt; Decl.of(v.trim(), mapper))<a name="line.352"></a>
+<span class="sourceLineNo">353</span>                );<a name="line.353"></a>
+<span class="sourceLineNo">354</span>        }<a name="line.354"></a>
+<span class="sourceLineNo">355</span><a name="line.355"></a>
+<span class="sourceLineNo">356</span>        /* *************************************************************************<a name="line.356"></a>
+<span class="sourceLineNo">357</span>         *  Java object serialization<a name="line.357"></a>
+<span class="sourceLineNo">358</span>         * ************************************************************************/<a name="line.358"></a>
 <span class="sourceLineNo">359</span><a name="line.359"></a>
-<span class="sourceLineNo">360</span>        void write(final ObjectOutput out) throws IOException {<a name="line.360"></a>
-<span class="sourceLineNo">361</span>                out.writeObject(_pattern);<a name="line.361"></a>
+<span class="sourceLineNo">360</span>        private Object writeReplace() {<a name="line.360"></a>
+<span class="sourceLineNo">361</span>                return new Serial(Serial.TREE_PATTERN, this);<a name="line.361"></a>
 <span class="sourceLineNo">362</span>        }<a name="line.362"></a>
 <span class="sourceLineNo">363</span><a name="line.363"></a>
-<span class="sourceLineNo">364</span>        @SuppressWarnings({"unchecked", "rawtypes"})<a name="line.364"></a>
-<span class="sourceLineNo">365</span>        static TreePattern read(final ObjectInput in)<a name="line.365"></a>
-<span class="sourceLineNo">366</span>                throws IOException, ClassNotFoundException<a name="line.366"></a>
-<span class="sourceLineNo">367</span>        {<a name="line.367"></a>
-<span class="sourceLineNo">368</span>                final TreeNode pattern = (TreeNode)in.readObject();<a name="line.368"></a>
-<span class="sourceLineNo">369</span>                return new TreePattern(pattern);<a name="line.369"></a>
-<span class="sourceLineNo">370</span>        }<a name="line.370"></a>
-<span class="sourceLineNo">371</span><a name="line.371"></a>
-<span class="sourceLineNo">372</span><a name="line.372"></a>
-<span class="sourceLineNo">373</span>        /* *************************************************************************<a name="line.373"></a>
-<span class="sourceLineNo">374</span>         * Pattern node classes.<a name="line.374"></a>
-<span class="sourceLineNo">375</span>         * ************************************************************************/<a name="line.375"></a>
-<span class="sourceLineNo">376</span><a name="line.376"></a>
-<span class="sourceLineNo">377</span>        /**<a name="line.377"></a>
-<span class="sourceLineNo">378</span>         * A &lt;em&gt;sealed&lt;/em&gt; class, which constitutes the nodes of a pattern tree.<a name="line.378"></a>
-<span class="sourceLineNo">379</span>         * The only two implementations of this class are the {@link Var} and the<a name="line.379"></a>
-<span class="sourceLineNo">380</span>         * {@link Val} class. The {@link Var} class represents a placeholder for an<a name="line.380"></a>
-<span class="sourceLineNo">381</span>         * arbitrary sub-tree and the {@link Val} class stands for an arbitrary<a name="line.381"></a>
-<span class="sourceLineNo">382</span>         * concrete sub-tree.<a name="line.382"></a>
-<span class="sourceLineNo">383</span>         *<a name="line.383"></a>
-<span class="sourceLineNo">384</span>         * @see Var<a name="line.384"></a>
-<span class="sourceLineNo">385</span>         * @see Val<a name="line.385"></a>
-<span class="sourceLineNo">386</span>         *<a name="line.386"></a>
-<span class="sourceLineNo">387</span>         * @param &lt;V&gt; the node type the tree-pattern is working on<a name="line.387"></a>
-<span class="sourceLineNo">388</span>         */<a name="line.388"></a>
-<span class="sourceLineNo">389</span>        public abstract static class Decl&lt;V&gt; {<a name="line.389"></a>
-<span class="sourceLineNo">390</span>                private static final char VAR_PREFIX = '$';<a name="line.390"></a>
-<span class="sourceLineNo">391</span>                private static final char ESC_CHAR = '\\';<a name="line.391"></a>
-<span class="sourceLineNo">392</span><a name="line.392"></a>
-<span class="sourceLineNo">393</span>                private static final Escaper ESCAPER = new Escaper(ESC_CHAR, VAR_PREFIX);<a name="line.393"></a>
-<span class="sourceLineNo">394</span><a name="line.394"></a>
-<span class="sourceLineNo">395</span>                private Decl() {<a name="line.395"></a>
-<span class="sourceLineNo">396</span>                }<a name="line.396"></a>
-<span class="sourceLineNo">397</span><a name="line.397"></a>
-<span class="sourceLineNo">398</span>                abstract &lt;B&gt; Decl&lt;B&gt; map(final Function&lt;? super V, ? extends B&gt; mapper);<a name="line.398"></a>
-<span class="sourceLineNo">399</span><a name="line.399"></a>
-<span class="sourceLineNo">400</span>                static &lt;V&gt; Decl&lt;V&gt; of(<a name="line.400"></a>
-<span class="sourceLineNo">401</span>                        final String value,<a name="line.401"></a>
-<span class="sourceLineNo">402</span>                        final Function&lt;? super String, ? extends V&gt; mapper<a name="line.402"></a>
-<span class="sourceLineNo">403</span>                ) {<a name="line.403"></a>
-<span class="sourceLineNo">404</span>                        return Var.isVar(value)<a name="line.404"></a>
-<span class="sourceLineNo">405</span>                                ? Var.of(value.substring(1))<a name="line.405"></a>
-<span class="sourceLineNo">406</span>                                : Val.of(mapper.apply(ESCAPER.unescape(value)));<a name="line.406"></a>
-<span class="sourceLineNo">407</span>                }<a name="line.407"></a>
-<span class="sourceLineNo">408</span>        }<a name="line.408"></a>
+<span class="sourceLineNo">364</span>        private void readObject(final ObjectOutputStream stream)<a name="line.364"></a>
+<span class="sourceLineNo">365</span>                throws InvalidObjectException<a name="line.365"></a>
+<span class="sourceLineNo">366</span>        {<a name="line.366"></a>
+<span class="sourceLineNo">367</span>                throw new InvalidObjectException("Serialization proxy required.");<a name="line.367"></a>
+<span class="sourceLineNo">368</span>        }<a name="line.368"></a>
+<span class="sourceLineNo">369</span><a name="line.369"></a>
+<span class="sourceLineNo">370</span>        void write(final ObjectOutput out) throws IOException {<a name="line.370"></a>
+<span class="sourceLineNo">371</span>                out.writeObject(_pattern);<a name="line.371"></a>
+<span class="sourceLineNo">372</span>        }<a name="line.372"></a>
+<span class="sourceLineNo">373</span><a name="line.373"></a>
+<span class="sourceLineNo">374</span>        @SuppressWarnings({"unchecked", "rawtypes"})<a name="line.374"></a>
+<span class="sourceLineNo">375</span>        static Object read(final ObjectInput in)<a name="line.375"></a>
+<span class="sourceLineNo">376</span>                throws IOException, ClassNotFoundException<a name="line.376"></a>
+<span class="sourceLineNo">377</span>        {<a name="line.377"></a>
+<span class="sourceLineNo">378</span>                final TreeNode pattern = (TreeNode)in.readObject();<a name="line.378"></a>
+<span class="sourceLineNo">379</span>                return new TreePattern(pattern);<a name="line.379"></a>
+<span class="sourceLineNo">380</span>        }<a name="line.380"></a>
+<span class="sourceLineNo">381</span><a name="line.381"></a>
+<span class="sourceLineNo">382</span><a name="line.382"></a>
+<span class="sourceLineNo">383</span>        /* *************************************************************************<a name="line.383"></a>
+<span class="sourceLineNo">384</span>         * Pattern node classes.<a name="line.384"></a>
+<span class="sourceLineNo">385</span>         * ************************************************************************/<a name="line.385"></a>
+<span class="sourceLineNo">386</span><a name="line.386"></a>
+<span class="sourceLineNo">387</span>        /**<a name="line.387"></a>
+<span class="sourceLineNo">388</span>         * A &lt;em&gt;sealed&lt;/em&gt; class, which constitutes the nodes of a pattern tree.<a name="line.388"></a>
+<span class="sourceLineNo">389</span>         * The only two implementations of this class are the {@link Var} and the<a name="line.389"></a>
+<span class="sourceLineNo">390</span>         * {@link Val} class. The {@link Var} class represents a placeholder for an<a name="line.390"></a>
+<span class="sourceLineNo">391</span>         * arbitrary sub-tree and the {@link Val} class stands for an arbitrary<a name="line.391"></a>
+<span class="sourceLineNo">392</span>         * concrete sub-tree.<a name="line.392"></a>
+<span class="sourceLineNo">393</span>         *<a name="line.393"></a>
+<span class="sourceLineNo">394</span>         * @see Var<a name="line.394"></a>
+<span class="sourceLineNo">395</span>         * @see Val<a name="line.395"></a>
+<span class="sourceLineNo">396</span>         *<a name="line.396"></a>
+<span class="sourceLineNo">397</span>         * @param &lt;V&gt; the node type the tree-pattern is working on<a name="line.397"></a>
+<span class="sourceLineNo">398</span>         */<a name="line.398"></a>
+<span class="sourceLineNo">399</span>        public abstract static class Decl&lt;V&gt; {<a name="line.399"></a>
+<span class="sourceLineNo">400</span>                private static final char VAR_PREFIX = '$';<a name="line.400"></a>
+<span class="sourceLineNo">401</span>                private static final char ESC_CHAR = '\\';<a name="line.401"></a>
+<span class="sourceLineNo">402</span><a name="line.402"></a>
+<span class="sourceLineNo">403</span>                private static final Escaper ESCAPER = new Escaper(ESC_CHAR, VAR_PREFIX);<a name="line.403"></a>
+<span class="sourceLineNo">404</span><a name="line.404"></a>
+<span class="sourceLineNo">405</span>                private Decl() {<a name="line.405"></a>
+<span class="sourceLineNo">406</span>                }<a name="line.406"></a>
+<span class="sourceLineNo">407</span><a name="line.407"></a>
+<span class="sourceLineNo">408</span>                abstract &lt;B&gt; Decl&lt;B&gt; map(final Function&lt;? super V, ? extends B&gt; mapper);<a name="line.408"></a>
 <span class="sourceLineNo">409</span><a name="line.409"></a>
-<span class="sourceLineNo">410</span>        /**<a name="line.410"></a>
-<span class="sourceLineNo">411</span>         * Represents a placeholder (variable) for an arbitrary sub-tree. A<a name="line.411"></a>
-<span class="sourceLineNo">412</span>         * &lt;em&gt;pattern&lt;/em&gt; variable is identified by its name. The pattern DSL<a name="line.412"></a>
-<span class="sourceLineNo">413</span>         * denotes variable names with a leading '$' character, e.g. {@code $x},<a name="line.413"></a>
-<span class="sourceLineNo">414</span>         * {@code $y} or {@code $my_var}. It is one of two implementations of the<a name="line.414"></a>
-<span class="sourceLineNo">415</span>         * &lt;em&gt;sealed&lt;/em&gt; {@link Decl} class.<a name="line.415"></a>
-<span class="sourceLineNo">416</span>         *<a name="line.416"></a>
-<span class="sourceLineNo">417</span>         * @see Val<a name="line.417"></a>
-<span class="sourceLineNo">418</span>         *<a name="line.418"></a>
-<span class="sourceLineNo">419</span>         * @implNote<a name="line.419"></a>
-<span class="sourceLineNo">420</span>         * This class is comparable by it's name.<a name="line.420"></a>
-<span class="sourceLineNo">421</span>         *<a name="line.421"></a>
-<span class="sourceLineNo">422</span>         * @param &lt;V&gt; the node type the tree-pattern is working<a name="line.422"></a>
-<span class="sourceLineNo">423</span>         */<a name="line.423"></a>
-<span class="sourceLineNo">424</span>        public static final class Var&lt;V&gt;<a name="line.424"></a>
-<span class="sourceLineNo">425</span>                extends Decl&lt;V&gt;<a name="line.425"></a>
-<span class="sourceLineNo">426</span>                implements Comparable&lt;Var&lt;V&gt;&gt;, Serializable<a name="line.426"></a>
-<span class="sourceLineNo">427</span>        {<a name="line.427"></a>
-<span class="sourceLineNo">428</span>                private static final long serialVersionUID = 1L;<a name="line.428"></a>
-<span class="sourceLineNo">429</span><a name="line.429"></a>
-<span class="sourceLineNo">430</span>                private final String _name;<a name="line.430"></a>
-<span class="sourceLineNo">431</span><a name="line.431"></a>
-<span class="sourceLineNo">432</span>                private Var(final String name) {<a name="line.432"></a>
-<span class="sourceLineNo">433</span>                        if (!isIdentifier(name)) {<a name="line.433"></a>
-<span class="sourceLineNo">434</span>                                throw new IllegalArgumentException(format(<a name="line.434"></a>
-<span class="sourceLineNo">435</span>                                        "Variable is not valid identifier: '%s'",<a name="line.435"></a>
-<span class="sourceLineNo">436</span>                                        name<a name="line.436"></a>
-<span class="sourceLineNo">437</span>                                ));<a name="line.437"></a>
-<span class="sourceLineNo">438</span>                        }<a name="line.438"></a>
-<span class="sourceLineNo">439</span>                        _name = name;<a name="line.439"></a>
-<span class="sourceLineNo">440</span>                }<a name="line.440"></a>
+<span class="sourceLineNo">410</span>                static &lt;V&gt; Decl&lt;V&gt; of(<a name="line.410"></a>
+<span class="sourceLineNo">411</span>                        final String value,<a name="line.411"></a>
+<span class="sourceLineNo">412</span>                        final Function&lt;? super String, ? extends V&gt; mapper<a name="line.412"></a>
+<span class="sourceLineNo">413</span>                ) {<a name="line.413"></a>
+<span class="sourceLineNo">414</span>                        return Var.isVar(value)<a name="line.414"></a>
+<span class="sourceLineNo">415</span>                                ? Var.of(value.substring(1))<a name="line.415"></a>
+<span class="sourceLineNo">416</span>                                : Val.of(mapper.apply(ESCAPER.unescape(value)));<a name="line.416"></a>
+<span class="sourceLineNo">417</span>                }<a name="line.417"></a>
+<span class="sourceLineNo">418</span>        }<a name="line.418"></a>
+<span class="sourceLineNo">419</span><a name="line.419"></a>
+<span class="sourceLineNo">420</span>        /**<a name="line.420"></a>
+<span class="sourceLineNo">421</span>         * Represents a placeholder (variable) for an arbitrary sub-tree. A<a name="line.421"></a>
+<span class="sourceLineNo">422</span>         * &lt;em&gt;pattern&lt;/em&gt; variable is identified by its name. The pattern DSL<a name="line.422"></a>
+<span class="sourceLineNo">423</span>         * denotes variable names with a leading '$' character, e.g. {@code $x},<a name="line.423"></a>
+<span class="sourceLineNo">424</span>         * {@code $y} or {@code $my_var}. It is one of two implementations of the<a name="line.424"></a>
+<span class="sourceLineNo">425</span>         * &lt;em&gt;sealed&lt;/em&gt; {@link Decl} class.<a name="line.425"></a>
+<span class="sourceLineNo">426</span>         *<a name="line.426"></a>
+<span class="sourceLineNo">427</span>         * @see Val<a name="line.427"></a>
+<span class="sourceLineNo">428</span>         *<a name="line.428"></a>
+<span class="sourceLineNo">429</span>         * @implNote<a name="line.429"></a>
+<span class="sourceLineNo">430</span>         * This class is comparable by it's name.<a name="line.430"></a>
+<span class="sourceLineNo">431</span>         *<a name="line.431"></a>
+<span class="sourceLineNo">432</span>         * @param &lt;V&gt; the node type the tree-pattern is working<a name="line.432"></a>
+<span class="sourceLineNo">433</span>         */<a name="line.433"></a>
+<span class="sourceLineNo">434</span>        public static final class Var&lt;V&gt;<a name="line.434"></a>
+<span class="sourceLineNo">435</span>                extends Decl&lt;V&gt;<a name="line.435"></a>
+<span class="sourceLineNo">436</span>                implements Comparable&lt;Var&lt;V&gt;&gt;, Serializable<a name="line.436"></a>
+<span class="sourceLineNo">437</span>        {<a name="line.437"></a>
+<span class="sourceLineNo">438</span>                private static final long serialVersionUID = 1L;<a name="line.438"></a>
+<span class="sourceLineNo">439</span><a name="line.439"></a>
+<span class="sourceLineNo">440</span>                private final String _name;<a name="line.440"></a>
 <span class="sourceLineNo">441</span><a name="line.441"></a>
-<span class="sourceLineNo">442</span>                @Override<a name="line.442"></a>
-<span class="sourceLineNo">443</span>                @SuppressWarnings("unchecked")<a name="line.443"></a>
-<span class="sourceLineNo">444</span>                &lt;B&gt; Var&lt;B&gt; map(final Function&lt;? super V, ? extends B&gt; mapper) {<a name="line.444"></a>
-<span class="sourceLineNo">445</span>                        return (Var&lt;B&gt;)this;<a name="line.445"></a>
-<span class="sourceLineNo">446</span>                }<a name="line.446"></a>
-<span class="sourceLineNo">447</span><a name="line.447"></a>
-<span class="sourceLineNo">448</span>                /**<a name="line.448"></a>
-<span class="sourceLineNo">449</span>                 * Return the name of the variable.<a name="line.449"></a>
-<span class="sourceLineNo">450</span>                 *<a name="line.450"></a>
-<span class="sourceLineNo">451</span>                 * @return the variable name<a name="line.451"></a>
-<span class="sourceLineNo">452</span>                 */<a name="line.452"></a>
-<span class="sourceLineNo">453</span>                public String name() {<a name="line.453"></a>
-<span class="sourceLineNo">454</span>                        return _name;<a name="line.454"></a>
-<span class="sourceLineNo">455</span>                }<a name="line.455"></a>
-<span class="sourceLineNo">456</span><a name="line.456"></a>
-<span class="sourceLineNo">457</span>                @Override<a name="line.457"></a>
-<span class="sourceLineNo">458</span>                public int compareTo(final Var&lt;V&gt; var) {<a name="line.458"></a>
-<span class="sourceLineNo">459</span>                        return _name.compareTo(var._name);<a name="line.459"></a>
-<span class="sourceLineNo">460</span>                }<a name="line.460"></a>
-<span class="sourceLineNo">461</span><a name="line.461"></a>
-<span class="sourceLineNo">462</span>                @Override<a name="line.462"></a>
-<span class="sourceLineNo">463</span>                public int hashCode() {<a name="line.463"></a>
-<span class="sourceLineNo">464</span>                        return _name.hashCode();<a name="line.464"></a>
+<span class="sourceLineNo">442</span>                private Var(final String name) {<a name="line.442"></a>
+<span class="sourceLineNo">443</span>                        if (!isIdentifier(name)) {<a name="line.443"></a>
+<span class="sourceLineNo">444</span>                                throw new IllegalArgumentException(format(<a name="line.444"></a>
+<span class="sourceLineNo">445</span>                                        "Variable is not valid identifier: '%s'",<a name="line.445"></a>
+<span class="sourceLineNo">446</span>                                        name<a name="line.446"></a>
+<span class="sourceLineNo">447</span>                                ));<a name="line.447"></a>
+<span class="sourceLineNo">448</span>                        }<a name="line.448"></a>
+<span class="sourceLineNo">449</span>                        _name = name;<a name="line.449"></a>
+<span class="sourceLineNo">450</span>                }<a name="line.450"></a>
+<span class="sourceLineNo">451</span><a name="line.451"></a>
+<span class="sourceLineNo">452</span>                @Override<a name="line.452"></a>
+<span class="sourceLineNo">453</span>                @SuppressWarnings("unchecked")<a name="line.453"></a>
+<span class="sourceLineNo">454</span>                &lt;B&gt; Var&lt;B&gt; map(final Function&lt;? super V, ? extends B&gt; mapper) {<a name="line.454"></a>
+<span class="sourceLineNo">455</span>                        return (Var&lt;B&gt;)this;<a name="line.455"></a>
+<span class="sourceLineNo">456</span>                }<a name="line.456"></a>
+<span class="sourceLineNo">457</span><a name="line.457"></a>
+<span class="sourceLineNo">458</span>                /**<a name="line.458"></a>
+<span class="sourceLineNo">459</span>                 * Return the name of the variable.<a name="line.459"></a>
+<span class="sourceLineNo">460</span>                 *<a name="line.460"></a>
+<span class="sourceLineNo">461</span>                 * @return the variable name<a name="line.461"></a>
+<span class="sourceLineNo">462</span>                 */<a name="line.462"></a>
+<span class="sourceLineNo">463</span>                public String name() {<a name="line.463"></a>
+<span class="sourceLineNo">464</span>                        return _name;<a name="line.464"></a>
 <span class="sourceLineNo">465</span>                }<a name="line.465"></a>
 <span class="sourceLineNo">466</span><a name="line.466"></a>
 <span class="sourceLineNo">467</span>                @Override<a name="line.467"></a>
-<span class="sourceLineNo">468</span>                public boolean equals(final Object obj) {<a name="line.468"></a>
-<span class="sourceLineNo">469</span>                        return obj == this ||<a name="line.469"></a>
-<span class="sourceLineNo">470</span>                                obj instanceof Var &amp;&amp;<a name="line.470"></a>
-<span class="sourceLineNo">471</span>                                Objects.equals(_name, ((Var)obj)._name);<a name="line.471"></a>
-<span class="sourceLineNo">472</span>                }<a name="line.472"></a>
-<span class="sourceLineNo">473</span><a name="line.473"></a>
-<span class="sourceLineNo">474</span>                @Override<a name="line.474"></a>
-<span class="sourceLineNo">475</span>                public String toString() {<a name="line.475"></a>
-<span class="sourceLineNo">476</span>                        return format("%s%s", Decl.VAR_PREFIX, _name);<a name="line.476"></a>
-<span class="sourceLineNo">477</span>                }<a name="line.477"></a>
-<span class="sourceLineNo">478</span><a name="line.478"></a>
-<span class="sourceLineNo">479</span>                /**<a name="line.479"></a>
-<span class="sourceLineNo">480</span>                 * Return a new variable with the given name.<a name="line.480"></a>
-<span class="sourceLineNo">481</span>                 *<a name="line.481"></a>
-<span class="sourceLineNo">482</span>                 * @param name the name of the variable<a name="line.482"></a>
-<span class="sourceLineNo">483</span>                 * @param &lt;V&gt; the node type the tree-pattern is working on<a name="line.483"></a>
-<span class="sourceLineNo">484</span>                 * @return a new variable with the given name<a name="line.484"></a>
-<span class="sourceLineNo">485</span>                 * @throws NullPointerException if the given {@code name} is {@code null}<a name="line.485"></a>
-<span class="sourceLineNo">486</span>                 * @throws IllegalArgumentException if the given {@code name} is not a<a name="line.486"></a>
-<span class="sourceLineNo">487</span>                 *         valid Java identifier<a name="line.487"></a>
-<span class="sourceLineNo">488</span>                 */<a name="line.488"></a>
-<span class="sourceLineNo">489</span>                public static &lt;V&gt; Var&lt;V&gt; of(final String name) {<a name="line.489"></a>
-<span class="sourceLineNo">490</span>                        return new Var&lt;&gt;(name);<a name="line.490"></a>
-<span class="sourceLineNo">491</span>                }<a name="line.491"></a>
-<span class="sourceLineNo">492</span><a name="line.492"></a>
-<span class="sourceLineNo">493</span>                static boolean isVar(final String name) {<a name="line.493"></a>
-<span class="sourceLineNo">494</span>                        return !name.isEmpty() &amp;&amp; name.charAt(0) == Decl.VAR_PREFIX;<a name="line.494"></a>
-<span class="sourceLineNo">495</span>                }<a name="line.495"></a>
-<span class="sourceLineNo">496</span><a name="line.496"></a>
-<span class="sourceLineNo">497</span>                /* *********************************************************************<a name="line.497"></a>
-<span class="sourceLineNo">498</span>                 *  Java object serialization<a name="line.498"></a>
-<span class="sourceLineNo">499</span>                 * ********************************************************************/<a name="line.499"></a>
-<span class="sourceLineNo">500</span><a name="line.500"></a>
-<span class="sourceLineNo">501</span>                private Object writeReplace() {<a name="line.501"></a>
-<span class="sourceLineNo">502</span>                        return new Serial(Serial.TREE_PATTERN_VAR, this);<a name="line.502"></a>
-<span class="sourceLineNo">503</span>                }<a name="line.503"></a>
-<span class="sourceLineNo">504</span><a name="line.504"></a>
-<span class="sourceLineNo">505</span>                private void readObject(final ObjectOutputStream stream)<a name="line.505"></a>
-<span class="sourceLineNo">506</span>                        throws InvalidObjectException<a name="line.506"></a>
-<span class="sourceLineNo">507</span>                {<a name="line.507"></a>
-<span class="sourceLineNo">508</span>                        throw new InvalidObjectException("Serialization proxy required.");<a name="line.508"></a>
-<span class="sourceLineNo">509</span>                }<a name="line.509"></a>
+<span class="sourceLineNo">468</span>                public int compareTo(final Var&lt;V&gt; var) {<a name="line.468"></a>
+<span class="sourceLineNo">469</span>                        return _name.compareTo(var._name);<a name="line.469"></a>
+<span class="sourceLineNo">470</span>                }<a name="line.470"></a>
+<span class="sourceLineNo">471</span><a name="line.471"></a>
+<span class="sourceLineNo">472</span>                @Override<a name="line.472"></a>
+<span class="sourceLineNo">473</span>                public int hashCode() {<a name="line.473"></a>
+<span class="sourceLineNo">474</span>                        return _name.hashCode();<a name="line.474"></a>
+<span class="sourceLineNo">475</span>                }<a name="line.475"></a>
+<span class="sourceLineNo">476</span><a name="line.476"></a>
+<span class="sourceLineNo">477</span>                @Override<a name="line.477"></a>
+<span class="sourceLineNo">478</span>                public boolean equals(final Object obj) {<a name="line.478"></a>
+<span class="sourceLineNo">479</span>                        return obj == this ||<a name="line.479"></a>
+<span class="sourceLineNo">480</span>                                obj instanceof Var &amp;&amp;<a name="line.480"></a>
+<span class="sourceLineNo">481</span>                                Objects.equals(_name, ((Var)obj)._name);<a name="line.481"></a>
+<span class="sourceLineNo">482</span>                }<a name="line.482"></a>
+<span class="sourceLineNo">483</span><a name="line.483"></a>
+<span class="sourceLineNo">484</span>                @Override<a name="line.484"></a>
+<span class="sourceLineNo">485</span>                public String toString() {<a name="line.485"></a>
+<span class="sourceLineNo">486</span>                        return format("%s%s", Decl.VAR_PREFIX, _name);<a name="line.486"></a>
+<span class="sourceLineNo">487</span>                }<a name="line.487"></a>
+<span class="sourceLineNo">488</span><a name="line.488"></a>
+<span class="sourceLineNo">489</span>                /**<a name="line.489"></a>
+<span class="sourceLineNo">490</span>                 * Return a new variable with the given name.<a name="line.490"></a>
+<span class="sourceLineNo">491</span>                 *<a name="line.491"></a>
+<span class="sourceLineNo">492</span>                 * @param name the name of the variable<a name="line.492"></a>
+<span class="sourceLineNo">493</span>                 * @param &lt;V&gt; the node type the tree-pattern is working on<a name="line.493"></a>
+<span class="sourceLineNo">494</span>                 * @return a new variable with the given name<a name="line.494"></a>
+<span class="sourceLineNo">495</span>                 * @throws NullPointerException if the given {@code name} is {@code null}<a name="line.495"></a>
+<span class="sourceLineNo">496</span>                 * @throws IllegalArgumentException if the given {@code name} is not a<a name="line.496"></a>
+<span class="sourceLineNo">497</span>                 *         valid Java identifier<a name="line.497"></a>
+<span class="sourceLineNo">498</span>                 */<a name="line.498"></a>
+<span class="sourceLineNo">499</span>                public static &lt;V&gt; Var&lt;V&gt; of(final String name) {<a name="line.499"></a>
+<span class="sourceLineNo">500</span>                        return new Var&lt;&gt;(name);<a name="line.500"></a>
+<span class="sourceLineNo">501</span>                }<a name="line.501"></a>
+<span class="sourceLineNo">502</span><a name="line.502"></a>
+<span class="sourceLineNo">503</span>                static boolean isVar(final String name) {<a name="line.503"></a>
+<span class="sourceLineNo">504</span>                        return !name.isEmpty() &amp;&amp; name.charAt(0) == Decl.VAR_PREFIX;<a name="line.504"></a>
+<span class="sourceLineNo">505</span>                }<a name="line.505"></a>
+<span class="sourceLineNo">506</span><a name="line.506"></a>
+<span class="sourceLineNo">507</span>                /* *********************************************************************<a name="line.507"></a>
+<span class="sourceLineNo">508</span>                 *  Java object serialization<a name="line.508"></a>
+<span class="sourceLineNo">509</span>                 * ********************************************************************/<a name="line.509"></a>
 <span class="sourceLineNo">510</span><a name="line.510"></a>
-<span class="sourceLineNo">511</span>                void write(final ObjectOutput out) throws IOException {<a name="line.511"></a>
-<span class="sourceLineNo">512</span>                        out.writeObject(_name);<a name="line.512"></a>
+<span class="sourceLineNo">511</span>                private Object writeReplace() {<a name="line.511"></a>
+<span class="sourceLineNo">512</span>                        return new Serial(Serial.TREE_PATTERN_VAR, this);<a name="line.512"></a>
 <span class="sourceLineNo">513</span>                }<a name="line.513"></a>
 <span class="sourceLineNo">514</span><a name="line.514"></a>
-<span class="sourceLineNo">515</span>                @SuppressWarnings({"unchecked", "rawtypes"})<a name="line.515"></a>
-<span class="sourceLineNo">516</span>                static Var read(final ObjectInput in)<a name="line.516"></a>
-<span class="sourceLineNo">517</span>                        throws IOException, ClassNotFoundException<a name="line.517"></a>
-<span class="sourceLineNo">518</span>                {<a name="line.518"></a>
-<span class="sourceLineNo">519</span>                        final String name = (String)in.readObject();<a name="line.519"></a>
-<span class="sourceLineNo">520</span>                        return new Var(name);<a name="line.520"></a>
-<span class="sourceLineNo">521</span>                }<a name="line.521"></a>
-<span class="sourceLineNo">522</span><a name="line.522"></a>
-<span class="sourceLineNo">523</span>        }<a name="line.523"></a>
+<span class="sourceLineNo">515</span>                private void readObject(final ObjectOutputStream stream)<a name="line.515"></a>
+<span class="sourceLineNo">516</span>                        throws InvalidObjectException<a name="line.516"></a>
+<span class="sourceLineNo">517</span>                {<a name="line.517"></a>
+<span class="sourceLineNo">518</span>                        throw new InvalidObjectException("Serialization proxy required.");<a name="line.518"></a>
+<span class="sourceLineNo">519</span>                }<a name="line.519"></a>
+<span class="sourceLineNo">520</span><a name="line.520"></a>
+<span class="sourceLineNo">521</span>                void write(final ObjectOutput out) throws IOException {<a name="line.521"></a>
+<span class="sourceLineNo">522</span>                        out.writeObject(_name);<a name="line.522"></a>
+<span class="sourceLineNo">523</span>                }<a name="line.523"></a>
 <span class="sourceLineNo">524</span><a name="line.524"></a>
-<span class="sourceLineNo">525</span>        /**<a name="line.525"></a>
-<span class="sourceLineNo">526</span>         * This class represents a constant pattern value, which can be part of a<a name="line.526"></a>
-<span class="sourceLineNo">527</span>         * whole sub-tree. It is one of two implementations of the &lt;em&gt;sealed&lt;/em&gt;<a name="line.527"></a>
-<span class="sourceLineNo">528</span>         * {@link Decl} class.<a name="line.528"></a>
-<span class="sourceLineNo">529</span>         *<a name="line.529"></a>
-<span class="sourceLineNo">530</span>         * @see Var<a name="line.530"></a>
-<span class="sourceLineNo">531</span>         *<a name="line.531"></a>
-<span class="sourceLineNo">532</span>         * @param &lt;V&gt; the node value type<a name="line.532"></a>
-<span class="sourceLineNo">533</span>         */<a name="line.533"></a>
-<span class="sourceLineNo">534</span>        public static final class Val&lt;V&gt; extends Decl&lt;V&gt; implements Serializable {<a name="line.534"></a>
-<span class="sourceLineNo">535</span>                private static final long serialVersionUID = 1L;<a name="line.535"></a>
-<span class="sourceLineNo">536</span><a name="line.536"></a>
-<span class="sourceLineNo">537</span>                private final V _value;<a name="line.537"></a>
-<span class="sourceLineNo">538</span><a name="line.538"></a>
-<span class="sourceLineNo">539</span>                private Val(final V value) {<a name="line.539"></a>
-<span class="sourceLineNo">540</span>                        _value = value;<a name="line.540"></a>
-<span class="sourceLineNo">541</span>                }<a name="line.541"></a>
-<span class="sourceLineNo">542</span><a name="line.542"></a>
-<span class="sourceLineNo">543</span>                public V value() {<a name="line.543"></a>
-<span class="sourceLineNo">544</span>                        return _value;<a name="line.544"></a>
-<span class="sourceLineNo">545</span>                }<a name="line.545"></a>
+<span class="sourceLineNo">525</span>                @SuppressWarnings("rawtypes")<a name="line.525"></a>
+<span class="sourceLineNo">526</span>                static Object read(final ObjectInput in)<a name="line.526"></a>
+<span class="sourceLineNo">527</span>                        throws IOException, ClassNotFoundException<a name="line.527"></a>
+<span class="sourceLineNo">528</span>                {<a name="line.528"></a>
+<span class="sourceLineNo">529</span>                        final String name = (String)in.readObject();<a name="line.529"></a>
+<span class="sourceLineNo">530</span>                        return new Var(name);<a name="line.530"></a>
+<span class="sourceLineNo">531</span>                }<a name="line.531"></a>
+<span class="sourceLineNo">532</span><a name="line.532"></a>
+<span class="sourceLineNo">533</span>        }<a name="line.533"></a>
+<span class="sourceLineNo">534</span><a name="line.534"></a>
+<span class="sourceLineNo">535</span>        /**<a name="line.535"></a>
+<span class="sourceLineNo">536</span>         * This class represents a constant pattern value, which can be part of a<a name="line.536"></a>
+<span class="sourceLineNo">537</span>         * whole sub-tree. It is one of two implementations of the &lt;em&gt;sealed&lt;/em&gt;<a name="line.537"></a>
+<span class="sourceLineNo">538</span>         * {@link Decl} class.<a name="line.538"></a>
+<span class="sourceLineNo">539</span>         *<a name="line.539"></a>
+<span class="sourceLineNo">540</span>         * @see Var<a name="line.540"></a>
+<span class="sourceLineNo">541</span>         *<a name="line.541"></a>
+<span class="sourceLineNo">542</span>         * @param &lt;V&gt; the node value type<a name="line.542"></a>
+<span class="sourceLineNo">543</span>         */<a name="line.543"></a>
+<span class="sourceLineNo">544</span>        public static final class Val&lt;V&gt; extends Decl&lt;V&gt; implements Serializable {<a name="line.544"></a>
+<span class="sourceLineNo">545</span>                private static final long serialVersionUID = 1L;<a name="line.545"></a>
 <span class="sourceLineNo">546</span><a name="line.546"></a>
-<span class="sourceLineNo">547</span>                @Override<a name="line.547"></a>
-<span class="sourceLineNo">548</span>                &lt;B&gt; Val&lt;B&gt; map(final Function&lt;? super V, ? extends B&gt; mapper) {<a name="line.548"></a>
-<span class="sourceLineNo">549</span>                        return of(mapper.apply(_value));<a name="line.549"></a>
-<span class="sourceLineNo">550</span>                }<a name="line.550"></a>
-<span class="sourceLineNo">551</span><a name="line.551"></a>
-<span class="sourceLineNo">552</span>                @Override<a name="line.552"></a>
-<span class="sourceLineNo">553</span>                public int hashCode() {<a name="line.553"></a>
-<span class="sourceLineNo">554</span>                        return Objects.hashCode(_value);<a name="line.554"></a>
+<span class="sourceLineNo">547</span>                private final V _value;<a name="line.547"></a>
+<span class="sourceLineNo">548</span><a name="line.548"></a>
+<span class="sourceLineNo">549</span>                private Val(final V value) {<a name="line.549"></a>
+<span class="sourceLineNo">550</span>                        _value = value;<a name="line.550"></a>
+<span class="sourceLineNo">551</span>                }<a name="line.551"></a>
+<span class="sourceLineNo">552</span><a name="line.552"></a>
+<span class="sourceLineNo">553</span>                public V value() {<a name="line.553"></a>
+<span class="sourceLineNo">554</span>                        return _value;<a name="line.554"></a>
 <span class="sourceLineNo">555</span>                }<a name="line.555"></a>
 <span class="sourceLineNo">556</span><a name="line.556"></a>
 <span class="sourceLineNo">557</span>                @Override<a name="line.557"></a>
-<span class="sourceLineNo">558</span>                public boolean equals(final Object obj) {<a name="line.558"></a>
-<span class="sourceLineNo">559</span>                        return obj == this ||<a name="line.559"></a>
-<span class="sourceLineNo">560</span>                                obj instanceof TreePattern.Val &amp;&amp;<a name="line.560"></a>
-<span class="sourceLineNo">561</span>                                Objects.equals(_value, ((Val)obj)._value);<a name="line.561"></a>
-<span class="sourceLineNo">562</span>                }<a name="line.562"></a>
-<span class="sourceLineNo">563</span><a name="line.563"></a>
-<span class="sourceLineNo">564</span>                @Override<a name="line.564"></a>
-<span class="sourceLineNo">565</span>                public String toString() {<a name="line.565"></a>
-<span class="sourceLineNo">566</span>                        return Objects.toString(_value);<a name="line.566"></a>
-<span class="sourceLineNo">567</span>                }<a name="line.567"></a>
-<span class="sourceLineNo">568</span><a name="line.568"></a>
-<span class="sourceLineNo">569</span>                /**<a name="line.569"></a>
-<span class="sourceLineNo">570</span>                 * Create a new &lt;em&gt;value&lt;/em&gt; object.<a name="line.570"></a>
-<span class="sourceLineNo">571</span>                 *<a name="line.571"></a>
-<span class="sourceLineNo">572</span>                 * @param value the underlying pattern value<a name="line.572"></a>
-<span class="sourceLineNo">573</span>                 * @param &lt;V&gt; the node type<a name="line.573"></a>
-<span class="sourceLineNo">574</span>                 * @return a new &lt;em&gt;value&lt;/em&gt; object<a name="line.574"></a>
-<span class="sourceLineNo">575</span>                 */<a name="line.575"></a>
-<span class="sourceLineNo">576</span>                public static &lt;V&gt; Val&lt;V&gt; of(final V value) {<a name="line.576"></a>
-<span class="sourceLineNo">577</span>                        return new Val&lt;&gt;(value);<a name="line.577"></a>
-<span class="sourceLineNo">578</span>                }<a name="line.578"></a>
-<span class="sourceLineNo">579</span><a name="line.579"></a>
-<span class="sourceLineNo">580</span><a name="line.580"></a>
-<span class="sourceLineNo">581</span>                /* *********************************************************************<a name="line.581"></a>
-<span class="sourceLineNo">582</span>                 *  Java object serialization<a name="line.582"></a>
-<span class="sourceLineNo">583</span>                 * ********************************************************************/<a name="line.583"></a>
-<span class="sourceLineNo">584</span><a name="line.584"></a>
-<span class="sourceLineNo">585</span>                private Object writeReplace() {<a name="line.585"></a>
-<span class="sourceLineNo">586</span>                        return new Serial(Serial.TREE_PATTERN_VAL, this);<a name="line.586"></a>
-<span class="sourceLineNo">587</span>                }<a name="line.587"></a>
-<span class="sourceLineNo">588</span><a name="line.588"></a>
-<span class="sourceLineNo">589</span>                private void readObject(final ObjectOutputStream stream)<a name="line.589"></a>
-<span class="sourceLineNo">590</span>                        throws InvalidObjectException<a name="line.590"></a>
-<span class="sourceLineNo">591</span>                {<a name="line.591"></a>
-<span class="sourceLineNo">592</span>                        throw new InvalidObjectException("Serialization proxy required.");<a name="line.592"></a>
-<span class="sourceLineNo">593</span>                }<a name="line.593"></a>
+<span class="sourceLineNo">558</span>                &lt;B&gt; Val&lt;B&gt; map(final Function&lt;? super V, ? extends B&gt; mapper) {<a name="line.558"></a>
+<span class="sourceLineNo">559</span>                        return Val.of(mapper.apply(_value));<a name="line.559"></a>
+<span class="sourceLineNo">560</span>                }<a name="line.560"></a>
+<span class="sourceLineNo">561</span><a name="line.561"></a>
+<span class="sourceLineNo">562</span>                @Override<a name="line.562"></a>
+<span class="sourceLineNo">563</span>                public int hashCode() {<a name="line.563"></a>
+<span class="sourceLineNo">564</span>                        return Objects.hashCode(_value);<a name="line.564"></a>
+<span class="sourceLineNo">565</span>                }<a name="line.565"></a>
+<span class="sourceLineNo">566</span><a name="line.566"></a>
+<span class="sourceLineNo">567</span>                @Override<a name="line.567"></a>
+<span class="sourceLineNo">568</span>                public boolean equals(final Object obj) {<a name="line.568"></a>
+<span class="sourceLineNo">569</span>                        return obj == this ||<a name="line.569"></a>
+<span class="sourceLineNo">570</span>                                obj instanceof TreePattern.Val &amp;&amp;<a name="line.570"></a>
+<span class="sourceLineNo">571</span>                                Objects.equals(_value, ((Val)obj)._value);<a name="line.571"></a>
+<span class="sourceLineNo">572</span>                }<a name="line.572"></a>
+<span class="sourceLineNo">573</span><a name="line.573"></a>
+<span class="sourceLineNo">574</span>                @Override<a name="line.574"></a>
+<span class="sourceLineNo">575</span>                public String toString() {<a name="line.575"></a>
+<span class="sourceLineNo">576</span>                        return Objects.toString(_value);<a name="line.576"></a>
+<span class="sourceLineNo">577</span>                }<a name="line.577"></a>
+<span class="sourceLineNo">578</span><a name="line.578"></a>
+<span class="sourceLineNo">579</span>                /**<a name="line.579"></a>
+<span class="sourceLineNo">580</span>                 * Create a new &lt;em&gt;value&lt;/em&gt; object.<a name="line.580"></a>
+<span class="sourceLineNo">581</span>                 *<a name="line.581"></a>
+<span class="sourceLineNo">582</span>                 * @param value the underlying pattern value<a name="line.582"></a>
+<span class="sourceLineNo">583</span>                 * @param &lt;V&gt; the node type<a name="line.583"></a>
+<span class="sourceLineNo">584</span>                 * @return a new &lt;em&gt;value&lt;/em&gt; object<a name="line.584"></a>
+<span class="sourceLineNo">585</span>                 */<a name="line.585"></a>
+<span class="sourceLineNo">586</span>                public static &lt;V&gt; Val&lt;V&gt; of(final V value) {<a name="line.586"></a>
+<span class="sourceLineNo">587</span>                        return new Val&lt;&gt;(value);<a name="line.587"></a>
+<span class="sourceLineNo">588</span>                }<a name="line.588"></a>
+<span class="sourceLineNo">589</span><a name="line.589"></a>
+<span class="sourceLineNo">590</span><a name="line.590"></a>
+<span class="sourceLineNo">591</span>                /* *********************************************************************<a name="line.591"></a>
+<span class="sourceLineNo">592</span>                 *  Java object serialization<a name="line.592"></a>
+<span class="sourceLineNo">593</span>                 * ********************************************************************/<a name="line.593"></a>
 <span class="sourceLineNo">594</span><a name="line.594"></a>
-<span class="sourceLineNo">595</span>                void write(final ObjectOutput out) throws IOException {<a name="line.595"></a>
-<span class="sourceLineNo">596</span>                        out.writeObject(_value);<a name="line.596"></a>
+<span class="sourceLineNo">595</span>                private Object writeReplace() {<a name="line.595"></a>
+<span class="sourceLineNo">596</span>                        return new Serial(Serial.TREE_PATTERN_VAL, this);<a name="line.596"></a>
 <span class="sourceLineNo">597</span>                }<a name="line.597"></a>
 <span class="sourceLineNo">598</span><a name="line.598"></a>
-<span class="sourceLineNo">599</span>                @SuppressWarnings({"unchecked", "rawtypes"})<a name="line.599"></a>
-<span class="sourceLineNo">600</span>                static Val read(final ObjectInput in)<a name="line.600"></a>
-<span class="sourceLineNo">601</span>                        throws IOException, ClassNotFoundException<a name="line.601"></a>
-<span class="sourceLineNo">602</span>                {<a name="line.602"></a>
-<span class="sourceLineNo">603</span>                        return new Val(in.readObject());<a name="line.603"></a>
-<span class="sourceLineNo">604</span>                }<a name="line.604"></a>
-<span class="sourceLineNo">605</span>        }<a name="line.605"></a>
-<span class="sourceLineNo">606</span><a name="line.606"></a>
-<span class="sourceLineNo">607</span>}<a name="line.607"></a>
+<span class="sourceLineNo">599</span>                private void readObject(final ObjectOutputStream stream)<a name="line.599"></a>
+<span class="sourceLineNo">600</span>                        throws InvalidObjectException<a name="line.600"></a>
+<span class="sourceLineNo">601</span>                {<a name="line.601"></a>
+<span class="sourceLineNo">602</span>                        throw new InvalidObjectException("Serialization proxy required.");<a name="line.602"></a>
+<span class="sourceLineNo">603</span>                }<a name="line.603"></a>
+<span class="sourceLineNo">604</span><a name="line.604"></a>
+<span class="sourceLineNo">605</span>                void write(final ObjectOutput out) throws IOException {<a name="line.605"></a>
+<span class="sourceLineNo">606</span>                        out.writeObject(_value);<a name="line.606"></a>
+<span class="sourceLineNo">607</span>                }<a name="line.607"></a>
+<span class="sourceLineNo">608</span><a name="line.608"></a>
+<span class="sourceLineNo">609</span>                @SuppressWarnings({"unchecked", "rawtypes"})<a name="line.609"></a>
+<span class="sourceLineNo">610</span>                static Object read(final ObjectInput in)<a name="line.610"></a>
+<span class="sourceLineNo">611</span>                        throws IOException, ClassNotFoundException<a name="line.611"></a>
+<span class="sourceLineNo">612</span>                {<a name="line.612"></a>
+<span class="sourceLineNo">613</span>                        return new Val(in.readObject());<a name="line.613"></a>
+<span class="sourceLineNo">614</span>                }<a name="line.614"></a>
+<span class="sourceLineNo">615</span>        }<a name="line.615"></a>
+<span class="sourceLineNo">616</span><a name="line.616"></a>
+<span class="sourceLineNo">617</span>}<a name="line.617"></a>
 
 
 
