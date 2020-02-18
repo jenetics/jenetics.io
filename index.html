@@ -189,7 +189,7 @@ import io.jenetics.util.Factory;
 public class HelloWorld {
     // 2.) Definition of the fitness function.
     private static int eval(Genotype&lt;BitGene&gt; gt) {
-        return gt.getChromosome()
+        return gt.chromosome()
             .as(BitChromosome.class)
             .bitCount();
     }
