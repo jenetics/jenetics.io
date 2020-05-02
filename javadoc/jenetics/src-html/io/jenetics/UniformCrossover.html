@@ -30,7 +30,7 @@ UniformCrossover.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">001</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-5.2.0).</font><br />
+<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-6.0.0).</font><br />
 <font color="#808080">003</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2020&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">004</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">005</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
@@ -78,7 +78,7 @@ UniformCrossover.java
 <font color="#808080">047</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wikipedia:&nbsp;Uniform&nbsp;crossover</font><font color="#7f7f9f">&lt;/a&gt;</font><br />
 <font color="#808080">048</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
 <font color="#808080">049</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">&lt;a&nbsp;href=&#34;mailto:franz.wilhelmstoetter@gmail.com&#34;&gt;Franz&nbsp;Wilhelmst&ouml;tter</font><font color="#7f7f9f">&lt;/a&gt;</font><br />
-<font color="#808080">050</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@version&nbsp;</font><font color="#3f5fbf">3.7</font><br />
+<font color="#808080">050</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@version&nbsp;</font><font color="#3f5fbf">6.0</font><br />
 <font color="#808080">051</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@since&nbsp;</font><font color="#3f5fbf">3.7</font><br />
 <font color="#808080">052</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
 <font color="#808080">053</font>&nbsp;<font color="#7f0055"><b>public&nbsp;class&nbsp;</b></font><font color="#000000">UniformCrossover&lt;</font><br />
@@ -140,26 +140,15 @@ UniformCrossover.java
 <font color="#808080">109</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">_swapProbability;</font><br />
 <font color="#808080">110</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
 <font color="#808080">111</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">112</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
-<font color="#808080">113</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Return&nbsp;the&nbsp;probability&nbsp;for&nbsp;swapping&nbsp;genes&nbsp;of&nbsp;a&nbsp;chromosome.</font><br />
-<font color="#808080">114</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
-<font color="#808080">115</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">the&nbsp;probability&nbsp;for&nbsp;swapping&nbsp;genes&nbsp;of&nbsp;a&nbsp;chromosome</font><br />
-<font color="#808080">116</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@deprecated&nbsp;</font><font color="#3f5fbf">Use&nbsp;</font><font color="#3f3fbf">{@link&nbsp;#swapProbability()}&nbsp;</font><font color="#3f5fbf">instead</font><br />
-<font color="#808080">117</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
-<font color="#808080">118</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Deprecated</font><br />
-<font color="#808080">119</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">getSwapProbability</font><font color="#000000">()&nbsp;{</font><br />
-<font color="#808080">120</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">_swapProbability;</font><br />
-<font color="#808080">121</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">122</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">123</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
-<font color="#808080">124</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>protected&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">crossover</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">MSeq&lt;G&gt;&nbsp;that,&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">MSeq&lt;G&gt;&nbsp;other</font><font color="#000000">)&nbsp;{</font><br />
-<font color="#808080">125</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">length&nbsp;=&nbsp;min</font><font color="#000000">(</font><font color="#000000">that.length</font><font color="#000000">()</font><font color="#000000">,&nbsp;other.length</font><font color="#000000">())</font><font color="#000000">;</font><br />
-<font color="#808080">126</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">(</font><font color="#7f0055"><b>int</b></font><font color="#000000">)</font><font color="#000000">indexes</font><font color="#000000">(</font><font color="#000000">RandomRegistry.random</font><font color="#000000">()</font><font color="#000000">,&nbsp;length,&nbsp;_swapProbability</font><font color="#000000">)</font><br />
-<font color="#808080">127</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.peek</font><font color="#000000">(</font><font color="#000000">i&nbsp;-&gt;&nbsp;that.swap</font><font color="#000000">(</font><font color="#000000">i,&nbsp;other</font><font color="#000000">))</font><br />
-<font color="#808080">128</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.count</font><font color="#000000">()</font><font color="#000000">;</font><br />
-<font color="#808080">129</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">130</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">131</font>&nbsp;<font color="#000000">}</font></code>
+<font color="#808080">112</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
+<font color="#808080">113</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>protected&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">crossover</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">MSeq&lt;G&gt;&nbsp;that,&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">MSeq&lt;G&gt;&nbsp;other</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">114</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">length&nbsp;=&nbsp;min</font><font color="#000000">(</font><font color="#000000">that.length</font><font color="#000000">()</font><font color="#000000">,&nbsp;other.length</font><font color="#000000">())</font><font color="#000000">;</font><br />
+<font color="#808080">115</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">(</font><font color="#7f0055"><b>int</b></font><font color="#000000">)</font><font color="#000000">indexes</font><font color="#000000">(</font><font color="#000000">RandomRegistry.random</font><font color="#000000">()</font><font color="#000000">,&nbsp;length,&nbsp;_swapProbability</font><font color="#000000">)</font><br />
+<font color="#808080">116</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.peek</font><font color="#000000">(</font><font color="#000000">i&nbsp;-&gt;&nbsp;that.swap</font><font color="#000000">(</font><font color="#000000">i,&nbsp;other</font><font color="#000000">))</font><br />
+<font color="#808080">117</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.count</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">118</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">119</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">120</font>&nbsp;<font color="#000000">}</font></code>
     
    </td>
   <!-- end source code -->
