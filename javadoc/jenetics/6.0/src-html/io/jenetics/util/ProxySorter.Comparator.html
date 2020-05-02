@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<main role="main">
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span><a id="line.1">/*</a>
+<span class="sourceLineNo">002</span><a id="line.2"> * Java Genetic Algorithm Library (jenetics-6.0.0).</a>
+<span class="sourceLineNo">003</span><a id="line.3"> * Copyright (c) 2007-2020 Franz Wilhelmstötter</a>
+<span class="sourceLineNo">004</span><a id="line.4"> *</a>
+<span class="sourceLineNo">005</span><a id="line.5"> * Licensed under the Apache License, Version 2.0 (the "License");</a>
+<span class="sourceLineNo">006</span><a id="line.6"> * you may not use this file except in compliance with the License.</a>
+<span class="sourceLineNo">007</span><a id="line.7"> * You may obtain a copy of the License at</a>
+<span class="sourceLineNo">008</span><a id="line.8"> *</a>
+<span class="sourceLineNo">009</span><a id="line.9"> *      http://www.apache.org/licenses/LICENSE-2.0</a>
+<span class="sourceLineNo">010</span><a id="line.10"> *</a>
+<span class="sourceLineNo">011</span><a id="line.11"> * Unless required by applicable law or agreed to in writing, software</a>
+<span class="sourceLineNo">012</span><a id="line.12"> * distributed under the License is distributed on an "AS IS" BASIS,</a>
+<span class="sourceLineNo">013</span><a id="line.13"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</a>
+<span class="sourceLineNo">014</span><a id="line.14"> * See the License for the specific language governing permissions and</a>
+<span class="sourceLineNo">015</span><a id="line.15"> * limitations under the License.</a>
+<span class="sourceLineNo">016</span><a id="line.16"> *</a>
+<span class="sourceLineNo">017</span><a id="line.17"> * Author:</a>
+<span class="sourceLineNo">018</span><a id="line.18"> *    Franz Wilhelmstötter (franz.wilhelmstoetter@gmail.com)</a>
+<span class="sourceLineNo">019</span><a id="line.19"> */</a>
+<span class="sourceLineNo">020</span><a id="line.20">package io.jenetics.util;</a>
+<span class="sourceLineNo">021</span><a id="line.21"></a>
+<span class="sourceLineNo">022</span><a id="line.22">import java.util.List;</a>
+<span class="sourceLineNo">023</span><a id="line.23"></a>
+<span class="sourceLineNo">024</span><a id="line.24">/**</a>
+<span class="sourceLineNo">025</span><a id="line.25"> * This sorting methods doesn't sort a given array directly, instead</a>
+<span class="sourceLineNo">026</span><a id="line.26"> * an index lookup array is returned which allows to access the array in</a>
+<span class="sourceLineNo">027</span><a id="line.27"> * an sorted order.</a>
+<span class="sourceLineNo">028</span><a id="line.28"> *</a>
+<span class="sourceLineNo">029</span><a id="line.29"> * &lt;pre&gt;{@code</a>
+<span class="sourceLineNo">030</span><a id="line.30"> * final double[] array = new Random().doubles(100).toArray();</a>
+<span class="sourceLineNo">031</span><a id="line.31"> * final int[] proxy = ProxySorter.sort(array);</a>
+<span class="sourceLineNo">032</span><a id="line.32"> *</a>
+<span class="sourceLineNo">033</span><a id="line.33"> * // 'Classical' array sort.</a>
+<span class="sourceLineNo">034</span><a id="line.34"> * final double[] sorted = array.clone();</a>
+<span class="sourceLineNo">035</span><a id="line.35"> * Arrays.sort(sorted);</a>
+<span class="sourceLineNo">036</span><a id="line.36"> *</a>
+<span class="sourceLineNo">037</span><a id="line.37"> * // Iterating the array in ascending order.</a>
+<span class="sourceLineNo">038</span><a id="line.38"> * for (int i = 0; i &lt; array.length; ++i) {</a>
+<span class="sourceLineNo">039</span><a id="line.39"> *     assert sorted[i] == array[proxy[i]];</a>
+<span class="sourceLineNo">040</span><a id="line.40"> * }</a>
+<span class="sourceLineNo">041</span><a id="line.41"> * }&lt;/pre&gt;</a>
+<span class="sourceLineNo">042</span><a id="line.42"> *</a>
+<span class="sourceLineNo">043</span><a id="line.43"> * The minimal requirement of the proxy-sorter will be an access function and</a>
+<span class="sourceLineNo">044</span><a id="line.44"> * the number of elements you want to sort.</a>
+<span class="sourceLineNo">045</span><a id="line.45"> * &lt;pre&gt;{@code</a>
+<span class="sourceLineNo">046</span><a id="line.46"> * final IntFunction&lt;String&gt; access = ...;</a>
+<span class="sourceLineNo">047</span><a id="line.47"> * final int length = 100;</a>
+<span class="sourceLineNo">048</span><a id="line.48"> * final int[] proxy = ProxySorter.sort(</a>
+<span class="sourceLineNo">049</span><a id="line.49"> *     access, length,</a>
+<span class="sourceLineNo">050</span><a id="line.50"> *     (a, i, j) -&gt; a.apply(i).compareTo(a.apply(j))</a>
+<span class="sourceLineNo">051</span><a id="line.51"> * );</a>
+<span class="sourceLineNo">052</span><a id="line.52"> * }&lt;/pre&gt;</a>
+<span class="sourceLineNo">053</span><a id="line.53"> * @apiNote</a>
+<span class="sourceLineNo">054</span><a id="line.54"> * The most general sorting method is {@link #sort(Object, int, Comparator)}.</a>
+<span class="sourceLineNo">055</span><a id="line.55"> * All other sorting methods can be created with this method.</a>
+<span class="sourceLineNo">056</span><a id="line.56"> *</a>
+<span class="sourceLineNo">057</span><a id="line.57"> * @see #sort(Object, int, Comparator)</a>
+<span class="sourceLineNo">058</span><a id="line.58"> * @see Comparator</a>
+<span class="sourceLineNo">059</span><a id="line.59"> *</a>
+<span class="sourceLineNo">060</span><a id="line.60"> * @author &lt;a href="mailto:franz.wilhelmstoetter@gmail.com"&gt;Franz Wilhelmstötter&lt;/a&gt;</a>
+<span class="sourceLineNo">061</span><a id="line.61"> * @version 5.1</a>
+<span class="sourceLineNo">062</span><a id="line.62"> * @since 5.1</a>
+<span class="sourceLineNo">063</span><a id="line.63"> */</a>
+<span class="sourceLineNo">064</span><a id="line.64">public final class ProxySorter {</a>
+<span class="sourceLineNo">065</span><a id="line.65"></a>
+<span class="sourceLineNo">066</span><a id="line.66">        /**</a>
+<span class="sourceLineNo">067</span><a id="line.67">         * The comparator used for comparing two array elements at the specified</a>
+<span class="sourceLineNo">068</span><a id="line.68">         * indexes.</a>
+<span class="sourceLineNo">069</span><a id="line.69">         * &lt;pre&gt;{@code</a>
+<span class="sourceLineNo">070</span><a id="line.70">         * final ProxySorter.Comparator&lt;double[]&gt; comparator =</a>
+<span class="sourceLineNo">071</span><a id="line.71">         *     (a, i, j) -&gt; Double.compare(a[i], a[j]);</a>
+<span class="sourceLineNo">072</span><a id="line.72">         * }&lt;/pre&gt;</a>
+<span class="sourceLineNo">073</span><a id="line.73">         * The example above shows how to create a comparator for {@code double[]}</a>
+<span class="sourceLineNo">074</span><a id="line.74">         * arrays.</a>
+<span class="sourceLineNo">075</span><a id="line.75">         *</a>
+<span class="sourceLineNo">076</span><a id="line.76">         * @see ProxySorter#sort(Object, int, Comparator)</a>
+<span class="sourceLineNo">077</span><a id="line.77">         * @see ProxySorter</a>
+<span class="sourceLineNo">078</span><a id="line.78">         *</a>
+<span class="sourceLineNo">079</span><a id="line.79">         * @param &lt;T&gt; the array type, e.g. {@code int[]}, {@code double[]} or</a>
+<span class="sourceLineNo">080</span><a id="line.80">         *            {@code Seq&lt;String&gt;}</a>
+<span class="sourceLineNo">081</span><a id="line.81">         *</a>
+<span class="sourceLineNo">082</span><a id="line.82">         * @author &lt;a href="mailto:franz.wilhelmstoetter@gmail.com"&gt;Franz Wilhelmstötter&lt;/a&gt;</a>
+<span class="sourceLineNo">083</span><a id="line.83">         * @version 5.1</a>
+<span class="sourceLineNo">084</span><a id="line.84">         * @since 5.1</a>
+<span class="sourceLineNo">085</span><a id="line.85">         */</a>
+<span class="sourceLineNo">086</span><a id="line.86">        @FunctionalInterface</a>
+<span class="sourceLineNo">087</span><a id="line.87">        public interface Comparator&lt;T&gt; {</a>
+<span class="sourceLineNo">088</span><a id="line.88"></a>
+<span class="sourceLineNo">089</span><a id="line.89">                /**</a>
+<span class="sourceLineNo">090</span><a id="line.90">                 * Compares the two array elements, specified by its indices, for order.</a>
+<span class="sourceLineNo">091</span><a id="line.91">                 * Returns a negative integer, zero, or a positive integer as the first</a>
+<span class="sourceLineNo">092</span><a id="line.92">                 * argument is less than, equal to, or greater than the second.</a>
+<span class="sourceLineNo">093</span><a id="line.93">                 *</a>
+<span class="sourceLineNo">094</span><a id="line.94">                 * @see java.util.Comparator#compare(Object, Object)</a>
+<span class="sourceLineNo">095</span><a id="line.95">                 *</a>
+<span class="sourceLineNo">096</span><a id="line.96">                 * @param array the array where the two comparing elements are fetched</a>
+<span class="sourceLineNo">097</span><a id="line.97">                 * @param i the index of the first array element</a>
+<span class="sourceLineNo">098</span><a id="line.98">                 * @param j the index of the second array element</a>
+<span class="sourceLineNo">099</span><a id="line.99">                 * @return a negative integer, zero, or a positive integer as the first</a>
+<span class="sourceLineNo">100</span><a id="line.100">                 *         argument is less than, equal to, or greater than the second.</a>
+<span class="sourceLineNo">101</span><a id="line.101">                 * @throws NullPointerException if an argument is null and this</a>
+<span class="sourceLineNo">102</span><a id="line.102">                 *         comparator does not permit null arguments</a>
+<span class="sourceLineNo">103</span><a id="line.103">                 */</a>
+<span class="sourceLineNo">104</span><a id="line.104">                int compare(final T array, final int i, final int j);</a>
+<span class="sourceLineNo">105</span><a id="line.105"></a>
+<span class="sourceLineNo">106</span><a id="line.106">                /**</a>
+<span class="sourceLineNo">107</span><a id="line.107">                 * Returns a comparator that imposes the reverse ordering of this</a>
+<span class="sourceLineNo">108</span><a id="line.108">                 * comparator.</a>
+<span class="sourceLineNo">109</span><a id="line.109">                 *</a>
+<span class="sourceLineNo">110</span><a id="line.110">                 * @return a comparator that imposes the reverse ordering of this</a>
+<span class="sourceLineNo">111</span><a id="line.111">                 *         comparator.</a>
+<span class="sourceLineNo">112</span><a id="line.112">                 */</a>
+<span class="sourceLineNo">113</span><a id="line.113">                default Comparator&lt;T&gt; reversed() {</a>
+<span class="sourceLineNo">114</span><a id="line.114">                        return (a, i, j) -&gt; compare(a, j, i);</a>
+<span class="sourceLineNo">115</span><a id="line.115">                }</a>
+<span class="sourceLineNo">116</span><a id="line.116"></a>
+<span class="sourceLineNo">117</span><a id="line.117">        }</a>
+<span class="sourceLineNo">118</span><a id="line.118"></a>
+<span class="sourceLineNo">119</span><a id="line.119">        private ProxySorter() {</a>
+<span class="sourceLineNo">120</span><a id="line.120">        }</a>
+<span class="sourceLineNo">121</span><a id="line.121"></a>
+<span class="sourceLineNo">122</span><a id="line.122">        /**</a>
+<span class="sourceLineNo">123</span><a id="line.123">         * Sorting the given array by creating an index lookup array. The original</a>
+<span class="sourceLineNo">124</span><a id="line.124">         * array is not touched and the returned array can then be used for</a>
+<span class="sourceLineNo">125</span><a id="line.125">         * iterating the array in ascending order.</a>
+<span class="sourceLineNo">126</span><a id="line.126">         *</a>
+<span class="sourceLineNo">127</span><a id="line.127">         * &lt;pre&gt;{@code</a>
+<span class="sourceLineNo">128</span><a id="line.128">         * final double[] array = ...;</a>
+<span class="sourceLineNo">129</span><a id="line.129">         * final int[] sorted = ProxySorter.sort(</a>
+<span class="sourceLineNo">130</span><a id="line.130">         *     array, array.length,</a>
+<span class="sourceLineNo">131</span><a id="line.131">         *     (a, i, j) -&gt; Doubler.compare(a[i], a[j])</a>
+<span class="sourceLineNo">132</span><a id="line.132">         * );</a>
+<span class="sourceLineNo">133</span><a id="line.133">         * for (int i : sorted) {</a>
+<span class="sourceLineNo">134</span><a id="line.134">         *     System.out.println(array[i]);</a>
+<span class="sourceLineNo">135</span><a id="line.135">         * }</a>
+<span class="sourceLineNo">136</span><a id="line.136">         * }&lt;/pre&gt;</a>
+<span class="sourceLineNo">137</span><a id="line.137">         *</a>
+<span class="sourceLineNo">138</span><a id="line.138">         * @param array the array which is sorted</a>
+<span class="sourceLineNo">139</span><a id="line.139">         * @param length the array length</a>
+<span class="sourceLineNo">140</span><a id="line.140">         * @param comparator the array element comparator</a>
+<span class="sourceLineNo">141</span><a id="line.141">         * @param &lt;T&gt; the array type</a>
+<span class="sourceLineNo">142</span><a id="line.142">         * @return the sorted index array</a>
+<span class="sourceLineNo">143</span><a id="line.143">         * @throws NullPointerException if one of the array is {@code null}</a>
+<span class="sourceLineNo">144</span><a id="line.144">         */</a>
+<span class="sourceLineNo">145</span><a id="line.145">        public static &lt;T&gt; int[] sort(</a>
+<span class="sourceLineNo">146</span><a id="line.146">                final T array,</a>
+<span class="sourceLineNo">147</span><a id="line.147">                final int length,</a>
+<span class="sourceLineNo">148</span><a id="line.148">                final Comparator&lt;? super T&gt; comparator</a>
+<span class="sourceLineNo">149</span><a id="line.149">        ) {</a>
+<span class="sourceLineNo">150</span><a id="line.150">                return TimProxySorter.sort(array, length, comparator);</a>
+<span class="sourceLineNo">151</span><a id="line.151">        }</a>
+<span class="sourceLineNo">152</span><a id="line.152"></a>
+<span class="sourceLineNo">153</span><a id="line.153"></a>
+<span class="sourceLineNo">154</span><a id="line.154">        /* *************************************************************************</a>
+<span class="sourceLineNo">155</span><a id="line.155">         * Derived sorting methods.</a>
+<span class="sourceLineNo">156</span><a id="line.156">         * ************************************************************************/</a>
+<span class="sourceLineNo">157</span><a id="line.157"></a>
+<span class="sourceLineNo">158</span><a id="line.158">        /**</a>
+<span class="sourceLineNo">159</span><a id="line.159">         * Sorting the given array by creating an index lookup array.</a>
+<span class="sourceLineNo">160</span><a id="line.160">         *</a>
+<span class="sourceLineNo">161</span><a id="line.161">         * @see #sort(Object, int, Comparator)</a>
+<span class="sourceLineNo">162</span><a id="line.162">         *</a>
+<span class="sourceLineNo">163</span><a id="line.163">         * @param array the array to sort</a>
+<span class="sourceLineNo">164</span><a id="line.164">         * @return the &lt;em&gt;sorted&lt;/em&gt; index lookup array</a>
+<span class="sourceLineNo">165</span><a id="line.165">         * @throws NullPointerException if the array is {@code null}</a>
+<span class="sourceLineNo">166</span><a id="line.166">         */</a>
+<span class="sourceLineNo">167</span><a id="line.167">        public static int[] sort(final int[] array) {</a>
+<span class="sourceLineNo">168</span><a id="line.168">                return sort(array, array.length, ProxySorter::compare);</a>
+<span class="sourceLineNo">169</span><a id="line.169">        }</a>
+<span class="sourceLineNo">170</span><a id="line.170"></a>
+<span class="sourceLineNo">171</span><a id="line.171">        private static int compare(final int[] a, final int i, final int j) {</a>
+<span class="sourceLineNo">172</span><a id="line.172">                return Integer.compare(a[i], a[j]);</a>
+<span class="sourceLineNo">173</span><a id="line.173">        }</a>
+<span class="sourceLineNo">174</span><a id="line.174"></a>
+<span class="sourceLineNo">175</span><a id="line.175">        /**</a>
+<span class="sourceLineNo">176</span><a id="line.176">         * Sorting the given array by creating an index lookup array.</a>
+<span class="sourceLineNo">177</span><a id="line.177">         *</a>
+<span class="sourceLineNo">178</span><a id="line.178">         * @see #sort(Object, int, Comparator)</a>
+<span class="sourceLineNo">179</span><a id="line.179">         *</a>
+<span class="sourceLineNo">180</span><a id="line.180">         * @param array the array to sort</a>
+<span class="sourceLineNo">181</span><a id="line.181">         * @return the &lt;em&gt;sorted&lt;/em&gt; index lookup array</a>
+<span class="sourceLineNo">182</span><a id="line.182">         * @throws NullPointerException if the array is {@code null}</a>
+<span class="sourceLineNo">183</span><a id="line.183">         */</a>
+<span class="sourceLineNo">184</span><a id="line.184">        public static int[] sort(final long[] array) {</a>
+<span class="sourceLineNo">185</span><a id="line.185">                return sort(array, array.length, ProxySorter::compare);</a>
+<span class="sourceLineNo">186</span><a id="line.186">        }</a>
+<span class="sourceLineNo">187</span><a id="line.187"></a>
+<span class="sourceLineNo">188</span><a id="line.188">        private static int compare(final long[] a, final int i, final int j) {</a>
+<span class="sourceLineNo">189</span><a id="line.189">                return Long.compare(a[i], a[j]);</a>
+<span class="sourceLineNo">190</span><a id="line.190">        }</a>
+<span class="sourceLineNo">191</span><a id="line.191"></a>
+<span class="sourceLineNo">192</span><a id="line.192">        /**</a>
+<span class="sourceLineNo">193</span><a id="line.193">         * Sorting the given array by creating an index lookup array.</a>
+<span class="sourceLineNo">194</span><a id="line.194">         *</a>
+<span class="sourceLineNo">195</span><a id="line.195">         * @see #sort(Object, int, Comparator)</a>
+<span class="sourceLineNo">196</span><a id="line.196">         *</a>
+<span class="sourceLineNo">197</span><a id="line.197">         * @param array the array to sort</a>
+<span class="sourceLineNo">198</span><a id="line.198">         * @return the &lt;em&gt;sorted&lt;/em&gt; index lookup array</a>
+<span class="sourceLineNo">199</span><a id="line.199">         * @throws NullPointerException if the array is {@code null}</a>
+<span class="sourceLineNo">200</span><a id="line.200">         */</a>
+<span class="sourceLineNo">201</span><a id="line.201">        public static int[] sort(final double[] array) {</a>
+<span class="sourceLineNo">202</span><a id="line.202">                return sort(array, array.length, ProxySorter::compare);</a>
+<span class="sourceLineNo">203</span><a id="line.203">        }</a>
+<span class="sourceLineNo">204</span><a id="line.204"></a>
+<span class="sourceLineNo">205</span><a id="line.205">        private static int compare(final double[] a, final int i, final int j) {</a>
+<span class="sourceLineNo">206</span><a id="line.206">                return Double.compare(a[i], a[j]);</a>
+<span class="sourceLineNo">207</span><a id="line.207">        }</a>
+<span class="sourceLineNo">208</span><a id="line.208"></a>
+<span class="sourceLineNo">209</span><a id="line.209">        /**</a>
+<span class="sourceLineNo">210</span><a id="line.210">         * Sorting the given array by creating an index lookup array.</a>
+<span class="sourceLineNo">211</span><a id="line.211">         *</a>
+<span class="sourceLineNo">212</span><a id="line.212">         * @see #sort(Object, int, Comparator)</a>
+<span class="sourceLineNo">213</span><a id="line.213">         *</a>
+<span class="sourceLineNo">214</span><a id="line.214">         * @param &lt;T&gt; the array element type</a>
+<span class="sourceLineNo">215</span><a id="line.215">         * @param array the array to sort</a>
+<span class="sourceLineNo">216</span><a id="line.216">         * @param comparator the array element comparator</a>
+<span class="sourceLineNo">217</span><a id="line.217">         * @return the &lt;em&gt;sorted&lt;/em&gt; index lookup array</a>
+<span class="sourceLineNo">218</span><a id="line.218">         * @throws NullPointerException if one of the arguments is {@code null}</a>
+<span class="sourceLineNo">219</span><a id="line.219">         */</a>
+<span class="sourceLineNo">220</span><a id="line.220">        public static &lt;T&gt; int[] sort(</a>
+<span class="sourceLineNo">221</span><a id="line.221">                final T[] array,</a>
+<span class="sourceLineNo">222</span><a id="line.222">                final java.util.Comparator&lt;? super T&gt; comparator</a>
+<span class="sourceLineNo">223</span><a id="line.223">        ) {</a>
+<span class="sourceLineNo">224</span><a id="line.224">                return sort(</a>
+<span class="sourceLineNo">225</span><a id="line.225">                        array, array.length,</a>
+<span class="sourceLineNo">226</span><a id="line.226">                        (a, i, j) -&gt; comparator.compare(a[i], a[j])</a>
+<span class="sourceLineNo">227</span><a id="line.227">                );</a>
+<span class="sourceLineNo">228</span><a id="line.228">        }</a>
+<span class="sourceLineNo">229</span><a id="line.229"></a>
+<span class="sourceLineNo">230</span><a id="line.230">        /**</a>
+<span class="sourceLineNo">231</span><a id="line.231">         * Sorting the given array by creating an index lookup array.</a>
+<span class="sourceLineNo">232</span><a id="line.232">         *</a>
+<span class="sourceLineNo">233</span><a id="line.233">         * @see #sort(Object, int, Comparator)</a>
+<span class="sourceLineNo">234</span><a id="line.234">         *</a>
+<span class="sourceLineNo">235</span><a id="line.235">         * @param &lt;T&gt; the array element type</a>
+<span class="sourceLineNo">236</span><a id="line.236">         * @param array the array to sort</a>
+<span class="sourceLineNo">237</span><a id="line.237">         * @return the &lt;em&gt;sorted&lt;/em&gt; index lookup array</a>
+<span class="sourceLineNo">238</span><a id="line.238">         * @throws NullPointerException if the array is {@code null}</a>
+<span class="sourceLineNo">239</span><a id="line.239">         */</a>
+<span class="sourceLineNo">240</span><a id="line.240">        public static &lt;T extends Comparable&lt;? super T&gt;&gt; int[] sort(final T[] array) {</a>
+<span class="sourceLineNo">241</span><a id="line.241">                return sort(</a>
+<span class="sourceLineNo">242</span><a id="line.242">                        array, array.length,</a>
+<span class="sourceLineNo">243</span><a id="line.243">                        (a, i, j) -&gt; a[i].compareTo(a[j])</a>
+<span class="sourceLineNo">244</span><a id="line.244">                );</a>
+<span class="sourceLineNo">245</span><a id="line.245">        }</a>
+<span class="sourceLineNo">246</span><a id="line.246"></a>
+<span class="sourceLineNo">247</span><a id="line.247">        /**</a>
+<span class="sourceLineNo">248</span><a id="line.248">         * Sorting the given array by creating an index lookup array.</a>
+<span class="sourceLineNo">249</span><a id="line.249">         *</a>
+<span class="sourceLineNo">250</span><a id="line.250">         * @see #sort(Object, int, Comparator)</a>
+<span class="sourceLineNo">251</span><a id="line.251">         *</a>
+<span class="sourceLineNo">252</span><a id="line.252">         * @param &lt;T&gt; the array element type</a>
+<span class="sourceLineNo">253</span><a id="line.253">         * @param array the array to sort</a>
+<span class="sourceLineNo">254</span><a id="line.254">         * @param comparator the array element comparator</a>
+<span class="sourceLineNo">255</span><a id="line.255">         * @return the &lt;em&gt;sorted&lt;/em&gt; index lookup array</a>
+<span class="sourceLineNo">256</span><a id="line.256">         * @throws NullPointerException if one of the arguments is {@code null}</a>
+<span class="sourceLineNo">257</span><a id="line.257">         */</a>
+<span class="sourceLineNo">258</span><a id="line.258">        public static &lt;T&gt; int[] sort(</a>
+<span class="sourceLineNo">259</span><a id="line.259">                final BaseSeq&lt;? extends T&gt; array,</a>
+<span class="sourceLineNo">260</span><a id="line.260">                final java.util.Comparator&lt;? super T&gt; comparator</a>
+<span class="sourceLineNo">261</span><a id="line.261">        ) {</a>
+<span class="sourceLineNo">262</span><a id="line.262">                return sort(</a>
+<span class="sourceLineNo">263</span><a id="line.263">                        array, array.length(),</a>
+<span class="sourceLineNo">264</span><a id="line.264">                        (a, i, j) -&gt; comparator.compare(a.get(i), a.get(j))</a>
+<span class="sourceLineNo">265</span><a id="line.265">                );</a>
+<span class="sourceLineNo">266</span><a id="line.266">        }</a>
+<span class="sourceLineNo">267</span><a id="line.267"></a>
+<span class="sourceLineNo">268</span><a id="line.268">        /**</a>
+<span class="sourceLineNo">269</span><a id="line.269">         * Sorting the given array by creating an index lookup array.</a>
+<span class="sourceLineNo">270</span><a id="line.270">         *</a>
+<span class="sourceLineNo">271</span><a id="line.271">         * @see #sort(Object, int, Comparator)</a>
+<span class="sourceLineNo">272</span><a id="line.272">         *</a>
+<span class="sourceLineNo">273</span><a id="line.273">         * @param &lt;T&gt; the array element type</a>
+<span class="sourceLineNo">274</span><a id="line.274">         * @param array the array to sort</a>
+<span class="sourceLineNo">275</span><a id="line.275">         * @return the &lt;em&gt;sorted&lt;/em&gt; index lookup array</a>
+<span class="sourceLineNo">276</span><a id="line.276">         * @throws NullPointerException if the array is {@code null}</a>
+<span class="sourceLineNo">277</span><a id="line.277">         */</a>
+<span class="sourceLineNo">278</span><a id="line.278">        public static &lt;T extends Comparable&lt;? super T&gt;&gt;</a>
+<span class="sourceLineNo">279</span><a id="line.279">        int[] sort(final BaseSeq&lt;? extends T&gt; array) {</a>
+<span class="sourceLineNo">280</span><a id="line.280">                return sort(</a>
+<span class="sourceLineNo">281</span><a id="line.281">                        array, array.length(),</a>
+<span class="sourceLineNo">282</span><a id="line.282">                        (a, i, j) -&gt; a.get(i).compareTo(a.get(j))</a>
+<span class="sourceLineNo">283</span><a id="line.283">                );</a>
+<span class="sourceLineNo">284</span><a id="line.284">        }</a>
+<span class="sourceLineNo">285</span><a id="line.285"></a>
+<span class="sourceLineNo">286</span><a id="line.286">        /**</a>
+<span class="sourceLineNo">287</span><a id="line.287">         * Sorting the given array by creating an index lookup array.</a>
+<span class="sourceLineNo">288</span><a id="line.288">         *</a>
+<span class="sourceLineNo">289</span><a id="line.289">         * @see #sort(Object, int, Comparator)</a>
+<span class="sourceLineNo">290</span><a id="line.290">         *</a>
+<span class="sourceLineNo">291</span><a id="line.291">         * @param &lt;T&gt; the array element type</a>
+<span class="sourceLineNo">292</span><a id="line.292">         * @param array the array to sort</a>
+<span class="sourceLineNo">293</span><a id="line.293">         * @param comparator the array element comparator</a>
+<span class="sourceLineNo">294</span><a id="line.294">         * @return the &lt;em&gt;sorted&lt;/em&gt; index lookup array</a>
+<span class="sourceLineNo">295</span><a id="line.295">         * @throws NullPointerException if one of the arguments is {@code null}</a>
+<span class="sourceLineNo">296</span><a id="line.296">         */</a>
+<span class="sourceLineNo">297</span><a id="line.297">        public static &lt;T&gt; int[] sort(</a>
+<span class="sourceLineNo">298</span><a id="line.298">                final List&lt;? extends T&gt; array,</a>
+<span class="sourceLineNo">299</span><a id="line.299">                final java.util.Comparator&lt;? super T&gt; comparator</a>
+<span class="sourceLineNo">300</span><a id="line.300">        ) {</a>
+<span class="sourceLineNo">301</span><a id="line.301">                return sort(</a>
+<span class="sourceLineNo">302</span><a id="line.302">                        array, array.size(),</a>
+<span class="sourceLineNo">303</span><a id="line.303">                        (a, i, j) -&gt; comparator.compare(a.get(i), a.get(j))</a>
+<span class="sourceLineNo">304</span><a id="line.304">                );</a>
+<span class="sourceLineNo">305</span><a id="line.305">        }</a>
+<span class="sourceLineNo">306</span><a id="line.306"></a>
+<span class="sourceLineNo">307</span><a id="line.307">        /**</a>
+<span class="sourceLineNo">308</span><a id="line.308">         * Sorting the given array by creating an index lookup array.</a>
+<span class="sourceLineNo">309</span><a id="line.309">         *</a>
+<span class="sourceLineNo">310</span><a id="line.310">         * @see #sort(Object, int, Comparator)</a>
+<span class="sourceLineNo">311</span><a id="line.311">         *</a>
+<span class="sourceLineNo">312</span><a id="line.312">         * @param &lt;T&gt; the array element type</a>
+<span class="sourceLineNo">313</span><a id="line.313">         * @param array the array to sort</a>
+<span class="sourceLineNo">314</span><a id="line.314">         * @return the &lt;em&gt;sorted&lt;/em&gt; index lookup array</a>
+<span class="sourceLineNo">315</span><a id="line.315">         * @throws NullPointerException if the array is {@code null}</a>
+<span class="sourceLineNo">316</span><a id="line.316">         */</a>
+<span class="sourceLineNo">317</span><a id="line.317">        public static &lt;T extends Comparable&lt;? super T&gt;&gt;</a>
+<span class="sourceLineNo">318</span><a id="line.318">        int[] sort(final List&lt;? extends T&gt; array) {</a>
+<span class="sourceLineNo">319</span><a id="line.319">                return sort(</a>
+<span class="sourceLineNo">320</span><a id="line.320">                        array, array.size(),</a>
+<span class="sourceLineNo">321</span><a id="line.321">                        (a, i, j) -&gt; a.get(i).compareTo(a.get(j))</a>
+<span class="sourceLineNo">322</span><a id="line.322">                );</a>
+<span class="sourceLineNo">323</span><a id="line.323">        }</a>
+<span class="sourceLineNo">324</span><a id="line.324"></a>
+<span class="sourceLineNo">325</span><a id="line.325">        /* *************************************************************************</a>
+<span class="sourceLineNo">326</span><a id="line.326">         * Some helper methods.</a>
+<span class="sourceLineNo">327</span><a id="line.327">         * ************************************************************************/</a>
+<span class="sourceLineNo">328</span><a id="line.328"></a>
+<span class="sourceLineNo">329</span><a id="line.329">        /**</a>
+<span class="sourceLineNo">330</span><a id="line.330">         * Create an initial indexes array of the given {@code length}.</a>
+<span class="sourceLineNo">331</span><a id="line.331">         *</a>
+<span class="sourceLineNo">332</span><a id="line.332">         * @param length the length of the indexes array</a>
+<span class="sourceLineNo">333</span><a id="line.333">         * @return the initialized indexes array</a>
+<span class="sourceLineNo">334</span><a id="line.334">         */</a>
+<span class="sourceLineNo">335</span><a id="line.335">        static int[] indexes(final int length) {</a>
+<span class="sourceLineNo">336</span><a id="line.336">                return init(new int[length]);</a>
+<span class="sourceLineNo">337</span><a id="line.337">        }</a>
+<span class="sourceLineNo">338</span><a id="line.338"></a>
+<span class="sourceLineNo">339</span><a id="line.339">        /**</a>
+<span class="sourceLineNo">340</span><a id="line.340">         * Initializes the given {@code indexes} array.</a>
+<span class="sourceLineNo">341</span><a id="line.341">         *</a>
+<span class="sourceLineNo">342</span><a id="line.342">         * @param indexes the indexes array to initialize</a>
+<span class="sourceLineNo">343</span><a id="line.343">         * @return the initialized indexes array</a>
+<span class="sourceLineNo">344</span><a id="line.344">         * @throws NullPointerException if the given {@code indexes} array is</a>
+<span class="sourceLineNo">345</span><a id="line.345">         *         {@code null}</a>
+<span class="sourceLineNo">346</span><a id="line.346">         */</a>
+<span class="sourceLineNo">347</span><a id="line.347">        private static int[] init(final int[] indexes) {</a>
+<span class="sourceLineNo">348</span><a id="line.348">                for (int i = 0; i &lt; indexes.length; ++i) {</a>
+<span class="sourceLineNo">349</span><a id="line.349">                        indexes[i] = i;</a>
+<span class="sourceLineNo">350</span><a id="line.350">                }</a>
+<span class="sourceLineNo">351</span><a id="line.351">                return indexes;</a>
+<span class="sourceLineNo">352</span><a id="line.352">        }</a>
+<span class="sourceLineNo">353</span><a id="line.353"></a>
+<span class="sourceLineNo">354</span><a id="line.354">}</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</main>
+</body>
+</html>
