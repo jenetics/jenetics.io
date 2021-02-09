@@ -30,8 +30,8 @@ MathOp.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">001</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-6.1.0).</font><br />
-<font color="#808080">003</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2020&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
+<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-6.2.0).</font><br />
+<font color="#808080">003</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2021&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">004</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">005</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
 <font color="#808080">006</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance&nbsp;with&nbsp;the&nbsp;License.</font><br />
@@ -50,35 +50,35 @@ MathOp.java
 <font color="#808080">019</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*/</font><br />
 <font color="#808080">020</font>&nbsp;<font color="#7f0055"><b>package&nbsp;</b></font><font color="#000000">io.jenetics.prog.op;</font><br />
 <font color="#808080">021</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">022</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.abs;</font><br />
-<font color="#808080">023</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.acos;</font><br />
-<font color="#808080">024</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.asin;</font><br />
-<font color="#808080">025</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.atan;</font><br />
-<font color="#808080">026</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.cbrt;</font><br />
-<font color="#808080">027</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.ceil;</font><br />
-<font color="#808080">028</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.cos;</font><br />
-<font color="#808080">029</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.cosh;</font><br />
-<font color="#808080">030</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.exp;</font><br />
-<font color="#808080">031</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.floor;</font><br />
-<font color="#808080">032</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.hypot;</font><br />
-<font color="#808080">033</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.log;</font><br />
-<font color="#808080">034</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.log10;</font><br />
-<font color="#808080">035</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.max;</font><br />
-<font color="#808080">036</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.min;</font><br />
-<font color="#808080">037</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.pow;</font><br />
-<font color="#808080">038</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.rint;</font><br />
-<font color="#808080">039</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.signum;</font><br />
-<font color="#808080">040</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.sin;</font><br />
-<font color="#808080">041</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.sinh;</font><br />
-<font color="#808080">042</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.sqrt;</font><br />
-<font color="#808080">043</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.tan;</font><br />
-<font color="#808080">044</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.tanh;</font><br />
-<font color="#808080">045</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.util.Objects.requireNonNull;</font><br />
-<font color="#808080">046</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">047</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Objects;</font><br />
-<font color="#808080">048</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Optional;</font><br />
-<font color="#808080">049</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.function.Function;</font><br />
-<font color="#808080">050</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.stream.DoubleStream;</font><br />
+<font color="#808080">022</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">io.jenetics.prog.op.Numbers.box;</font><br />
+<font color="#808080">023</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.abs;</font><br />
+<font color="#808080">024</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.acos;</font><br />
+<font color="#808080">025</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.asin;</font><br />
+<font color="#808080">026</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.atan;</font><br />
+<font color="#808080">027</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.cbrt;</font><br />
+<font color="#808080">028</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.ceil;</font><br />
+<font color="#808080">029</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.cos;</font><br />
+<font color="#808080">030</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.cosh;</font><br />
+<font color="#808080">031</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.exp;</font><br />
+<font color="#808080">032</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.floor;</font><br />
+<font color="#808080">033</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.hypot;</font><br />
+<font color="#808080">034</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.log;</font><br />
+<font color="#808080">035</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.log10;</font><br />
+<font color="#808080">036</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.max;</font><br />
+<font color="#808080">037</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.min;</font><br />
+<font color="#808080">038</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.pow;</font><br />
+<font color="#808080">039</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.rint;</font><br />
+<font color="#808080">040</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.signum;</font><br />
+<font color="#808080">041</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.sin;</font><br />
+<font color="#808080">042</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.sinh;</font><br />
+<font color="#808080">043</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.sqrt;</font><br />
+<font color="#808080">044</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.tan;</font><br />
+<font color="#808080">045</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.lang.Math.tanh;</font><br />
+<font color="#808080">046</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.util.Objects.requireNonNull;</font><br />
+<font color="#808080">047</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">048</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Objects;</font><br />
+<font color="#808080">049</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Optional;</font><br />
+<font color="#808080">050</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.function.Function;</font><br />
 <font color="#808080">051</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.stream.Stream;</font><br />
 <font color="#808080">052</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">053</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.ext.util.Tree;</font><br />
@@ -417,78 +417,74 @@ MathOp.java
 <font color="#808080">386</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">the&nbsp;evaluated&nbsp;operation</font><br />
 <font color="#808080">387</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
 <font color="#808080">388</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>double&nbsp;</b></font><font color="#000000">eval</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#7f0055"><b>double</b></font><font color="#000000">...&nbsp;args</font><font color="#000000">)&nbsp;{</font><br />
-<font color="#808080">389</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">apply</font><font color="#000000">(</font><br />
-<font color="#808080">390</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">DoubleStream.of</font><font color="#000000">(</font><font color="#000000">args</font><font color="#000000">)</font><br />
-<font color="#808080">391</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.boxed</font><font color="#000000">()</font><br />
-<font color="#808080">392</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.toArray</font><font color="#000000">(</font><font color="#000000">Double</font><font color="#000000">[]</font><font color="#000000">::</font><font color="#7f0055"><b>new</b></font><font color="#000000">)</font><br />
-<font color="#808080">393</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">394</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">395</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">396</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
-<font color="#808080">397</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">String&nbsp;toString</font><font color="#000000">()&nbsp;{</font><br />
-<font color="#808080">398</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">_name;</font><br />
-<font color="#808080">399</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">400</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">401</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
-<font color="#808080">402</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Converts&nbsp;the&nbsp;string&nbsp;representation&nbsp;of&nbsp;an&nbsp;operation&nbsp;to&nbsp;the&nbsp;operation</font><br />
-<font color="#808080">403</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;object.&nbsp;It&nbsp;is&nbsp;used&nbsp;for&nbsp;converting&nbsp;the&nbsp;string&nbsp;representation&nbsp;of&nbsp;a&nbsp;tree&nbsp;to</font><br />
-<font color="#808080">404</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;an&nbsp;operation&nbsp;tree.&nbsp;</font><font color="#7f7f9f">&lt;b&gt;</font><font color="#3f5fbf">If&nbsp;you&nbsp;use&nbsp;it&nbsp;that&nbsp;way,&nbsp;you&nbsp;should&nbsp;not&nbsp;forget&nbsp;to</font><br />
-<font color="#808080">405</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;re-index&nbsp;the&nbsp;tree&nbsp;variables.</font><font color="#7f7f9f">&lt;/b&gt;</font><br />
-<font color="#808080">406</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
-<font color="#808080">407</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;pre&gt;</font><font color="#3f5fbf">{@code</font><br />
-<font color="#808080">408</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;final&nbsp;TreeNode</font><font color="#7f7f9f">&lt;Op&lt;Double&gt;</font><font color="#3f5fbf">&gt;&nbsp;tree&nbsp;=&nbsp;TreeNode.parse(</font><br />
-<font color="#808080">409</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#34;add(mul(x,y),sub(y,x))&#34;,</font><br />
-<font color="#808080">410</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MathOp::toMathOp</font><br />
-<font color="#808080">411</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;);</font><br />
-<font color="#808080">412</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
-<font color="#808080">413</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;assert&nbsp;Program.eval(tree,&nbsp;10.0,&nbsp;5.0)&nbsp;==&nbsp;100.0;</font><br />
-<font color="#808080">414</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Var.reindex(tree);</font><br />
-<font color="#808080">415</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;assert&nbsp;Program.eval(tree,&nbsp;10.0,&nbsp;5.0)&nbsp;==&nbsp;45.0;</font><br />
-<font color="#808080">416</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><font color="#7f7f9f">&lt;/pre&gt;</font><br />
-<font color="#808080">417</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
-<font color="#808080">418</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@since&nbsp;</font><font color="#3f5fbf">5.0</font><br />
-<font color="#808080">419</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
-<font color="#808080">420</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@see&nbsp;</font><font color="#3f5fbf">Var#reindex(TreeNode)</font><br />
-<font color="#808080">421</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@see&nbsp;</font><font color="#3f5fbf">Program#eval(Tree,&nbsp;Object[])</font><br />
-<font color="#808080">422</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
-<font color="#808080">423</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">string&nbsp;the&nbsp;string&nbsp;representation&nbsp;of&nbsp;an&nbsp;operation&nbsp;which&nbsp;should&nbsp;be</font><br />
-<font color="#808080">424</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converted</font><br />
-<font color="#808080">425</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">the&nbsp;operation,&nbsp;converted&nbsp;from&nbsp;the&nbsp;given&nbsp;string</font><br />
-<font color="#808080">426</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@throws&nbsp;</font><font color="#3f5fbf">IllegalArgumentException&nbsp;if&nbsp;the&nbsp;given&nbsp;{@code&nbsp;value}&nbsp;doesn't</font><br />
-<font color="#808080">427</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;represent&nbsp;a&nbsp;mathematical&nbsp;expression</font><br />
-<font color="#808080">428</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@throws&nbsp;</font><font color="#3f5fbf">NullPointerException&nbsp;if&nbsp;the&nbsp;given&nbsp;string&nbsp;{@code&nbsp;value}&nbsp;is</font><br />
-<font color="#808080">429</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@code&nbsp;null}</font><br />
-<font color="#808080">430</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
-<font color="#808080">431</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#000000">Op&lt;Double&gt;&nbsp;toMathOp</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">String&nbsp;string</font><font color="#000000">)&nbsp;{</font><br />
-<font color="#808080">432</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">requireNonNull</font><font color="#000000">(</font><font color="#000000">string</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">433</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">434</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Op&lt;Double&gt;&nbsp;result;</font><br />
-<font color="#808080">435</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Optional&lt;Const&lt;Double&gt;&gt;&nbsp;cop&nbsp;=&nbsp;toConst</font><font color="#000000">(</font><font color="#000000">string</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">436</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">cop.isPresent</font><font color="#000000">())&nbsp;{</font><br />
-<font color="#808080">437</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">result&nbsp;=&nbsp;cop.orElseThrow</font><font color="#000000">(</font><font color="#000000">AssertionError::</font><font color="#7f0055"><b>new</b></font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">438</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;</b></font><font color="#000000">{</font><br />
-<font color="#808080">439</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Optional&lt;Op&lt;Double&gt;&gt;&nbsp;mop&nbsp;=&nbsp;toOp</font><font color="#000000">(</font><font color="#000000">string</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">440</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">result&nbsp;=&nbsp;mop.isPresent</font><font color="#000000">()</font><br />
-<font color="#808080">441</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">?&nbsp;mop.orElseThrow</font><font color="#000000">(</font><font color="#000000">AssertionError::</font><font color="#7f0055"><b>new</b></font><font color="#000000">)</font><br />
-<font color="#808080">442</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">:&nbsp;Var.parse</font><font color="#000000">(</font><font color="#000000">string</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">443</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">444</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">445</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">result;</font><br />
-<font color="#808080">446</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">447</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">448</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>static&nbsp;</b></font><font color="#000000">Optional&lt;Const&lt;Double&gt;&gt;&nbsp;toConst</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">String&nbsp;string</font><font color="#000000">)&nbsp;{</font><br />
-<font color="#808080">449</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">Numbers.toDoubleOptional</font><font color="#000000">(</font><font color="#000000">string</font><font color="#000000">)</font><br />
-<font color="#808080">450</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.map</font><font color="#000000">(</font><font color="#000000">Const::of</font><font color="#000000">)</font><font color="#000000">;</font><br />
-<font color="#808080">451</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">452</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">453</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;static&nbsp;</b></font><font color="#000000">Optional&lt;Op&lt;Double&gt;&gt;&nbsp;toOp</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">String&nbsp;string</font><font color="#000000">)&nbsp;{</font><br />
-<font color="#808080">454</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">Stream.of</font><font color="#000000">(</font><font color="#000000">values</font><font color="#000000">())</font><br />
-<font color="#808080">455</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.filter</font><font color="#000000">(</font><font color="#000000">op&nbsp;-&gt;&nbsp;Objects.equals</font><font color="#000000">(</font><font color="#000000">op._name,&nbsp;string</font><font color="#000000">))</font><br />
-<font color="#808080">456</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.map</font><font color="#000000">(</font><font color="#000000">op&nbsp;-&gt;&nbsp;</font><font color="#000000">(</font><font color="#000000">Op&lt;Double&gt;</font><font color="#000000">)</font><font color="#000000">op</font><font color="#000000">)</font><br />
-<font color="#808080">457</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.findFirst</font><font color="#000000">()</font><font color="#000000">;</font><br />
-<font color="#808080">458</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
-<font color="#808080">459</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">460</font>&nbsp;<font color="#000000">}</font></code>
+<font color="#808080">389</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">apply</font><font color="#000000">(</font><font color="#000000">box</font><font color="#000000">(</font><font color="#000000">args</font><font color="#000000">))</font><font color="#000000">;</font><br />
+<font color="#808080">390</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">391</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">392</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
+<font color="#808080">393</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">String&nbsp;toString</font><font color="#000000">()&nbsp;{</font><br />
+<font color="#808080">394</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">_name;</font><br />
+<font color="#808080">395</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">396</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">397</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">398</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Converts&nbsp;the&nbsp;string&nbsp;representation&nbsp;of&nbsp;an&nbsp;operation&nbsp;to&nbsp;the&nbsp;operation</font><br />
+<font color="#808080">399</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;object.&nbsp;It&nbsp;is&nbsp;used&nbsp;for&nbsp;converting&nbsp;the&nbsp;string&nbsp;representation&nbsp;of&nbsp;a&nbsp;tree&nbsp;to</font><br />
+<font color="#808080">400</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;an&nbsp;operation&nbsp;tree.&nbsp;</font><font color="#7f7f9f">&lt;b&gt;</font><font color="#3f5fbf">If&nbsp;you&nbsp;use&nbsp;it&nbsp;that&nbsp;way,&nbsp;you&nbsp;should&nbsp;not&nbsp;forget&nbsp;to</font><br />
+<font color="#808080">401</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;re-index&nbsp;the&nbsp;tree&nbsp;variables.</font><font color="#7f7f9f">&lt;/b&gt;</font><br />
+<font color="#808080">402</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">403</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;pre&gt;</font><font color="#3f5fbf">{@code</font><br />
+<font color="#808080">404</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;final&nbsp;TreeNode</font><font color="#7f7f9f">&lt;Op&lt;Double&gt;</font><font color="#3f5fbf">&gt;&nbsp;tree&nbsp;=&nbsp;TreeNode.parse(</font><br />
+<font color="#808080">405</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#34;add(mul(x,y),sub(y,x))&#34;,</font><br />
+<font color="#808080">406</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MathOp::toMathOp</font><br />
+<font color="#808080">407</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;);</font><br />
+<font color="#808080">408</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">409</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;assert&nbsp;Program.eval(tree,&nbsp;10.0,&nbsp;5.0)&nbsp;==&nbsp;100.0;</font><br />
+<font color="#808080">410</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Var.reindex(tree);</font><br />
+<font color="#808080">411</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;assert&nbsp;Program.eval(tree,&nbsp;10.0,&nbsp;5.0)&nbsp;==&nbsp;45.0;</font><br />
+<font color="#808080">412</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><font color="#7f7f9f">&lt;/pre&gt;</font><br />
+<font color="#808080">413</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">414</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@since&nbsp;</font><font color="#3f5fbf">5.0</font><br />
+<font color="#808080">415</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">416</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@see&nbsp;</font><font color="#3f5fbf">Var#reindex(TreeNode)</font><br />
+<font color="#808080">417</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@see&nbsp;</font><font color="#3f5fbf">Program#eval(Tree,&nbsp;Object[])</font><br />
+<font color="#808080">418</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">419</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">string&nbsp;the&nbsp;string&nbsp;representation&nbsp;of&nbsp;an&nbsp;operation&nbsp;which&nbsp;should&nbsp;be</font><br />
+<font color="#808080">420</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converted</font><br />
+<font color="#808080">421</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@return&nbsp;</font><font color="#3f5fbf">the&nbsp;operation,&nbsp;converted&nbsp;from&nbsp;the&nbsp;given&nbsp;string</font><br />
+<font color="#808080">422</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@throws&nbsp;</font><font color="#3f5fbf">IllegalArgumentException&nbsp;if&nbsp;the&nbsp;given&nbsp;{@code&nbsp;value}&nbsp;doesn't</font><br />
+<font color="#808080">423</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;represent&nbsp;a&nbsp;mathematical&nbsp;expression</font><br />
+<font color="#808080">424</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@throws&nbsp;</font><font color="#3f5fbf">NullPointerException&nbsp;if&nbsp;the&nbsp;given&nbsp;string&nbsp;{@code&nbsp;value}&nbsp;is</font><br />
+<font color="#808080">425</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@code&nbsp;null}</font><br />
+<font color="#808080">426</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">427</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#000000">Op&lt;Double&gt;&nbsp;toMathOp</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">String&nbsp;string</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">428</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">requireNonNull</font><font color="#000000">(</font><font color="#000000">string</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">429</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">430</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Op&lt;Double&gt;&nbsp;result;</font><br />
+<font color="#808080">431</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Optional&lt;Const&lt;Double&gt;&gt;&nbsp;cop&nbsp;=&nbsp;toConst</font><font color="#000000">(</font><font color="#000000">string</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">432</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">cop.isPresent</font><font color="#000000">())&nbsp;{</font><br />
+<font color="#808080">433</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">result&nbsp;=&nbsp;cop.orElseThrow</font><font color="#000000">(</font><font color="#000000">AssertionError::</font><font color="#7f0055"><b>new</b></font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">434</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;</b></font><font color="#000000">{</font><br />
+<font color="#808080">435</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Optional&lt;Op&lt;Double&gt;&gt;&nbsp;mop&nbsp;=&nbsp;toOp</font><font color="#000000">(</font><font color="#000000">string</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">436</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">result&nbsp;=&nbsp;mop.isPresent</font><font color="#000000">()</font><br />
+<font color="#808080">437</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">?&nbsp;mop.orElseThrow</font><font color="#000000">(</font><font color="#000000">AssertionError::</font><font color="#7f0055"><b>new</b></font><font color="#000000">)</font><br />
+<font color="#808080">438</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">:&nbsp;Var.parse</font><font color="#000000">(</font><font color="#000000">string</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">439</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">440</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">441</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">result;</font><br />
+<font color="#808080">442</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">443</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">444</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>static&nbsp;</b></font><font color="#000000">Optional&lt;Const&lt;Double&gt;&gt;&nbsp;toConst</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">String&nbsp;string</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">445</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">Numbers.toDoubleOptional</font><font color="#000000">(</font><font color="#000000">string</font><font color="#000000">)</font><br />
+<font color="#808080">446</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.map</font><font color="#000000">(</font><font color="#000000">Const::of</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">447</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">448</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">449</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;static&nbsp;</b></font><font color="#000000">Optional&lt;Op&lt;Double&gt;&gt;&nbsp;toOp</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">String&nbsp;string</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">450</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">Stream.of</font><font color="#000000">(</font><font color="#000000">values</font><font color="#000000">())</font><br />
+<font color="#808080">451</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.filter</font><font color="#000000">(</font><font color="#000000">op&nbsp;-&gt;&nbsp;Objects.equals</font><font color="#000000">(</font><font color="#000000">op._name,&nbsp;string</font><font color="#000000">))</font><br />
+<font color="#808080">452</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.map</font><font color="#000000">(</font><font color="#000000">op&nbsp;-&gt;&nbsp;</font><font color="#000000">(</font><font color="#000000">Op&lt;Double&gt;</font><font color="#000000">)</font><font color="#000000">op</font><font color="#000000">)</font><br />
+<font color="#808080">453</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.findFirst</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#808080">454</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">455</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">456</font>&nbsp;<font color="#000000">}</font></code>
     
    </td>
   <!-- end source code -->
