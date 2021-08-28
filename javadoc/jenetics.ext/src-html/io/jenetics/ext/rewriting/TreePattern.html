@@ -30,7 +30,7 @@ TreePattern.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">001</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-6.2.0).</font><br />
+<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-6.3.0).</font><br />
 <font color="#808080">003</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2021&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">004</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">005</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
@@ -257,7 +257,7 @@ TreePattern.java
 <font color="#808080">226</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">)&nbsp;{</font><br />
 <font color="#808080">227</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Decl&lt;V&gt;&nbsp;decl&nbsp;=&nbsp;pattern.value</font><font color="#000000">()</font><font color="#000000">;</font><br />
 <font color="#808080">228</font>&nbsp;<font color="#ffffff"></font><br />
-<font color="#808080">229</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">decl&nbsp;</font><font color="#7f0055"><b>instanceof&nbsp;</b></font><font color="#000000">Var</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">229</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">decl&nbsp;</font><font color="#7f0055"><b>instanceof&nbsp;</b></font><font color="#000000">Var&lt;?&gt;</font><font color="#000000">)&nbsp;{</font><br />
 <font color="#808080">230</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Tree&lt;?&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">V,&nbsp;?&gt;&nbsp;tree&nbsp;=&nbsp;vars.get</font><font color="#000000">(</font><font color="#000000">decl</font><font color="#000000">)</font><font color="#000000">;</font><br />
 <font color="#808080">231</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">tree&nbsp;==&nbsp;</font><font color="#7f0055"><b>null</b></font><font color="#000000">)&nbsp;{</font><br />
 <font color="#808080">232</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">vars.put</font><font color="#000000">((</font><font color="#000000">Var&lt;V&gt;</font><font color="#000000">)</font><font color="#000000">decl,&nbsp;node</font><font color="#000000">)</font><font color="#000000">;</font><br />
