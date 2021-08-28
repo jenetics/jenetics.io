@@ -30,7 +30,7 @@ Lazy.java
    <td nowrap="nowrap" valign="top" align="left">
     <code>
 <font color="#808080">001</font>&nbsp;<font color="#3f7f5f">/*</font><br />
-<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-6.2.0).</font><br />
+<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-6.3.0).</font><br />
 <font color="#808080">003</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2021&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
 <font color="#808080">004</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
 <font color="#808080">005</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
@@ -128,8 +128,8 @@ Lazy.java
 <font color="#808080">097</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
 <font color="#808080">098</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#7f0055"><b>boolean&nbsp;</b></font><font color="#000000">equals</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Object&nbsp;obj</font><font color="#000000">)&nbsp;{</font><br />
 <font color="#808080">099</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">obj&nbsp;==&nbsp;</font><font color="#7f0055"><b>this&nbsp;</b></font><font color="#000000">||</font><br />
-<font color="#808080">100</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">obj&nbsp;</font><font color="#7f0055"><b>instanceof&nbsp;</b></font><font color="#000000">Lazy&nbsp;&amp;&amp;</font><br />
-<font color="#808080">101</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Objects.equals</font><font color="#000000">(((</font><font color="#000000">Lazy</font><font color="#000000">)</font><font color="#000000">obj</font><font color="#000000">)</font><font color="#000000">.get</font><font color="#000000">()</font><font color="#000000">,&nbsp;get</font><font color="#000000">())</font><font color="#000000">;</font><br />
+<font color="#808080">100</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">obj&nbsp;</font><font color="#7f0055"><b>instanceof&nbsp;</b></font><font color="#000000">Lazy&lt;?&gt;&nbsp;&amp;&amp;</font><br />
+<font color="#808080">101</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Objects.equals</font><font color="#000000">(((</font><font color="#000000">Lazy&lt;?&gt;</font><font color="#000000">)</font><font color="#000000">obj</font><font color="#000000">)</font><font color="#000000">.get</font><font color="#000000">()</font><font color="#000000">,&nbsp;get</font><font color="#000000">())</font><font color="#000000">;</font><br />
 <font color="#808080">102</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
 <font color="#808080">103</font>&nbsp;<font color="#ffffff"></font><br />
 <font color="#808080">104</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
