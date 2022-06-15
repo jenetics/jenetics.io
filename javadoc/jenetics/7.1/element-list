@@ -1,0 +1,9 @@
+module:io.jenetics.base
+io.jenetics
+io.jenetics.engine
+io.jenetics.internal.collection
+io.jenetics.internal.engine
+io.jenetics.internal.math
+io.jenetics.internal.util
+io.jenetics.stat
+io.jenetics.util
