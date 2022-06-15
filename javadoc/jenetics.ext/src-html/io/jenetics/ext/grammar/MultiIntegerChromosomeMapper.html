@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<title></title>
+  <style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+  </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head><body>
+
+
+<!-- ======================================================== -->
+<!-- = Java Sourcecode to HTML automatically converted code = -->
+<!-- =   Java2Html Converter 5.0 [2006-02-26] by Markus Gebhard  markus@jave.de   = -->
+<!-- =     Further information: http://www.java2html.de     = -->
+<div align="left" class="java">
+<table border="2" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+  <!-- start headline -->
+   <tr>
+    <td colspan="2">
+     <center><font size="+2">
+      <code><b>
+MultiIntegerChromosomeMapper.java
+      </b></code>
+     </font></center>
+    </td>
+   </tr>
+  <!-- end headline -->
+   <tr>
+  <!-- start source code -->
+   <td nowrap="nowrap" valign="top" align="left">
+    <code>
+<font color="#808080">001</font>&nbsp;<font color="#3f7f5f">/*</font><br />
+<font color="#808080">002</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Java&nbsp;Genetic&nbsp;Algorithm&nbsp;Library&nbsp;(jenetics-7.1.0).</font><br />
+<font color="#808080">003</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Copyright&nbsp;(c)&nbsp;2007-2022&nbsp;Franz&nbsp;Wilhelmst&ouml;tter</font><br />
+<font color="#808080">004</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+<font color="#808080">005</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&#34;License&#34;);</font><br />
+<font color="#808080">006</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance&nbsp;with&nbsp;the&nbsp;License.</font><br />
+<font color="#808080">007</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;You&nbsp;may&nbsp;obtain&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;License&nbsp;at</font><br />
+<font color="#808080">008</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+<font color="#808080">009</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.apache.org/licenses/LICENSE-2.0</font><br />
+<font color="#808080">010</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+<font color="#808080">011</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Unless&nbsp;required&nbsp;by&nbsp;applicable&nbsp;law&nbsp;or&nbsp;agreed&nbsp;to&nbsp;in&nbsp;writing,&nbsp;software</font><br />
+<font color="#808080">012</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;distributed&nbsp;under&nbsp;the&nbsp;License&nbsp;is&nbsp;distributed&nbsp;on&nbsp;an&nbsp;&#34;AS&nbsp;IS&#34;&nbsp;BASIS,</font><br />
+<font color="#808080">013</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;WITHOUT&nbsp;WARRANTIES&nbsp;OR&nbsp;CONDITIONS&nbsp;OF&nbsp;ANY&nbsp;KIND,&nbsp;either&nbsp;express&nbsp;or&nbsp;implied.</font><br />
+<font color="#808080">014</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;See&nbsp;the&nbsp;License&nbsp;for&nbsp;the&nbsp;specific&nbsp;language&nbsp;governing&nbsp;permissions&nbsp;and</font><br />
+<font color="#808080">015</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;limitations&nbsp;under&nbsp;the&nbsp;License.</font><br />
+<font color="#808080">016</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+<font color="#808080">017</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Author:</font><br />
+<font color="#808080">018</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;&nbsp;&nbsp;&nbsp;Franz&nbsp;Wilhelmst&ouml;tter&nbsp;(franz.wilhelmstoetter@gmail.com)</font><br />
+<font color="#808080">019</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*/</font><br />
+<font color="#808080">020</font>&nbsp;<font color="#7f0055"><b>package&nbsp;</b></font><font color="#000000">io.jenetics.ext.grammar;</font><br />
+<font color="#808080">021</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">022</font>&nbsp;<font color="#7f0055"><b>import&nbsp;static&nbsp;</b></font><font color="#000000">java.util.Objects.requireNonNull;</font><br />
+<font color="#808080">023</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">024</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.Map;</font><br />
+<font color="#808080">025</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.function.Function;</font><br />
+<font color="#808080">026</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.stream.Collectors;</font><br />
+<font color="#808080">027</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.util.stream.IntStream;</font><br />
+<font color="#808080">028</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">029</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.Genotype;</font><br />
+<font color="#808080">030</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.IntegerChromosome;</font><br />
+<font color="#808080">031</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.IntegerGene;</font><br />
+<font color="#808080">032</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.engine.Codec;</font><br />
+<font color="#808080">033</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.util.Factory;</font><br />
+<font color="#808080">034</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.util.ISeq;</font><br />
+<font color="#808080">035</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.util.IntRange;</font><br />
+<font color="#808080">036</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">037</font>&nbsp;<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">io.jenetics.ext.grammar.Cfg.Rule;</font><br />
+<font color="#808080">038</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">039</font>&nbsp;<font color="#3f5fbf">/**</font><br />
+<font color="#808080">040</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;Codec&nbsp;for&nbsp;creating&nbsp;</font><font color="#7f7f9f">&lt;em&gt;</font><font color="#3f5fbf">results</font><font color="#7f7f9f">&lt;/em&gt;&nbsp;</font><font color="#3f5fbf">from&nbsp;a&nbsp;given&nbsp;grammar.&nbsp;The&nbsp;creation&nbsp;of</font><br />
+<font color="#808080">041</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;the&nbsp;grammar&nbsp;result&nbsp;is&nbsp;controlled&nbsp;by&nbsp;a&nbsp;given&nbsp;genotype.&nbsp;This&nbsp;encoding&nbsp;uses</font><br />
+<font color="#808080">042</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;separate&nbsp;</font><font color="#7f7f9f">&lt;em&gt;</font><font color="#3f5fbf">codons</font><font color="#7f7f9f">&lt;/em&gt;</font><font color="#3f5fbf">,&nbsp;backed&nbsp;up&nbsp;by&nbsp;a&nbsp;</font><font color="#3f3fbf">{@link&nbsp;IntegerChromosome}</font><font color="#3f5fbf">,&nbsp;for</font><br />
+<font color="#808080">043</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;every&nbsp;rule.&nbsp;The&nbsp;length&nbsp;of&nbsp;the&nbsp;chromosome&nbsp;is&nbsp;defined&nbsp;as&nbsp;a&nbsp;function&nbsp;of&nbsp;the</font><br />
+<font color="#808080">044</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;encoded&nbsp;rules.&nbsp;This&nbsp;means&nbsp;that&nbsp;the&nbsp;following&nbsp;CFG,</font><br />
+<font color="#808080">045</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">046</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;pre&gt;</font><font color="#3f5fbf">{@code</font><br />
+<font color="#808080">047</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1)</font><br />
+<font color="#808080">048</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;(0)&nbsp;</font><font color="#7f7f9f">&lt;expr&gt;&nbsp;</font><font color="#3f5fbf">::=&nbsp;(</font><font color="#7f7f9f">&lt;expr&gt;&lt;op&gt;&lt;expr&gt;</font><font color="#3f5fbf">)&nbsp;|&nbsp;</font><font color="#7f7f9f">&lt;var&gt;</font><br />
+<font color="#808080">049</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0)&nbsp;(1)&nbsp;(2)&nbsp;(3)</font><br />
+<font color="#808080">050</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;(1)&nbsp;</font><font color="#7f7f9f">&lt;op&gt;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">::=&nbsp;+&nbsp;|&nbsp;-&nbsp;|&nbsp;*&nbsp;|&nbsp;/</font><br />
+<font color="#808080">051</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0)&nbsp;(1)&nbsp;(2)&nbsp;(3)&nbsp;(4)</font><br />
+<font color="#808080">052</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;(2)&nbsp;</font><font color="#7f7f9f">&lt;var&gt;&nbsp;&nbsp;</font><font color="#3f5fbf">::=&nbsp;x&nbsp;|&nbsp;1&nbsp;|&nbsp;2&nbsp;|&nbsp;3&nbsp;|&nbsp;4</font><br />
+<font color="#808080">053</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><font color="#7f7f9f">&lt;/pre&gt;</font><br />
+<font color="#808080">054</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">055</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;will&nbsp;be&nbsp;represented&nbsp;by&nbsp;the&nbsp;following&nbsp;</font><font color="#3f3fbf">{@link&nbsp;Genotype}</font><br />
+<font color="#808080">056</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;pre&gt;</font><font color="#3f5fbf">{@code</font><br />
+<font color="#808080">057</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;Genotype.of(</font><br />
+<font color="#808080">058</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IntegerChromosome.of(IntRange.of(0,&nbsp;2),&nbsp;length.apply(cfg.rules().get(0))),</font><br />
+<font color="#808080">059</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IntegerChromosome.of(IntRange.of(0,&nbsp;4),&nbsp;length.apply(cfg.rules().get(1))),</font><br />
+<font color="#808080">060</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IntegerChromosome.of(IntRange.of(0,&nbsp;5),&nbsp;length.apply(cfg.rules().get(2)))</font><br />
+<font color="#808080">061</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;)</font><br />
+<font color="#808080">062</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><font color="#7f7f9f">&lt;/pre&gt;</font><br />
+<font color="#808080">063</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">064</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;The&nbsp;{@code&nbsp;length}&nbsp;function&nbsp;lets&nbsp;you&nbsp;defining&nbsp;the&nbsp;number&nbsp;of&nbsp;codons&nbsp;as</font><br />
+<font color="#808080">065</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;function&nbsp;of&nbsp;the&nbsp;rule&nbsp;the&nbsp;chromosome&nbsp;is&nbsp;encoding.</font><br />
+<font color="#808080">066</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">067</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f7f9f">&lt;pre&gt;</font><font color="#3f5fbf">{@code</font><br />
+<font color="#808080">068</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;final&nbsp;Cfg</font><font color="#7f7f9f">&lt;String&gt;&nbsp;</font><font color="#3f5fbf">cfg&nbsp;=&nbsp;Bnf.parse(...);</font><br />
+<font color="#808080">069</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;final&nbsp;Codec</font><font color="#7f7f9f">&lt;List&lt;Terminal&lt;String&gt;</font><font color="#3f5fbf">&gt;,&nbsp;IntegerGene&gt;&nbsp;codec&nbsp;=&nbsp;new&nbsp;Mapper</font><font color="#7f7f9f">&lt;&gt;</font><font color="#3f5fbf">(</font><br />
+<font color="#808080">070</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cfg,</font><br />
+<font color="#808080">071</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;The&nbsp;chromosome&nbsp;length&nbsp;is&nbsp;10&nbsp;times&nbsp;the</font><br />
+<font color="#808080">072</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;number&nbsp;of&nbsp;rule&nbsp;alternatives.</font><br />
+<font color="#808080">073</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rule&nbsp;-&gt;&nbsp;IntRange.of(rule.alternatives().size()*10),</font><br />
+<font color="#808080">074</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Using&nbsp;the&nbsp;standard&nbsp;sentence&nbsp;generator</font><br />
+<font color="#808080">075</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;with&nbsp;a&nbsp;maximal&nbsp;sentence&nbsp;length&nbsp;of&nbsp;5,000.</font><br />
+<font color="#808080">076</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index&nbsp;-&gt;&nbsp;new&nbsp;SentenceGenerator</font><font color="#7f7f9f">&lt;&gt;</font><font color="#3f5fbf">(index,&nbsp;5_000)</font><br />
+<font color="#808080">077</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;);</font><br />
+<font color="#808080">078</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;}</font><font color="#7f7f9f">&lt;/pre&gt;</font><br />
+<font color="#808080">079</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">080</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#7f7f9f">&lt;T&gt;&nbsp;</font><font color="#3f5fbf">the&nbsp;terminal&nbsp;token&nbsp;type&nbsp;of&nbsp;the&nbsp;grammar</font><br />
+<font color="#808080">081</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#7f7f9f">&lt;R&gt;&nbsp;</font><font color="#3f5fbf">the&nbsp;result&nbsp;type&nbsp;of&nbsp;the&nbsp;mapper</font><br />
+<font color="#808080">082</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">083</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">&lt;a&nbsp;href=&#34;mailto:franz.wilhelmstoetter@gmail.com&#34;&gt;Franz&nbsp;Wilhelmst&ouml;tter</font><font color="#7f7f9f">&lt;/a&gt;</font><br />
+<font color="#808080">084</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@since&nbsp;</font><font color="#3f5fbf">7.1</font><br />
+<font color="#808080">085</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@version&nbsp;</font><font color="#3f5fbf">7.1</font><br />
+<font color="#808080">086</font>&nbsp;<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">087</font>&nbsp;<font color="#7f0055"><b>final&nbsp;class&nbsp;</b></font><font color="#000000">MultiIntegerChromosomeMapper&lt;T,&nbsp;R&gt;&nbsp;</font><font color="#7f0055"><b>implements&nbsp;</b></font><font color="#000000">Codec&lt;R,&nbsp;IntegerGene&gt;&nbsp;</font><font color="#000000">{</font><br />
+<font color="#808080">088</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">089</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">Factory&lt;Genotype&lt;IntegerGene&gt;&gt;&nbsp;_encoding;</font><br />
+<font color="#808080">090</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">Function&lt;Genotype&lt;IntegerGene&gt;,&nbsp;R&gt;&nbsp;_decoder;</font><br />
+<font color="#808080">091</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">092</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">093</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Create&nbsp;a&nbsp;new&nbsp;sentence&nbsp;(list&nbsp;of&nbsp;terminal&nbsp;symbols)&nbsp;codec.</font><br />
+<font color="#808080">094</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*</font><br />
+<font color="#808080">095</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">cfg&nbsp;the&nbsp;encoding&nbsp;grammar</font><br />
+<font color="#808080">096</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">length&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;chromosome&nbsp;which&nbsp;is&nbsp;used&nbsp;for&nbsp;selecting</font><br />
+<font color="#808080">097</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rules&nbsp;and&nbsp;symbols.&nbsp;The&nbsp;input&nbsp;parameter&nbsp;for&nbsp;this&nbsp;function&nbsp;is&nbsp;the</font><br />
+<font color="#808080">098</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;actual&nbsp;rule.&nbsp;This&nbsp;way&nbsp;it&nbsp;is&nbsp;possible&nbsp;to&nbsp;define&nbsp;the&nbsp;chromosome</font><br />
+<font color="#808080">099</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;length&nbsp;dependent&nbsp;on&nbsp;the&nbsp;selectable&nbsp;alternatives.</font><br />
+<font color="#808080">100</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@param&nbsp;</font><font color="#3f5fbf">generator&nbsp;sentence&nbsp;generator&nbsp;function&nbsp;from&nbsp;a&nbsp;given</font><br />
+<font color="#808080">101</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f3fbf">{@link&nbsp;SymbolIndex}</font><br />
+<font color="#808080">102</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">103</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">MultiIntegerChromosomeMapper</font><font color="#000000">(</font><br />
+<font color="#808080">104</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Cfg&lt;?&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">T&gt;&nbsp;cfg,</font><br />
+<font color="#808080">105</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Function&lt;?&nbsp;</font><font color="#7f0055"><b>super&nbsp;</b></font><font color="#000000">Rule&lt;?&gt;,&nbsp;IntRange&gt;&nbsp;length,</font><br />
+<font color="#808080">106</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Function&lt;?&nbsp;</font><font color="#7f0055"><b>super&nbsp;</b></font><font color="#000000">SymbolIndex,&nbsp;?&nbsp;</font><font color="#7f0055"><b>extends&nbsp;</b></font><font color="#000000">Generator&lt;T,&nbsp;R&gt;&gt;&nbsp;generator</font><br />
+<font color="#808080">107</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">108</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;Every&nbsp;rule&nbsp;gets&nbsp;its&nbsp;own&nbsp;codons.&nbsp;The&nbsp;ranges&nbsp;of&nbsp;the&nbsp;chromosomes</font><br />
+<font color="#808080">109</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;will&nbsp;fit&nbsp;exactly&nbsp;the&nbsp;number&nbsp;of&nbsp;rule&nbsp;alternatives.</font><br />
+<font color="#808080">110</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_encoding&nbsp;=&nbsp;Genotype.of</font><font color="#000000">(</font><br />
+<font color="#808080">111</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">cfg.rules</font><font color="#000000">()</font><font color="#000000">.stream</font><font color="#000000">()</font><br />
+<font color="#808080">112</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.map</font><font color="#000000">(</font><font color="#000000">rule&nbsp;-&gt;</font><br />
+<font color="#808080">113</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">IntegerChromosome.of</font><font color="#000000">(</font><br />
+<font color="#808080">114</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">IntRange.of</font><font color="#000000">(</font><font color="#990000">0</font><font color="#000000">,&nbsp;rule.alternatives</font><font color="#000000">()</font><font color="#000000">.size</font><font color="#000000">())</font><font color="#000000">,</font><br />
+<font color="#808080">115</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">length.apply</font><font color="#000000">(</font><font color="#000000">rule</font><font color="#000000">)</font><br />
+<font color="#808080">116</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">))</font><br />
+<font color="#808080">117</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.collect</font><font color="#000000">(</font><font color="#000000">ISeq.toISeq</font><font color="#000000">())</font><br />
+<font color="#808080">118</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">119</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">120</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">var&nbsp;codons&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">CodonsFactory</font><font color="#000000">(</font><font color="#000000">cfg</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">121</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_decoder&nbsp;=&nbsp;gt&nbsp;-&gt;&nbsp;generator.apply</font><font color="#000000">(</font><font color="#000000">codons.get</font><font color="#000000">(</font><font color="#000000">gt</font><font color="#000000">))</font><font color="#000000">.generate</font><font color="#000000">(</font><font color="#000000">cfg</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">122</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">123</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">124</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
+<font color="#808080">125</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">Factory&lt;Genotype&lt;IntegerGene&gt;&gt;&nbsp;encoding</font><font color="#000000">()&nbsp;{</font><br />
+<font color="#808080">126</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">_encoding;</font><br />
+<font color="#808080">127</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">128</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">129</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#646464">@Override</font><br />
+<font color="#808080">130</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">Function&lt;Genotype&lt;IntegerGene&gt;,&nbsp;R&gt;&nbsp;decoder</font><font color="#000000">()&nbsp;{</font><br />
+<font color="#808080">131</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">_decoder;</font><br />
+<font color="#808080">132</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">133</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">134</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">135</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Helper&nbsp;class&nbsp;for&nbsp;generating&nbsp;codons&nbsp;for&nbsp;a&nbsp;given&nbsp;genotype.</font><br />
+<font color="#808080">136</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">137</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;static&nbsp;final&nbsp;class&nbsp;</b></font><font color="#000000">CodonsFactory&nbsp;</font><font color="#000000">{</font><br />
+<font color="#808080">138</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">Map&lt;String,&nbsp;Integer&gt;&nbsp;_rulesIndex;</font><br />
+<font color="#808080">139</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">140</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">CodonsFactory</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Cfg&lt;?&gt;&nbsp;cfg</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">141</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_rulesIndex&nbsp;=&nbsp;IntStream</font><br />
+<font color="#808080">142</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.range</font><font color="#000000">(</font><font color="#990000">0</font><font color="#000000">,&nbsp;cfg.rules</font><font color="#000000">()</font><font color="#000000">.size</font><font color="#000000">())</font><br />
+<font color="#808080">143</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.mapToObj</font><font color="#000000">(</font><font color="#000000">i&nbsp;-&gt;&nbsp;Map.entry</font><font color="#000000">(</font><font color="#000000">cfg.rules</font><font color="#000000">()</font><font color="#000000">.get</font><font color="#000000">(</font><font color="#000000">i</font><font color="#000000">)</font><font color="#000000">.start</font><font color="#000000">()</font><font color="#000000">.name</font><font color="#000000">()</font><font color="#000000">,&nbsp;i</font><font color="#000000">))</font><br />
+<font color="#808080">144</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.collect</font><font color="#000000">(</font><font color="#000000">Collectors.toMap</font><font color="#000000">(</font><font color="#000000">Map.Entry::getKey,&nbsp;Map.Entry::getValue</font><font color="#000000">))</font><font color="#000000">;</font><br />
+<font color="#808080">145</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">146</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">147</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">SymbolIndex&nbsp;get</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Genotype&lt;IntegerGene&gt;&nbsp;gt</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">148</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">var&nbsp;codons&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">CodonsCache</font><font color="#000000">(</font><font color="#000000">gt</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">149</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">150</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">(</font><font color="#000000">rule,&nbsp;bound</font><font color="#000000">)&nbsp;</font><font color="#000000">-&gt;&nbsp;codons</font><br />
+<font color="#808080">151</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.get</font><font color="#000000">(</font><font color="#000000">_rulesIndex.get</font><font color="#000000">(</font><font color="#000000">rule.start</font><font color="#000000">()</font><font color="#000000">.name</font><font color="#000000">()))</font><br />
+<font color="#808080">152</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">.next</font><font color="#000000">(</font><font color="#000000">rule,&nbsp;bound</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">153</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">154</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">155</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+<font color="#808080">156</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;Caching&nbsp;and&nbsp;lazy&nbsp;creation&nbsp;of&nbsp;codons.</font><br />
+<font color="#808080">157</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#808080">158</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;static&nbsp;final&nbsp;class&nbsp;</b></font><font color="#000000">CodonsCache&nbsp;</font><font color="#000000">{</font><br />
+<font color="#808080">159</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">Genotype&lt;IntegerGene&gt;&nbsp;_genotype;</font><br />
+<font color="#808080">160</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>private&nbsp;final&nbsp;</b></font><font color="#000000">Codons</font><font color="#000000">[]&nbsp;</font><font color="#000000">_codons;</font><br />
+<font color="#808080">161</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">162</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">CodonsCache</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#000000">Genotype&lt;IntegerGene&gt;&nbsp;genotype</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">163</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_genotype&nbsp;=&nbsp;requireNonNull</font><font color="#000000">(</font><font color="#000000">genotype</font><font color="#000000">)</font><font color="#000000">;</font><br />
+<font color="#808080">164</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_codons&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">Codons</font><font color="#000000">[</font><font color="#000000">genotype.length</font><font color="#000000">()]</font><font color="#000000">;</font><br />
+<font color="#808080">165</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">166</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">167</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Codons&nbsp;get</font><font color="#000000">(</font><font color="#7f0055"><b>final&nbsp;</b></font><font color="#7f0055"><b>int&nbsp;</b></font><font color="#000000">index</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">168</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Codons&nbsp;result&nbsp;=&nbsp;_codons</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">;</font><br />
+<font color="#808080">169</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if&nbsp;</b></font><font color="#000000">(</font><font color="#000000">result&nbsp;==&nbsp;</font><font color="#7f0055"><b>null</b></font><font color="#000000">)&nbsp;{</font><br />
+<font color="#808080">170</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">result&nbsp;=&nbsp;Codons.ofIntegerGenes</font><font color="#000000">(</font><font color="#000000">_genotype.get</font><font color="#000000">(</font><font color="#000000">index</font><font color="#000000">))</font><font color="#000000">;</font><br />
+<font color="#808080">171</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">_codons</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]&nbsp;</font><font color="#000000">=&nbsp;result;</font><br />
+<font color="#808080">172</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">173</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">174</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">result;</font><br />
+<font color="#808080">175</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">176</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">177</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">178</font>&nbsp;<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#808080">179</font>&nbsp;<font color="#ffffff"></font><br />
+<font color="#808080">180</font>&nbsp;<font color="#000000">}</font></code>
+    
+   </td>
+  <!-- end source code -->
+   </tr>
+</table>
+</div>
+<!-- =       END of automatically generated HTML code       = -->
+<!-- ======================================================== -->
+
+
+</body></html>
