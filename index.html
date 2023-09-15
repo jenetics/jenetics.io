@@ -161,7 +161,7 @@
                     <div class="item col-md-4 col-sm-6 col-xs-12">
                         <div class="content">
                             <h4><i class="fa fa-check-circle"></i> Compiles and runs with Java 17/21</h4>
-                            <p>Full support of Java Streams and lambda expressions. Stable module names: <code>io.jenetics.[base|ext|prog|xml]</code>
+                            <p>Full support for Java Streams and lambda expressions. Stable module names: <code>io.jenetics.[base|ext|prog|xml]</code>
                             </p>
                         </div>
                     </div>
@@ -231,8 +231,8 @@ public class HelloWorld {
 
                 <ol>
                     <li>The probably most challenging part, when setting up a new evolution <code>Engine</code>, is to transform the problem domain into a appropriate <code>Genotype</code> (factory) representation. In our example we want to count the number of ones of a <code>BitChromosome</code>. Since we are counting only the ones of one chromosome, we are adding only one <code>BitChromosome</code> to our <code>Genotype</code>. In general, the <code>Genotype</code> can be created with 1 to n chromosomes.</li>
-                <li> Once this is done, the fitness function which should be maximized, can be defined. Utilizing the new language features introduced in Java 8, we simply write a private static method, which takes the genotype we defined and calculate it's fitness value. If we want to use the optimized bit-counting method, <code>bitCount()</code>, we have to cast the <code>Chromosome&lt;BitGene&gt;</code> class to the actual used <code>BitChromosome</code> class. Since we know for sure that we created the Genotype with a <code>BitChromosome</code>, this can be done safely. A reference to the eval method is then used as fitness function and passed to the <code>Engine.build</code> method.</li>
-                <li> In the third step we are creating the evolution <code>Engine</code>, which is responsible for changing, respectively evolving, a given population. The <code>Engine</code> is highly configurable and takes parameters for controlling the evolutionary and the computational environment. For changing the evolutionary behavior, you can set different alterers and selectors. By changing the used <code>Executor</code> service, you control the number of threads, the Engine is allowed to use. An new <code>Engine</code> instance can only be created via its builder, which is created by calling the <code>Engine.builder</code> method.</li>
+                <li> Once this is done, the fitness function, which should be maximized, can be defined. Utilizing the new language features introduced in Java 8, we simply write a private static method, which takes the genotype we defined and calculate it's fitness value. If we want to use the optimized bit-counting method, <code>bitCount()</code>, we have to cast the <code>Chromosome&lt;BitGene&gt;</code> class to the actual used <code>BitChromosome</code> class. Since we know for sure that we created the Genotype with a <code>BitChromosome</code>, this can be done safely. A reference to the eval method is then used as fitness function and passed to the <code>Engine.build</code> method.</li>
+                <li> In the third step we are creating the evolution <code>Engine</code>, which is responsible for changing, respectively evolving, a given population. The <code>Engine</code> is highly configurable and takes parameters for controlling evolutionary and the computational environment. For changing the evolutionary behavior, you can set different alterers and selectors. By changing the used <code>Executor</code> service, you control the number of threads, the Engine is allowed to use. An new <code>Engine</code> instance can only be created via its builder, which is created by calling the <code>Engine.builder</code> method.</li>
                     <li>In the last step, we can create a new <code>EvolutionStream</code> from our <code>Engine</code>. The <code>EvolutionStream</code> is the model or view of the evolutionary process. It serves as a »process handle« and also allows you, among other things, to control the termination of the evolution. In our example, we simply truncate the stream after 100 generations. If you don't limit the stream, the <code>EvolutionStream</code> will not terminate and run forever. Since the <code>EvolutionStream</code> extends the <code>java.util.stream.Stream</code> interface, it integrates smoothly with the rest of the Java Stream API. The final result, the best <code>Genotype</code> in our example, is then collected with one of the predefined collectors of the <code>EvolutionResult</code> class.</li>
                 </ol>
 
@@ -242,7 +242,7 @@ public class HelloWorld {
                     <img src="https://raw.githubusercontent.com/jenetics/jenetics/master/jenetics.doc/src/main/resources/graphic/EvolvingImagesExampleScreenShot.png" alt="Evolving Mona Lisa" style="width:350px">
                 </a>
 
-                <p>For a detailed description on how to execute this example, have a look at the <a href="https://github.com/jenetics/jenetics#evolving-images">Github</a> project page.</p>
+                <p>For a detailed description on how to execute this example, have a look at the <a href="https://github.com/jenetics/jenetics#evolving-images">GitHub</a> project page.</p>
 
 
                 <h3>Symbolic regression (GP)</h3>
@@ -260,9 +260,9 @@ public class HelloWorld {
 
 
                 <h2>Additional modules</h2>
-                <p>This libraries doesn't have any dependency to Jenetics and can be used as they are.</p>
+                <p>These libraries don't have any dependency on Jenetics and can be used as they are.</p>
                 <ul>
-                    <li><a href="https://github.com/jenetics/prngine"><b>io.jenetics.prngine</b></a>: A pseudo-random number generator library for sequential and parallel <a href="https://de.wikipedia.org/wiki/Monte-Carlo-Simulation">Monte Carlo simulations</a>. It has been designed to work smoothly with the <em>Jenetics</em> library, but it has no dependency to it. All PRNG implementations of this library extends the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Random.html">Random</a> class, which makes it easily usable in other projects.</li>
+                    <li><a href="https://github.com/jenetics/prngine"><b>io.jenetics.prngine</b></a>: A pseudo-random number generator library for sequential and parallel <a href="https://de.wikipedia.org/wiki/Monte-Carlo-Simulation">Monte Carlo simulations</a>. It has been designed to work smoothly with the <em>Jenetics</em> library, but it has no dependency to it. All PRNG implementations of this library extend the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Random.html">Random</a> class, which makes it easily usable in other projects.</li>
                     <li><a href="https://github.com/jenetics/jpx"><b>io.jenetics.jpx</b>:</a> A Java library for creating, reading and writing <a href="https://en.wikipedia.org/wiki/Global_Positioning_System">GPS</a> data in <a href="https://en.wikipedia.org/wiki/GPS_Exchange_Format">GPX</a> format. It is a <b>full</b> implementation of version <a href="http://www.topografix.com/GPX/1/1/">1.1</a> of the GPX format. The data classes are completely immutable and allows a functional programming style. They  are working also nicely with the Java 8 <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream</a> API. <em>Since it is also possible to calculate the distance between way-points, it is a good fit for the TSP.</em></li>
                 </ul>
 
@@ -296,6 +296,8 @@ public class HelloWorld {
 
                 <h2>Citations</h2>
                 <ol>
+                    <li>Syed Juned Ali, Jan Michael Laranjo, Dominik Bork. <a href="https://model-engineering.info/publications/papers/EDOC23-GGMF-web.pdf">A Generic and Customizable Genetic Algorithms-based Conceptual Model Modularization Framework</a> <em> 27th International EDOC Conference (EDOC 2023) - Enterprise Design, Operations and Computing.</em> Sep. 2023.
+                    </li>
                     <li>Julien Amblard, Robert Filman, Gabriel Kopito. <a href="https://doi.org/10.1145/3583133.3596369">GPStar4: A flexible framework for experimenting with genetic programming.</a> <em> OGECCO '23 Companion: Proceedings of the Companion Conference on Genetic and Evolutionary Computation. </em> July 2023.
                     </li>
                     <li>Garmendia, A., Bork, D., Eisenberg, M., Ferreira, T., Kessentini, M., Wimmer, M. <a href="https://doi.org/10.1007/978-981-19-9948-2_4">Leveraging Artificial Intelligence for Model-based Software Analysis and Design.</a> <em> Optimising the Software Development Process with Artificial Intelligence. Natural Computing Series. Springer, Singapore. </em> July 2023.
