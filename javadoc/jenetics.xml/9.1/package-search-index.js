@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html","k":"18"},{"m":"io.jenetics.xml","l":"io.jenetics.xml"},{"m":"io.jenetics.xml","l":"io.jenetics.xml.stream"}];updateSearchResults();
