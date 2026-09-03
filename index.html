@@ -229,7 +229,7 @@ public class HelloWorld {
             .bitCount();
     }
 
-    public static void main(String[] args) {
+    void main() {
         // 1.) Define the genotype (factory) suitable
         //     for the problem.
         Factory&lt;Genotype&lt;BitGene&gt;&gt; gtf =
@@ -246,7 +246,7 @@ public class HelloWorld {
             .limit(100)
             .collect(EvolutionResult.toBestGenotype());
 
-        System.out.println("Hello World:\n" + result);
+        IO.println("Hello World:\n" + result);
     }
 }</code></pre>
 
@@ -587,10 +587,17 @@ public class HelloWorld {
                 </ol>
 
                 <h2>Used software</h2>
-                <div align="left" class="jetbrains-logo">
+                <div class="jetbrains-logo">
                     <h4>
                         <a href="https://www.jetbrains.com/idea/">
                             <img src="img/icon_IntelliJIDEA.png" alt="IntelliJ" style="width:50px"/> IntelliJ IDEA
+                        </a>
+                    </h4>
+                </div>
+                <div class="smartgit-logo">
+                    <h4>
+                        <a href="https://www.syntevo.com/smartgit/">
+                            <img src="https://www.syntevo.com/assets/images/logos/smartgit-8c1aa1e2.svg"  alt="SmartGit" style="width:50px"/> SmartGit
                         </a>
                     </h4>
                 </div>
