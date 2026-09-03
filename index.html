@@ -9,6 +9,7 @@
     <meta name="keywords" content="java, genetic algorithm, evolutionary algorithm, evolution strategy, genetic programming, programming, ga, gp, parallel ga, optimization, evolutionary, streams, artificial intelligence, multi-objective optimization">
     <meta NAME="robots" content="noarchive, index, follow">
     <meta name="author" content="Franz Wilhelmstötter">
+    <meta name="theme-color" content="#2c3e50">
 
     <meta property="og:title" content="Jenetics: Java Genetic Algorithm Library"/>
     <meta property="og:type" content="product"/>
@@ -22,24 +23,45 @@
     <link rel="icon" sizes="16x16 32x32" href="favicon.ico">
     <link rel="shortcut icon" href="favicon.ico" />
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/sons-of-obsidian.css">
+    <link rel="preload" href="img/bg.jpg" as="image">
 
-    <link rel="stylesheet" type="text/css" href="css/jquery.floating-social-share.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
 
-    <link href="css/docs.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <link rel="canonical" href="https://jenetics.io" />
     <title>Jenetics: Java Genetic Algorithm Library</title>
 
-    <style>
-        .bs-docs-footer-links_font {
-            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Jenetics",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",
+        "description": "Genetic Algorithm, Evolutionary Algorithm, Grammatical Evolution, Genetic Programming, and Multi-objective Optimization library for Java.",
+        "url": "https://jenetics.io",
+        "version": "9.1.0",
+        "license": "Apache-2.0",
+        "author": {
+            "@type": "Person",
+            "name": "Franz Wilhelmstötter"
         }
-    </style>
+    }
+    </script>
 </head>
 
-<body class="bs-docs-home" onload="prettyPrint()" style="background: #ECECEA">
+<body class="bs-docs-home">
+
+<div class="floating-share">
+    <span class="floating-share-label">Share</span>
+    <a href="https://twitter.com/intent/tweet?text=Jenetics%3A%20Java%20Genetic%20Algorithm%20Library&url=https%3A%2F%2Fjenetics.io%2F" target="_blank" rel="noopener" title="Share on X" class="floating-share-link" aria-label="Share on X"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fjenetics.io%2F" target="_blank" rel="noopener" title="Share on Facebook" class="floating-share-link" aria-label="Share on Facebook"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fjenetics.io%2F" target="_blank" rel="noopener" title="Share on LinkedIn" class="floating-share-link" aria-label="Share on LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="https://bsky.app/intent/compose?text=Jenetics%3A%20Java%20Genetic%20Algorithm%20Library%20https%3A%2F%2Fjenetics.io%2F" target="_blank" rel="noopener" title="Share on Bluesky" class="floating-share-link" aria-label="Share on Bluesky"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566 1 0 1.994 0 5.16c0 .775.382 6.113.612 7.52C1.34 16.387 4.013 17.38 7.07 16.34c0 0 .444.122 1.072.272-2.688.78-4.704 2.334-2.504 4.678 3.854 4.104 5.217-.867 5.362-2.448V10.8z"/><path d="M12 10.8c1.087-2.114 4.046-6.053 6.798-7.995C21.434 1 24 1.994 24 5.16c0 .775-.382 6.113-.612 7.52-.728 3.707-3.401 4.7-6.458 3.66 0 0-.444.122-1.072.272 2.688.78 4.704 2.334 2.504 4.678-3.854 4.104-5.217-.867-5.362-2.448V10.8z"/></svg></a>
+</div>
 
 <div class="bs-docs-masthead" role="main" style="background-image: url('img/bg.jpg'); background-size: cover;">
     <div class="container" >
@@ -48,38 +70,38 @@
         <p class="lead">Jenetics is a Genetic Algorithm, Evolutionary Algorithm, Grammatical Evolution, Genetic Programming, and Multi-objective Optimization library, written in modern-day Java.</p>
 
         <p class="lead">
-            <a href="https://github.com/jenetics/jenetics/archive/v9.0.0.zip" class="btn btn-outline-inverse btn-lg">
-                <i class="fa fa-file-archive-o"></i> zip
+            <a href="https://github.com/jenetics/jenetics/archive/v9.1.0.zip" class="btn btn-outline-light btn-lg" data-jv="href">
+                <i class="fas fa-file-archive"></i> zip
             </a>
 
-            <a href="https://github.com/jenetics/jenetics/archive/v9.0.0.tar.gz" class="btn btn-outline-inverse btn-lg">
-                <i class="fa fa-file-archive-o"></i> tar.gz</a>
+            <a href="https://github.com/jenetics/jenetics/archive/v9.1.0.tar.gz" class="btn btn-outline-light btn-lg" data-jv="href">
+                <i class="fas fa-file-archive"></i> tar.gz</a>
 
-            <a href="https://mvnrepository.com/artifact/io.jenetics/jenetics" class="btn btn-outline-inverse btn-lg">
-                <i class="fa fa-external-link"></i> Maven</a>
+            <a href="https://mvnrepository.com/artifact/io.jenetics/jenetics" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-external-link"></i> Maven</a>
         </p>
 
-        <p><a href="https://github.com/jenetics/jenetics/releases/tag/v9.0.0">Currently v9.1.0</a></p>
+        <p><a href="https://github.com/jenetics/jenetics/releases/tag/v9.1.0" data-jv="href">Currently v<span data-jv="text">9.1.0</span></a></p>
     </div>
 </div>
 
 <div class="bs-docs-social">
-    <ul class="bs-docs-footer-links bs-docs-footer-links_font">
-        <li class="fa fa-external-link"><a class="bs-docs-footer-links_font" href="javadoc/combined/9.1/index.html"> Documentation</a></li>
+    <ul class="bs-docs-footer-links">
+        <li class="fas fa-external-link"><a href="javadoc/combined/9.1/index.html" data-jv="href"> Documentation</a></li>
         <li>&middot;</li>
-        <li class="fa fa-file-pdf-o"><a class="bs-docs-footer-links_font" href="manual/manual-9.1.0.pdf"> User guide</a></li>
+        <li class="fas fa-file-pdf"><a href="manual/manual-9.1.0.pdf" data-jv="href"> User guide</a></li>
         <li>&middot;</li>
-        <li class="fa fa-medium"><a class="bs-docs-footer-links_font" href="https://medium.com/@jeneticsga/"> Blog</a></li>
+        <li class="fab fa-medium"><a href="https://medium.com/@jeneticsga/"> Blog</a></li>
         <li>&middot;</li>
-        <li class="fa fa-twitter"><a class="bs-docs-footer-links_font" href="https://twitter.com/jeneticsga"> Twitter</a></li>
+        <li class="fab fa-twitter"><a href="https://twitter.com/jeneticsga"> Twitter</a></li>
         <li>&middot;</li>
-        <li class="fa fa-mastodon"><a class="bs-docs-footer-links_font" href="https://mastodon.social/@jeneticsga"> Mastodon</a></li>
+        <li class="fab fa-mastodon"><a href="https://mastodon.social/@jeneticsga"> Mastodon</a></li>
         <li>&middot;</li>
-        <li class="fa fa-github"><a class="bs-docs-footer-links_font" href="https://github.com/jenetics/jenetics"> GitHub</a></li>
+        <li class="fab fa-github"><a href="https://github.com/jenetics/jenetics"> GitHub</a></li>
         <li>&middot;</li>
-        <li class="fa fa-github"><a class="bs-docs-footer-links_font" href="https://github.com/jenetics/jenetics/issues"> Issues</a></li>
+        <li class="fab fa-github"><a href="https://github.com/jenetics/jenetics/issues"> Issues</a></li>
         <li>&middot;</li>
-        <li class="fa fa-github"><a class="bs-docs-footer-links_font" href="https://github.com/jenetics/jenetics/releases"> Releases</a></li>
+        <li class="fab fa-github"><a href="https://github.com/jenetics/jenetics/releases"> Releases</a></li>
     </ul>
 </div>
 
@@ -87,7 +109,7 @@
     <div class="row">
         <div class="col-md-12" role="main">
             <div class="bs-docs-section">
-                <h2 class="page-header">Overview</h2>
+                <h2 class="border-bottom pb-2 mb-4">Overview</h2>
 
                 <p><strong>Jenetics</strong> is designed with a
                     clear separation of the several concepts of the algorithm,
@@ -96,82 +118,82 @@
                     fitness <em>Function</em>. Jenetics allows you to minimize
                     and maximize the given fitness function without tweaking it. In contrast
                     to other GA implementations, the library uses the concept of an
-                    evolution stream (<a href="javadoc/jenetics/9.1/io.jenetics.base/io/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a>) for executing the evolution steps.
-                    Since the <a href="javadoc/jenetics/9.1/io.jenetics.base/io/jenetics/engine/EvolutionStream.html"><code>EvolutionStream</code></a> implements the Java <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/stream/Stream.html"><code>Stream</code></a> interface,
+                    evolution stream (<a href="javadoc/jenetics/9.1/io.jenetics.base/io/jenetics/engine/EvolutionStream.html" data-jv="href"><code>EvolutionStream</code></a>) for executing the evolution steps.
+                    Since the <a href="javadoc/jenetics/9.1/io.jenetics.base/io/jenetics/engine/EvolutionStream.html" data-jv="href"><code>EvolutionStream</code></a> implements the Java <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/stream/Stream.html"><code>Stream</code></a> interface,
                     it works smoothly with the rest of the Java Stream API.
                 </p>
 
                 <h3>Features</h3>
-                <div class="row">
-                    <div class="item col-md-4 col-sm-6 col-xs-12">
+                <div class="row g-3">
+                    <div class="col-md-4 col-sm-6 col-12">
                         <div class="content">
-                            <h4><i class="fa fa-check-circle"></i> Multi-objective optimization
-                                <!--<span class="badge badge-secondary">New</span>--></h4>
+                            <h4><i class="fas fa-circle-check"></i> Multi-objective optimization</h4>
                             <p>The <a href="https://github.com/jenetics/jenetics/tree/master/jenetics.ext"><i>jenetics.ext</i></a>
                                 module contains classes for solving <a
                                         href="https://en.wikipedia.org/wiki/Multi-objective_optimization"><i>Multi-objective
                                     problems</i></a> with Jenetics.</p>
                         </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-12">
                         <div class="content">
-                            <h4><i class="fa fa-check-circle"></i> Grammatical evolution
-                                <!--<span class="badge badge-secondary">New</span>--></h4>
+                            <h4><i class="fas fa-circle-check"></i> Grammatical evolution</h4>
                             <p>The <a href="https://github.com/jenetics/jenetics/tree/master/jenetics.ext"><i>jenetics.ext</i></a>
                                 module also contains classes for doing <a
                                         href="https://en.wikipedia.org/wiki/Grammatical_evolution"><i>Grammatical evolution (GE)</i></a>.</p>
                         </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-12">
                         <div class="content">
-                            <h4><i class="fa fa-check-circle"></i> Genetic programming </h4>
+                            <h4><i class="fas fa-circle-check"></i> Genetic programming </h4>
                             <p>The <a href="https://github.com/jenetics/jenetics/tree/master/jenetics.prog"><i>jenetics.prog</i></a>
                                 module allows to do <a href="https://en.wikipedia.org/wiki/Genetic_programming"><i>Genetic
                                     programming</i></a> with Jenetics.</p>
                         </div>
                     </div>
-                    <div class="item col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-12">
                         <div class="content">
-                            <h4><i class="fa fa-check-circle"></i> Frictionless minimization</h4>
+                            <h4><i class="fas fa-circle-check"></i> Frictionless minimization</h4>
                             <p>No need to tweak the fitness function for minimization problems. Just change the
                                 configuration of the evolution <a
-                                        href="javadoc/jenetics/9.1/io.jenetics.base/io/jenetics/engine/Engine.html"><code>Engine</code></a>.
+                                        href="javadoc/jenetics/9.1/io.jenetics.base/io/jenetics/engine/Engine.html" data-jv="href"><code>Engine</code></a>.
                             </p>
                         </div>
                     </div>
-                    <div class="item col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-12">
                         <div class="content">
-                            <h4><i class="fa fa-check-circle"></i> Plugable PRNG</h4>
+                            <h4><i class="fas fa-circle-check"></i> Plugable PRNG</h4>
                             <p>Easy changeable PRNG (<a
-                                    href="javadoc/jenetics/9.1/io.jenetics.base/io/jenetics/util/RandomRegistry.html"><code>RandomRegistry</code></a>).
+                                    href="javadoc/jenetics/9.1/io.jenetics.base/io/jenetics/util/RandomRegistry.html" data-jv="href"><code>RandomRegistry</code></a>).
                                 No <i>special</i> PRNG interface; the standard Java <a
                                         href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html"><code>RandomGenerator</code></a>
                                 allows the use of existing random generators.</p>
                         </div>
                     </div>
-                    <div class="item col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-12">
                         <div class="content">
-                            <h4><i class="fa fa-check-circle"></i> Parallel processing support</h4>
+                            <h4><i class="fas fa-circle-check"></i> Parallel processing support</h4>
                             <p>Processing of the evolutionary steps can be executed in parallel!</p>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="item col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-12">
                         <div class="content">
-                            <h4><i class="fa fa-check-circle"></i> Dependency free</h4>
+                            <h4><i class="fas fa-circle-check"></i> Dependency free</h4>
                             <p>No runtime dependencies to Third Party libraries! No mismatch and class loading problems
                                 with other libraries.</p>
                         </div>
                     </div>
-                    <div class="item col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-12">
                         <div class="content">
-                            <h4><i class="fa fa-check-circle"></i> Compiles and runs with Java 25</h4>
+                            <h4><i class="fas fa-circle-check"></i> Compiles and runs with Java 25</h4>
                             <p>Full support for Java Streams and lambda expressions. Stable module names: <code>io.jenetics.[base|ext|prog|xml]</code>
                             </p>
                         </div>
                     </div>
-                    <div class="item col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-12">
                         <div class="content">
-                            <h4><i class="fa fa-check-circle"></i> Fully documented</h4>
-                            <p>Complete <a href="javadoc/jenetics/9.1/index.html">Documentation</a> and <a
-                                    href="manual/manual-9.1.0.pdf">User guide</a> available.</p>
+                            <h4><i class="fas fa-circle-check"></i> Fully documented</h4>
+                            <p>Complete <a href="javadoc/jenetics/9.1/index.html" data-jv="href">Documentation</a> and <a
+                                    href="manual/manual-9.1.0.pdf" data-jv="href">User guide</a> available.</p>
                         </div>
                     </div>
                 </div>
@@ -192,8 +214,7 @@
                     new random <em>Genotypes</em>.
                 </p>
 
-                    <pre class="prettyprint linenums">
-import io.jenetics.BitChromosome;
+<pre class="line-numbers"><code class="language-java">import io.jenetics.BitChromosome;
 import io.jenetics.BitGene;
 import io.jenetics.Genotype;
 import io.jenetics.engine.Engine;
@@ -208,7 +229,7 @@ public class HelloWorld {
             .bitCount();
     }
 
-    public static void main(String[] args) {
+    void main() {
         // 1.) Define the genotype (factory) suitable
         //     for the problem.
         Factory&lt;Genotype&lt;BitGene&gt;&gt; gtf =
@@ -225,9 +246,9 @@ public class HelloWorld {
             .limit(100)
             .collect(EvolutionResult.toBestGenotype());
 
-        System.out.println("Hello World:\n" + result);
+        IO.println("Hello World:\n" + result);
     }
-}</pre>
+}</code></pre>
 
                 In contrast to other GA implementations, the library uses the concept of an evolution stream (<code>EvolutionStream</code>) for executing the evolution steps. Since the <code>EvolutionStream</code> implements the Java Stream interface, it works smoothly with the rest of the Java streaming API. Now let's have a closer look at listing above and discuss this simple program step by step:
 
@@ -240,8 +261,8 @@ public class HelloWorld {
 
                 <h3>Evolving images</h3>
 <p>This example tries to approximate a given image by semitransparent polygons.  It comes with an Swing UI, where you can immediately start your own experiments.</p>
-                <a target="_blank" href="https://raw.githubusercontent.com/jenetics/jenetics/master/jenetics.doc/src/main/resources/graphic/EvolvingImagesExampleScreenShot.png">
-                    <img src="https://raw.githubusercontent.com/jenetics/jenetics/master/jenetics.doc/src/main/resources/graphic/EvolvingImagesExampleScreenShot.png" alt="Evolving Mona Lisa" style="width:350px">
+                <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/jenetics/jenetics/master/jenetics.doc/src/main/resources/graphic/EvolvingImagesExampleScreenShot.png">
+                    <img src="https://raw.githubusercontent.com/jenetics/jenetics/master/jenetics.doc/src/main/resources/graphic/EvolvingImagesExampleScreenShot.png" alt="Evolving Mona Lisa" style="width:350px" loading="lazy">
                 </a>
 
                 <p>For a detailed description on how to execute this example, have a look at the <a href="https://github.com/jenetics/jenetics#evolving-images">GitHub</a> project page.</p>
@@ -255,9 +276,9 @@ public class HelloWorld {
 
                 <h2>Extension modules</h2>
                 <ul>
-                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.ext"><b>io.jenetics.ext</b> (<a href="javadoc/jenetics.ext/9.1/index.html">javadoc</a>):</a> Additional, non-standard, genetic operators and chromosomes. Containing classes for the <a href="https://en.wikipedia.org/wiki/Weasel_program">Weasel program</a> and tree data structures.</li>
-                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.prog"><b>io.jenetics.prog</b> (<a href="javadoc/jenetics.prog/9.1/index.html">javadoc</a>):</a>The modules contains classes which allows to do genetic programming (GP). It seamlessly works with the existing <code>EvolutionStream</code> and evolution <code>Engine</code>.</li>
-                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.xml"><b>io.jenetics.xml</b> (<a href="javadoc/jenetics.xml/9.1/index.html">javadoc</a>):</a> XML marshalling module for the Jenetics base data structures.</li>
+                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.ext"><b>io.jenetics.ext</b></a> (<a href="javadoc/jenetics.ext/9.1/index.html" data-jv="href">javadoc</a>): Additional, non-standard, genetic operators and chromosomes. Containing classes for the <a href="https://en.wikipedia.org/wiki/Weasel_program">Weasel program</a> and tree data structures.</li>
+                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.prog"><b>io.jenetics.prog</b></a> (<a href="javadoc/jenetics.prog/9.1/index.html" data-jv="href">javadoc</a>): The module contains classes which allow genetic programming (GP). It works seamlessly with the existing <code>EvolutionStream</code> and evolution <code>Engine</code>.</li>
+                    <li><a href="https://github.com/jenetics/jenetics/tree/master/jenetics.xml"><b>io.jenetics.xml</b></a> (<a href="javadoc/jenetics.xml/9.1/index.html" data-jv="href">javadoc</a>): XML marshalling module for the Jenetics base data structures.</li>
                 </ul>
 
 
@@ -511,11 +532,12 @@ public class HelloWorld {
                     </li>
                     <li>Aleksandar Prokopec, Andrea Rosà, David Leopoldseder, Gilles Duboscq, Petr Tůma, Martin Studener, Lubomír Bulej, Yudi Zheng, Alex Villazón, Doug Simon, Thomas Wuerthinger, Walter Binder. <a href="https://arxiv.org/pdf/1903.10267.pdf">On Evaluating the Renaissance Benchmarking Suite: Variety, Performance, and Complexity.</a> <em>Cornell University: Programming Languages, </em> Mar. 2019.
                     </li>
-                    <li>S. Appel, W. Geithner, S. Reimann, M Sapinski, R. Singh, D. M. Vilsmeier <a href="https://www.researchgate.net/profile/Sabrina_Appel/publication/330934110_OPTIMIZATION_OF_HEAVY-ION_SYNCHROTRONS_USING_NATURE-INSPIRED_ALGORITHMS_AND_MACHINE_LEARNING/links/5c5c425b299bf1d14cb33546/OPTIMIZATION-OF-HEAVY-ION-SYNCHROTRONS-USING-NATURE-INSPIRED-ALGORITHMS-AND-MACHINE-LEARNING.pdf">OPTIMIZATION OF HEAVY-ION SYNCHROTRONS USINGNATURE-INSPIRED ALGORITHMS AND MACHINE LEARNING.</a><em><a href="https://bt.pa.msu.edu/ICAP18/index.html">13th Int. Computational Accelerator Physics Conf.</a>, </em></a> Feb. 2019.
+                    <li>S. Appel, W. Geithner, S. Reimann, M Sapinski, R. Singh, D. M. Vilsmeier <a href="https://www.researchgate.net/profile/Sabrina_Appel/publication/330934110_OPTIMIZATION_OF_HEAVY-ION_SYNCHROTRONS_USING_NATURE-INSPIRED_ALGORITHMS_AND_MACHINE_LEARNING/links/5c5c425b299bf1d14cb33546/OPTIMIZATION-OF-HEAVY-ION-SYNCHROTRONS-USING-NATURE-INSPIRED-ALGORITHMS-AND-MACHINE-LEARNING.pdf">OPTIMIZATION OF HEAVY-ION SYNCHROTRONS USINGNATURE-INSPIRED ALGORITHMS AND MACHINE LEARNING.</a><em><a href="https://bt.pa.msu.edu/ICAP18/index.html">13th Int. Computational Accelerator Physics Conf.</a>, </em>
+                        Feb. 2019.
                     </li>
                     <li>Saad, Christian, Bernhard Bauer, Ulrich R Mansmann, and Jian Li. <a href="https://journals.sagepub.com/doi/10.1177/1177932218818458">AutoAnalyze in Systems Biology.</a> <em>Bioinformatics and Biology Insights, </em> Jan. 2019.
                     </li>
-                    <li>Gandeva Bayu Satrya, Soo Young Shin. <a href="https://arxiv.org/pdf/1812.01201.pdf">Evolutionary Computing Approach to Optimize Superframe Scheduling on Industrial Wireless Sensor Networks.</a> <em>Cornell University, </em></a> Dec. 2018.
+                    <li>Gandeva Bayu Satrya, Soo Young Shin. <a href="https://arxiv.org/pdf/1812.01201.pdf">Evolutionary Computing Approach to Optimize Superframe Scheduling on Industrial Wireless Sensor Networks.</a> <em>Cornell University, </em> Dec. 2018.
                     </li>
                     <li>H.R. Maier, S. Razavi, Z. Kapelan, L.S. Matott, J. Kasprzyk, B.A. Tolson. <a href="https://www.sciencedirect.com/science/article/pii/S1364815218305905">Introductory overview: Optimization using evolutionary algorithms and other metaheuristics.</a> <em>Environmental Modelling & Software, </em> Dec. 2018.
                     </li>
@@ -525,9 +547,9 @@ public class HelloWorld {
                     </li>
                     <li>Ghulam Mubashar Hassan and Mark Reynolds. <a href="https://easychair.org/publications/open/GRLP">Genetic Algorithms for Scheduling and Optimization of Ore Train Networks.</a> <em>GCAI-2018. 4th Global Conference on Artificial Intelligence, </em> Sep. 2018.
                     </li>
-                    <li>Drezewski, Rafal & Kruk, Sylwia & Makowka, Maciej. <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8466578">The Evolutionary Optimization of a Company’s Return on Equity Factor: Towards the Agent-Based Bio-Inspired System Supporting Corporate Finance Decisions.</a> <em>IEEE Access. 6. 10.1109/ACCESS.2018.2870201, </em></a> Sep. 2018.
+                    <li>Drezewski, Rafal & Kruk, Sylwia & Makowka, Maciej. <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8466578">The Evolutionary Optimization of a Company’s Return on Equity Factor: Towards the Agent-Based Bio-Inspired System Supporting Corporate Finance Decisions.</a> <em>IEEE Access. 6. 10.1109/ACCESS.2018.2870201, </em> Sep. 2018.
                     </li>
-                    <li>Arifin, H. H., Chimplee, N. , Kit Robert Ong, H. , Daengdej, J. and Sortrakul, T. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/j.2334-5837.2018.00549.x">Automated Component‐Selection of Design Synthesis for Physical Architecture with Model‐Based Systems Engineering using Evolutionary Trade‐off.</a> <em><a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/j.2334-5837.2018.00549.x">INCOSE International Symposium, 28: 1296-1310</a>, </em></a> Aug. 2018.
+                    <li>Arifin, H. H., Chimplee, N. , Kit Robert Ong, H. , Daengdej, J. and Sortrakul, T. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/j.2334-5837.2018.00549.x">Automated Component‐Selection of Design Synthesis for Physical Architecture with Model‐Based Systems Engineering using Evolutionary Trade‐off.</a> <em><a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/j.2334-5837.2018.00549.x">INCOSE International Symposium, 28: 1296-1310</a>, </em> Aug. 2018.
                     </li>
                     <li>Ong, Robert & Sortrakul, Thotsapon. <a href="https://www.researchgate.net/publication/327096423_Comparison_of_Selection_Methods_of_Genetic_Algorithms_for_Automated_Component-Selection_of_Design_Synthesis_with_Model-Based_Systems_Engineering">Comparison of Selection Methods of Genetic Algorithms for Automated Component-Selection of Design Synthesis with Model-Based Systems Engineering.</a> <em>Conference: I-SEEC 2018, </em> May 2018.
                     </li>
@@ -565,10 +587,17 @@ public class HelloWorld {
                 </ol>
 
                 <h2>Used software</h2>
-                <div align="left" class="jetbrains-logo">
+                <div class="jetbrains-logo">
                     <h4>
                         <a href="https://www.jetbrains.com/idea/">
                             <img src="img/icon_IntelliJIDEA.png" alt="IntelliJ" style="width:50px"/> IntelliJ IDEA
+                        </a>
+                    </h4>
+                </div>
+                <div class="smartgit-logo">
+                    <h4>
+                        <a href="https://www.syntevo.com/smartgit/">
+                            <img src="https://www.syntevo.com/assets/images/logos/smartgit-8c1aa1e2.svg"  alt="SmartGit" style="width:50px"/> SmartGit
                         </a>
                     </h4>
                 </div>
@@ -596,20 +625,15 @@ public class HelloWorld {
     </div>
 </footer>
 
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
-<script type="text/javascript" src="js/prettify.js"></script>
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
 
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 </body>
 </html>
+
+
